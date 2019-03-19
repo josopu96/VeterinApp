@@ -1,0 +1,23 @@
+{
+  "name": "veterinapp",
+  "version": "1.0.0",
+  "description": "Aplicacion para la gestion de una clinica veterinaria",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TFG-Veterinaria/VeterinApp.git"
+  },
+  "author": "Jose Daniel Solano Puech y Javier Rodriguez Gallego",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TFG-Veterinaria/VeterinApp/issues"
+  },
+  "homepage": "https://github.com/TFG-Veterinaria/VeterinApp#readme",
+  "dependencies": {
+    "electron": "^4.1.0"
+  }
+}

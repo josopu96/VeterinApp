@@ -18,6 +18,12 @@
   },
   "homepage": "https://github.com/TFG-Veterinaria/VeterinApp#readme",
   "dependencies": {
-    "electron": "^4.1.0"
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.3.1",
+    "electron": "^4.1.0",
+    "express": "^4.16.4",
+    "jquery": "^3.3.1",
+    "mongoose": "^5.4.20",
+    "popper.js": "^1.14.7"
   }
 }

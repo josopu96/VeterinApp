@@ -11,15 +11,26 @@ function createWindow() {
   const electronScreen = screen;
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
+  var anchoVentana = 1280;
+  var altoVentana = 720;
+
+  if (serve) {
+    anchoVentana = anchoVentana + 400;
+  }
+
+  const margenHorizontal = (size.width - anchoVentana) / 2;
+  const margenVertical = (size.height - altoVentana) /2;
   // Create the browser window.
   win = new BrowserWindow({
-    x: 0,
-    y: 0,
-    width: size.width,
-    height: size.height,
+    x: margenHorizontal,
+    y: margenVertical,
+    width: 1280,
+    minHeight: 749,
+    height: 749,
     webPreferences: {
       nodeIntegration: true,
     },
+    resizable: false,
   });
 
   if (serve) {
@@ -35,9 +46,14 @@ function createWindow() {
     }));
   }
 
+  win.setMenu(null);
+
   if (serve) {
     win.webContents.openDevTools();
   }
+
+  win.setSize(anchoVentana,altoVentana+29);
+
 
   // Emitted when the window is closed.
   win.on('closed', () => {

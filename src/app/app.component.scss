@@ -1,0 +1,23 @@
+$color1:#195E52;
+$color2:#22B24C;
+$color3:#7CC543;
+$color4:#2CBC92;
+$color5:#ABFCC2;
+
+.container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    background-color: rgba($color1, $alpha: 1.0);
+    -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+    background-size: cover; /* version standardisée */
+  
+    .title {
+      color: white;
+      margin:0;
+      padding:50px 20px;
+    }
+
+}

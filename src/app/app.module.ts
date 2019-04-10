@@ -18,6 +18,11 @@ import { WebviewDirective } from './directives/webview.directive';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
+import { SeleccionComponent } from './components/seleccion/seleccion.component';
+import { BotonMenuComponent } from './components/boton-menu/boton-menu.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { SeleccionesComponent } from './components/selecciones/selecciones.component';
+import { LoginComponent } from './components/login/login.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -28,7 +33,12 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     HomeComponent,
-    WebviewDirective
+    WebviewDirective,
+    SeleccionComponent,
+    BotonMenuComponent,
+    MenuComponent,
+    SeleccionesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

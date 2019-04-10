@@ -1,0 +1,18 @@
+$anchoSelectores: 731px;
+$altoSelectores: 160px;
+
+.selectors{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $anchoSelectores;
+    height: $altoSelectores;
+
+    .item{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+        height: 100%;
+    }
+}

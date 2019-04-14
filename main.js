@@ -28,6 +28,25 @@ function createWindow() {
         },
         resizable: false,
     });
+    var express = require('express');
+    var bodyParser = require('body-parser');
+    var server = express();
+    var usuario = require('./src/server/routes/usuario.route'); // Imports routes for the products
+    // Set up mongoose connection
+    var mongoose = require('mongoose');
+    var dev_db_url = 'mongodb+srv://admin:admin@frankfurtcluster-kdmjy.mongodb.net/VeterinApp';
+    var mongoDB = process.env.MONGODB_URI || dev_db_url;
+    mongoose.connect(mongoDB);
+    mongoose.Promise = global.Promise;
+    var db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+    server.use(bodyParser.json());
+    server.use(bodyParser.urlencoded({ extended: false }));
+    server.use('/usuarios', usuario);
+    var port = 9018;
+    server.listen(port, function () {
+        console.log('Server is up and running on port numner ' + port);
+    });
     if (serve) {
         require('electron-reload')(__dirname, {
             electron: require(__dirname + "/node_modules/electron")
@@ -42,7 +61,7 @@ function createWindow() {
         }));
     }
     win.setMenu(null);
-    if (serve) {
+    if (true) {
         win.webContents.openDevTools();
     }
     win.setSize(anchoVentana, altoVentana + 29);

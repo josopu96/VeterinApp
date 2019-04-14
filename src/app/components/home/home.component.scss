@@ -1,17 +1,83 @@
+$color1:#195E52;
+$color2:#22B24C;
+$color3:#7CC543;
+$color4:#2CBC92;
+$color5:#ABFCC2;
+$altoTop: 160px;
+$altoSeccion: 560px;
+$anchoSeccion: 1104px;
+$anchoLogo: 363px;
+$anchoAjustes: 186px;
+
 .container {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: url(../../../assets/background.jpg) no-repeat center fixed;
-  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
-  background-size: cover; /* version standardisée */
-
-  .title {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     color: white;
-    margin:0;
-    padding:50px 20px;
-  }
+  
+    background-color: rgba($color1, $alpha: 1.0);
+    -webkit-background-size: cover;
+    background-size: cover;
 
+    .top{
+      background-color: rgba(#000000, $alpha: 0.4);
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      flex-grow: 1;
+      width: 100%;
+      flex-basis: $altoTop;
+
+      .logo{
+        display: flex;
+        flex-basis: $anchoLogo;
+        align-items: center;  
+        justify-content: center;
+        height: 100%;
+      }
+      .selecciones{
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+      .ajustes{
+        display: flex;
+        flex-basis: $anchoAjustes;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+
+
+
+    }
+    .bottom{
+      background-color: rgba(#000000, $alpha: 0.4);
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      flex-basis: $altoSeccion;
+      width: 100%;
+
+      .menu{
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+      .seccion{
+        display: flex;
+        background-color: rgba(#ffffff, $alpha: 0.4);
+        flex-basis: $anchoSeccion;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+    }
 }

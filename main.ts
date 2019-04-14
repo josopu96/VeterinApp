@@ -33,6 +33,29 @@ function createWindow() {
     resizable: false,
   });
 
+  const express = require('express');
+  const bodyParser = require('body-parser');
+  const server = express();
+  const usuario = require('./src/server/routes/usuario.route'); // Imports routes for the products
+
+  // Set up mongoose connection
+  const mongoose = require('mongoose');
+  let dev_db_url = 'mongodb+srv://admin:admin@frankfurtcluster-kdmjy.mongodb.net/VeterinApp';
+  let mongoDB = process.env.MONGODB_URI || dev_db_url;
+  mongoose.connect(mongoDB);
+  mongoose.Promise = global.Promise;
+  let db = mongoose.connection;
+  db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+  server.use(bodyParser.json());
+  server.use(bodyParser.urlencoded({extended: false}));
+  server.use('/usuarios', usuario);
+
+  let port = 9018;
+  server.listen(port, () => {
+    console.log('Server is up and running on port numner ' + port);
+  });
+
   if (serve) {
     require('electron-reload')(__dirname, {
       electron: require(`${__dirname}/node_modules/electron`)
@@ -48,7 +71,7 @@ function createWindow() {
 
   win.setMenu(null);
 
-  if (serve) {
+  if (true) {
     win.webContents.openDevTools();
   }
 
@@ -66,6 +89,7 @@ function createWindow() {
 }
 
 try {
+
 
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.

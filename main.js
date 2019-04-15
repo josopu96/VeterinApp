@@ -12,7 +12,7 @@ function createWindow() {
     var anchoVentana = 1280;
     var altoVentana = 720;
     if (serve) {
-        anchoVentana = anchoVentana + 400;
+        anchoVentana = anchoVentana;
     }
     var margenHorizontal = (size.width - anchoVentana) / 2;
     var margenVertical = (size.height - altoVentana) / 2;

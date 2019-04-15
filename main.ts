@@ -15,7 +15,7 @@ function createWindow() {
   var altoVentana = 720;
 
   if (serve) {
-    anchoVentana = anchoVentana + 400;
+    anchoVentana = anchoVentana;
   }
 
   const margenHorizontal = (size.width - anchoVentana) / 2;

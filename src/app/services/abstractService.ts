@@ -9,15 +9,16 @@ export class AbstractWS {
     return new Promise(resolve => {
       let headers = new HttpHeaders();
       if (token) {
-        headers = new HttpHeaders()
-          .set('Accept', 'application/json')
-          .set('Authorization', 'Token ' + token)
-          .set('Access-Control-Allow-Headers', 'Content-Type')
-          .set('Content-Type', "application/x-www-form-urlencoded")
-          .set('Access-Control-Allow-Origin', '*');
+        headers = new HttpHeaders();
+        headers.append('Accept', 'application/json');
+        headers.append('Authorization', 'Token ' + token);
+        headers.append('Content-Type', "application/x-www-form-urlencoded");
       } else {
         headers = new HttpHeaders().set('Accept', 'application/json');
       }
+      headers.append('Access-Control-Allow-Origin', '*');
+      headers.append('Access-Control-Allow-Headers', 'Content-Type');
+      headers.append('Content-Type', "application/x-www-form-urlencoded");
       resolve(headers);
     });
   }

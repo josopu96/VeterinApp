@@ -44,11 +44,6 @@ function createWindow() {
     server.use(bodyParser.json());
     server.use(bodyParser.urlencoded({ extended: false }));
     server.use('/usuarios', usuario);
-    server.all('/*', function (req, res, next) {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "X-Requested-With");
-        next();
-    });
     var port = 9018;
     server.listen(port, function () {
         console.log('Server is up and running on port numner ' + port);

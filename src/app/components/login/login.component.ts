@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../app.dataModels';
 import { DataManagement } from '../../services/dataManagement';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private dm: DataManagement,
     private cookieService: CookieService,
+    private router: Router
   ) {
     this.userLogged.email = "josed@gmail.com";
     this.password = "josed";
@@ -25,10 +27,10 @@ export class LoginComponent implements OnInit {
   }
 
   sendLogin() {
-    console.log("Usuario introducido: " + this.userLogged.email + "\n contraseña: " + this.password);
     this.dm.login(this.userLogged.email, this.password).then((res) => {
-      this.cookieService.set('token', res);
       console.log("Login correcto");
+      this.cookieService.set('token', res.id);
+      this.router.navigateByUrl("");
     }).catch((err) => {
       console.log(err);
     });

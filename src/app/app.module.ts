@@ -27,6 +27,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { DataManagement } from './services/dataManagement';
 import { RestWS } from './services/restService';
 import { ConfigService } from '../config/configService';
+import { Utils } from './utilities/Utils';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -62,7 +63,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CookieService,
     DataManagement,
     RestWS,
-    ConfigService
+    ConfigService,
+    Utils
   ],
   bootstrap: [AppComponent]
 })

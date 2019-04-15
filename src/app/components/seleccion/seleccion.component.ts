@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Cliente, Mascota, Veterinario } from '../../app.dataModels';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-seleccion',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SeleccionComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(
+    private location: Location
+  ) { }
+
+  @Input() cliente: Cliente;
+  @Input() veterinario: Veterinario;
+  @Input() mascota: Mascota;
 
   ngOnInit() {
   }
 
+  goBack(): void {
+    this.location.back();
+  }
 }

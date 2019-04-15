@@ -1,0 +1,67 @@
+@import "../../utilities/variables.scss";
+
+.seccionMenu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: $anchoMenu;
+    height: $altoSeccion;
+
+    .item{
+        display: flex;
+        height: 100%;
+        width: 100%;
+
+        .fondo{
+            background: rgba($color: $colorFondoOscuro, $alpha: 0.5);
+            height: $altoItemMenu;
+            width: 100%;
+            border: 4px ridge $colorFondoOscuro;
+            border-radius: 5px;
+            box-sizing: border-box;
+
+            .clientes{
+                height: $altoItemMenu;
+                width: 100%;
+                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/clientes.png);
+            }
+            
+            .clientesOscuro{
+                height: $altoItemMenu;
+                width: 100%;
+                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/clientes-oscuro.png);
+            }
+            .mascotas{
+                height: $altoItemMenu;
+                width: 100%;
+                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/mascotas.png);
+            }
+            .mascotasOscuro{
+                height: $altoItemMenu;
+                width: 100%;
+                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/mascotas-oscuro.png);
+            }
+            .calendario{
+                height: $altoItemMenu;
+                width: 100%;
+                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/calendario.png);
+            }
+            .calendarioOscuro{
+                height: $altoItemMenu;
+                width: 100%;
+                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/calendario-oscuro.png);
+            }
+            .operaciones{
+                height: $altoItemMenu;
+                width: 100%;
+                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/operaciones.png);
+            }
+            .operacionesOscuro{
+                height: $altoItemMenu;
+                width: 100%;
+                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/operaciones-oscuro.png);
+            }
+        }
+    }
+}

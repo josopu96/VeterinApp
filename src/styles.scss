@@ -1,7 +1,100 @@
+@import "app/utilities/variables.scss";
+
 /* You can add global styles to this file, and also import other style files */
 html, body {
   margin: 0;
   padding: 0;
-
   height: 100%;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: $textoClaro;
+  
+    background-color: rgba($color1, $alpha: 1.0);
+    -webkit-background-size: cover;
+    background-size: cover;
+
+    .top{
+      background-color: rgba(#000000, $alpha: 0.4);
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      flex-grow: 1;
+      width: 100%;
+      flex-basis: $altoTop;
+
+      .logo{
+        display: flex;
+        flex-basis: $anchoLogo;
+        align-items: center;  
+        justify-content: center;
+        height: 100%;
+      }
+      .selecciones{
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+      .ajustes{
+        display: flex;
+        flex-basis: $anchoAjustes;
+        justify-content: space-evenly;
+        height: 100%;
+        flex-direction: column;
+
+        .app-settings{
+          display: flex;
+          align-self: flex-end;
+          height: 50px;
+          width: 70px;
+
+        }
+
+        .app-data{
+          display: flex;
+          align-self: flex-end;
+          height: 50px;
+          width: 70px;
+        }
+      }
+
+
+
+    }
+    .bottom{
+      background-color: rgba(#000000, $alpha: 0.4);
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      flex-basis: $altoSeccion;
+      width: 100%;
+
+      .menu{
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+      .seccion{
+        display: flex;
+        background-color: rgba(#ffffff, $alpha: 0.4);
+        flex-basis: $anchoSeccion;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        border-top: 2px solid $colorFondoOscuro;
+        border-left: 2px solid $colorFondoOscuro;
+        box-sizing: border-box;
+        border-top-left-radius: 5px;
+      }
+    }
 }

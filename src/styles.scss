@@ -27,11 +27,11 @@ html, body {
       flex-direction: row;
       flex-grow: 1;
       width: 100%;
-      flex-basis: $altoTop;
+      flex-basis: $altoTop+px;
 
       .logo{
         display: flex;
-        flex-basis: $anchoLogo;
+        flex-basis: $anchoLogo+px;
         align-items: center;  
         justify-content: center;
         height: 100%;
@@ -45,7 +45,7 @@ html, body {
       }
       .ajustes{
         display: flex;
-        flex-basis: $anchoAjustes;
+        flex-basis: $anchoAjustes+px;
         justify-content: space-evenly;
         height: 100%;
         flex-direction: column;
@@ -74,7 +74,7 @@ html, body {
       display: flex;
       align-items: center;
       flex-direction: row;
-      flex-basis: $altoSeccion;
+      flex-basis: $altoSeccion+px;
       width: 100%;
 
       .menu{
@@ -87,7 +87,7 @@ html, body {
       .seccion{
         display: flex;
         background-color: rgba(#ffffff, $alpha: 0.4);
-        flex-basis: $anchoSeccion;
+        flex-basis: $anchoSeccion+px;
         align-items: center;
         justify-content: center;
         height: 100%;

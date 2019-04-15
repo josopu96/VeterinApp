@@ -5,8 +5,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: $anchoMenu;
-    height: $altoSeccion;
+    width: $anchoMenu+px;
+    height: $altoSeccion+px;
 
     .item{
         display: flex;
@@ -14,53 +14,86 @@
         width: 100%;
 
         .fondo{
+            $border: 4;
             background: rgba($color: $colorFondoOscuro, $alpha: 0.5);
-            height: $altoItemMenu;
+            height: $altoItemMenu+px;
             width: 100%;
-            border: 4px ridge $colorFondoOscuro;
+            border: $border+px ridge $colorFondoOscuro;
             border-radius: 5px;
             box-sizing: border-box;
 
             .clientes{
-                height: $altoItemMenu;
+                height: $altoItemMenu - 2 * $border+px;
                 width: 100%;
                 background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/clientes.png);
+                &:hover{
+                    background-color: $colorFondoOscuroTransparente;
+                    cursor: pointer;
+                }
             }
             
             .clientesOscuro{
-                height: $altoItemMenu;
+                height: $altoItemMenu - 2 * $border+px;
                 width: 100%;
                 background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/clientes-oscuro.png);
+                &:hover{
+                    background-color: $colorFondoClaroTransparente;
+                    cursor: pointer;
+                }
             }
             .mascotas{
-                height: $altoItemMenu;
+                height: $altoItemMenu - 2 * $border+px;
                 width: 100%;
                 background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/mascotas.png);
+                &:hover{
+                    background-color: $colorFondoOscuroTransparente;
+                    cursor: pointer;
+                }
             }
             .mascotasOscuro{
-                height: $altoItemMenu;
+                height: $altoItemMenu - 2 * $border+px;
                 width: 100%;
                 background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/mascotas-oscuro.png);
+                &:hover{
+                    background-color: $colorFondoClaroTransparente;
+                    cursor: pointer;
+                }
             }
             .calendario{
-                height: $altoItemMenu;
+                height: $altoItemMenu - 2 * $border+px;
                 width: 100%;
                 background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/calendario.png);
+                &:hover{
+                    background-color: $colorFondoOscuroTransparente;
+                    cursor: pointer;
+                }
             }
             .calendarioOscuro{
-                height: $altoItemMenu;
+                height: $altoItemMenu - 2 * $border+px;
                 width: 100%;
                 background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/calendario-oscuro.png);
+                &:hover{
+                    background-color: $colorFondoClaroTransparente;
+                    cursor: pointer;
+                }
             }
             .operaciones{
-                height: $altoItemMenu;
+                height: $altoItemMenu - 2 * $border+px;
                 width: 100%;
                 background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/operaciones.png);
+                &:hover{
+                    background-color: $colorFondoOscuroTransparente;
+                    cursor: pointer;
+                }
             }
             .operacionesOscuro{
-                height: $altoItemMenu;
+                height: $altoItemMenu - 2 * $border+px;
                 width: 100%;
                 background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/operaciones-oscuro.png);
+                &:hover{
+                    background-color: $colorFondoClaroTransparente;
+                    cursor: pointer;
+                }
             }
         }
     }

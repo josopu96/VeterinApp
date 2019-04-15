@@ -35,6 +35,7 @@ function createWindow() {
 
   const express = require('express');
   const bodyParser = require('body-parser');
+  const cors = require('cors');
   const server = express();
   const usuario = require('./src/server/routes/usuario.route'); // Imports routes for the products
 
@@ -50,6 +51,11 @@ function createWindow() {
   server.use(bodyParser.json());
   server.use(bodyParser.urlencoded({extended: false}));
   server.use('/usuarios', usuario);
+  server.all('/*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+  });
 
   let port = 9018;
   server.listen(port, () => {

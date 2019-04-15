@@ -1,0 +1,113 @@
+@import "../../utilities/variables.scss";
+
+.exterior{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $anchoExterior;
+    height: $altoExterior;
+    flex-direction: column;
+
+    .texto{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: $altoTexto;
+        color: $textoClaro;
+    }
+
+    .interior{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: $altoInterior;
+        border: 4px ridge $colorFondoOscuro;
+        border-radius: 5px;
+        box-sizing: border-box;
+        background: rgba($color: $colorFondoOscuro, $alpha: 0.5);
+
+        .addclient{
+            background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/addclient.png);
+        }
+        .addpet{
+            background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/addpet.png);
+        }
+        .selectvet{
+            background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/selectvet.png);
+        }
+
+        .addclientOscuro{
+            background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/addclient-oscuro.png);
+        }
+        .addpetOscuro{
+            background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/addpet-oscuro.png);
+        }
+        .selectvetOscuro{
+            background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/selectvet-oscuro.png);
+        }
+
+        .seccion1{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: $anchoSeccion1;
+            height: 100%;
+
+            .imagenSelector{
+                width: $anchoImagenSelector;
+                height: $altoImagenSelector;
+            }
+        }
+
+        .seccion2{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100%;
+            flex-grow: 1;
+            border-left: 4px ridge $colorFondoOscuro;
+
+            .botonCambiar{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-grow: 1;
+                width: 100%;
+                border-bottom: 4px ridge $colorFondoOscuro;
+                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/swap.png);
+            }
+
+            .botonLimpiar{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                flex-grow: 1;
+                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/limpiar.png);
+            }
+
+            .botonLimpiarOscuro{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                flex-grow: 1;
+                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/limpiar-oscuro.png);
+            }
+
+            .botonCambiarOscuro{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-grow: 1;
+                width: 100%;
+                border-bottom: 4px ridge $colorFondoOscuro;
+                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/swap-oscuro.png);
+            }
+        }
+
+    }
+}

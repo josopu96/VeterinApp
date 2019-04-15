@@ -14,3 +14,10 @@ export class Veterinario {
   nombre: string;
   apellido: string;
 }
+
+export class Usuario {
+  id: string;
+  nombre: string;
+  email: string;
+  isAdmin: boolean;
+}

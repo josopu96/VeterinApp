@@ -30,6 +30,7 @@ function createWindow() {
     });
     var express = require('express');
     var bodyParser = require('body-parser');
+    var cors = require('cors');
     var server = express();
     var usuario = require('./src/server/routes/usuario.route'); // Imports routes for the products
     // Set up mongoose connection

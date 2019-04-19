@@ -4,9 +4,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 import { Cliente, Mascota, Veterinario } from '../../app.dataModels';
-import { ClienteService }  from '../../services/cliente/cliente.service';
-import { MascotaService }  from '../../services/mascota/mascota.service';
-import { VeterinarioService }  from '../../services/veterinario/veterinario.service';
+import { DataManagement } from '../../services/dataManagement';
 
 @Component({
   selector: 'app-selecciones',
@@ -18,10 +16,8 @@ export class SeleccionesComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private mascotaService: MascotaService,
-    private veterinarioService: VeterinarioService,
-    private clienteService: ClienteService,
-    private location: Location
+    private location: Location,
+    private dm: DataManagement
   ) { }
 
   
@@ -38,31 +34,35 @@ export class SeleccionesComponent implements OnInit {
   getCliente(): void {
     const id = +this.route.snapshot.paramMap.get('idCliente');
     if(id){
-      this.clienteService.getCliente(id)
-        .subscribe(cliente => this.cliente = cliente);
+      this.dm.getCliente(id)
+        .then(cliente => {
+          this.cliente = cliente
+          console.log(this.cliente);
+        }).catch((err) => {
+          this.cliente = null;
+          console.error(err);
+        });
     } else {
-      this.clienteService.getCliente(0)
-        .subscribe(cliente => this.cliente = cliente);
+      this.cliente = new Cliente();
+      this.cliente._id = "0";
     }
   }
   getMascota(): void {
     const id = +this.route.snapshot.paramMap.get('idMascota');
     if(id){
-      this.mascotaService.getMascota(id)
-        .subscribe(mascota => this.mascota = mascota);
+      //TODO
     } else {
-      this.mascotaService.getMascota(0)
-        .subscribe(mascota => this.mascota = mascota);
+      this.mascota = new Mascota();
+      this.mascota._id = "0";
     }
   }
   getVeterinario(): void {
     const id = +this.route.snapshot.paramMap.get('idVeterinario');
     if(id){
-      this.veterinarioService.getVeterinario(id)
-        .subscribe(veterinario => this.veterinario = veterinario);
+      //TODO
     } else {
-      this.veterinarioService.getVeterinario(0)
-        .subscribe(veterinario => this.veterinario = veterinario);
+      this.veterinario = new Veterinario();
+      this.veterinario._id = "0";
     }
   }
 

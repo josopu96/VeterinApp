@@ -20,4 +20,12 @@ export class DataManagement {
       return Promise.reject('error');
     });
   }
+
+  public getCliente(id: number): Promise<any> {
+    return this.restService.getCliente(id).then((data: String) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
 }

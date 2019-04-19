@@ -18,11 +18,11 @@ export class ListaComponent implements OnInit {
   constructor(
     private dm: DataManagement
   ) {
-    this.getItems();
 
   }
 
   ngOnInit() {
+    this.getItems();
   }
 
   private getItems (filters?: any[]) {

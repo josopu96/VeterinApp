@@ -4,6 +4,21 @@ exports.test = function (req, res) {
     res.send('Greetings from the Test controller!');
 };
 
+exports.login = function(req, res) {
+  // console.log(req.body);
+  Usuario.where({ email: req.body.email }).findOne(function (err, usuario) {
+    if(usuario) {
+      if(usuario.clave == req.body.clave) {
+        res.send({ "id": usuario.id });
+      } else {
+        res.sendStatus(404);
+      }
+    } else {
+      res.sendStatus(404);
+    }
+  });
+}
+
 exports.createUsuario = function(req, res) {
     let usuario = new Usuario ({
         nombre: req.body.nombre,

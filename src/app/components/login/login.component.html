@@ -1,3 +1,52 @@
-<p>
-  login works!
-</p>
+<div class="container">
+  <div class="top">
+    <div class="logo">
+      <img src="../../../assets/logoclaro.png" width="255px" height="155px" [routerLink]="['/']" routerLinkActive="router-link-active">
+    </div>
+    <div class="selecciones">
+      <app-selecciones></app-selecciones>
+    </div>
+    <div class="ajustes">
+      <div class="app-settings">
+        <img src="../../../assets/img/ajustes-oscuro.png" width="50px" height="50px" />
+      </div>
+      <div class="app-data">
+        <img src="../../../assets/img/appdata-oscuro.png" width="50px" height="50px" />
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="seccion">
+
+      <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Tabs Titles -->
+
+          <!-- Icon -->
+          <div class="fadeIn first">
+            <img src="../../../assets/logoclaro.png" id="icon" alt="User Icon" />
+          </div>
+
+          <!-- Login Form -->
+          <form>
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" [(ngModel)]="userLogged.email">
+            <input type="password" id="password" class="fadeIn second" name="login" placeholder="password" [(ngModel)]="password">
+            <input type="submit" class="fadeIn fourth" value="Entrar" (click)="sendLogin()">
+          </form>
+          <ng-container *ngIf="showError">
+            <p> Usuario o contraseña incorrectos </p>
+          </ng-container>
+
+          <!-- Remind Passowrd -->
+          <div id="formFooter">
+            <a class="underlineHover" (click)="showSupport = true">¿Olvidaste la contraseña?</a>
+          </div>
+          <ng-container *ngIf="showSupport">
+            <p> Contacta con el servicio técnico </p>
+          </ng-container>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

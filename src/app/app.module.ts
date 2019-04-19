@@ -23,6 +23,11 @@ import { BotonMenuComponent } from './components/boton-menu/boton-menu.component
 import { MenuComponent } from './components/menu/menu.component';
 import { SeleccionesComponent } from './components/selecciones/selecciones.component';
 import { LoginComponent } from './components/login/login.component';
+import { CookieService } from 'ngx-cookie-service';
+import { DataManagement } from './services/dataManagement';
+import { RestWS } from './services/restService';
+import { ConfigService } from '../config/configService';
+import { Utils } from './utilities/Utils';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -53,7 +58,14 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [ElectronService],
+  providers: [
+    ElectronService,
+    CookieService,
+    DataManagement,
+    RestWS,
+    ConfigService,
+    Utils
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

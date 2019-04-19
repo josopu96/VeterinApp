@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="top">
+    <div class="logo">
+      <img src="../../../assets/logoclaro.png" width="255px" height="155px" [routerLink]="['/']"
+        routerLinkActive="router-link-active">
+    </div>
+    <div class="selecciones">
+      <app-selecciones></app-selecciones>
+    </div>
+    <div class="ajustes">
+      <div class="app-settings">
+        <img src="../../../assets/img/ajustes-oscuro.png" width="50px" height="50px" />
+      </div>
+      <div class="app-data">
+        <img src="../../../assets/img/appdata-oscuro.png" width="50px" height="50px" />
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="menu">
+      <app-menu></app-menu>
+    </div>
+    <div class="seccion">
+      <ng-container>
+        Lista de clientes
+        <table mdbTable striped="true">
+          <thead>
+            <tr>
+              <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr mdbTableCol *ngFor="let el of elements">
+              <th scope="row">{{ el.cliente.nombre }}</th>
+              <td>{{ el.cliente.apellidos }}</td>
+              <td>{{ el.cliente.dni }}</td>
+              <td *ngIf="el.cliente.contactos && el.cliente.contactos[0]">{{ el.cliente.contactos[0].telefono }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -36,7 +36,8 @@ function createWindow() {
   const express = require('express');
   const bodyParser = require('body-parser');
   const server = express();
-  const usuario = require('./src/server/routes/usuario.route'); // Imports routes for the products
+  const usuario = require('./src/server/routes/usuario.route');
+  const cliente = require('./src/server/routes/cliente.route');
 
   // Set up mongoose connection
   const mongoose = require('mongoose');
@@ -50,6 +51,7 @@ function createWindow() {
   server.use(bodyParser.json());
   server.use(bodyParser.urlencoded({extended: false}));
   server.use('/usuarios', usuario);
+  server.use('/clientes', cliente);
 
   let port = 9018;
   server.listen(port, () => {

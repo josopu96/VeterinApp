@@ -12,4 +12,12 @@ export class DataManagement {
         return Promise.reject('error');
       });
   }
+
+  public getClients(filters?): Promise<any> {
+    return this.restService.getClients(filters).then((data: String) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
 }

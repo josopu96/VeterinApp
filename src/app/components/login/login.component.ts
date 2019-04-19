@@ -13,6 +13,8 @@ export class LoginComponent implements OnInit {
 
   userLogged: Usuario = new Usuario();
   password: String = "";
+  showSupport: Boolean;
+  showError: Boolean;
 
   constructor(
     private dm: DataManagement,
@@ -32,6 +34,7 @@ export class LoginComponent implements OnInit {
       this.cookieService.set('token', res.id);
       this.router.navigateByUrl("");
     }).catch((err) => {
+      this.showError = true;
       console.log(err);
     });
   }

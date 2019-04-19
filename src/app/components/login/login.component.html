@@ -33,15 +33,20 @@
           <!-- Login Form -->
           <form>
             <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" [(ngModel)]="userLogged.email">
-            <input type="password" id="password" class="fadeIn third" name="login" placeholder="password" [(ngModel)]="password">
-            <input type="submit" class="fadeIn fourth" value="Log In" (click)="sendLogin()">
+            <input type="password" id="password" class="fadeIn second" name="login" placeholder="password" [(ngModel)]="password">
+            <input type="submit" class="fadeIn fourth" value="Entrar" (click)="sendLogin()">
           </form>
+          <ng-container *ngIf="showError">
+            <p> Usuario o contraseña incorrectos </p>
+          </ng-container>
 
           <!-- Remind Passowrd -->
           <div id="formFooter">
-            <a class="underlineHover" href="#">Forgot Password?</a>
+            <a class="underlineHover" (click)="showSupport = true">¿Olvidaste la contraseña?</a>
           </div>
-
+          <ng-container *ngIf="showSupport">
+            <p> Contacta con el servicio técnico </p>
+          </ng-container>
         </div>
       </div>
 

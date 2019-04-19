@@ -31,7 +31,8 @@ function createWindow() {
     var express = require('express');
     var bodyParser = require('body-parser');
     var server = express();
-    var usuario = require('./src/server/routes/usuario.route'); // Imports routes for the products
+    var usuario = require('./src/server/routes/usuario.route');
+    var cliente = require('./src/server/routes/cliente.route');
     // Set up mongoose connection
     var mongoose = require('mongoose');
     var dev_db_url = 'mongodb+srv://admin:admin@frankfurtcluster-kdmjy.mongodb.net/VeterinApp';
@@ -43,6 +44,7 @@ function createWindow() {
     server.use(bodyParser.json());
     server.use(bodyParser.urlencoded({ extended: false }));
     server.use('/usuarios', usuario);
+    server.use('/clientes', cliente);
     var port = 9018;
     server.listen(port, function () {
         console.log('Server is up and running on port numner ' + port);

@@ -52,6 +52,7 @@
     "@types/jasmine": "2.8.7",
     "@types/jasminewd2": "2.0.3",
     "@types/node": "8.9.4",
+    "angular-bootstrap-md": "^7.5.0",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.3.1",
     "chai": "^4.2.0",

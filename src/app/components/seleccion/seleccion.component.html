@@ -12,26 +12,26 @@
   </div>
   <div class="interior">
     <ng-template [ngIf]="cliente">
-      <ng-template [ngIf]="cliente.id==0">
+      <ng-template [ngIf]="cliente._id==0">
         <div class="seccion1 addclientOscuro"></div>
       </ng-template>
-      <ng-template [ngIf]="cliente.id!=0">
+      <ng-template [ngIf]="cliente._id!=0">
           <div class="seccion1">{{ cliente.nombre }}</div>
       </ng-template>
     </ng-template>
     <ng-template [ngIf]="mascota">
-      <ng-template [ngIf]="mascota.id==0">
+      <ng-template [ngIf]="mascota._id==0">
           <div class="seccion1 addpetOscuro"></div>
       </ng-template>
-      <ng-template [ngIf]="mascota.id!=0">
+      <ng-template [ngIf]="mascota._id!=0">
           <div class="seccion1">{{ mascota.nombre }}</div>
       </ng-template>
     </ng-template>
     <ng-template [ngIf]="veterinario">
-      <ng-template [ngIf]="veterinario.id==0">
+      <ng-template [ngIf]="veterinario._id==0">
           <div class="seccion1 selectvetOscuro"></div>
       </ng-template>
-      <ng-template [ngIf]="veterinario.id!=0">
+      <ng-template [ngIf]="veterinario._id!=0">
           <div class="seccion1">{{ veterinario.nombre }}</div>
       </ng-template>
     </ng-template>

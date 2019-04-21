@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 
 import { ActivatedRoute } from '@angular/router';
 
-import { Cliente, Mascota, Veterinario } from '../../app.dataModels';
+import {Cliente, Mascota, Veterinario } from '../../app.dataModels';
 import { DataManagement } from '../../services/dataManagement';
 
 @Component({
@@ -39,12 +39,13 @@ export class SeleccionesComponent implements OnInit {
           this.cliente = cliente
           console.log(this.cliente);
         }).catch((err) => {
-          this.cliente = null;
           console.error(err);
+          this.cliente = new Cliente();
+          this.cliente.setId("0");
         });
     } else {
       this.cliente = new Cliente();
-      this.cliente._id = "0";
+      this.cliente.setId("0");
     }
   }
   getMascota(): void {
@@ -53,7 +54,7 @@ export class SeleccionesComponent implements OnInit {
       //TODO
     } else {
       this.mascota = new Mascota();
-      this.mascota._id = "0";
+      this.mascota.setId("0");
     }
   }
   getVeterinario(): void {
@@ -62,7 +63,7 @@ export class SeleccionesComponent implements OnInit {
       //TODO
     } else {
       this.veterinario = new Veterinario();
-      this.veterinario._id = "0";
+      this.veterinario.setId("0");
     }
   }
 

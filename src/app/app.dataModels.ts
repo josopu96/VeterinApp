@@ -1,37 +1,36 @@
-import {Contacto} from "./models/contacto";
-import {Operacion} from "./models/operacion";
-import {ItemFactura} from "./models/itemFactura";
-import {Factura} from "./models/factura"
+//Colección de cliente
+export {Cliente} from "./models/cliente";
+export {Contacto} from "./models/contacto";
+export {Factura} from "./models/factura";
+export {ItemFactura} from "./models/itemFactura";
+export {Operacion} from "./models/operacion";
 
-export class Cliente {
-  _id: string;
-  nombre: string;
-  apellidos: string;
-  direccion: string;
-  codPostal: string;
-  poblacion: string;
-  dni: string;
-  email: string;
-  fecNac: Date;
-  contactos: Contacto[];
-  facturas: Factura[];
-}
+//Colección de calendario
+export {Calendario} from "./models/calendario";
+export {Visita} from "./models/visita";
+
+//Colección de mascota
+export {Mascota} from "./models/mascota";
+export {Tratamiento} from "./models/tratamiento";
+export {Receta} from "./models/receta";
+export {TipoTratamiento} from "./models/tipoTratamiento";
+export {Vacuna} from "./models/vacuna";
+export {Desparasitacion} from "./models/desparasitacion";
+export {Prueba} from "./models/prueba";
+export {Analitica} from "./models/analitica";
+export {Radiografia} from "./models/radiografia";
 
 
-export class Mascota {
-  _id: string;
-  nombre: string;
-}
+//Colección de tarifa
+export {Tarifa} from "./models/tarifa";
 
-export class Veterinario {
-  _id: string;
-  nombre: string;
-  apellido: string;
-}
+//Colección de clínica
+export {Clinica} from "./models/clinica";
+export {Veterinario} from "./models/veterinario";
+export {Producto} from "./models/producto";
+export {Stock} from "./models/stock";
 
-export class Usuario {
-  id: string;
-  nombre: string;
-  email: string;
-  isAdmin: boolean;
-}
+//Colección de usuario
+export {Usuario} from "./models/usuario";
+export {Ajustes} from "./models/ajustes";
+

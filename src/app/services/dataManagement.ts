@@ -21,7 +21,7 @@ export class DataManagement {
     });
   }
 
-  public getCliente(id: number): Promise<any> {
+  public getCliente(id: string): Promise<any> {
     return this.restService.getCliente(id).then((data: String) => {
       return Promise.resolve(data);
     }).catch(error => {

@@ -29,6 +29,7 @@ import { RestWS } from './services/restService';
 import { ConfigService } from '../config/configService';
 import { Utils } from './utilities/Utils';
 import { ListaComponent } from './components/clientes/lista/lista.component';
+import { GlobalService } from './services/globalService';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -66,7 +67,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DataManagement,
     RestWS,
     ConfigService,
-    Utils
+    Utils,
+    GlobalService
   ],
   bootstrap: [AppComponent]
 })

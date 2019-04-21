@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private cookieService: CookieService,
-    private router: Router,
+    private router: Router
   ) {
     const token = this.cookieService.get("token");
     const isUserLogged = token ? true : false;
@@ -24,5 +24,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   }
+
 
 }

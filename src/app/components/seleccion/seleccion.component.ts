@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Cliente, Mascota, Veterinario } from '../../app.dataModels';
 import { Location } from '@angular/common';
+import { GlobalService } from '../../services/globalService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-seleccion',
@@ -11,7 +13,9 @@ export class SeleccionComponent implements OnInit {
 
 
   constructor(
-    private location: Location
+    private router: Router,
+    private location: Location,
+    private globalService: GlobalService
   ) { }
 
   @Input() cliente: Cliente;
@@ -23,5 +27,11 @@ export class SeleccionComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  limpiarCliente():void{
+    this.globalService.limpiarCliente();
+    this.router.navigateByUrl('/seleccionaCliente', {skipLocationChange: true}).then(()=>
+    this.router.navigate(["clientes"])); 
   }
 }

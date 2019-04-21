@@ -21,11 +21,11 @@ export class LoginComponent implements OnInit {
     private cookieService: CookieService,
     private router: Router
   ) {
-    this.userLogged.email = "josed@gmail.com";
-    this.password = "josed";
   }
 
   ngOnInit() {
+    this.userLogged.setEmail("josed@gmail.com");
+    this.password = "josed";
   }
 
   sendLogin() {

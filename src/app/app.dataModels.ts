@@ -1,101 +1,36 @@
-export class Cliente {
-  nombre: {
-    type: String,
-    required: true
-  };
-  apellidos: {
-    type: String,
-    required: true
-  };
-  direccion: {
-    type: String,
-    required: true
-  };
-  codPostal: {
-    type: String,
-    required: true
-  };
-  poblacion: {
-    type: String,
-    required: true
-  };
-  dni: {
-    type: String,
-    required: true
-  };
-  email: {
-    type: String,
-    required: true
-  };
-  fecNac: {
-    type: Date,
-    required: true
-  };
-  contactos: [{
-    nombre: String,
-    telefono: String,
-    tipo: String
-  }];
-  facturas: [{
-    numero: String,
-    fecha: Date,
-    importeTotal: Number,
-    tipoPago: String,
-    estado: String,
-    porcentajeTarifa: Number,
-    tratamientos: [{
-      precio: String,
-      concepto: String,
-      id_tratamiento: String
-    }];
-    vacunas: [{
-      precio: String,
-      concepto: String,
-      id_vacuna: String
-    }];
-    desparasitaciones: [{
-      precio: Number,
-      concepto: String,
-      id_desparasitacion: String
-    }];
-    pruebas: [{
-      precio: Number,
-      concepto: String,
-      id_prueba: String
-    }];
-    analiticas: [{
-      precio: Number,
-      concepto: String,
-      id_analitica: String
-    }];
-    radiografias: [{
-      precio: Number,
-      concepto: String,
-      id_radiografia: String
-    }];
-    itemFactura: [{
-      cantidad: Number,
-      precioVenta: String,
-      iva: String,
-      idProducto: String
-    }];
-  }];
-}
+//Colección de cliente
+export {Cliente} from "./models/cliente";
+export {Contacto} from "./models/contacto";
+export {Factura} from "./models/factura";
+export {ItemFactura} from "./models/itemFactura";
+export {Operacion} from "./models/operacion";
 
-export class Mascota {
-  id: number;
-  nombre: string;
-}
+//Colección de calendario
+export {Calendario} from "./models/calendario";
+export {Visita} from "./models/visita";
 
-export class Veterinario {
-  id: number;
-  nombre: string;
-  apellido: string;
-}
+//Colección de mascota
+export {Mascota} from "./models/mascota";
+export {Tratamiento} from "./models/tratamiento";
+export {Receta} from "./models/receta";
+export {TipoTratamiento} from "./models/tipoTratamiento";
+export {Vacuna} from "./models/vacuna";
+export {Desparasitacion} from "./models/desparasitacion";
+export {Prueba} from "./models/prueba";
+export {Analitica} from "./models/analitica";
+export {Radiografia} from "./models/radiografia";
 
-export class Usuario {
-  id: string;
-  nombre: string;
-  email: string;
-  isAdmin: boolean;
-}
+
+//Colección de tarifa
+export {Tarifa} from "./models/tarifa";
+
+//Colección de clínica
+export {Clinica} from "./models/clinica";
+export {Veterinario} from "./models/veterinario";
+export {Producto} from "./models/producto";
+export {Stock} from "./models/stock";
+
+//Colección de usuario
+export {Usuario} from "./models/usuario";
+export {Ajustes} from "./models/ajustes";
+

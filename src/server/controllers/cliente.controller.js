@@ -8,3 +8,13 @@ exports.getClientes = function(req, res) {
       res.send(clientes);
   });
 };
+
+exports.getCliente = function(req, res) {
+  console.log("Parámetro id: "+req.params.id);
+  Cliente.findById(req.params.id, function(err, cliente) {
+      if (err)  {
+          res.send(err);
+      }
+      res.send(cliente);
+  });
+};

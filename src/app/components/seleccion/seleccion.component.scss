@@ -20,7 +20,7 @@
     .interior{
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-end;
         width: 100%;
         height: $altoInterior+px;
         border: 4px ridge $colorFondoOscuro;
@@ -91,7 +91,7 @@
             justify-content: center;
             flex-direction: column;
             height: 100%;
-            flex-grow: 1;
+            width: 39px;
             border-left: 4px ridge $colorFondoOscuro;
 
             .botonCambiar{

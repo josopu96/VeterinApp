@@ -39,10 +39,9 @@ export class RestWS extends AbstractWS {
       });
   }
 
-  public getCliente(id: number) {
+  public getCliente(id: string) {
     const fd = new HttpParams();
-    fd.set('idCliente', id.toString());
-    return this.makeGetRequest(this.path + 'cliente', fd).then((res: String) => {
+    return this.makeGetRequest(this.path + 'clientes/'+id, fd).then((res: String) => {
         return Promise.resolve(res);
       }).catch(error => {
         console.log('Error: ' + error);

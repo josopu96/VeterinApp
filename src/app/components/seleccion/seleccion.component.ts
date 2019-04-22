@@ -30,8 +30,24 @@ export class SeleccionComponent implements OnInit {
   }
 
   limpiarCliente():void{
-    this.globalService.limpiarCliente();
-    this.router.navigateByUrl('/seleccionaCliente', {skipLocationChange: true}).then(()=>
-    this.router.navigate(["clientes"])); 
+    if(this.globalService.getCliente().id!="0"){
+      this.globalService.limpiarCliente();
+      this.router.navigateByUrl('/seleccionaCliente', {skipLocationChange: true}).then(()=>
+      this.router.navigate(["clientes"]));
+    }
+  }
+  limpiarMascota():void{
+    if(this.globalService.getMascota().id!="0"){
+      this.globalService.limpiarMascota();
+      this.router.navigateByUrl('/seleccionaMascota', {skipLocationChange: true}).then(()=>
+      this.router.navigate(["mascotas"]));
+    }
+  }
+  limpiarVeterinario():void{
+    if(this.globalService.getVeterinario().id!="0"){
+      this.globalService.limpiarVeterinario();
+      this.router.navigateByUrl('/seleccionaVeterinario', {skipLocationChange: true}).then(()=>
+      this.router.navigate(["veterinarios"]));
+    }
   }
 }

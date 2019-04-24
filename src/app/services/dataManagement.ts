@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { RestWS } from './restService';
+import { Usuario } from '../models/usuario';
 
 @Injectable()
 export class DataManagement {
   constructor(private restService: RestWS) { }
 
   public login(email, password): Promise<any> {
-    return this.restService.login(email, password).then((data: String) => {
+    return this.restService.login(email, password).then((data: Usuario) => {
         return Promise.resolve(data);
       }).catch(error => {
         return Promise.reject('error');

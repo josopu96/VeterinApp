@@ -1,0 +1,23 @@
+@import "../../utilities/variables.scss";
+
+.home{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient($fondoDegradado, $fondoDegradado), url(../../../assets/logoSolo.jpg);
+    background-size: 100% 100%;
+}
+
+.textoBienvenida {
+    font-size: 60px;
+    margin-bottom: 255px;
+    font-weight: bold;
+    color: $textoInicio;
+}
+
+.reloj {
+    margin-bottom: 50px;
+}

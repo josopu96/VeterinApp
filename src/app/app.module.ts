@@ -30,6 +30,8 @@ import { ConfigService } from '../config/configService';
 import { Utils } from './utilities/Utils';
 import { ListaComponent } from './components/clientes/lista/lista.component';
 import { GlobalService } from './services/globalService';
+import { NumberComponent } from './components/home/number/number.component';
+import { DotComponent } from './components/home/dot/dot.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -46,7 +48,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     MenuComponent,
     SeleccionesComponent,
     LoginComponent,
-    ListaComponent
+    ListaComponent,
+    NumberComponent,
+    DotComponent
   ],
   imports: [
     BrowserModule,

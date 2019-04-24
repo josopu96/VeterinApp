@@ -42,61 +42,52 @@
             width: 100%;
             background-color: transparent;
             text-align: center;
-            border: 0;
+            border-spacing: 0px;
         }
-        
+
         .table-dark,
         .table-dark > th,
         .table-dark > td {
             background-color: #030303;
-            border: 0;
         }
         
         .table-hover .table-dark:hover {
             background-color: #030303;
-            border: 0;
         }
         
         .table-hover .table-dark:hover > td,
         .table-hover .table-dark:hover > th {
             background-color: #030303;
-            border: 0;
         }
         
         .table-active,
         .table-active > th,
         .table-active > td {
             background-color: rgba(0, 0, 0, 0.075);
-            border: 0;
         }
         
         .table-hover .table-active:hover {
             background-color: rgba(0, 0, 0, 0.075);
-            border: 0;
         }
         
         .table-hover .table-active:hover > td,
         .table-hover .table-active:hover > th {
             background-color: rgba(0, 0, 0, 0.075);
-            border: 0;
         }
         
         .table .thead-dark th {
             color: #fff;
             background-color: #21252980;
             border-color: #121416;
-            border: 0;
             padding: 10px;
         }
         .table .tbody-dark td {
-            border: 0;
             padding: 7px;
         }
         
         .table-dark {
             color: #fff;
             background-color: #21252980;
-            border: 0;
         }
         
         .table-dark.table-striped tbody tr:nth-of-type(odd) {

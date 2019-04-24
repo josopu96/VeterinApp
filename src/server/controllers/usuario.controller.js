@@ -5,11 +5,11 @@ exports.test = function (req, res) {
 };
 
 exports.login = function(req, res) {
-  // console.log(req.body);
+  //console.log(req.body);
   Usuario.where({ email: req.body.email }).findOne(function (err, usuario) {
     if(usuario) {
       if(usuario.clave == req.body.clave) {
-        res.send({ "id": usuario.id });
+        res.send(usuario);
       } else {
         res.sendStatus(404);
       }

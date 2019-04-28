@@ -1,24 +1,7 @@
 <div class="container">
-  <div class="top">
-    <div class="logo">
-      <img src="../../../assets/logoclaro.png" width="255px" height="155px" [routerLink]="['/']" routerLinkActive="router-link-active">
-    </div>
-    <div class="selecciones">
-      <app-selecciones></app-selecciones>
-    </div>
-    <div class="ajustes">
-        <div class="app-settings">
-          <img src="../../../assets/img/ajustes-oscuro.png" width="50px" height="50px" />
-        </div>
-        <div class="app-data">
-          <img src="../../../assets/img/appdata-oscuro.png" width="50px" height="50px" />
-        </div>
-    </div>
-  </div>
+  <app-selecciones class="top"></app-selecciones>
   <div class="bottom">
-    <div class="menu">
-      <app-menu></app-menu>
-    </div>
+    <app-menu class="menu"></app-menu>
     <div class="seccion">
       <ng-container>
         <div class="datos">

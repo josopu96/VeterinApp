@@ -1,17 +1,63 @@
 @import "../../utilities/variables.scss";
 
-.selectors{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: $anchoSelectores+px;
-    height: $altoSelectores+px;
+.selectors {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $anchoSelectores + px;
+  height: $altoSelectores + px;
 
-    .item{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-grow: 1;
-        height: 100%;
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    height: 100%;
+  }
+}
+
+.top {
+  background-color: rgba(#000000, $alpha: 0.4);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-grow: 1;
+  width: 100%;
+  flex-basis: $altoTop + px;
+
+  .logo {
+    display: flex;
+    flex-basis: $anchoLogo + px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  .selecciones {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  .ajustes {
+    display: flex;
+    flex-basis: $anchoAjustes + px;
+    justify-content: space-evenly;
+    height: $altoTop+px;
+    flex-direction: column;
+
+    .app-settings {
+      display: flex;
+      align-self: flex-end;
+      height: 50px;
+      width: 70px;
     }
+
+    .app-data {
+      display: flex;
+      align-self: flex-end;
+      height: 50px;
+      width: 70px;
+    }
+  }
 }

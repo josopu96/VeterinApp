@@ -50,4 +50,13 @@ export class RestWS extends AbstractWS {
       });
   }
 
+  public getUserByToken(token: string) {
+    const fd = new HttpParams().set('token', token);
+    return this.makeGetRequest(this.path + 'usuarios/token/', fd).then((res: Usuario) => {
+        return Promise.resolve(res);
+      }).catch(error => {
+        console.error('Error: ' + error);
+        return Promise.reject(error);
+      });
+  }
 }

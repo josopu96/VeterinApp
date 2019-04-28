@@ -20,7 +20,19 @@
       <app-menu></app-menu>
     </div>
     <div class="seccion">
-      5
+      <div class="home">
+        <div class="textoBienvenida">{{mensajeBienvenida}}{{nombreUsuario}}josed</div>
+        <div class="reloj">
+          <app-number [ngClass]="'number'+now[0]"></app-number>
+          <app-number [ngClass]="'number'+now[1]"></app-number>
+          <app-dot></app-dot>
+          <app-number [ngClass]="'number'+now[2]"></app-number>
+          <app-number [ngClass]="'number'+now[3]"></app-number>
+          <app-dot></app-dot>
+          <app-number [ngClass]="'number'+now[4]"></app-number>
+          <app-number [ngClass]="'number'+now[5]"></app-number>
+        </div>
+      </div>
     </div>
   </div>
 </div>

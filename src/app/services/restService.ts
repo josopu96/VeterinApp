@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './../../config/configService';
 import { AbstractWS } from './abstractService';
 import { Injectable } from '@angular/core';
+import { Usuario } from '../models/usuario';
 
 @Injectable()
 export class RestWS extends AbstractWS {
@@ -17,7 +18,7 @@ export class RestWS extends AbstractWS {
   // Methods
   public login(email, clave) {
     const fd = new HttpParams().set('email', email).set('clave', clave);
-    return this.makePostRequest(this.path + 'usuarios/login', fd).then((res: String) => {
+    return this.makePostRequest(this.path + 'usuarios/login', fd).then((res: Usuario) => {
         console.log('Logged successfully');
         return Promise.resolve(res);
       }).catch(error => {
@@ -39,10 +40,9 @@ export class RestWS extends AbstractWS {
       });
   }
 
-  public getCliente(id: number) {
+  public getCliente(id: string) {
     const fd = new HttpParams();
-    fd.set('idCliente', id.toString());
-    return this.makeGetRequest(this.path + 'cliente', fd).then((res: String) => {
+    return this.makeGetRequest(this.path + 'clientes/'+id, fd).then((res: String) => {
         return Promise.resolve(res);
       }).catch(error => {
         console.log('Error: ' + error);

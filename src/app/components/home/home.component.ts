@@ -22,9 +22,11 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private globalService: GlobalService
   ) {
+    console.log("el usuario tiene token: "+this.cookieService.get("token"));
     const token = this.cookieService.get("token");
     const isUserLogged = token ? true : false;
-
+    console.log("isUserLogged: "+isUserLogged);
+    console.log("token: "+token);
     if (!isUserLogged) {
       this.router.navigateByUrl("/login");
     }

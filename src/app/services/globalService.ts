@@ -25,16 +25,18 @@ export class GlobalService{
       this.mascota = new Mascota();
       this.mascota.setId("0");
       this.token = this.coockieService.get("token");
-      if(this.token){
-        this.getUserByToken();
+      if(this.token == "undefined"){
+        this.metodoParaDesarrollo();
       } else {
         this.usuario = new Usuario();
       }
     }
 
-    getUserByToken(){
+    metodoParaDesarrollo(){
+      this.token = "5ca0e4fc34eaf00d889a9fee";
       this.dm.getUserByToken(this.token).then((res:Usuario) => {
         this.setUsuario(res);
+        this.coockieService.set("token",res.id);
       });
     }
 

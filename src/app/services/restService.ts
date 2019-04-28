@@ -51,8 +51,9 @@ export class RestWS extends AbstractWS {
   }
 
   public getUserByToken(token: string) {
-    const fd = new HttpParams().set('token', token);
-    return this.makeGetRequest(this.path + 'usuarios/token/', fd).then((res: Usuario) => {
+    const fd = new HttpParams();
+    return this.makeGetRequest(this.path + 'usuarios/token/'+token, fd).then((res: Usuario) => {
+        console.log("la respuesta del server es: "+res);
         return Promise.resolve(res);
       }).catch(error => {
         console.error('Error: ' + error);

@@ -22,9 +22,11 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private globalService: GlobalService
   ) {
+    console.log("el usuario tiene token: "+this.cookieService.get("token"));
     const token = this.cookieService.get("token");
     const isUserLogged = token ? true : false;
-
+    console.log("isUserLogged: "+isUserLogged);
+    console.log("token: "+token);
     if (!isUserLogged) {
       this.router.navigateByUrl("/login");
     }
@@ -57,9 +59,9 @@ export class HomeComponent implements OnInit {
     if(estado=='M'){
       this.mensajeBienvenida="Buenos días, ";
     } else if(estado=='T'){
-      this.mensajeBienvenida="Buenos tardes, ";
+      this.mensajeBienvenida="Buenas tardes, ";
     } else {
-      this.mensajeBienvenida="Buenos noches, ";
+      this.mensajeBienvenida="Buenas noches, ";
     }
   }
 }

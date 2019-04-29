@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
       this.cookieService.set('token', res.id);
       this.globalService.setUsuario(res);
       this.router.navigateByUrl("");
-      console.log("el nombre del usuario es: "+this.globalService.getUsuario().nombre);
     }).catch((err) => {
       this.showError = true;
       console.log(err);

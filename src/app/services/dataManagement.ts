@@ -29,4 +29,12 @@ export class DataManagement {
       return Promise.reject(error);
     });
   }
+
+  public getUserByToken(token: string): Promise<any> {
+    return this.restService.getUserByToken(token).then((data: Usuario) => {
+        return Promise.resolve(data);
+      }).catch(error => {
+        return Promise.reject('error');
+      });
+  }
 }

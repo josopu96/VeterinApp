@@ -57,3 +57,14 @@ exports.deleteUsuario = function (req, res) {
         res.send('Eliminado satisfactoriamente!');
     });
 };
+
+exports.getUserByToken = function(req, res) {
+  console.log("El id recibido es: "+req.params.id);
+  console.log("Este token no se usa: "+req.params.token);
+  Usuario.findById(req.params.id, function(err, usuario) {
+      if (err)  {
+          res.send(err);
+      }
+      res.send(usuario);
+  });
+}

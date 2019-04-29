@@ -1,6 +1,6 @@
 export class Ajustes {
   private _id: string;
-  private _tamLetra: number;
+  private _tamLetra: string;
   private _tema: string;
   private _recordatorio: number;
 
@@ -22,7 +22,7 @@ export class Ajustes {
 
   contructor(
     id: string,
-    tamLetra: number,
+    tamLetra: string,
     tema: string,
     recordatorio: number
   ){
@@ -37,7 +37,7 @@ export class Ajustes {
       this._id = id;
     }
   }
-  setTamLetra(tamLetra: number){
+  setTamLetra(tamLetra: string){
     if(tamLetra){
       this._tamLetra = tamLetra;
     }

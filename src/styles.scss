@@ -51,5 +51,8 @@ html, body {
         box-sizing: border-box;
         border-top-left-radius: 5px;
       }
+      .columna{
+        flex-direction: column;
+      }
     }
 }

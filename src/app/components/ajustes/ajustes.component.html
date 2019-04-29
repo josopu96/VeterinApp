@@ -1,9 +1,60 @@
 <div class="container">
-    <app-selecciones class="top"></app-selecciones>
-    <div class="bottom">
-      <app-menu class="menu"></app-menu>
-      <div class="seccion">
+  <app-selecciones class="top"></app-selecciones>
+  <div class="bottom">
+    <app-menu class="menu"></app-menu>
+    <div class="seccion columna">
+      <div class="titulo">
+        <h2>AJUSTES DE LA APLICACIÓN</h2>
+      </div>
+      <div class="tema">
+        <fieldset>
+          <legend>Tema</legend>
+          <div class="texto">
+            <p>Puedes seleccionar el tema que te resulte más cómodo para trabajar.</p>
+            <p>Lo único que cambiará será el estilo de la aplicación, pero las funcionalidades seguirán siendo las
+              mismas.</p>
+          </div>
+          <div class="botones">
+            <button>Claro</button>
+            <button>Oscuro</button>
+          </div>
+        </fieldset>
+      </div>
+      <div class="tamanyo">
+        <fieldset>
+          <legend>Tamaño</legend>
+          <div class="texto">
+            <p>Puedes seleccionar el tamaño de la aplicación.</p>
+            <p>Un mayor tamaño implica que toda la aplicación se verá más grande.</p>
+          </div>
+          <div class="botones">
+            <button>Pequeño</button>
+            <button>Medio</button>
+            <button>Grande</button>
+          </div>
+        </fieldset>
+      </div>
+      <div class="recordatorio">
+        <fieldset>
+          <legend>Recordatorios</legend>
+          <div class="texto">
+            <p>Puedes seleccionar los días de antelación con los que quiere avisar a un cliente de su cita.</p>
+            <p>Si selecciona "-" entonces no se realizará el recordatorio.</p>
+          </div>
+          <div class="botones">
+            <select class="select">
+              <option> - </option>
+              <option> 1 </option>
+              <option> 2 </option>
+            </select>
+          </div>
+        </fieldset>
+      </div>
+      <div class="cerrar">
+        <div class="cerrarSesion">
+          <p>Cerrar sesión</p>
+        </div>
       </div>
     </div>
   </div>
-  
+</div>

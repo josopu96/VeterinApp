@@ -1,6 +1,6 @@
 @import "../../utilities/variables.scss";
 
-.exterior{
+.exterior_claro{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,7 +14,7 @@
         justify-content: center;
         width: 100%;
         height: $altoTexto+px;
-        color: $textoClaro;
+        color: $textoOscuro;
     }
 
     .interior{
@@ -26,51 +26,30 @@
         border: 4px ridge $colorFondoOscuro;
         border-radius: 5px;
         box-sizing: border-box;
-        background: rgba($color: $colorFondoOscuro, $alpha: 0.5);
+        background: rgba($color: $colorFondoClaro, $alpha: 0.5);
 
         .addclient{
-            background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/addclient.png);
+            background: url(../../../assets/img/addclient.png);
             &:hover{
                 background-color: $colorFondoOscuroTransparente;
                 cursor: pointer;
             }
         }
         .addpet{
-            background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/addpet.png);
+            background: url(../../../assets/img/addpet.png);
             &:hover{
                 background-color: $colorFondoOscuroTransparente;
                 cursor: pointer;
             }
         }
         .selectvet{
-            background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/selectvet.png);
+            background: url(../../../assets/img/selectvet.png);
             &:hover{
                 background-color: $colorFondoOscuroTransparente;
                 cursor: pointer;
             }
         }
 
-        .addclientOscuro{
-            background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/addclient-oscuro.png);
-            &:hover{
-                background-color: $colorFondoClaroTransparente;
-                cursor: pointer;
-            }
-        }
-        .addpetOscuro{
-            background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/addpet-oscuro.png);
-            &:hover{
-                background-color: $colorFondoClaroTransparente;
-                cursor: pointer;
-            }
-        }
-        .selectvetOscuro{
-            background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/selectvet-oscuro.png);
-            &:hover{
-                background-color: $colorFondoClaroTransparente;
-                cursor: pointer;
-            }
-        }
 
         .seccion1{
             display: flex;
@@ -101,7 +80,7 @@
                 flex-grow: 1;
                 width: 100%;
                 border-bottom: 4px ridge $colorFondoOscuro;
-                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/swap.png);
+                background: url(../../../assets/img/swap.png);
                 &:hover{
                     background-color: $colorFondoOscuroTransparente;
                     cursor: pointer;
@@ -114,14 +93,91 @@
                 justify-content: center;
                 width: 100%;
                 flex-grow: 1;
-                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/limpiar.png);
+                background: url(../../../assets/img/limpiar.png);
                 &:hover{
                     background-color: $colorFondoOscuroTransparente;
                     cursor: pointer;
                 }
             }
+        }
 
-            .botonLimpiarOscuro{
+    }
+}
+
+.exterior_oscuro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $anchoExterior+px;
+    height: $altoExterior+px;
+    flex-direction: column;
+
+    .texto{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: $altoTexto+px;
+        color: $textoClaro;
+    }
+
+    .interior{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+        height: $altoInterior+px;
+        border: 4px ridge $colorFondoOscuro;
+        border-radius: 5px;
+        box-sizing: border-box;
+        background: rgba($color: $colorFondoOscuro, $alpha: 0.5);
+
+        .addclient{
+            background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/addclient-oscuro.png);
+            &:hover{
+                background-color: $colorFondoClaroTransparente;
+                cursor: pointer;
+            }
+        }
+        .addpet{
+            background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/addpet-oscuro.png);
+            &:hover{
+                background-color: $colorFondoClaroTransparente;
+                cursor: pointer;
+            }
+        }
+        .selectvet{
+            background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/selectvet-oscuro.png);
+            &:hover{
+                background-color: $colorFondoClaroTransparente;
+                cursor: pointer;
+            }
+        }
+
+        .seccion1{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: $anchoSeccion1+px;
+            height: 100%;
+
+            .imagenSelector{
+                width: $anchoImagenSelector+px;
+                height: $altoImagenSelector+px;
+            }
+        }
+
+        .seccion2{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100%;
+            width: 39px;
+            border-left: 4px ridge $colorFondoOscuro;
+
+
+            .botonLimpiar{
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -134,7 +190,7 @@
                 }
             }
 
-            .botonCambiarOscuro{
+            .botonCambiar{
                 display: flex;
                 align-items: center;
                 justify-content: center;

@@ -12,6 +12,7 @@ import { Usuario } from '../../models/usuario';
 })
 export class HomeComponent implements OnInit {
 
+  tema: string = "_claro";
   nombreUsuario: String;
   hora: number;
   mensajeBienvenida: String;
@@ -33,6 +34,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tema = "_"+this.globalService.getTema();
     console.log("el nombre del usuario es: "+this.globalService.getUsuario().nombre);
     this.nombreUsuario = this.globalService.getUsuario().nombre;
     if(this.time.getHours()<12 && this.time.getHours() >= 3){

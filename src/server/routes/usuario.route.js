@@ -11,5 +11,6 @@ router.get('/:id', cors(), usuario_controller.displayUsuario);
 router.put('/:id/update', cors(), usuario_controller.updateUsuario);
 router.delete('/:id', cors(), usuario_controller.deleteUsuario);
 router.get('/token/:id', cors(), usuario_controller.getUserByToken);
+router.post('/updateAjustes/:id', cors(), usuario_controller.updateAjustes);
 
 module.exports = router;

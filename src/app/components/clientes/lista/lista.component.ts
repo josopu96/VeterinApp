@@ -16,6 +16,7 @@ export class ListaComponent implements OnInit {
   headElements = ['Nombre', 'Apellidos', 'DNI', 'Teléfono', 'Visualizar', 'Editar', 'Seleccionar'];
 
   elements: any[];
+  tema: string = "_claro";
 
 
   constructor(
@@ -28,6 +29,7 @@ export class ListaComponent implements OnInit {
 
   ngOnInit() {
     this.getItems();
+    this.tema = "_"+this.globalService.getTema();
   }
 
   private getItems (filters?: any[]) {

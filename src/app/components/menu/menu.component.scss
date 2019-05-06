@@ -1,6 +1,68 @@
 @import "../../utilities/variables.scss";
 
-.seccionMenu{
+.seccionMenu_claro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: $anchoMenu+px;
+    height: $altoSeccion+px;
+
+    .item{
+        display: flex;
+        height: 100%;
+        width: 100%;
+
+        .fondo{
+            $border: 4;
+            background: rgba($color: $colorFondoClaro, $alpha: 0.5);
+            height: $altoItemMenu+px;
+            width: 100%;
+            border: $border+px ridge $colorFondoOscuro;
+            border-radius: 5px;
+            box-sizing: border-box;
+
+            .clientes{
+                height: $altoItemMenu - 2 * $border+px;
+                width: 100%;
+                background: url(../../../assets/img/clientes.png);
+                &:hover{
+                    background-color: $colorFondoOscuroTransparente;
+                    cursor: pointer;
+                }
+            }
+            .mascotas{
+                height: $altoItemMenu - 2 * $border+px;
+                width: 100%;
+                background: url(../../../assets/img/mascotas.png);
+                &:hover{
+                    background-color: $colorFondoOscuroTransparente;
+                    cursor: pointer;
+                }
+            }
+            .calendario{
+                height: $altoItemMenu - 2 * $border+px;
+                width: 100%;
+                background: url(../../../assets/img/calendario.png);
+                &:hover{
+                    background-color: $colorFondoOscuroTransparente;
+                    cursor: pointer;
+                }
+            }
+            .operaciones{
+                height: $altoItemMenu - 2 * $border+px;
+                width: 100%;
+                background: url(../../../assets/img/operaciones.png);
+                &:hover{
+                    background-color: $colorFondoOscuroTransparente;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+.seccionMenu_oscuro{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,17 +84,8 @@
             border-radius: 5px;
             box-sizing: border-box;
 
-            .clientes{
-                height: $altoItemMenu - 2 * $border+px;
-                width: 100%;
-                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/clientes.png);
-                &:hover{
-                    background-color: $colorFondoOscuroTransparente;
-                    cursor: pointer;
-                }
-            }
             
-            .clientesOscuro{
+            .clientes{
                 height: $altoItemMenu - 2 * $border+px;
                 width: 100%;
                 background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/clientes-oscuro.png);
@@ -44,15 +97,6 @@
             .mascotas{
                 height: $altoItemMenu - 2 * $border+px;
                 width: 100%;
-                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/mascotas.png);
-                &:hover{
-                    background-color: $colorFondoOscuroTransparente;
-                    cursor: pointer;
-                }
-            }
-            .mascotasOscuro{
-                height: $altoItemMenu - 2 * $border+px;
-                width: 100%;
                 background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/mascotas-oscuro.png);
                 &:hover{
                     background-color: $colorFondoClaroTransparente;
@@ -62,15 +106,6 @@
             .calendario{
                 height: $altoItemMenu - 2 * $border+px;
                 width: 100%;
-                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/calendario.png);
-                &:hover{
-                    background-color: $colorFondoOscuroTransparente;
-                    cursor: pointer;
-                }
-            }
-            .calendarioOscuro{
-                height: $altoItemMenu - 2 * $border+px;
-                width: 100%;
                 background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/calendario-oscuro.png);
                 &:hover{
                     background-color: $colorFondoClaroTransparente;
@@ -78,15 +113,6 @@
                 }
             }
             .operaciones{
-                height: $altoItemMenu - 2 * $border+px;
-                width: 100%;
-                background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/operaciones.png);
-                &:hover{
-                    background-color: $colorFondoOscuroTransparente;
-                    cursor: pointer;
-                }
-            }
-            .operacionesOscuro{
                 height: $altoItemMenu - 2 * $border+px;
                 width: 100%;
                 background: linear-gradient($colorFondoOscuroTransparente, $colorFondoOscuroTransparente), url(../../../assets/img/operaciones-oscuro.png);

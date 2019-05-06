@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalService } from '../../../services/globalService';
 
 @Component({
   selector: 'app-number',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NumberComponent implements OnInit {
 
-  constructor() { }
+  tema: string = "_claro";
+
+  constructor(
+    private globalService: GlobalService
+  ) { }
 
   ngOnInit() {
+    this.tema = "_"+this.globalService.getTema();
   }
 
 }

@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    //Esta es la única pantalla que tendrá siempre el mismo tema de colores. Ya que no disponemos aun de los ajustes de usuario.
   }
 
   sendLogin() {

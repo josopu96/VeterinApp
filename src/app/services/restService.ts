@@ -3,6 +3,7 @@ import { ConfigService } from './../../config/configService';
 import { AbstractWS } from './abstractService';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../models/usuario';
+import { Ajustes } from '../models/ajustes';
 
 @Injectable()
 export class RestWS extends AbstractWS {
@@ -54,6 +55,21 @@ export class RestWS extends AbstractWS {
     const fd = new HttpParams();
     return this.makeGetRequest(this.path + 'usuarios/token/'+token, fd).then((res: Usuario) => {
         console.log("la respuesta del server es: "+res);
+        return Promise.resolve(res);
+      }).catch(error => {
+        console.error('Error: ' + error);
+        return Promise.reject(error);
+      });
+  }
+  
+  public updateAjustes(ajustes: Ajustes, token: string) {
+    const fd = new HttpParams()
+      .set('tema', ajustes.tema)
+      .set('tamLetra', ajustes.tamLetra)
+      .set('recordatorio', ajustes.recordatorio.toString())
+      .set('id', ajustes.id);
+    return this.makePostRequest(this.path + 'usuarios/updateAjustes/'+token, fd).then((res) => {
+        console.log(res);
         return Promise.resolve(res);
       }).catch(error => {
         console.error('Error: ' + error);

@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
 
   email: String = "josed@gmail.com";
   password: String = "josed";
-  showSupport: Boolean;
   showError: Boolean;
 
   constructor(
@@ -39,6 +38,10 @@ export class LoginComponent implements OnInit {
       this.showError = true;
       console.log(err);
     });
+  }
+
+  rememberPass() {
+
   }
 
 }

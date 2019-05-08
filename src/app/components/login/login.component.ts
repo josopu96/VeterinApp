@@ -26,12 +26,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    //Esta es la única pantalla que tendrá siempre el mismo tema de colores. Ya que no disponemos aun de los ajustes de usuario.
   }
 
   sendLogin() {
     this.dm.login(this.email, this.password).then((res:Usuario) => {
       console.log("Login correcto");
-      this.cookieService.set('token', res.id);
+      this.cookieService.set('token', res._id);
       this.globalService.setUsuario(res);
       this.router.navigateByUrl("");
     }).catch((err) => {

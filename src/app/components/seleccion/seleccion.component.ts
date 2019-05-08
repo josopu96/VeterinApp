@@ -21,8 +21,10 @@ export class SeleccionComponent implements OnInit {
   @Input() cliente: Cliente;
   @Input() veterinario: Veterinario;
   @Input() mascota: Mascota;
+  tema: string = "_claro";
 
   ngOnInit() {
+    this.tema = "_"+this.globalService.getTema();
   }
 
   goBack(): void {

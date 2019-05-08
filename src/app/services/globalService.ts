@@ -1,42 +1,40 @@
 import { Injectable } from '@angular/core';
-import { Cliente } from '../models/cliente';
-import { Veterinario } from '../models/veterinario';
-import { Mascota } from '../models/mascota';
-import { Usuario } from '../models/usuario';
 import { CookieService } from 'ngx-cookie-service';
 import { DataManagement } from '../services/dataManagement';
+import { Ajustes, Usuario, Mascota, Veterinario, Cliente } from '../app.dataModels';
 
 @Injectable()
-export class GlobalService{
+export class GlobalService {
     cliente: Cliente;
     veterinario: Veterinario;
     mascota: Mascota;
     usuario: Usuario;
     token: string;
+    ajustes: Ajustes;
 
     constructor(
       private coockieService: CookieService,
       private dm: DataManagement
       ){
-      this.cliente = new Cliente();
-      this.cliente.setId("0");
-      this.veterinario = new Veterinario();
-      this.veterinario.setId("0");
-      this.mascota = new Mascota();
-      this.mascota.setId("0");
-      this.token = this.coockieService.get("token");
-      if(this.token == "undefined"){
-        this.metodoParaDesarrollo();
-      } else {
-        this.usuario = new Usuario();
-      }
+        this.cliente = new Cliente();
+        this.cliente.setId("0");
+        this.veterinario = new Veterinario();
+        this.veterinario.setId("0");
+        this.mascota = new Mascota();
+        this.mascota.setId("0");
+        this.token = this.coockieService.get("token");
+        if(this.token == "undefined"){
+          this.metodoParaDesarrollo();
+        } else {
+          this.usuario = new Usuario();
+        }
     }
 
     metodoParaDesarrollo(){
       this.token = "5ca0e4fc34eaf00d889a9fee";
       this.dm.getUserByToken(this.token).then((res:Usuario) => {
         this.setUsuario(res);
-        this.coockieService.set("token",res.id);
+        this.coockieService.set("token",res._id);
       });
     }
 
@@ -88,7 +86,47 @@ export class GlobalService{
     }
 
     setUsuario(user: Usuario){
-      this.usuario=user;
+      this.usuario=new Usuario();
+      this.ajustes=new Ajustes();
+      this.ajustes.contructor(
+        user.ajustes.id,
+        user.ajustes.tamLetra,
+        user.ajustes.tema,
+        user.ajustes.recordatorio
+      );
+      this.usuario.contructor(
+        user._id,
+        user.nombre,
+        user.clave,
+        user.isAdmin,
+        user.email,
+        this.ajustes
+      );
+
+    }
+
+    getTema(){
+      if(this.getUsuario()){
+        return this.getUsuario().ajustes.tema;
+      } else {
+        return "claro";
+      }
+    }
+
+    cambiarTema(tema: string){
+      if(this.getUsuario()){
+        this.ajustes = new Ajustes();
+        this.ajustes.contructor(
+          this.getUsuario().ajustes.id,
+          this.getUsuario().ajustes.tamLetra,
+          this.getUsuario().ajustes.tema,
+          this.getUsuario().ajustes.recordatorio);
+        this.ajustes.setTema(tema);
+        //this.ajustes.setTema(tema);
+        //console.log(this.usuario);
+        this.usuario.setAjustes(this.ajustes);
+      }
+      return this.ajustes;
     }
 
 }

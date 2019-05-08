@@ -59,8 +59,6 @@ exports.deleteUsuario = function (req, res) {
 };
 
 exports.getUserByToken = function(req, res) {
-  console.log("El id recibido es: "+req.params.id);
-  console.log("Este token no se usa: "+req.params.token);
   Usuario.findById(req.params.id, function(err, usuario) {
       if (err)  {
           res.send(err);
@@ -68,3 +66,22 @@ exports.getUserByToken = function(req, res) {
       res.send(usuario);
   });
 }
+
+exports.updateAjustes = function(req, res) {
+
+    Usuario.findById(req.params.id, function(err, usuario) {
+      if (err)  {
+          res.send(err);
+      }
+
+      usuario.ajustes.tema = req.body.tema;
+      usuario.ajustes.tamLetra = req.body.tamLetra;
+      usuario.ajustes.recordatorio = req.body.recordatorio;
+      usuario.save (function (err) {
+          if (err) {
+              return next(err);
+          }
+          res.send(usuario);
+      });
+    });
+};

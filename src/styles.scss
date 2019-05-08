@@ -11,21 +11,20 @@ html, body {
 .top {
   width: 100%;
 }
-.container {
+.container_claro {
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: $textoClaro;
+    color: $textoOscuro;
   
-    background-color: rgba($color1, $alpha: 1.0);
+    background-color: rgba($color7, $alpha: 1.0);
     -webkit-background-size: cover;
     background-size: cover;
 
     .bottom{
-      background-color: rgba(#000000, $alpha: 0.4);
       display: flex;
       align-items: center;
       flex-direction: row;
@@ -39,20 +38,39 @@ html, body {
         justify-content: center;
         height: 100%;
       }
-      .seccion{
-        display: flex;
-        background-color: rgba(#ffffff, $alpha: 0.4);
-        flex-basis: $anchoSeccion+px;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        border-top: 2px solid $colorFondoOscuro;
-        border-left: 2px solid $colorFondoOscuro;
-        box-sizing: border-box;
-        border-top-left-radius: 5px;
-      }
-      .columna{
-        flex-direction: column;
-      }
     }
+}
+
+.container_oscuro {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: $textoClaro;
+
+  background-color: rgba($color6, $alpha: 1.0);
+  -webkit-background-size: cover;
+  background-size: cover;
+
+  .bottom{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-basis: $altoSeccion+px;
+    width: 100%;
+
+    .menu{
+      display: flex;
+      flex-grow: 1;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+  }
+}
+
+.columna {
+  flex-direction: column;
 }

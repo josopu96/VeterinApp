@@ -1,15 +1,15 @@
 import {Ajustes} from "./ajustes";
 
 export class Usuario {
-  private _id: string;
+  private __id: string;
   private _nombre: string;
   private _clave: string;
   private _isAdmin: boolean;
   private _email: string;
   private _ajustes: Ajustes;
 
-  get id(){
-    return this._id;
+  get _id(){
+    return this.__id;
   }
 
   get nombre(){
@@ -33,14 +33,14 @@ export class Usuario {
   }
 
   contructor(
-    id: string,
+    _id: string,
     nombre: string,
     clave: string,
     isAdmin: boolean,
     email: string,
     ajustes: Ajustes
   ){
-    this.setId(id);
+    this.setId(_id);
     this.setNombre(nombre);
     this.setClave(clave);
     this.setIsAdmin(isAdmin);
@@ -48,9 +48,9 @@ export class Usuario {
     this.setAjustes(ajustes);
   }
 
-  setId(id: string){
-    if(id){
-      this._id = id;
+  setId(_id: string){
+    if(_id){
+      this.__id = _id;
     }
   }
   setNombre(nombre: string){

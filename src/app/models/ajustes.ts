@@ -43,11 +43,12 @@ export class Ajustes {
     }
   }
   
-  setTema(tema: string){
+  setTema(tema: string):void{
     if(tema){
       this._tema = tema;
     }
   }
+
   setRecordatorio(recordatorio: number){
     if(recordatorio){
       this._recordatorio = recordatorio;

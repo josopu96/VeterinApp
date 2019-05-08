@@ -1,6 +1,17 @@
 @import "../../utilities/variables.scss";
 
-.home{
+.seccion_claro {
+  display: flex;
+  background-color: rgba(#ffffff, $alpha: 0.4);
+  flex-basis: $anchoSeccion + px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border-top: 2px solid $colorFondoOscuro;
+  border-left: 2px solid $colorFondoOscuro;
+  box-sizing: border-box;
+  border-top-left-radius: 5px;
+  .home {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,15 +20,50 @@
     width: 100%;
     background: linear-gradient($fondoDegradado, $fondoDegradado), url(../../../assets/logoSolo.jpg);
     background-size: 100% 100%;
-}
+  }
 
-.textoBienvenida {
+  .textoBienvenida {
     font-size: 60px;
     margin-bottom: 255px;
     font-weight: bold;
     color: $textoInicio;
+  }
+
+  .reloj {
+    margin-bottom: 50px;
+  }
 }
 
-.reloj {
-    margin-bottom: 50px;
-}
+.seccion_oscuro {
+    display: flex;
+    background-color: rgba(#ffffff, $alpha: 0.4);
+    flex-basis: $anchoSeccion + px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    border-top: 2px solid $colorFondoOscuro;
+    border-left: 2px solid $colorFondoOscuro;
+    box-sizing: border-box;
+    border-top-left-radius: 5px;
+    .home {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient($fondoDegradado, $fondoDegradado), url(../../../assets/logoSolo.jpg);
+      background-size: 100% 100%;
+    }
+  
+    .textoBienvenida {
+      font-size: 60px;
+      margin-bottom: 255px;
+      font-weight: bold;
+      color: $textoInicio;
+    }
+  
+    .reloj {
+      margin-bottom: 50px;
+    }
+  }

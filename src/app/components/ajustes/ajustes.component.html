@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container{{tema}}">
   <app-selecciones class="top"></app-selecciones>
   <div class="bottom">
     <app-menu class="menu"></app-menu>
-    <div class="seccion columna">
+    <div class="seccion{{tema}} columna">
       <div class="titulo">
         <h2>AJUSTES DE LA APLICACIÓN</h2>
       </div>
@@ -15,8 +15,8 @@
               mismas.</p>
           </div>
           <div class="botones">
-            <button>Claro</button>
-            <button>Oscuro</button>
+            <button class="claro_seleccionado" (click)="cambiarTema('claro')">Claro</button>
+            <button class="oscuro_seleccionado" (click)="cambiarTema('oscuro')">Oscuro</button>
           </div>
         </fieldset>
       </div>
@@ -28,9 +28,9 @@
             <p>Un mayor tamaño implica que toda la aplicación se verá más grande.</p>
           </div>
           <div class="botones">
-            <button>Pequeño</button>
+            <button disabled>Pequeño</button>
             <button>Medio</button>
-            <button>Grande</button>
+            <button disabled>Grande</button>
           </div>
         </fieldset>
       </div>

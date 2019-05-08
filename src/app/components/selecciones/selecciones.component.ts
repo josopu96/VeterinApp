@@ -22,15 +22,16 @@ export class SeleccionesComponent implements OnInit {
     private globalService: GlobalService
   ) { }
 
-  
   cliente: Cliente;
   veterinario: Veterinario;
   mascota: Mascota;
+  tema: string = "_claro";
 
   ngOnInit() {
     this.getCliente();
     this.getMascota();
     this.getVeterinario();
+    this.tema = "_"+this.globalService.getTema();
   }
 
   getCliente(): void {

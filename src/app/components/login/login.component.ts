@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   sendLogin() {
     this.dm.login(this.email, this.password).then((res:Usuario) => {
       console.log("Login correcto");
-      this.cookieService.set('token', res.id);
+      this.cookieService.set('token', res._id);
       this.globalService.setUsuario(res);
       this.router.navigateByUrl("");
     }).catch((err) => {

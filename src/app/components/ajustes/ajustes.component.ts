@@ -14,6 +14,7 @@ export class AjustesComponent implements OnInit {
 
   tema: string = "_claro";
   ajustes: Ajustes;
+  token: string;
 
   constructor(
     private globalService: GlobalService,
@@ -28,7 +29,8 @@ export class AjustesComponent implements OnInit {
 
   cambiarTema(tema: string){
       this.ajustes = this.globalService.cambiarTema(tema);
-      this.dm.updateAjustes(this.ajustes, this.cookieService.get('token')).then(res => {
+      this.token = this.cookieService.get('token');
+      this.dm.updateAjustes(this.ajustes, this.token).then(res => {
         console.log(res);
       }).catch((err) => {
         console.error(err);

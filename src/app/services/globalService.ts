@@ -34,7 +34,7 @@ export class GlobalService {
       this.token = "5ca0e4fc34eaf00d889a9fee";
       this.dm.getUserByToken(this.token).then((res:Usuario) => {
         this.setUsuario(res);
-        this.coockieService.set("token",res.id);
+        this.coockieService.set("token",res._id);
       });
     }
 
@@ -95,7 +95,7 @@ export class GlobalService {
         user.ajustes.recordatorio
       );
       this.usuario.contructor(
-        user.id,
+        user._id,
         user.nombre,
         user.clave,
         user.isAdmin,

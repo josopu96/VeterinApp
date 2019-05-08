@@ -21,12 +21,10 @@
           </ng-container>
 
           <!-- Remind Passowrd -->
-          <div id="formFooter">
-            <a class="underlineHover" (click)="showSupport = true">¿Olvidaste la contraseña?</a>
+          <div id="formFooter" style="color:black;">
+            <input type="checkbox" [(ngModel)]="rememberPass" />
+            Recordar contraseña
           </div>
-          <ng-container *ngIf="showSupport">
-            <p> Contacta con el servicio técnico </p>
-          </ng-container>
         </div>
       </div>
 

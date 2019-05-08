@@ -4,6 +4,7 @@ import { DataManagement } from '../../services/dataManagement';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { GlobalService } from '../../services/globalService';
+import { Global } from '../../models/bundle';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,10 @@ import { GlobalService } from '../../services/globalService';
 })
 export class LoginComponent implements OnInit {
 
-  email: String = "josed@gmail.com";
-  password: String = "josed";
+  email: String;
+  password: String;
   showError: Boolean;
+  rememberPass: Boolean;
 
   constructor(
     private dm: DataManagement,
@@ -26,11 +28,21 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     //Esta es la única pantalla que tendrá siempre el mismo tema de colores. Ya que no disponemos aun de los ajustes de usuario.
+    this.dm.getGlobalLogin().then((res: Global) => {
+      this.rememberPass = res.recordarPass;
+      if (this.rememberPass === true) {
+        this.dm.getUserByToken(res.usuarioId).then((usr) => {
+          this.email = usr.email;
+          this.password = usr.clave;
+        });
+      }
+    });
   }
 
   sendLogin() {
-    this.dm.login(this.email, this.password).then((res:Usuario) => {
+    this.dm.login(this.email, this.password).then((res: Usuario) => {
       console.log("Login correcto");
+      this.doRememberPass(res._id);
       this.cookieService.set('token', res._id);
       this.globalService.setUsuario(res);
       this.router.navigateByUrl("");
@@ -40,8 +52,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  rememberPass() {
+  doRememberPass(userId: string) {
+    this.dm.updateGlobalLogin(userId, String(this.rememberPass)).then((_) => {
 
+    }).catch((err) => {
+      console.log(err);
+    });
   }
-
 }

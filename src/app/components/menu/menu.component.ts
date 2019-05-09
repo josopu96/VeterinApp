@@ -8,14 +8,14 @@ import { GlobalService } from '../../services/globalService';
 })
 export class MenuComponent implements OnInit {
 
-  tema: string = "_claro";
+  tema = "_claro";
 
   constructor(
     private globalService: GlobalService
   ) { }
 
   ngOnInit() {
-    this.tema = "_"+this.globalService.getTema();
+    this.tema = "_" + this.globalService.getTema();
   }
 
 }

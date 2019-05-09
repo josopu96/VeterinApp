@@ -28,7 +28,8 @@ import { DataManagement } from './services/dataManagement';
 import { RestWS } from './services/restService';
 import { ConfigService } from '../config/configService';
 import { Utils } from './utilities/Utils';
-import { ListaComponent } from './components/clientes/lista/lista.component';
+import { ListaComponent as ListaUsuarios } from './components/clientes/lista/lista.component';
+import { ListaComponent as ListaMascotas } from './components/mascotas/lista/lista.component';
 import { GlobalService } from './services/globalService';
 import { NumberComponent } from './components/home/number/number.component';
 import { DotComponent } from './components/home/dot/dot.component';
@@ -49,7 +50,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MenuComponent,
     SeleccionesComponent,
     LoginComponent,
-    ListaComponent,
+    ListaUsuarios,
+    ListaMascotas,
     NumberComponent,
     DotComponent,
     AjustesComponent

@@ -15,7 +15,7 @@ export class GlobalService {
     constructor(
       private coockieService: CookieService,
       private dm: DataManagement
-      ){
+      ) {
         this.cliente = new Cliente();
         this.cliente.setId("0");
         this.veterinario = new Veterinario();
@@ -23,14 +23,14 @@ export class GlobalService {
         this.mascota = new Mascota();
         this.mascota.setId("0");
         this.token = this.coockieService.get("token");
-        if(this.token == "undefined"){
+        if (this.token == "undefined") {
           this.metodoParaDesarrollo();
         } else {
           this.usuario = new Usuario();
         }
     }
 
-    metodoParaDesarrollo(){
+    metodoParaDesarrollo() {
       this.token = "5ca0e4fc34eaf00d889a9fee";
       this.dm.getUserByToken(this.token).then((res:Usuario) => {
         this.setUsuario(res);
@@ -38,54 +38,54 @@ export class GlobalService {
       });
     }
 
-    setCliente( nuevoCliente: Cliente){
+    setCliente( nuevoCliente: Cliente) {
       this.cliente = nuevoCliente;
     }
 
-    getCliente(){
+    getCliente() {
       return this.cliente;
     }
 
-    setVeterinario( nuevoVeterinario: Veterinario){
+    setVeterinario( nuevoVeterinario: Veterinario) {
       this.veterinario = nuevoVeterinario;
     }
 
-    getVeterinario(){
+    getVeterinario() {
       return this.veterinario;
     }
 
-    setMascota( nuevaMascota: Mascota){
+    setMascota( nuevaMascota: Mascota) {
       this.mascota = nuevaMascota;
     }
 
-    getMascota(){
+    getMascota() {
       return this.mascota;
     }
 
-    limpiarCliente(){
+    limpiarCliente() {
       this.limpiarMascota();
       this.cliente = new Cliente();
       this.cliente.setId("0");
       return this.cliente;
     }
 
-    limpiarMascota(){
+    limpiarMascota() {
       this.mascota = new Mascota();
       this.mascota.setId("0");
       return this.mascota;
     }
 
-    limpiarVeterinario(){
+    limpiarVeterinario() {
       this.veterinario = new Veterinario();
       this.veterinario.setId("0");
       return this.veterinario;
     }
 
-    getUsuario(){
+    getUsuario() {
       return this.usuario;
     }
 
-    setUsuario(user: Usuario){
+    setUsuario(user: Usuario) {
       this.usuario=new Usuario();
       this.ajustes=new Ajustes();
       this.ajustes.contructor(
@@ -106,15 +106,19 @@ export class GlobalService {
     }
 
     getTema(){
-      if(this.getUsuario()){
-        return this.getUsuario().ajustes.tema;
+      if (this.getUsuario()) {
+        if (this.ajustes) {
+          return this.getUsuario().ajustes.tema;
+        } else {
+          return "oscuro";
+        }
       } else {
-        return "claro";
+        return "oscuro";
       }
     }
 
-    cambiarTema(tema: string){
-      if(this.getUsuario()){
+    cambiarTema(tema: string) {
+      if(this.getUsuario()) {
         this.ajustes = new Ajustes();
         this.ajustes.contructor(
           this.getUsuario().ajustes.id,

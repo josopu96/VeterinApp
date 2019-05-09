@@ -39,6 +39,7 @@ function createWindow() {
   const usuario = require('./src/server/routes/usuario.route');
   const cliente = require('./src/server/routes/cliente.route');
   const globalModel = require('./src/server/routes/global.route');
+  const mascota = require('./src/server/routes/mascota.route');
 
 
   // Set up mongoose connection
@@ -55,6 +56,7 @@ function createWindow() {
   server.use('/usuarios', usuario);
   server.use('/clientes', cliente);
   server.use('/global', globalModel);
+  server.use('/mascotas', mascota);
 
   let port = 9018;
   server.listen(port, () => {

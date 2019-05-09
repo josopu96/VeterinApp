@@ -1,5 +1,6 @@
 import {Factura} from "./factura";
 import {Contacto} from "./contacto";
+import {Cuidado} from "./cuidado";
 
 export class Cliente {
   private _id: string;
@@ -13,6 +14,7 @@ export class Cliente {
   private _fecNac: Date;
   private _contactos: Contacto[];
   private _facturas: Factura[];
+  private _cuidados: Cuidado[];
 
   get id(){
     return this._id;
@@ -58,6 +60,10 @@ export class Cliente {
     return this._facturas;
   }
 
+  get cuidados(){
+    return this._cuidados;
+  }
+
   contructor(
     id: string,
     nombre: string,
@@ -70,6 +76,7 @@ export class Cliente {
     fecNac: Date,
     contactos: Contacto[],
     facturas: Factura[],
+    cuidados: Cuidado[],
   ){
     this.setId(id);
     this.setNombre(nombre);
@@ -82,6 +89,7 @@ export class Cliente {
     this.setFecNac(fecNac);
     this.setContactos(contactos);
     this.setFacturas(facturas);
+    this.setCuidados(cuidados);
 
   }
 
@@ -143,6 +151,13 @@ export class Cliente {
       this._facturas = facturas;
     } else {
       this._facturas = [];
+    }
+  }
+  setCuidados(cuidados: Cuidado[]){
+    if(cuidados){
+      this._cuidados = cuidados;
+    } else {
+      this._cuidados = [];
     }
   }
 

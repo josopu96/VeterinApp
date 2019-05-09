@@ -35,41 +35,13 @@ export class SeleccionesComponent implements OnInit {
   }
 
   getCliente(): void {
-    const id = this.route.snapshot.paramMap.get('idCliente');
-    console.log("Cliente: "+id);
-    if(id){
-      this.dm.getCliente(id)
-        .then(cliente => {
-          this.cliente = cliente;
-          this.globalService.setCliente(this.cliente);
-          console.log(this.cliente);
-        }).catch((err) => {
-          console.error(err);
-          this.cliente = new Cliente();
-          this.cliente.setId("0");
-        });
-    } else {
       this.cliente = this.globalService.getCliente();
-    }
   }
   getMascota(): void {
-    const id = +this.route.snapshot.paramMap.get('idMascota');
-    console.log("Mascota: "+id);
-    if(id){
-      //TODO
-    } else {
-      this.mascota = new Mascota();
-      this.mascota.setId("0");
-    }
+    this.mascota = this.globalService.getMascota();
   }
   getVeterinario(): void {
-    const id = +this.route.snapshot.paramMap.get('idVeterinario');
-    if(id){
-      //TODO
-    } else {
-      this.veterinario = new Veterinario();
-      this.veterinario.setId("0");
-    }
+    this.veterinario = this.globalService.getVeterinario();
   }
 
   goBack(): void {

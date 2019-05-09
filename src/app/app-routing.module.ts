@@ -6,6 +6,7 @@ import { ListaComponent as ListaUsuarios } from './components/clientes/lista/lis
 import { ListaComponent as ListaMascotas } from './components/mascotas/lista/lista.component';
 import { SeleccionComponent } from './components/seleccion/seleccion.component';
 import { AjustesComponent } from './components/ajustes/ajustes.component';
+import { AppDataComponent } from './components/app-data/app-data.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -14,7 +15,9 @@ const routes: Routes = [
     { path: 'mascotas' , component: ListaMascotas },
     { path: 'seleccionaCliente' , component: SeleccionComponent },
     { path: 'seleccionaMascota' , component: SeleccionComponent },
-    { path: 'ajustes' , component: AjustesComponent }
+    { path: 'ajustes' , component: AjustesComponent },
+    { path: 'appData' , component: AppDataComponent }
+
 
 ];
 

@@ -1,9 +1,14 @@
 export class ItemFactura {
+    private __id: string;
     private _cantidad: number;
     private _precioVenta: number;
     private _iva: number;
     private _idProducto: string;
   
+    get _id(){
+      return this.__id;
+    }
+
     get cantidad(){
       return this._cantidad;
     }
@@ -20,13 +25,19 @@ export class ItemFactura {
       return this._idProducto;
     }
   
-    contructor(cantidad: number, precioVenta: number, iva: number, idProducto: string){
+    contructor(_id:string, cantidad: number, precioVenta: number, iva: number, idProducto: string){
+      this.setId(_id);
       this.setCantidad(cantidad);
       this.setPrecioVenta(precioVenta);
       this.setIva(iva);
       this.setIdProducto(idProducto);
     }
   
+    setId(_id: string){
+      if(_id){
+        this.__id = _id;
+      }
+    }
     setCantidad(cantidad: number){
       if(cantidad){
         this._cantidad = cantidad;

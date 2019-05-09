@@ -1,10 +1,15 @@
 export class Operacion {
-    private _id: string;
+    private _idOperacion: string;
+    private _tipo: string;
     private _precio: number;
     private _concepto: string;
   
-    get id(){
-      return this._id;
+    get idOperacion(){
+      return this._idOperacion;
+    }
+  
+    get tipo(){
+      return this._tipo;
     }
   
     get precio(){
@@ -15,15 +20,21 @@ export class Operacion {
       return this._concepto;
     }
   
-    contructor(id: string, precio: number, concepto: string){
-      this.setId(id);
+    contructor(idOperacion: string, tipo: string, precio: number, concepto: string){
+      this.setId(idOperacion);
+      this.setTipo(tipo);
       this.setPrecio(precio);
       this.setConcepto(concepto);
     }
   
-    setId(id: string){
-      if(id){
-        this._id = id;
+    setId(idOperacion: string){
+      if(idOperacion){
+        this._idOperacion = idOperacion;
+      }
+    }
+    setTipo(tipo: string){
+      if(tipo){
+        this._tipo = tipo;
       }
     }
     setPrecio(precio: number){

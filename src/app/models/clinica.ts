@@ -2,7 +2,7 @@ import {Veterinario} from "./veterinario";
 import {Producto} from "./producto";
 
 export class Clinica {
-  private _id: string;
+  private __id: string;
   private _cif: string;
   private _nombre: string;
   private _direccion: string;
@@ -21,8 +21,8 @@ export class Clinica {
   private _veterinarios: Veterinario[];
   private _productos: Producto[];
 
-  get id(){
-    return this._id;
+  get _id(){
+    return this.__id;
   }
 
   get cif(){
@@ -94,7 +94,7 @@ export class Clinica {
   }
 
   contructor(
-    id: string,
+    _id: string,
     cif: string,
     nombre: string,
     direccion: string,
@@ -113,7 +113,7 @@ export class Clinica {
     veterinarios: Veterinario[],
     productos: Producto[]
   ){
-    this.setId(id);
+    this.setId(_id);
     this.setCif(cif);
     this.setNombre(nombre);
     this.setDireccion(direccion);
@@ -133,9 +133,9 @@ export class Clinica {
     this.setProductos(productos);
   }
 
-  setId(id: string){
-    if(id){
-      this._id = id;
+  setId(_id: string){
+    if(_id){
+      this.__id = _id;
     }
   }
   setCif(cif: string){

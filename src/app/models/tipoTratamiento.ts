@@ -1,12 +1,12 @@
 export class TipoTratamiento {
-  private _id: string;
+  private __id: string;
   private _nombre: string;
   private _dosis: string;
   private _hora: number;
   private _estado: boolean;
 
-  get id(){
-    return this._id;
+  get _id(){
+    return this.__id;
   }
 
   get nombre(){
@@ -41,7 +41,7 @@ export class TipoTratamiento {
 
   setId(id: string){
     if(id){
-      this._id = id;
+      this.__id = id;
     }
   }
   setNombre(nombre: string){

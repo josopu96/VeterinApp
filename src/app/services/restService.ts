@@ -68,7 +68,7 @@ export class RestWS extends AbstractWS {
       .set('tema', ajustes.tema)
       .set('tamLetra', ajustes.tamLetra)
       .set('recordatorio', ajustes.recordatorio.toString())
-      .set('id', ajustes.id);
+      .set('id', ajustes._id);
     return this.makePostRequest(this.path + 'usuarios/updateAjustes/' + token, fd).then((res) => {
       console.log(res);
       return Promise.resolve(res);

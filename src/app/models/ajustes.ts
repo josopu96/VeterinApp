@@ -1,11 +1,11 @@
 export class Ajustes {
-  private _id: string;
+  private __id: string;
   private _tamLetra: string;
   private _tema: string;
   private _recordatorio: number;
 
-  get id(){
-    return this._id;
+  get _id(){
+    return this.__id;
   }
 
   get tamLetra(){
@@ -21,20 +21,20 @@ export class Ajustes {
   }
 
   contructor(
-    id: string,
+    _id: string,
     tamLetra: string,
     tema: string,
     recordatorio: number
   ){
-    this.setId(id);
+    this.setId(_id);
     this.setTamLetra(tamLetra);
     this.setTema(tema);
     this.setRecordatorio(recordatorio);
   }
 
-  setId(id: string){
-    if(id){
-      this._id = id;
+  setId(_id: string){
+    if(_id){
+      this.__id = _id;
     }
   }
   setTamLetra(tamLetra: string){
@@ -43,7 +43,7 @@ export class Ajustes {
     }
   }
   
-  setTema(tema: string):void{
+  setTema(tema: string){
     if(tema){
       this._tema = tema;
     }

@@ -1,12 +1,12 @@
 export class Stock {
-  private _id: string;
+  private __id: string;
   private _lote: string;
   private _unidades: number;
   private _fecCompra: Date;
   private _fecCaducidad: Date;
 
-  get id(){
-    return this._id;
+  get _id(){
+    return this.__id;
   }
 
   get lote(){
@@ -41,7 +41,7 @@ export class Stock {
 
   setId(id: string){
     if(id){
-      this._id = id;
+      this.__id = id;
     }
   }
   setLote(lote: string){

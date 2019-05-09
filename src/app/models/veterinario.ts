@@ -1,5 +1,5 @@
 export class Veterinario {
-  private _id: string;
+  private __id: string;
   private _nombre: string;
   private _apellidos: string;
   private _fecNac: Date;
@@ -8,8 +8,8 @@ export class Veterinario {
   private _numColegiado: number;
   private _borrado: boolean;
 
-  get id(){
-    return this._id;
+  get _id(){
+    return this.__id;
   }
 
   get nombre(){
@@ -63,7 +63,7 @@ export class Veterinario {
 
   setId(id: string){
     if(id){
-      this._id = id;
+      this.__id = id;
     }
   }
   setNombre(nombre: string){

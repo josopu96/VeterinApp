@@ -1,11 +1,11 @@
 export class Visita {
-  private _id: string;
+  private __id: string;
   private _descripcion: string;
   private _fecha: Date;
   private _idCliente: string;
 
-  get id(){
-    return this._id;
+  get _id(){
+    return this.__id;
   }
 
   get descripcion(){
@@ -34,7 +34,7 @@ export class Visita {
 
   setId(id: string){
     if(id){
-      this._id = id;
+      this.__id = id;
     }
   }
   setDescripcion(descripcion: string){

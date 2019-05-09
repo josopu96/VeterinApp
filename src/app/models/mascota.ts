@@ -6,7 +6,7 @@ import {Vacuna} from "./vacuna";
 import {Tratamiento} from "./tratamiento";
 
 export class Mascota {
-  private _id: string;
+  private __id: string;
   private _nombre: string;
   private _chip: string;
   private _fecNac: Date;
@@ -24,8 +24,8 @@ export class Mascota {
   private _vacunas: Vacuna[];
   private _tratamientos: Tratamiento[];
 
-  get id(){
-    return this._id;
+  get _id(){
+    return this.__id;
   }
 
   get nombre(){
@@ -132,7 +132,7 @@ export class Mascota {
 
   setId(id: string){
     if(id){
-      this._id = id;
+      this.__id = id;
     }
   }
   setNombre(nombre: string){

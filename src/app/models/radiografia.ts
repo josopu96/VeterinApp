@@ -1,10 +1,10 @@
 export class Radiografia {
-  private _id: string;
+  private __id: string;
   private _imagen: string;
   private _fecha: Date;
 
-  get id(){
-    return this._id;
+  get _id(){
+    return this.__id;
   }
 
   get imagen(){
@@ -27,7 +27,7 @@ export class Radiografia {
 
   setId(id: string){
     if(id){
-      this._id = id;
+      this.__id = id;
     }
   }
   setImagen(imagen: string){

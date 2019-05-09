@@ -1,0 +1,238 @@
+@import "../../../utilities/variables.scss";
+
+.seccion_claro {
+  display: flex;
+  background-color: rgba(#ffffff, $alpha: 0.4);
+  flex-basis: $anchoSeccion + px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border-top: 2px solid $colorFondoOscuro;
+  border-left: 2px solid $colorFondoOscuro;
+  box-sizing: border-box;
+  border-top-left-radius: 5px;
+
+  .titulo {
+    color: $textoClaro;
+    background-color: $tituloOscuro;
+    width: 100%;
+    display: flex;
+    height: $altoTitulo + px;
+    justify-content: center;
+    align-items: center;
+  }
+  .tema,
+  .tamanyo,
+  .recordatorio {
+    width: 100%;
+    display: flex;
+    flex-grow: 3;
+    justify-content: center;
+    align-items: center;
+
+    fieldset {
+      height: $altoFieldSet + px;
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+      font-weight: bold;
+      background-color: $colorFondoOscuroTransparente;
+
+      .texto {
+        display: flex;
+        flex-direction: column;
+        height: 40%;
+      }
+      .botones {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45%;
+
+        button {
+          cursor: pointer;
+          margin-left: 10px;
+          margin-right: 10px;
+          padding: 7px;
+          background-color: $fondoBoton;
+          color: $textoOscuroAjustes;
+          width: 100px;
+          font-weight: bold;
+
+        }
+        .claro_seleccionado {
+          background-color: $fondoBotonSeleccionado;
+          color: $textoClaro;
+        }
+        button:hover {
+          background-color: $fondoBotonHover;
+          color: $textoClaro;
+        }
+
+        .select {
+          cursor: pointer;
+          margin-left: 10px;
+          margin-right: 10px;
+          padding: 7px;
+          background-color: $fondoBoton;
+          color: $textoOscuroAjustes;
+          width: 200px;
+          font-weight: bold;
+          text-align-last: center;
+        }
+      }
+
+      p {
+        font-weight: normal;
+        margin: 0px;
+        font-style: italic;
+        text-align: center;
+      }
+    }
+  }
+  .cerrar {
+    width: 100%;
+    display: flex;
+    flex-grow: 2;
+    justify-content: center;
+    align-items: center;
+
+    .cerrarSesion {
+      height: $altoCerrarSesion + px;
+      margin-bottom: 20px;
+      background-color: $tituloOscuro;
+      width: 35%;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 22px;
+      border: 3px solid black;
+      border-radius: 5px;
+      color: $textoClaro;
+    }
+    .cerrarSesion:hover {
+      background-color: $tituloOscuroHover;
+    }
+  }
+}
+
+
+.seccion_oscuro {
+  display: flex;
+  background-color: rgba(#ffffff, $alpha: 0.4);
+  flex-basis: $anchoSeccion + px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border-top: 2px solid $colorFondoOscuro;
+  border-left: 2px solid $colorFondoOscuro;
+  box-sizing: border-box;
+  border-top-left-radius: 5px;
+
+  .titulo {
+    background-color: $tituloOscuro;
+    width: 100%;
+    display: flex;
+    height: $altoTitulo + px;
+    justify-content: center;
+    align-items: center;
+  }
+  .tema,
+  .tamanyo,
+  .recordatorio {
+    width: 100%;
+    display: flex;
+    flex-grow: 3;
+    justify-content: center;
+    align-items: center;
+
+    fieldset {
+      height: $altoFieldSet + px;
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+      font-weight: bold;
+      background-color: $colorFondoOscuroTransparente;
+
+      .texto {
+        display: flex;
+        flex-direction: column;
+        height: 40%;
+      }
+      .botones {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45%;
+
+        button {
+          cursor: pointer;
+          margin-left: 10px;
+          margin-right: 10px;
+          padding: 7px;
+          background-color: $fondoBoton;
+          color: $textoOscuroAjustes;
+          width: 100px;
+          font-weight: bold;
+
+        }
+        button:hover {
+          background-color: $fondoBotonHover;
+          color: $textoClaro;
+        }
+        .oscuro_seleccionado {
+          background-color: $fondoBotonSeleccionado;
+          color: $textoClaro;
+        }
+
+        .select {
+          cursor: pointer;
+          margin-left: 10px;
+          margin-right: 10px;
+          padding: 7px;
+          background-color: $fondoBoton;
+          color: $textoOscuroAjustes;
+          width: 200px;
+          font-weight: bold;
+          text-align-last: center;
+        }
+      }
+
+      p {
+        font-weight: normal;
+        margin: 0px;
+        font-style: italic;
+        text-align: center;
+      }
+    }
+  }
+  .cerrar {
+    width: 100%;
+    display: flex;
+    flex-grow: 2;
+    justify-content: center;
+    align-items: center;
+
+    .cerrarSesion {
+      height: $altoCerrarSesion + px;
+      margin-bottom: 20px;
+      background-color: $tituloOscuro;
+      width: 35%;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 22px;
+      border: 3px solid black;
+      border-radius: 5px;
+    }
+    .cerrarSesion:hover {
+      background-color: $tituloOscuroHover;
+    }
+  }
+}

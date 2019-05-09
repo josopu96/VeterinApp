@@ -36,13 +36,11 @@ export class SeleccionesComponent implements OnInit {
 
   getCliente(): void {
     const id = this.route.snapshot.paramMap.get('idCliente');
-    console.log("Cliente: "+id);
     if(id){
       this.dm.getCliente(id)
         .then(cliente => {
           this.cliente = cliente;
           this.globalService.setCliente(this.cliente);
-          console.log(this.cliente);
         }).catch((err) => {
           console.error(err);
           this.cliente = new Cliente();
@@ -54,7 +52,6 @@ export class SeleccionesComponent implements OnInit {
   }
   getMascota(): void {
     const id = +this.route.snapshot.paramMap.get('idMascota');
-    console.log("Mascota: "+id);
     if(id){
       //TODO
     } else {

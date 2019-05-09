@@ -1,0 +1,49 @@
+<div class="container{{tema}}">
+  <app-selecciones class="top"></app-selecciones>
+  <div class="bottom">
+    <app-menu class="menu"></app-menu>
+    <div class="seccion{{tema}}">
+      <ng-container>
+        <div class="datos">
+          <div class="titulo">
+            <span *ngIf="new"> Nuevo veterinario </span>
+            <span *ngIf="!new"> Editando veterinario </span>
+          </div>
+          <div>
+            <fieldset>
+              <div class="texto">
+                <span>Nombre</span><input type="text" [(ngModel)]="veterinarioEditado.nombre" />
+              </div>
+            </fieldset>
+            <fieldset>
+              <div class="texto">
+                <span>Apellidos</span><input type="text" [(ngModel)]="veterinarioEditado.apellidos" />
+              </div>
+            </fieldset>
+            <fieldset>
+              <div class="texto">
+                <span>DNI</span><input type="text" [(ngModel)]="veterinarioEditado.dni" />
+              </div>
+            </fieldset>
+            <fieldset>
+              <div class="texto">
+                <span>Fecha de Nacimiento</span><input type="text" [(ngModel)]="veterinarioEditado.fecNac" />
+              </div>
+            </fieldset>
+            <fieldset>
+              <div class="texto">
+                <span>Telefono</span><input type="text" [(ngModel)]="veterinarioEditado.telefono" />
+              </div>
+            </fieldset>
+            <fieldset>
+              <div class="texto">
+                <span>Numero Colegiado</span><input type="text" [(ngModel)]="veterinarioEditado.numColegiado" />
+              </div>
+            </fieldset>
+          </div>
+          <button (click)="guardar()"> Guardar </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

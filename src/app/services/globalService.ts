@@ -25,7 +25,7 @@ export class GlobalService {
         this.token = this.coockieService.get("token");
         if (this.token == "undefined") {
           this.metodoParaDesarrollo();
-        } else {
+        } else if(this.token) {
           this.getUsuarioPorToken();
         }
     }

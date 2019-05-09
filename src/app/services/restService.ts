@@ -97,4 +97,17 @@ export class RestWS extends AbstractWS {
       return Promise.reject(error);
     });
   }
+
+  public getMascotas(filters?) {
+    const fd = new HttpParams();
+    if (filters) {
+      fd.set('filters', filters);
+    }
+    return this.makeGetRequest(this.path + 'mascotas', fd).then((res: String) => {
+      return Promise.resolve(res);
+    }).catch(error => {
+      console.log('Error: ' + error);
+      return Promise.reject(error);
+    });
+  }
 }

@@ -64,4 +64,12 @@ export class DataManagement {
       return Promise.reject('error');
     });
   }
+
+  public getMascotas(filters?): Promise<any> {
+    return this.restService.getMascotas(filters).then((data: String) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
 }

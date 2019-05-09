@@ -40,4 +40,9 @@ export class AjustesComponent implements OnInit {
       this.router.navigate(["ajustes"])); 
   }
 
+  cerrarSesion(){
+      this.ajustes = this.globalService.cerrarSesion();
+      this.router.navigate(["login"]); 
+  }
+
 }

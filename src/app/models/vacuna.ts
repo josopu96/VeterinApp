@@ -1,10 +1,10 @@
 export class Vacuna {
-  private _id: string;
+  private __id: string;
   private _fecha: Date;
   private _tipoVacuna: string;
 
-  get id(){
-    return this._id;
+  get _id(){
+    return this.__id;
   }
 
   get tipoVacuna(){
@@ -27,7 +27,7 @@ export class Vacuna {
 
   setId(id: string){
     if(id){
-      this._id = id;
+      this.__id = id;
     }
   }
   setTipoVacuna(tipoVacuna: string){

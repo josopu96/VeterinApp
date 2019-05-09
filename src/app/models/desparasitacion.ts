@@ -1,10 +1,10 @@
 export class Desparasitacion {
-  private _id: string;
+  private __id: string;
   private _fecha: Date;
   private _tipoDesparasitacion: string;
 
-  get id(){
-    return this._id;
+  get _id(){
+    return this.__id;
   }
 
   get tipoDesparasitacion(){
@@ -27,7 +27,7 @@ export class Desparasitacion {
 
   setId(id: string){
     if(id){
-      this._id = id;
+      this.__id = id;
     }
   }
   setTipoDesparasitacion(tipoDesparasitacion: string){

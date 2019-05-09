@@ -1,15 +1,15 @@
 import {Radiografia} from "./radiografia";
 
 export class Prueba {
-  private _id: string;
+  private __id: string;
   private _concepto: string;
   private _categoria: string;
   private _tipoPrueba: string;
   private _fecha: Date;
   private _radiografias: Radiografia[];
 
-  get id(){
-    return this._id;
+  get _id(){
+    return this.__id;
   }
 
   get concepto(){
@@ -50,7 +50,7 @@ export class Prueba {
 
   setId(id: string){
     if(id){
-      this._id = id;
+      this.__id = id;
     }
   }
   setConcepto(concepto: string){

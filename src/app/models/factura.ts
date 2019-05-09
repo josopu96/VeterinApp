@@ -2,6 +2,7 @@ import {Operacion} from "./operacion";
 import {ItemFactura} from "./itemFactura";
 
 export class Factura {
+  private __id: string;
   private _numero: string;
   private _fecha: Date;
   private _importeTotal: number;
@@ -15,6 +16,10 @@ export class Factura {
   private _analiticas: Operacion[];
   private _radiografias: Operacion[];
   private _itemsFactura: ItemFactura[];
+  
+  get _id(){
+    return this.__id;
+  }
 
   get numero(){
     return this._numero;
@@ -69,6 +74,7 @@ export class Factura {
   }
 
   contructor(
+    _id: string,
     numero:string,
     fecha: Date,
     tipoPago:string,
@@ -82,6 +88,7 @@ export class Factura {
     radiografias: Operacion[],
     itemsFactura: ItemFactura[],
   ){
+    this.setId(_id);
     this.setNumero(numero);
     this.setFecha(fecha);
     this.setTipoPago(tipoPago);
@@ -98,6 +105,11 @@ export class Factura {
 
   }
 
+  setId(_id: string){
+    if(_id){
+      this.__id = _id;
+    }
+  }
   setNumero(numero: string){
     if(numero){
       this._numero = numero;

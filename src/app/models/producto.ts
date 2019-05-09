@@ -1,15 +1,15 @@
 import {Stock} from "./stock";
 
 export class Producto {
-  private _id: string;
+  private __id: string;
   private _nombre: string;
   private _precioCompra: number;
   private _precioVenta: number;
   private _indicaciones: string;
   private _stocks: Stock[];
 
-  get id(){
-    return this._id;
+  get _id(){
+    return this.__id;
   }
 
   get nombre(){
@@ -50,7 +50,7 @@ export class Producto {
 
   setId(id: string){
     if(id){
-      this._id = id;
+      this.__id = id;
     }
   }
   setNombre(nombre: string){

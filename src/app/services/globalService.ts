@@ -26,12 +26,16 @@ export class GlobalService {
         if (this.token == "undefined") {
           this.metodoParaDesarrollo();
         } else {
-          this.usuario = new Usuario();
+          this.getUsuarioPorToken();
         }
     }
 
     metodoParaDesarrollo() {
       this.token = "5ca0e4fc34eaf00d889a9fee";
+      this.getUsuarioPorToken();
+    }
+
+    getUsuarioPorToken() {
       this.dm.getUserByToken(this.token).then((res:Usuario) => {
         this.setUsuario(res);
         this.coockieService.set("token",res._id);
@@ -89,7 +93,7 @@ export class GlobalService {
       this.usuario=new Usuario();
       this.ajustes=new Ajustes();
       this.ajustes.contructor(
-        user.ajustes.id,
+        user.ajustes._id,
         user.ajustes.tamLetra,
         user.ajustes.tema,
         user.ajustes.recordatorio
@@ -119,17 +123,29 @@ export class GlobalService {
 
     cambiarTema(tema: string) {
       if(this.getUsuario()) {
-        this.ajustes = new Ajustes();
-        this.ajustes.contructor(
-          this.getUsuario().ajustes.id,
-          this.getUsuario().ajustes.tamLetra,
-          this.getUsuario().ajustes.tema,
-          this.getUsuario().ajustes.recordatorio);
-        this.ajustes.setTema(tema);
-        //this.ajustes.setTema(tema);
-        //console.log(this.usuario);
-        this.usuario.setAjustes(this.ajustes);
+          this.ajustes = new Ajustes();
+          this.ajustes.contructor(
+            this.getUsuario().ajustes._id,
+            this.getUsuario().ajustes.tamLetra,
+            this.getUsuario().ajustes.tema,
+            this.getUsuario().ajustes.recordatorio);
+          this.ajustes.setTema(tema);
+          this.usuario.setAjustes(this.ajustes);
       }
+      return this.ajustes;
+    }
+
+    cerrarSesion() {
+      this.coockieService.deleteAll();
+      this.cliente = new Cliente();
+      this.veterinario= new Veterinario();
+      this.mascota = new Mascota();
+      this.cliente.setId("0");
+      this.veterinario.setId("0");
+      this.mascota.setId("0");
+      this.usuario = new Usuario();
+      this.token = "";
+      this.ajustes = new Ajustes();
       return this.ajustes;
     }
 

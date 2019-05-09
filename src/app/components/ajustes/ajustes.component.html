@@ -28,9 +28,9 @@
             <p>Un mayor tamaño implica que toda la aplicación se verá más grande.</p>
           </div>
           <div class="botones">
-            <button disabled>Pequeño</button>
-            <button>Medio</button>
-            <button disabled>Grande</button>
+            <button class="disabled" disabled>Pequeño</button>
+            <button class="seleccionado" disabled>Medio</button>
+            <button class="disabled" disabled>Grande</button>
           </div>
         </fieldset>
       </div>
@@ -42,7 +42,7 @@
             <p>Si selecciona "-" entonces no se realizará el recordatorio.</p>
           </div>
           <div class="botones">
-            <select class="select">
+            <select class="select_disabled" disabled>
               <option> - </option>
               <option> 1 </option>
               <option> 2 </option>
@@ -51,7 +51,7 @@
         </fieldset>
       </div>
       <div class="cerrar">
-        <div class="cerrarSesion">
+        <div class="cerrarSesion" (click)="cerrarSesion()">
           <p>Cerrar sesión</p>
         </div>
       </div>

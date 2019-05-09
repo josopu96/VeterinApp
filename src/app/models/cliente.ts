@@ -3,7 +3,7 @@ import {Contacto} from "./contacto";
 import {Cuidado} from "./cuidado";
 
 export class Cliente {
-  private _id: string;
+  private __id: string;
   private _nombre: string;
   private _apellidos: string;
   private _direccion: string;
@@ -16,8 +16,8 @@ export class Cliente {
   private _facturas: Factura[];
   private _cuidados: Cuidado[];
 
-  get id(){
-    return this._id;
+  get _id(){
+    return this.__id;
   }
 
   get nombre(){
@@ -65,7 +65,7 @@ export class Cliente {
   }
 
   contructor(
-    id: string,
+    _id: string,
     nombre: string,
     apellidos: string,
     direccion: string,
@@ -78,7 +78,7 @@ export class Cliente {
     facturas: Factura[],
     cuidados: Cuidado[],
   ){
-    this.setId(id);
+    this.setId(_id);
     this.setNombre(nombre);
     this.setApellidos(apellidos);
     this.setDireccion(direccion);
@@ -93,9 +93,9 @@ export class Cliente {
 
   }
 
-  setId(id: string){
-    if(id){
-      this._id = id;
+  setId(_id: string){
+    if(_id){
+      this.__id = _id;
     }
   }
   setNombre(nombre: string){

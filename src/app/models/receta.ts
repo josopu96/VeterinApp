@@ -1,11 +1,11 @@
 export class Receta {
-  private _id: string;
+  private __id: string;
   private _fecha: Date;
   private _responsable: string;
   private _observaciones: string;
 
-  get id(){
-    return this._id;
+  get _id(){
+    return this.__id;
   }
 
   get fecha(){
@@ -34,7 +34,7 @@ export class Receta {
 
   setId(id: string){
     if(id){
-      this._id = id;
+      this.__id = id;
     }
   }
   setFecha(fecha: Date){

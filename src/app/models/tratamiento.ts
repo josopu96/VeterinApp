@@ -2,7 +2,7 @@ import {Receta} from "./receta";
 import {TipoTratamiento} from "./tipoTratamiento";
 
 export class Tratamiento {
-  private _id: string;
+  private __id: string;
   private _anamnesis: string;
   private _diagnostico: string;
   private _tipoTratamiento: TipoTratamiento;
@@ -10,8 +10,8 @@ export class Tratamiento {
   private _receta: Receta;
   private _idVeterinario: string;
 
-  get id(){
-    return this._id;
+  get _id(){
+    return this.__id;
   }
 
   get anamnesis(){
@@ -58,7 +58,7 @@ export class Tratamiento {
 
   setId(id: string){
     if(id){
-      this._id = id;
+      this.__id = id;
     }
   }
   setAnamnesis(anamnesis: string){

@@ -1,11 +1,11 @@
 import {Visita} from "./visita";
 
 export class Calendario {
-  private _id: string;
+  private __id: string;
   private _visitas: Visita[];
 
-  get id(){
-    return this._id;
+  get _id(){
+    return this.__id;
   }
 
   get visitas(){
@@ -13,16 +13,16 @@ export class Calendario {
   }
 
   contructor(
-    id: string,
+    _id: string,
     visitas: Visita[]
   ){
-    this.setId(id);
+    this.setId(_id);
     this.setVisitas(visitas);
   }
 
-  setId(id: string){
-    if(id){
-      this._id = id;
+  setId(_id: string){
+    if(_id){
+      this.__id = _id;
     }
   }
   setVisitas(visitas: Visita[]){

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataManagement } from '../../../services/dataManagement';
 import { GlobalService } from '../../../services/globalService';
-import { Cliente } from '../../../models/cliente';
 import { Router } from '@angular/router';
+import { Mascota } from '../../../models/mascota';
 
 @Component({
   selector: 'app-lista',
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ListaComponent implements OnInit {
 
-  headElements = ['Nombre', 'Apellidos', 'DNI', 'Teléfono', 'Visualizar', 'Editar', 'Seleccionar'];
+  headElements = ['Nombre', 'Fecha Nacimiento', 'Chip', 'Visualizar', 'Editar', 'Seleccionar'];
 
   elements: any[];
   tema = "_claro";
@@ -21,9 +21,7 @@ export class ListaComponent implements OnInit {
     private dm: DataManagement,
     private globalService: GlobalService,
     private router: Router
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
     this.getItems();
@@ -31,16 +29,16 @@ export class ListaComponent implements OnInit {
   }
 
   private getItems (filters?: any[]) {
-    this.dm.getClients(filters).then((response) => {
+    this.dm.getMascotas(filters).then((response) => {
       this.elements = response;
     }).catch((err) => {
       console.log(err);
     });
   }
 
-  onSelect(cliente: Cliente): void{
-    this.globalService.setCliente(cliente);
-    this.router.navigateByUrl('/seleccionaCliente', {skipLocationChange: true}).then(()=>
-    this.router.navigate(["clientes"]));
+  onSelect(mascota: Mascota): void {
+    this.globalService.setMascota(mascota);
+    this.router.navigateByUrl('/seleccionaMascota', {skipLocationChange: true}).then(() =>
+    this.router.navigate(["mascotas"]));
   }
 }

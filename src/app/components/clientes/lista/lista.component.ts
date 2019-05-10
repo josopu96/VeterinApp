@@ -26,7 +26,8 @@ export class ListaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getItems();
+    //this.getItems();
+    this.elements = this.globalService.clientes;
     this.tema = "_" + this.globalService.getTema();
   }
 

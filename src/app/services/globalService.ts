@@ -5,148 +5,179 @@ import { Ajustes, Usuario, Mascota, Veterinario, Cliente } from '../app.dataMode
 
 @Injectable()
 export class GlobalService {
-    cliente: Cliente;
-    veterinario: Veterinario;
-    mascota: Mascota;
-    usuario: Usuario;
-    token: string;
-    ajustes: Ajustes;
+  cliente: Cliente;
+  veterinario: Veterinario;
+  mascota: Mascota;
+  usuario: Usuario;
+  token: string;
+  ajustes: Ajustes;
+  clientes: Cliente[];
+  mascotas: Mascota[];
+  veterinarios: Veterinario[];
 
-    constructor(
-      private coockieService: CookieService,
-      private dm: DataManagement
-      ) {
-        this.cliente = new Cliente();
-        this.cliente.setId("0");
-        this.veterinario = new Veterinario();
-        this.veterinario.setId("0");
-        this.mascota = new Mascota();
-        this.mascota.setId("0");
-        this.token = this.coockieService.get("token");
-        if (this.token == "undefined") {
-          this.metodoParaDesarrollo();
-        } else if(this.token) {
-          this.getUsuarioPorToken();
-        }
-    }
-
-    metodoParaDesarrollo() {
-      this.token = "5ca0e4fc34eaf00d889a9fee";
+  constructor(
+    private coockieService: CookieService,
+    private dm: DataManagement
+  ) {
+    this.cliente = new Cliente();
+    this.cliente.setId("0");
+    this.veterinario = new Veterinario();
+    this.veterinario.setId("0");
+    this.mascota = new Mascota();
+    this.mascota.setId("0");
+    this.token = this.coockieService.get("token");
+    if (this.token == "undefined") {
+      this.metodoParaDesarrollo();
+    } else if (this.token) {
       this.getUsuarioPorToken();
     }
+    this.getClientes();
+    this.getMascotas();
+  }
 
-    getUsuarioPorToken() {
-      this.dm.getUserByToken(this.token).then((res:Usuario) => {
-        this.setUsuario(res);
-        this.coockieService.set("token",res._id);
-      });
-    }
+  private getClientes() {
+    this.clientes = [];
+    this.dm.getClients().then((clientes: Cliente[]) => {
+      for (let client of clientes) {
+        let clienteTemp = new Cliente();
+        clienteTemp.contructor(client._id, client.nombre, client.apellidos, client.direccion, client.codPostal, client.poblacion, client.dni, client.email, client.fecNac, client.contactos, client.facturas, client.cuidados);
+        this.clientes.push(clienteTemp);
+      }
+    });
+  }
 
-    setCliente( nuevoCliente: Cliente) {
-      this.cliente = nuevoCliente;
-    }
+  private getMascotas() {
+    this.mascotas = [];
+    this.dm.getMascotas().then((mascotas: Mascota[]) => {
+      for (let mascota of mascotas) {
+        let mascotaTemp = new Mascota();
+        mascotaTemp.contructor(mascota._id, mascota.nombre, mascota.chip, mascota.fecNac, mascota.fecBaja, mascota.sexo, mascota.estado, mascota.pelo, mascota.capa, mascota.especie, mascota.raza, mascota.analiticas, mascota.radiografias, mascota.pruebas, mascota.desparasitaciones, mascota.vacunas, mascota.tratamientos);
+        this.mascotas.push(mascotaTemp);
+      }
+    });
+  }
 
-    getCliente() {
-      return this.cliente;
-    }
+  getVeterinarios() {
+    //TODO
+  }
 
-    setVeterinario( nuevoVeterinario: Veterinario) {
-      this.veterinario = nuevoVeterinario;
-    }
+  metodoParaDesarrollo() {
+    this.token = "5ca0e4fc34eaf00d889a9fee";
+    this.getUsuarioPorToken();
+  }
 
-    getVeterinario() {
-      return this.veterinario;
-    }
+  getUsuarioPorToken() {
+    this.dm.getUserByToken(this.token).then((res: Usuario) => {
+      this.setUsuario(res);
+      this.coockieService.set("token", res._id);
+    });
+  }
 
-    setMascota( nuevaMascota: Mascota) {
-      this.mascota = nuevaMascota;
-    }
+  setCliente(nuevoCliente: Cliente) {
+    this.cliente = nuevoCliente;
+  }
 
-    getMascota() {
-      return this.mascota;
-    }
+  getCliente() {
+    return this.cliente;
+  }
 
-    limpiarCliente() {
-      this.limpiarMascota();
-      this.cliente = new Cliente();
-      this.cliente.setId("0");
-      return this.cliente;
-    }
+  setVeterinario(nuevoVeterinario: Veterinario) {
+    this.veterinario = nuevoVeterinario;
+  }
 
-    limpiarMascota() {
-      this.mascota = new Mascota();
-      this.mascota.setId("0");
-      return this.mascota;
-    }
+  getVeterinario() {
+    return this.veterinario;
+  }
 
-    limpiarVeterinario() {
-      this.veterinario = new Veterinario();
-      this.veterinario.setId("0");
-      return this.veterinario;
-    }
+  setMascota(nuevaMascota: Mascota) {
+    this.mascota = nuevaMascota;
+  }
 
-    getUsuario() {
-      return this.usuario;
-    }
+  getMascota() {
+    return this.mascota;
+  }
 
-    setUsuario(user: Usuario) {
-      this.usuario=new Usuario();
-      this.ajustes=new Ajustes();
-      this.ajustes.contructor(
-        user.ajustes._id,
-        user.ajustes.tamLetra,
-        user.ajustes.tema,
-        user.ajustes.recordatorio
-      );
-      this.usuario.contructor(
-        user._id,
-        user.nombre,
-        user.clave,
-        user.isAdmin,
-        user.email,
-        this.ajustes
-      );
+  limpiarCliente() {
+    this.limpiarMascota();
+    this.cliente = new Cliente();
+    this.cliente.setId("0");
+    return this.cliente;
+  }
 
-    }
+  limpiarMascota() {
+    this.mascota = new Mascota();
+    this.mascota.setId("0");
+    return this.mascota;
+  }
 
-    getTema(){
-      if (this.getUsuario()) {
-        if (this.ajustes) {
-          return this.getUsuario().ajustes.tema;
-        } else {
-          return "oscuro";
-        }
+  limpiarVeterinario() {
+    this.veterinario = new Veterinario();
+    this.veterinario.setId("0");
+    return this.veterinario;
+  }
+
+  getUsuario() {
+    return this.usuario;
+  }
+
+  setUsuario(user: Usuario) {
+    this.usuario = new Usuario();
+    this.ajustes = new Ajustes();
+    this.ajustes.contructor(
+      user.ajustes._id,
+      user.ajustes.tamLetra,
+      user.ajustes.tema,
+      user.ajustes.recordatorio
+    );
+    this.usuario.contructor(
+      user._id,
+      user.nombre,
+      user.clave,
+      user.isAdmin,
+      user.email,
+      this.ajustes
+    );
+
+  }
+
+  getTema() {
+    if (this.getUsuario()) {
+      if (this.ajustes) {
+        return this.getUsuario().ajustes.tema;
       } else {
         return "oscuro";
       }
+    } else {
+      return "oscuro";
     }
+  }
 
-    cambiarTema(tema: string) {
-      if(this.getUsuario()) {
-          this.ajustes = new Ajustes();
-          this.ajustes.contructor(
-            this.getUsuario().ajustes._id,
-            this.getUsuario().ajustes.tamLetra,
-            this.getUsuario().ajustes.tema,
-            this.getUsuario().ajustes.recordatorio);
-          this.ajustes.setTema(tema);
-          this.usuario.setAjustes(this.ajustes);
-      }
-      return this.ajustes;
-    }
-
-    cerrarSesion() {
-      this.coockieService.deleteAll();
-      this.cliente = new Cliente();
-      this.veterinario= new Veterinario();
-      this.mascota = new Mascota();
-      this.cliente.setId("0");
-      this.veterinario.setId("0");
-      this.mascota.setId("0");
-      this.usuario = new Usuario();
-      this.token = "";
+  cambiarTema(tema: string) {
+    if (this.getUsuario()) {
       this.ajustes = new Ajustes();
-      return this.ajustes;
+      this.ajustes.contructor(
+        this.getUsuario().ajustes._id,
+        this.getUsuario().ajustes.tamLetra,
+        this.getUsuario().ajustes.tema,
+        this.getUsuario().ajustes.recordatorio);
+      this.ajustes.setTema(tema);
+      this.usuario.setAjustes(this.ajustes);
     }
+    return this.ajustes;
+  }
+
+  cerrarSesion() {
+    this.coockieService.deleteAll();
+    this.cliente = new Cliente();
+    this.veterinario = new Veterinario();
+    this.mascota = new Mascota();
+    this.cliente.setId("0");
+    this.veterinario.setId("0");
+    this.mascota.setId("0");
+    this.usuario = new Usuario();
+    this.token = "";
+    this.ajustes = new Ajustes();
+    return this.ajustes;
+  }
 
 }

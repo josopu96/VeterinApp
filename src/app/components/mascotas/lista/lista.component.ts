@@ -24,17 +24,8 @@ export class ListaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //this.getItems();
     this.elements = this.globalService.mascotas;
     this.tema = "_" + this.globalService.getTema();
-  }
-
-  private getItems (filters?: any[]) {
-    this.dm.getMascotas(filters).then((response) => {
-      this.elements = response;
-    }).catch((err) => {
-      console.log(err);
-    });
   }
 
   onSelect(mascota: Mascota): void {

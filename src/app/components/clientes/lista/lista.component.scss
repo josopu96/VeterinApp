@@ -269,5 +269,14 @@
     width: $anchoFiltros + px;
     height: 100%;
     background: rgba(88, 88, 88, 0.774);
+
+    .busqueda_avanzada{
+      .morosos_true{
+        background-color: black;
+      }
+      .morosos_false{
+        background-color: white;
+      }
+    }
   }
 }

@@ -33,7 +33,22 @@
           </div>
         </div>
         <div class="filtros">
-          Filtros
+          <div class="busqueda">
+            <label>Nombre</label>
+            <input type="text" [(ngModel)]="filtroCliente.nombre" (ngModelChange)="buscar()" />
+            <label>Apellidos</label>
+            <input type="text" [(ngModel)]="filtroCliente.apellidos" (ngModelChange)="buscar()" />
+            <label>DNI</label>
+            <input type="text" [(ngModel)]="filtroCliente.dni" (ngModelChange)="buscar()" />
+            <label>Telefono</label>
+            <input type="text" [(ngModel)]="filtroCliente.telefono" (ngModelChange)="buscar()" />
+          </div>
+          <div class="busqueda_avanzada">
+              <button class="morosos_{{filtroCliente.morosos}}" (click)="filtroMorosos()">Morosos</button>
+              <button (click)="filtroCitados()">Citados para hoy</button>
+              <button (click)="filtroMascota()">Por mascota seleccionada</button>
+              <button (click)="filtroAtendidos()">Atendidos hoy</button>
+          </div>
         </div>
       </ng-container>
     </div>

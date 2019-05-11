@@ -35,6 +35,7 @@ function createWindow() {
     var cliente = require('./src/server/routes/cliente.route');
     var globalModel = require('./src/server/routes/global.route');
     var mascota = require('./src/server/routes/mascota.route');
+    var clinica = require('./src/server/routes/clinica.route');
     // Set up mongoose connection
     var mongoose = require('mongoose');
     var dev_db_url = 'mongodb+srv://admin:admin@frankfurtcluster-kdmjy.mongodb.net/VeterinApp';
@@ -49,6 +50,7 @@ function createWindow() {
     server.use('/clientes', cliente);
     server.use('/global', globalModel);
     server.use('/mascotas', mascota);
+    server.use('/clinicas', clinica);
     var port = 9018;
     server.listen(port, function () {
         console.log('Server is up and running on port numner ' + port);

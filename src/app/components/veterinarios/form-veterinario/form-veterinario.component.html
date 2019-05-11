@@ -1,0 +1,41 @@
+<div class="container{{tema}}">
+  <app-selecciones class="top"></app-selecciones>
+  <div class="bottom">
+    <app-menu class="menu"></app-menu>
+    <div class="seccion{{tema}} columna">
+      <div class="titulo">
+        <span *ngIf="new"> Nuevo veterinario </span>
+        <span *ngIf="!new"> Editando veterinario </span>
+      </div>
+      <div class="formulario">
+        <fieldset>
+          <legend>Datos obligatorios</legend>
+          <div class="texto">
+            <span>Nombre</span><input type="text" [(ngModel)]="veterinarioEditado.nombre" />
+          </div>
+          <div class="texto">
+            <span>Apellidos</span><input type="text" [(ngModel)]="veterinarioEditado.apellidos" />
+          </div>
+          <div class="texto">
+            <span>DNI</span><input type="text" [(ngModel)]="veterinarioEditado.dni" />
+          </div>
+          <div class="texto">
+            <span>Numero Colegiado</span><input type="text" [(ngModel)]="veterinarioEditado.numColegiado" />
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Datos opcionales</legend>
+          <div class="texto">
+            <span>Fecha de Nacimiento</span><input type="date" [(ngModel)]="veterinarioEditado.fecNac" (keyup)="checkFechaNac()" maxlength="8"/>
+          </div>
+          <div class="texto">
+            <span>Telefono</span><input type="text" [(ngModel)]="veterinarioEditado.telefono" />
+          </div>
+        </fieldset>
+      </div>
+      <div class="guardar">
+        <button (click)="guardar()" [disabled]="checkFormIsFullfilled()"> Guardar </button>
+      </div>
+    </div>
+  </div>
+</div>

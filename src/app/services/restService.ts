@@ -4,12 +4,13 @@ import { AbstractWS } from './abstractService';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../models/usuario';
 import { Ajustes } from '../models/ajustes';
-import { Global } from '../models/bundle';
+import { Global, Veterinario } from '../models/bundle';
 import { Cliente } from '../app.dataModels';
 
 @Injectable()
 export class RestWS extends AbstractWS {
   path = '';
+  clinicaId = '';
 
   constructor(
     private config: ConfigService,
@@ -17,6 +18,7 @@ export class RestWS extends AbstractWS {
   ) {
     super(http);
     this.path = this.config.config().restUrlPrefix;
+    this.clinicaId = this.config.config().clinicaId;
   }
   // Methods
   public login(email, clave) {
@@ -111,4 +113,66 @@ export class RestWS extends AbstractWS {
       return Promise.reject(error);
     });
   }
+
+  public getVeterinarios(filters?) {
+    const fd = new HttpParams();
+    if (filters) {
+      fd.set('filters', filters);
+    }
+    return this.makeGetRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinarios', fd).then((res: String) => {
+      return Promise.resolve(res);
+    }).catch(error => {
+      console.log('Error: ' + error);
+      return Promise.reject(error);
+    });
+  }
+
+  public getVeterinario(id: string): Promise<Veterinario> {
+    return this.makeGetRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinario/' + id, null).then((res: Veterinario) => {
+      return Promise.resolve(res);
+    }).catch(error => {
+      console.log('Error: ' + error);
+      return Promise.reject(error);
+    });
+  }
+
+  public updateVeterinario(veterinario: Veterinario) {
+    const fd = new HttpParams()
+      .set('nombre', veterinario.nombre)
+      .set('apellidos', veterinario.apellidos)
+      .set('fecNac', veterinario.fecNac)
+      .set('dni', veterinario.dni)
+      .set('telefono', veterinario.telefono)
+      .set('numColegiado', veterinario.numColegiado);
+    return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinario/' + veterinario._id + '/update', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public deleteVeterinario(id: string) {
+    return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinario/' + id + '/delete', null).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public createVeterinario(veterinario: Veterinario) {
+    const fd = new HttpParams()
+      .set('nombre', veterinario.nombre)
+      .set('apellidos', veterinario.apellidos)
+      .set('fecNac', veterinario.fecNac)
+      .set('dni', veterinario.dni)
+      .set('telefono', veterinario.telefono)
+      .set('numColegiado', veterinario.numColegiado);
+    return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinario/create', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+
 }

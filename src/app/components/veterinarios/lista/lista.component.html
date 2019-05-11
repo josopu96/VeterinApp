@@ -1,0 +1,42 @@
+<div class="container{{tema}}">
+  <app-selecciones class="top"></app-selecciones>
+  <div class="bottom">
+    <app-menu class="menu"></app-menu>
+    <div class="seccion{{tema}}">
+      <ng-container>
+        <div class="datos">
+          <div class="titulo">
+            Lista de veterinarios
+          </div>
+          <div class="lista">
+            <table mdbTable striped="true" class="table table-striped table-dark table-hover">
+                <thead class=thead-dark>
+                  <tr>
+                    <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+                  </tr>
+                </thead>
+                <tbody class=tbody-dark>
+                  <tr mdbTableCol *ngFor="let el of elements">
+                    <td (click)="onSelect(el)">{{ el.nombre }}</td>
+                    <td>{{ el.apellidos }}</td>
+                    <td>{{ el.fecNac | date:"dd/MM/yyyy" }}</td>
+                    <td>{{ el.dni }}</td>
+                    <td>{{ el.telefono }}</td>
+                    <td>{{ el.numColegiado }}</td>
+                    <td (click)="editar(el)"></td>
+                    <td (click)="borrar(el.id)"></td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="nuevo" [routerLink]="['/formVeterinario']" routerLinkActive="router-link-active" >
+            Nuevo veterinario
+          </div>
+        </div>
+        <div class="filtros">
+          Filtros
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

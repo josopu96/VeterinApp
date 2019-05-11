@@ -68,8 +68,8 @@ export class ListaComponent implements OnInit {
       this.aplicarFiltros();
     } else {
       this.elements = this.elements.filter(cliente =>
-        this.time.setHours(0, 0, 0, 0) <= cliente.fecModificacion.setHours(0, 0, 0, 0) &&
-        cliente.fecModificacion.setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
+        this.time.setHours(0, 0, 0, 0) <= new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) &&
+        new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
       );
       this.filtroCliente.atendidos = true;
     }
@@ -107,16 +107,9 @@ export class ListaComponent implements OnInit {
       //TODO: Incluir filtro por mascota (es posible que haya que modificar los selectores para que modifiquen esta variable también)
     }
     if (this.filtroCliente.atendidos) {
-      this.elements = this.elements.filter(cliente => {
-          let result: boolean = false;
-
-          result = this.time.setHours(0, 0, 0, 0) <= cliente.fecModificacion.setHours(0, 0, 0, 0) &&
-          cliente.fecModificacion.setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0);
-
-          console.log("hola");
-
-          return result;
-        }
+      this.elements = this.elements.filter(cliente =>
+          this.time.setHours(0, 0, 0, 0) <= new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) &&
+          new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
       );
     }
   }

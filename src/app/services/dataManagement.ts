@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RestWS } from './restService';
-import { Usuario } from '../models/usuario';
-import { Ajustes } from '../models/ajustes';
-import { Global } from '../models/bundle';
-import { Veterinario } from '../models/bundle';
+import { Usuario, Ajustes, Global, Veterinario } from '../app.dataModels';
 import { Cliente } from '../app.dataModels';
 
 @Injectable()

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataManagement } from '../../../services/dataManagement';
 import { GlobalService } from '../../../services/globalService';
-import { Cliente } from '../../../models/cliente';
+import { Cliente, Contacto } from '../../../app.dataModels';
 import { Router } from '@angular/router';
-import { Contacto } from '../../../models/contacto';
 import { FiltroCliente } from '../../../models/filtros';
 
 @Component({
@@ -89,8 +88,6 @@ export class ListaComponent implements OnInit {
     );
   }
 
-
-
   private aplicarFiltros() {
     this.elements = this.clientesTotales.filter(cliente =>
       cliente.nombre.toLowerCase().includes(this.filtroCliente.nombre.toLowerCase()) &&
@@ -110,9 +107,16 @@ export class ListaComponent implements OnInit {
       //TODO: Incluir filtro por mascota (es posible que haya que modificar los selectores para que modifiquen esta variable también)
     }
     if (this.filtroCliente.atendidos) {
-      this.elements = this.elements.filter(cliente =>
-        this.time.setHours(0, 0, 0, 0) <= cliente.fecModificacion.setHours(0, 0, 0, 0) &&
-        cliente.fecModificacion.setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
+      this.elements = this.elements.filter(cliente => {
+          let result: boolean = false;
+
+          result = this.time.setHours(0, 0, 0, 0) <= cliente.fecModificacion.setHours(0, 0, 0, 0) &&
+          cliente.fecModificacion.setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0);
+
+          console.log("hola");
+
+          return result;
+        }
       );
     }
   }

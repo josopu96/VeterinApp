@@ -27,7 +27,6 @@ export class FormVeterinarioComponent implements OnInit {
     this.tema = "_" + this.globalService.getTema();
     this.route.params.forEach(params => {
       if (params) {
-        console.log(params);
         this.new = false;
         this.veterinarioEditado._id = params["id"];
         this.veterinarioEditado.nombre = params["nombre"];
@@ -62,9 +61,9 @@ export class FormVeterinarioComponent implements OnInit {
         'telefono': this.veterinarioEditado.telefono,
         'numColegiado': this.veterinarioEditado.numColegiado
       };
-      this.router.navigate(['formVeterinario', params]);
+      this.router.navigateByUrl('/veterinarios');
     }).catch((err) => {
-      console.log(err);
+      this.router.navigateByUrl('/veterinarios');
     });
   }
 
@@ -72,11 +71,18 @@ export class FormVeterinarioComponent implements OnInit {
     this.dm.createVeterinario(this.veterinarioEditado).then((res) => {
       this.router.navigateByUrl('/veterinarios');
     }).catch((err) => {
-      console.log(err);
-// tslint:disable-next-line: triple-equals
-      if (err == "null") {
-        this.router.navigateByUrl('/veterinarios');
-      }
+      this.router.navigateByUrl('/veterinarios');
     });
   }
+
+  checkFormIsFullfilled() {
+    let disabled = true;
+
+    if (this.veterinarioEditado.nombre && this.veterinarioEditado.apellidos && this.veterinarioEditado.dni && this.veterinarioEditado.numColegiado) {
+      disabled = false;
+    }
+
+    return disabled;
+  }
+
 }

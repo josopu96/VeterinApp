@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataManagement } from '../../../services/dataManagement';
 import { GlobalService } from '../../../services/globalService';
 import { Router } from '@angular/router';
-import { Mascota } from '../../../models/mascota';
+import { Mascota } from '../../../app.dataModels';
 
 @Component({
   selector: 'app-lista',
@@ -24,17 +24,8 @@ export class ListaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //this.getItems();
     this.elements = this.globalService.mascotas;
     this.tema = "_" + this.globalService.getTema();
-  }
-
-  private getItems (filters?: any[]) {
-    this.dm.getMascotas(filters).then((response) => {
-      this.elements = response;
-    }).catch((err) => {
-      console.log(err);
-    });
   }
 
   onSelect(mascota: Mascota): void {

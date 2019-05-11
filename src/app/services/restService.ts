@@ -2,9 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './../../config/configService';
 import { AbstractWS } from './abstractService';
 import { Injectable } from '@angular/core';
-import { Usuario } from '../models/usuario';
-import { Ajustes } from '../models/ajustes';
-import { Global, Veterinario } from '../models/bundle';
+import { Usuario, Ajustes, Global, Veterinario } from '../app.dataModels';
+import { Cliente } from '../app.dataModels';
 
 @Injectable()
 export class RestWS extends AbstractWS {
@@ -31,12 +30,12 @@ export class RestWS extends AbstractWS {
     });
   }
 
-  public getClients(filters?) {
+  public getClients(filters?):Promise<Cliente[]> {
     const fd = new HttpParams();
     if (filters) {
       fd.set('filters', filters);
     }
-    return this.makeGetRequest(this.path + 'clientes', fd).then((res: String) => {
+    return this.makeGetRequest(this.path + 'clientes', fd).then((res: Cliente[]) => {
       return Promise.resolve(res);
     }).catch(error => {
       console.log('Error: ' + error);
@@ -139,10 +138,10 @@ export class RestWS extends AbstractWS {
     const fd = new HttpParams()
       .set('nombre', veterinario.nombre)
       .set('apellidos', veterinario.apellidos)
-      .set('fecNac', veterinario.fecNac)
+      .set('fecNac', veterinario.fecNac.toString())
       .set('dni', veterinario.dni)
       .set('telefono', veterinario.telefono)
-      .set('numColegiado', veterinario.numColegiado);
+      .set('numColegiado', veterinario.numColegiado.toString());
     return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinario/' + veterinario._id + '/update', fd).then((_) => {
       return Promise.resolve();
     }).catch(error => {
@@ -162,10 +161,10 @@ export class RestWS extends AbstractWS {
     const fd = new HttpParams()
       .set('nombre', veterinario.nombre)
       .set('apellidos', veterinario.apellidos)
-      .set('fecNac', veterinario.fecNac)
+      .set('fecNac', veterinario.fecNac.toString())
       .set('dni', veterinario.dni)
       .set('telefono', veterinario.telefono)
-      .set('numColegiado', veterinario.numColegiado);
+      .set('numColegiado', veterinario.numColegiado.toString());
     return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinario/create', fd).then((_) => {
       return Promise.resolve();
     }).catch(error => {

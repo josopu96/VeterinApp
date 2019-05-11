@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RestWS } from './restService';
-import { Usuario } from '../models/usuario';
-import { Ajustes } from '../models/ajustes';
-import { Global } from '../models/bundle';
-import { Veterinario } from '../models/bundle';
+import { Usuario, Ajustes, Global, Veterinario } from '../app.dataModels';
+import { Cliente } from '../app.dataModels';
 
 @Injectable()
 export class DataManagement {
@@ -17,8 +15,8 @@ export class DataManagement {
     });
   }
 
-  public getClients(filters?): Promise<any> {
-    return this.restService.getClients(filters).then((data: string) => {
+  public getClients(filters?): Promise<Cliente[]> {
+    return this.restService.getClients(filters).then((data: Cliente[]) => {
       return Promise.resolve(data);
     }).catch(error => {
       return Promise.reject('error');

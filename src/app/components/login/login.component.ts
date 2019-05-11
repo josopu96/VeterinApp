@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from '../../app.dataModels';
+import { Usuario, Global } from '../../app.dataModels';
 import { DataManagement } from '../../services/dataManagement';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { GlobalService } from '../../services/globalService';
-import { Global } from '../../models/bundle';
 
 @Component({
   selector: 'app-login',

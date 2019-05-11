@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataManagement } from '../../../services/dataManagement';
 import { GlobalService } from '../../../services/globalService';
 import { Router, NavigationExtras } from '@angular/router';
-import { Veterinario } from '../../../models/bundle';
+import { Veterinario } from '../../../app.dataModels';
 
 @Component({
   selector: 'app-lista',

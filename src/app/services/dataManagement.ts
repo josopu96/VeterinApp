@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { RestWS } from './restService';
 import { Usuario } from '../models/usuario';
 import { Ajustes } from '../models/ajustes';
-import { stringify } from '@angular/compiler/src/util';
 import { Global } from '../models/bundle';
+import { Veterinario } from '../models/bundle';
 
 @Injectable()
 export class DataManagement {
@@ -18,7 +18,7 @@ export class DataManagement {
   }
 
   public getClients(filters?): Promise<any> {
-    return this.restService.getClients(filters).then((data: String) => {
+    return this.restService.getClients(filters).then((data: string) => {
       return Promise.resolve(data);
     }).catch(error => {
       return Promise.reject('error');
@@ -26,7 +26,7 @@ export class DataManagement {
   }
 
   public getCliente(id: string): Promise<any> {
-    return this.restService.getCliente(id).then((data: String) => {
+    return this.restService.getCliente(id).then((data: string) => {
       return Promise.resolve(data);
     }).catch(error => {
       return Promise.reject(error);
@@ -66,10 +66,51 @@ export class DataManagement {
   }
 
   public getMascotas(filters?): Promise<any> {
-    return this.restService.getMascotas(filters).then((data: String) => {
+    return this.restService.getMascotas(filters).then((data: string) => {
       return Promise.resolve(data);
     }).catch(error => {
       return Promise.reject('error');
     });
   }
+
+  public getVeterinarios(filters?): Promise<any> {
+    return this.restService.getVeterinarios(filters).then((data: string) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public getVeterinario(id: string): Promise<any> {
+    return this.restService.getVeterinario(id).then((data: any) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public updateVeterinario(veterinario: Veterinario): Promise<any> {
+    return this.restService.updateVeterinario(veterinario).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public deleteVeterinario(id: string): Promise<any> {
+    return this.restService.deleteVeterinario(id).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public createVeterinario(veterinario: Veterinario): Promise<any> {
+    return this.restService.createVeterinario(veterinario).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
 }

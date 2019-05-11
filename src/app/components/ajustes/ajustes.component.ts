@@ -3,7 +3,7 @@ import { GlobalService } from '../../services/globalService';
 import { Router } from '@angular/router';
 import { DataManagement } from '../../services/dataManagement';
 import { CookieService } from 'ngx-cookie-service';
-import { Ajustes } from '../../models/ajustes';
+import { Ajustes } from '../../app.dataModels';
 
 @Component({
   selector: 'app-ajustes',

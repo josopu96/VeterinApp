@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataManagement } from '../../../services/dataManagement';
 import { GlobalService } from '../../../services/globalService';
 import { Router } from '@angular/router';
-import { Mascota } from '../../../models/mascota';
+import { Mascota } from '../../../app.dataModels';
 
 @Component({
   selector: 'app-lista',

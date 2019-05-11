@@ -29,11 +29,11 @@ export class GlobalService {
 
     //Inicializamos el cliente, el veterinario y la mascota con id=0
     this.cliente = new Cliente();
-    this.cliente.setId("0");
+    this.cliente._id = "0";
     this.veterinario = new Veterinario();
-    this.veterinario.setId("0");
+    this.veterinario._id = "0";
     this.mascota = new Mascota();
-    this.mascota.setId("0");
+    this.mascota._id = "0";
 
     //Comprobamos si disponemos de token, en caso positivo, guardamos el usuario perteneciente al token.
     this.token = this.coockieService.get("token");
@@ -59,22 +59,14 @@ export class GlobalService {
   private getClientes() {
     this.clientes = [];
     this.dm.getClients().then((clientes: Cliente[]) => {
-      for (let client of clientes) {
-        let clienteTemp = new Cliente();
-        clienteTemp.contructor(client._id, client.nombre, client.apellidos, client.direccion, client.codPostal, client.poblacion, client.dni, client.email, client.fecNac, client.contactos, client.facturas, client.cuidados, client.fecModificacion);
-        this.clientes.push(clienteTemp);
-      }
+      this.clientes = clientes;
     });
   }
 
   private getMascotas() {
     this.mascotas = [];
     this.dm.getMascotas().then((mascotas: Mascota[]) => {
-      for (let mascota of mascotas) {
-        let mascotaTemp = new Mascota();
-        mascotaTemp.contructor(mascota._id, mascota.nombre, mascota.chip, mascota.fecNac, mascota.fecBaja, mascota.sexo, mascota.estado, mascota.pelo, mascota.capa, mascota.especie, mascota.raza, mascota.analiticas, mascota.radiografias, mascota.pruebas, mascota.desparasitaciones, mascota.vacunas, mascota.tratamientos, mascota.fecModificacion);
-        this.mascotas.push(mascotaTemp);
-      }
+      this.mascotas = mascotas;
     });
   }
 
@@ -127,19 +119,19 @@ export class GlobalService {
   limpiarCliente() {
     this.limpiarMascota();
     this.cliente = new Cliente();
-    this.cliente.setId("0");
+    this.cliente._id = "0";
     return this.cliente;
   }
 
   limpiarMascota() {
     this.mascota = new Mascota();
-    this.mascota.setId("0");
+    this.mascota._id = "0";
     return this.mascota;
   }
 
   limpiarVeterinario() {
     this.veterinario = new Veterinario();
-    this.veterinario.setId("0");
+    this.veterinario._id = "0";
     return this.veterinario;
   }
 
@@ -159,20 +151,8 @@ export class GlobalService {
   setUsuario(user: Usuario) {
     this.usuario = new Usuario();
     this.ajustes = new Ajustes();
-    this.ajustes.contructor(
-      user.ajustes._id,
-      user.ajustes.tamLetra,
-      user.ajustes.tema,
-      user.ajustes.recordatorio
-    );
-    this.usuario.contructor(
-      user._id,
-      user.nombre,
-      user.clave,
-      user.isAdmin,
-      user.email,
-      this.ajustes
-    );
+    this.ajustes = user.ajustes;
+    this.usuario = user;
 
   }
 
@@ -190,14 +170,8 @@ export class GlobalService {
 
   cambiarTema(tema: string) {
     if (this.getUsuario()) {
-      this.ajustes = new Ajustes();
-      this.ajustes.contructor(
-        this.getUsuario().ajustes._id,
-        this.getUsuario().ajustes.tamLetra,
-        this.getUsuario().ajustes.tema,
-        this.getUsuario().ajustes.recordatorio);
-      this.ajustes.setTema(tema);
-      this.usuario.setAjustes(this.ajustes);
+      this.ajustes.tema = tema;
+      this.usuario.ajustes = this.ajustes;
     }
     return this.ajustes;
   }
@@ -207,9 +181,9 @@ export class GlobalService {
     this.cliente = new Cliente();
     this.veterinario = new Veterinario();
     this.mascota = new Mascota();
-    this.cliente.setId("0");
-    this.veterinario.setId("0");
-    this.mascota.setId("0");
+    this.cliente._id = "0";
+    this.veterinario._id = "0";
+    this.mascota._id = "0";
     this.usuario = new Usuario();
     this.token = "";
     this.ajustes = new Ajustes();

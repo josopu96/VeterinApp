@@ -23,6 +23,7 @@ export class Mascota {
   private _desparasitaciones: Desparasitacion[];
   private _vacunas: Vacuna[];
   private _tratamientos: Tratamiento[];
+  private _fecModificacion: Date;
 
   get _id(){
     return this.__id;
@@ -92,6 +93,11 @@ export class Mascota {
     return this._tratamientos;
   }
 
+  get fecModificacion(){
+    return this._fecModificacion;
+  }
+
+
   contructor(
     id: string,
     nombre: string,
@@ -109,7 +115,8 @@ export class Mascota {
     pruebas: Prueba[],
     desparasitaciones: Desparasitacion[],
     vacunas: Vacuna[],
-    tratamientos: Tratamiento[]
+    tratamientos: Tratamiento[],
+    fecModificacion: Date,
   ){
     this.setId(id);
     this.setNombre(nombre);
@@ -128,6 +135,7 @@ export class Mascota {
     this.setDesparasitaciones(desparasitaciones);
     this.setVacunas(vacunas);
     this.setTratamientos(tratamientos);
+    this.setFecModificacion(fecModificacion);
   }
 
   setId(id: string){
@@ -225,6 +233,11 @@ export class Mascota {
       this._tratamientos = tratamientos;
     } else {
       this._tratamientos = [];
+    }
+  }
+  setFecModificacion(fecModificacion: Date){
+    if(fecModificacion){
+      this._fecModificacion = fecModificacion;
     }
   }
 

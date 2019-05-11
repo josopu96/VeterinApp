@@ -1,0 +1,113 @@
+@import "../../../utilities/variables.scss";
+
+
+.seccion_oscuro {
+  display: flex;
+  background-color: rgba(#8a8a8a, $alpha: 0.3);
+  flex-basis: $anchoSeccion + px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border-top: 2px solid $colorFondoOscuro;
+  border-left: 2px solid $colorFondoOscuro;
+  box-sizing: border-box;
+  border-top-left-radius: 5px;
+
+  .titulo {
+    background-color: $tituloOscuro;
+    width: 100%;
+    display: flex;
+    height: $altoTitulo + px;
+    justify-content: center;
+    align-items: center;
+
+    span{
+      font-size: 30px;
+      font-weight: bold;
+    }
+  }
+
+  .formulario{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+
+    fieldset{
+      margin: 0px 40px 20px 40px;
+      padding-top: 20px;
+      padding-bottom: 30px;
+      padding-left: 40px;
+      padding-right: 40px;
+      background-color: $colorFondoFieldset;
+
+      legend{
+        font-weight: bold;
+        font-size: 18px;
+      }
+      .texto{
+        display: flex;
+        justify-content: center;
+
+        span{
+          flex-grow: 1;
+          margin-bottom: 10px;
+          margin-top: 10px;
+        }
+        input{
+          width: 400px;
+          margin: 0px;
+          margin-bottom: 5px;
+          margin-top: 5px;
+          border: none;
+          text-align: center;
+          background-color: #00000000;
+          border-bottom: 1px solid #cccccc;
+          transition: all ease-out 0.3s;
+          box-sizing: border-box;
+          color: $textoClaro;
+          
+          &:focus{
+            margin-bottom: 2px;
+            margin-top: 2px;
+            font-size: 20px;
+            background-color: $colorInput;
+            border: 1px solid #cccccc;
+          }
+        }
+      }
+    }
+
+  }
+
+  .guardar{
+    width: 100%;
+    display: flex;
+    height: $altoGuardar+px;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid $colorFondoOscuro;
+    box-sizing: border-box;
+
+    button {
+      height: 100%;
+      background-color: $colorFondoGuardar;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 22px;
+      border: 0px;
+      color: $textoClaro;
+      transition: all 0.5s;
+      &:hover {
+        background-color: $colorFondoHoverGuardar;
+      }
+    }
+  }
+
+}

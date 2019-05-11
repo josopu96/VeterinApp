@@ -15,6 +15,7 @@ export class Cliente {
   private _contactos: Contacto[];
   private _facturas: Factura[];
   private _cuidados: Cuidado[];
+  private _fecModificacion: Date;
 
   get _id(){
     return this.__id;
@@ -64,6 +65,10 @@ export class Cliente {
     return this._cuidados;
   }
 
+  get fecModificacion(){
+    return this._fecModificacion;
+  }
+
   contructor(
     _id: string,
     nombre: string,
@@ -77,6 +82,7 @@ export class Cliente {
     contactos: Contacto[],
     facturas: Factura[],
     cuidados: Cuidado[],
+    fecModificacion: Date,
   ){
     this.setId(_id);
     this.setNombre(nombre);
@@ -86,10 +92,11 @@ export class Cliente {
     this.setPoblacion(poblacion);
     this.setDni(dni);
     this.setEmail(email);
-    this.setFecNac(fecNac);
+    this.setFecNac(new Date(fecNac));
     this.setContactos(contactos);
     this.setFacturas(facturas);
     this.setCuidados(cuidados);
+    this.setFecModificacion(fecModificacion);
 
   }
 
@@ -136,7 +143,7 @@ export class Cliente {
   }
   setFecNac(fecNac: Date){
     if(fecNac){
-      this._fecNac = fecNac;
+      this._fecNac = new Date(fecNac);
     }
   }
   setContactos(contactos: Contacto[]){
@@ -158,6 +165,11 @@ export class Cliente {
       this._cuidados = cuidados;
     } else {
       this._cuidados = [];
+    }
+  }
+  setFecModificacion(fecModificacion: Date){
+    if(fecModificacion){
+      this._fecModificacion = new Date(fecModificacion);
     }
   }
 

@@ -10,22 +10,22 @@
           </div>
           <div class="lista">
             <table mdbTable striped="true" class="table table-striped table-dark table-hover">
-                <thead class=thead-dark>
-                  <tr>
-                    <th *ngFor="let head of headElements" scope="col">{{head}} </th>
-                  </tr>
-                </thead>
-                <tbody class=tbody-dark>
-                    <tr mdbTableCol *ngFor="let el of elements">
-                      <td (click)="onSelect(el)">{{ el.nombre }}</td>
-                      <td>{{ el.apellidos }}</td>
-                      <td>{{ el.dni }}</td>
-                      <td *ngIf="el.contactos && el.contactos[0]">{{ el.contactos[0].telefono }}</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                </tbody>
+              <thead class=thead-dark>
+                <tr>
+                  <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+                </tr>
+              </thead>
+              <tbody class=tbody-dark>
+                <tr mdbTableCol *ngFor="let el of elements">
+                  <td (click)="onSelect(el)">{{ el.nombre }}</td>
+                  <td>{{ el.apellidos }}</td>
+                  <td>{{ el.dni }}</td>
+                  <td><span *ngIf="el.contactos && el.contactos[0]">{{ el.contactos[0].telefono }}</span></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
             </table>
           </div>
           <div class="nuevo">
@@ -33,7 +33,35 @@
           </div>
         </div>
         <div class="filtros">
-          Filtros
+          <div class="busqueda">
+            <div class="titulo_filtro">
+              Buscar clientes
+            </div>
+            <div class="cuerpo_filtro">
+              <label>Nombre</label>
+              <input type="text" [(ngModel)]="filtroCliente.nombre" (ngModelChange)="buscar()" />
+              <label>Apellidos</label>
+              <input type="text" [(ngModel)]="filtroCliente.apellidos" (ngModelChange)="buscar()" />
+              <label>DNI</label>
+              <input type="text" [(ngModel)]="filtroCliente.dni" (ngModelChange)="buscar()" />
+              <label>Telefono</label>
+              <input type="text" [(ngModel)]="filtroCliente.telefono" (ngModelChange)="buscar()" />
+            </div>
+          </div>
+          <div class="busqueda_avanzada">
+            <div class="titulo_filtro">
+              Buscar clientes
+            </div>
+            <div class="cuerpo_filtro">
+              <button class="morosos_{{filtroCliente.morosos}}" (click)="filtroMorosos()">Morosos</button>
+              <button (click)="filtroCitados()">Citados para hoy</button>
+              <button (click)="filtroMascota()">Por mascota seleccionada</button>
+              <button (click)="filtroAtendidos()">Atendidos hoy</button>
+            </div>
+          </div>
+          <div class="borrar_filtros">
+            <button class="" (click)="borrarFiltros()">Borrar todos los filtros</button>
+          </div>
         </div>
       </ng-container>
     </div>

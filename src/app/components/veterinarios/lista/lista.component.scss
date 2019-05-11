@@ -266,44 +266,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
     width: $anchoFiltros + px;
     height: 100%;
-    background: #585858c5;
-
-    .busqueda{
-      height: 260px;
-      background: #585858c5;
-      
-      .titulo_filtro{
-        justify-content: center;
-        display: flex;
-
-      }
-
-      .cuerpo_filtro{
-        justify-content: center;
-        display: flex;
-        flex-direction: column;
-      }
-    }
-
-    .busqueda_avanzada{
-      flex-grow: 1;
-
-      .morosos_true{
-        background-color: black;
-      }
-      .morosos_false{
-        background-color: white;
-      }
-    }
-
-    .borrar_filtros{
-      height: 40px;
-      background: #585858c5;
-      width: 100%;
-      justify-content: center;
-    }
+    background: rgba(88, 88, 88, 0.774);
   }
 }

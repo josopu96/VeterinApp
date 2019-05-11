@@ -18,8 +18,8 @@ export class DataManagement {
     });
   }
 
-  public getClients(filters?): Promise<any> {
-    return this.restService.getClients(filters).then((data: string) => {
+  public getClients(filters?): Promise<Cliente[]> {
+    return this.restService.getClients(filters).then((data: Cliente[]) => {
       return Promise.resolve(data);
     }).catch(error => {
       return Promise.reject('error');

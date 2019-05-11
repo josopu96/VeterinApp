@@ -19,7 +19,6 @@ export class ListaComponent implements OnInit {
   tema = "_claro";
   mostrar: Boolean;
   cliente: Cliente;
-  clientesAux: Cliente[];
   clientesTotales: Cliente[];
 
   time: Date = new Date();
@@ -40,7 +39,6 @@ export class ListaComponent implements OnInit {
     this.filtroCliente = this.globalService.filtroCliente;
     this.elements = this.globalService.clientes;
     this.clientesTotales = this.globalService.clientes;
-    this.clientesAux = this.globalService.clientes;
     this.tema = "_" + this.globalService.getTema();
     this.aplicarFiltros();
   }
@@ -66,7 +64,6 @@ export class ListaComponent implements OnInit {
   }
 
   filtroAtendidos(){
-    console.log(this.elements);
     if(this.filtroCliente.atendidos){
       this.filtroCliente.atendidos = false;
       this.aplicarFiltros();
@@ -77,6 +74,13 @@ export class ListaComponent implements OnInit {
       );
       this.filtroCliente.atendidos = true;
     }
+  }
+
+  borrarFiltros(){
+    this.globalService.inicializaFiltroCliente();
+    this.filtroCliente = this.globalService.filtroCliente;
+    this.aplicarFiltros();
+
   }
 
   private getClientesMorosos() {

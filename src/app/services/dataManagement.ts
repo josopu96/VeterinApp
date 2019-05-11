@@ -4,6 +4,7 @@ import { Usuario } from '../models/usuario';
 import { Ajustes } from '../models/ajustes';
 import { stringify } from '@angular/compiler/src/util';
 import { Global } from '../models/bundle';
+import { Cliente } from '../app.dataModels';
 
 @Injectable()
 export class DataManagement {
@@ -17,8 +18,8 @@ export class DataManagement {
     });
   }
 
-  public getClients(filters?): Promise<any> {
-    return this.restService.getClients(filters).then((data: String) => {
+  public getClients(filters?): Promise<Cliente[]> {
+    return this.restService.getClients(filters).then((data: Cliente[]) => {
       return Promise.resolve(data);
     }).catch(error => {
       return Promise.reject('error');

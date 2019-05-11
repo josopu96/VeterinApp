@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { Usuario } from '../models/usuario';
 import { Ajustes } from '../models/ajustes';
 import { Global } from '../models/bundle';
+import { Cliente } from '../app.dataModels';
 
 @Injectable()
 export class RestWS extends AbstractWS {
@@ -29,12 +30,12 @@ export class RestWS extends AbstractWS {
     });
   }
 
-  public getClients(filters?) {
+  public getClients(filters?):Promise<Cliente[]> {
     const fd = new HttpParams();
     if (filters) {
       fd.set('filters', filters);
     }
-    return this.makeGetRequest(this.path + 'clientes', fd).then((res: String) => {
+    return this.makeGetRequest(this.path + 'clientes', fd).then((res: Cliente[]) => {
       return Promise.resolve(res);
     }).catch(error => {
       console.log('Error: ' + error);

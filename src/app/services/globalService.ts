@@ -218,7 +218,7 @@ export class GlobalService {
 
   // --- FILTROS ---
   
-  private inicializaFiltroCliente(){
+  inicializaFiltroCliente(){
     this.filtroCliente = new FiltroCliente();
     this.filtroCliente.nombre = '';
     this.filtroCliente.apellidos = '';

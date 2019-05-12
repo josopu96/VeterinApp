@@ -32,7 +32,42 @@
           </div>
         </div>
         <div class="filtros">
-          Filtros
+          <div class="busqueda">
+            <div class="titulo_filtro">
+              Buscar mascotas
+            </div>
+            <div class="cuerpo_filtro">
+              <label>Nombre</label>
+              <input type="text" [(ngModel)]="filtroMascota.nombre" (ngModelChange)="buscar()" />
+              <label>Chip</label>
+              <input type="text" [(ngModel)]="filtroMascota.chip" (ngModelChange)="buscar()" />
+              <label>Raza</label>
+              <input type="text" [(ngModel)]="filtroMascota.raza" (ngModelChange)="buscar()" />
+              <label>Edad</label>
+              <input type="number" min="0" [(ngModel)]="filtroMascota.edad" (ngModelChange)="buscar()" />
+              <label>Pelo</label>
+              <input type="text" [(ngModel)]="filtroMascota.pelo" (ngModelChange)="buscar()" />
+              <label>Especie</label>
+              <input type="text" [(ngModel)]="filtroMascota.especie" (ngModelChange)="buscar()" />
+              <label>Sexo</label>
+              <input type="text" [(ngModel)]="filtroMascota.sexo" (ngModelChange)="buscar()" />
+            </div>
+          </div>
+          <div class="busqueda_avanzada">
+            <div class="titulo_filtro">
+              Búsqueda avanzada
+            </div>
+            <div class="cuerpo_filtro">
+              <button class="seleccionado_{{filtroMascota.porCliente}}" (click)="filtroCliente()"
+                *ngIf="filtroMascota.porCliente">Por cliente seleccionado</button>
+              <button class="deshabilitado" *ngIf="!filtroMascota.porCliente">Por cliente seleccionado</button>
+              <button class="seleccionado_{{filtroMascota.atendidas}}" (click)="filtroAtendidas()">Atendidas
+                hoy</button>
+            </div>
+          </div>
+          <div class="borrar_filtros">
+            <button (click)="borrarFiltros()">Borrar todos los filtros</button>
+          </div>
         </div>
       </ng-container>
     </div>

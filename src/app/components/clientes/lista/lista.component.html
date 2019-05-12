@@ -54,11 +54,14 @@
             </div>
             <div class="cuerpo_filtro">
               <button class="morosos seleccionado_{{filtroCliente.morosos}}" (click)="filtroMorosos()">Morosos</button>
-              <button class="seleccionado_{{filtroCliente.citados}}" (click)="filtroCitados()" *ngIf="filtroCliente.citados">Citados para hoy</button>
-              <button class="seleccionado_{{filtroCliente.porMascota}}" (click)="filtroMascota()" *ngIf="filtroCliente.porMascota">Por mascota seleccionada</button>
+              <button class="seleccionado_{{filtroCliente.citados}}" (click)="filtroCitados()"
+                *ngIf="filtroCliente.citados">Citados para hoy</button>
+              <button class="seleccionado_{{filtroCliente.porMascota}}" (click)="filtroMascota()"
+                *ngIf="filtroCliente.porMascota">Por mascota seleccionada</button>
               <button class="deshabilitado" *ngIf="!filtroCliente.citados">Citados para hoy</button>
               <button class="deshabilitado" *ngIf="!filtroCliente.porMascota">Por mascota seleccionada</button>
-              <button class="seleccionado_{{filtroCliente.atendidos}}" (click)="filtroAtendidos()">Atendidos hoy</button>
+              <button class="seleccionado_{{filtroCliente.atendidos}}" (click)="filtroAtendidos()">Atendidos
+                hoy</button>
             </div>
           </div>
           <div class="borrar_filtros">

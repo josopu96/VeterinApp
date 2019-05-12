@@ -8,7 +8,7 @@ import { GlobalService } from '../../services/globalService';
 })
 export class MenuComponent implements OnInit {
 
-  tema = "_claro";
+  tema = "_oscuro";
 
   constructor(
     private globalService: GlobalService

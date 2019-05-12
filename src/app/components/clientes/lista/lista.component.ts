@@ -15,9 +15,7 @@ export class ListaComponent implements OnInit {
   headElements = ['Nombre', 'Apellidos', 'DNI', 'Teléfono', 'Visualizar', 'Editar', 'Seleccionar'];
 
   elements: Cliente[];
-  tema = "_claro";
-  mostrar: Boolean;
-  cliente: Cliente;
+  tema = "_oscuro";
   clientesTotales: Cliente[];
 
   time: Date = new Date();

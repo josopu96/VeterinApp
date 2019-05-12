@@ -2,21 +2,28 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { DataManagement } from '../services/dataManagement';
 import { Ajustes, Usuario, Mascota, Veterinario, Cliente, Clinica } from '../app.dataModels';
-import { FiltroCliente } from '../models/filtros';
+import { FiltroCliente, FiltroMascota } from '../models/filtros';
 
 @Injectable()
 export class GlobalService {
-  cliente: Cliente;
-  veterinario: Veterinario;
-  mascota: Mascota;
+
+  //Variables de sesión
   usuario: Usuario;
   token: string;
   ajustes: Ajustes;
+
+  //Variables de interacción
+  clinica: Clinica;
+  cliente: Cliente;
+  veterinario: Veterinario;
+  mascota: Mascota;
   clientes: Cliente[];
   mascotas: Mascota[];
-  clinica: Clinica;
   veterinarios: Veterinario[];
+
+  //Variables de filtros
   filtroCliente: FiltroCliente;
+  filtroMascota: FiltroMascota;
 
   constructor(
     private coockieService: CookieService,
@@ -46,6 +53,7 @@ export class GlobalService {
 
     //Inicializamos los filtros
     this.inicializaFiltroCliente();
+    this.inicializaFiltroMascota();
 
     //Inicializamos las colecciones que usaremos más adelante en la aplicación.
     this.getClientes();
@@ -204,8 +212,25 @@ export class GlobalService {
     this.filtroCliente.atendidos = false;
   }
 
+  inicializaFiltroMascota(){
+    this.filtroMascota = new FiltroMascota();
+    this.filtroMascota.nombre = '';
+    this.filtroMascota.chip = '';
+    this.filtroMascota.raza = '';
+    this.filtroMascota.edad = null;
+    this.filtroMascota.pelo = '';
+    this.filtroMascota.especie = '';
+    this.filtroMascota.sexo = '';
+    this.filtroMascota.atendidas = false;
+    this.filtroMascota.porCliente = false;
+  }
+
   setFiltroCliente(filtro:FiltroCliente){
     this.filtroCliente = filtro;
+  }
+
+  setFiltroMascota(filtro:FiltroMascota){
+    this.filtroMascota = filtro;
   }
 
   // --- OTROS ---

@@ -12,7 +12,7 @@ import { Usuario } from '../../app.dataModels';
 })
 export class HomeComponent implements OnInit {
 
-  tema: string = "_claro";
+  tema: string = "_oscuro";
   nombreUsuario: String;
   hora: number;
   mensajeBienvenida: String;

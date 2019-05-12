@@ -14,7 +14,7 @@ export class ListaComponent implements OnInit {
   headElements = ['Nombre', 'Apellidos', 'Fecha Nacimiento', 'DNI', 'Teléfono', 'Num Colegiado', 'Editar', 'Borrar'];
 
   elements: any[];
-  tema = "_claro";
+  tema = "_oscuro";
 
   constructor(
     private dm: DataManagement,

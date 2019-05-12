@@ -8,7 +8,7 @@ import { GlobalService } from '../../../services/globalService';
 })
 export class NumberComponent implements OnInit {
 
-  tema: string = "_claro";
+  tema: string = "_oscuro";
 
   constructor(
     private globalService: GlobalService

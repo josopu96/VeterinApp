@@ -37,8 +37,10 @@
               Buscar mascotas
             </div>
             <div class="cuerpo_filtro">
-              <label>Nombre</label>
-              <input type="text" [(ngModel)]="filtroMascota.nombre" (ngModelChange)="buscar()" />
+              <label for="nombre">Nombre</label>
+              <input id="nombre" type="search" list="nombres" [(ngModel)]="filtroMascota.nombre" (ngModelChange)="buscarPorNombre()" />
+              <datalist id="nombres" *ngIf="filtroMascota.nombre.length>=1">
+              </datalist>
               <label>Chip</label>
               <input type="text" [(ngModel)]="filtroMascota.chip" (ngModelChange)="buscar()" />
               <label>Raza</label>

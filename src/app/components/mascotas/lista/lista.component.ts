@@ -24,6 +24,8 @@ export class ListaComponent implements OnInit {
   //Campos del formulario para filtrar
   filtroMascota: FiltroMascota;
 
+  dataListInicializado: Boolean;
+
   constructor(
     private dm: DataManagement,
     private globalService: GlobalService,
@@ -38,6 +40,27 @@ export class ListaComponent implements OnInit {
     this.aplicarFiltros();
   }
 
+  inicializaDataList(nombreDataList: string){
+    if(!this.dataListInicializado){
+      
+      let dataList = document.getElementById(nombreDataList);
+      if(dataList){
+        let listaNombres: string[] = [];
+        let option;
+        for(let mascota of this.mascotasTotales){
+          if(!listaNombres.includes(mascota.nombre)){
+            listaNombres.push(mascota.nombre);
+            option = document.createElement('option');
+            option.value = mascota.nombre;
+            dataList.appendChild(option);
+          }
+        }
+        console.log(dataList);
+        this.dataListInicializado = true;
+      }
+    }
+  }
+
   onSelect(mascota: Mascota): void {
     this.globalService.setMascota(mascota);
     this.router.navigateByUrl('/seleccionaMascota', { skipLocationChange: true }).then(() =>
@@ -48,11 +71,18 @@ export class ListaComponent implements OnInit {
     this.aplicarFiltros();
   }
 
-  private aplicarFiltros() {
-    console.log(this.filtroMascota.edad);
+  buscarPorNombre() {
+    console.log(this.filtroMascota.nombre.length);
+    if(this.filtroMascota.nombre.length>=1){
+      this.inicializaDataList('nombres');
+    } else {
+      this.dataListInicializado = false;
+    }
     
-    let timeDiff: number;
-    let edad:number;
+    this.aplicarFiltros();
+  }
+
+  private aplicarFiltros() {
 
     this.elements = this.mascotasTotales.filter(mascota =>
       mascota.nombre.toLowerCase().includes(this.filtroMascota.nombre.toLowerCase()) &&
@@ -66,12 +96,12 @@ export class ListaComponent implements OnInit {
     );
     if (this.filtroMascota.porCliente) {
       //TODO
-      if (this.filtroMascota.atendidas) {
-        this.elements = this.elements.filter(mascota =>
-          this.time.setHours(0, 0, 0, 0) <= new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) &&
-          new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
-        );
-      }
+    }
+    if (this.filtroMascota.atendidas) {
+      this.elements = this.elements.filter(mascota =>
+        this.time.setHours(0, 0, 0, 0) <= new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) &&
+        new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
+      );
     }
   }
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataManagement } from '../../../services/dataManagement';
 import { GlobalService } from '../../../services/globalService';
-import { Cliente } from '../../../models/cliente';
+import { Cliente, Contacto } from '../../../app.dataModels';
 import { Router } from '@angular/router';
+import { FiltroCliente } from '../../../models/filtros';
 
 @Component({
   selector: 'app-lista',
@@ -13,8 +14,16 @@ export class ListaComponent implements OnInit {
 
   headElements = ['Nombre', 'Apellidos', 'DNI', 'Teléfono', 'Visualizar', 'Editar', 'Seleccionar'];
 
-  elements: any[];
+  elements: Cliente[];
   tema = "_claro";
+  mostrar: Boolean;
+  cliente: Cliente;
+  clientesTotales: Cliente[];
+
+  time: Date = new Date();
+
+  //Campos del formulario para filtrar
+  filtroCliente: FiltroCliente;
 
 
   constructor(
@@ -26,21 +35,82 @@ export class ListaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getItems();
+    this.filtroCliente = this.globalService.filtroCliente;
+    this.elements = this.globalService.clientes;
+    this.clientesTotales = this.globalService.clientes;
     this.tema = "_" + this.globalService.getTema();
+    this.aplicarFiltros();
   }
 
-  private getItems (filters?: any[]) {
-    this.dm.getClients(filters).then((response) => {
-      this.elements = response;
-    }).catch((err) => {
-      console.log(err);
-    });
-  }
-
-  onSelect(cliente: Cliente): void{
+  onSelect(cliente: Cliente): void {
     this.globalService.setCliente(cliente);
-    this.router.navigateByUrl('/seleccionaCliente', {skipLocationChange: true}).then(()=>
-    this.router.navigate(["clientes"]));
+    this.router.navigateByUrl('/seleccionaCliente', { skipLocationChange: true }).then(() =>
+      this.router.navigate(["clientes"]));
+  }
+
+  buscar() {
+    this.aplicarFiltros();
+  }
+
+  filtroMorosos() {
+    if (this.filtroCliente.morosos) {
+      this.filtroCliente.morosos = false;
+      this.aplicarFiltros();
+    } else {
+      this.elements = this.elements.filter(cliente => this.getClientesMorosos().includes(cliente));
+      this.filtroCliente.morosos = true;
+    }
+  }
+
+  filtroAtendidos(){
+    if(this.filtroCliente.atendidos){
+      this.filtroCliente.atendidos = false;
+      this.aplicarFiltros();
+    } else {
+      this.elements = this.elements.filter(cliente =>
+        this.time.setHours(0, 0, 0, 0) <= new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) &&
+        new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
+      );
+      this.filtroCliente.atendidos = true;
+    }
+  }
+
+  borrarFiltros(){
+    this.globalService.inicializaFiltroCliente();
+    this.filtroCliente = this.globalService.filtroCliente;
+    this.aplicarFiltros();
+
+  }
+
+  private getClientesMorosos() {
+    return this.elements.filter(cliente =>
+      cliente.facturas.includes(cliente.facturas.filter(factura => factura.estado.toLowerCase() == 'impagado')[0])
+    );
+  }
+
+  private aplicarFiltros() {
+    this.elements = this.clientesTotales.filter(cliente =>
+      cliente.nombre.toLowerCase().includes(this.filtroCliente.nombre.toLowerCase()) &&
+      cliente.apellidos.toLowerCase().includes(this.filtroCliente.apellidos.toLowerCase()) &&
+      cliente.dni.toLowerCase().includes(this.filtroCliente.dni.toLowerCase()) &&
+      (
+        this.filtroCliente.telefono == '' ? true : cliente.contactos.includes(cliente.contactos.filter(contacto => contacto.telefono.toLowerCase().includes(this.filtroCliente.telefono.toLowerCase()))[0])
+      )
+    );
+    if (this.filtroCliente.morosos) {
+      this.elements = this.elements.filter(cliente => this.getClientesMorosos().includes(cliente));
+    }
+    if (this.filtroCliente.citados) {
+      //TODO: Incluir filtro cuando esté desarrollado el calendario
+    }
+    if (this.filtroCliente.porMascota) {
+      //TODO: Incluir filtro por mascota (es posible que haya que modificar los selectores para que modifiquen esta variable también)
+    }
+    if (this.filtroCliente.atendidos) {
+      this.elements = this.elements.filter(cliente =>
+          this.time.setHours(0, 0, 0, 0) <= new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) &&
+          new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
+      );
+    }
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, NgZone, Renderer2, ViewChild, ElementRef } from '@an
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { GlobalService } from '../../services/globalService';
-import { Usuario } from '../../models/usuario';
+import { Usuario } from '../../app.dataModels';
 
 
 @Component({

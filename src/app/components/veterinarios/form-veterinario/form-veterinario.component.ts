@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Veterinario } from '../../../models/bundle';
+import { Veterinario } from '../../../app.dataModels';
 import { GlobalService } from '../../../services/globalService';
 import { DataManagement } from '../../../services/dataManagement';
 import { Router, ActivatedRoute } from '@angular/router';

@@ -7,7 +7,9 @@ html, body {
   height: 100%;
   cursor: default;
 }
-
+:focus{
+  outline: 0px;
+}
 .top {
   width: 100%;
 }

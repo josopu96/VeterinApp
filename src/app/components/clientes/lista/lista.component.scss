@@ -1,5 +1,6 @@
 @import "../../../utilities/variables.scss";
 
+
 .seccion_claro {
   display: flex;
   background-color: rgba(#ffffff, $alpha: 0.4);
@@ -23,14 +24,10 @@
       align-items: center;
       justify-content: center;
       flex-grow: 1;
-      height: $altoTitulo + px;
-      border-bottom: 1px solid black;
-      box-sizing: border-box;
+      height: $altoTituloCliente + px;
       background: rgba(0, 0, 0, 0.8);
       font-size: 22px;
       font-weight: bold;
-      border-left: 4px solid black;
-      border-right: 4px solid black;
       box-sizing: border-box;
     }
 
@@ -43,9 +40,6 @@
       -ms-overflow-style: -ms-autohiding-scrollbar;
       font-size: 15px;
       font-weight: normal;
-      border-left: 4px solid black;
-      border-right: 4px solid black;
-      border-bottom: 4px solid black;
       box-sizing: border-box;
 
       .table {
@@ -114,15 +108,14 @@
       justify-content: center;
       flex-grow: 1;
       height: $altoNuevo + px;
-      border-top: 1px solid black;
       box-sizing: border-box;
-      background: rgba(0, 0, 0, 0.6);
+      background: #00000099;
       font-size: 22px;
       font-weight: bold;
       cursor: pointer;
     }
     .nuevo:hover {
-      background: rgba(0, 0, 0, 0.5);
+      background: #00000080;
     }
   }
 
@@ -130,9 +123,130 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     width: $anchoFiltros + px;
     height: 100%;
-    background: rgba(88, 88, 88, 0.774);
+    background: $fondoFiltroCliente;
+
+    .busqueda{
+      height: $altoBusquedaCliente+px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      
+      .titulo_filtro{
+        height: $altoTituloFiltroCliente+px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        background-color: $fondoTituloFiltroCliente;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .cuerpo_filtro{
+        flex-grow: 1;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+
+        label{
+          height: $altoLabelFiltroCliente+px;
+        }
+        input{
+          margin-bottom: 6px;
+          height: 18px;
+          width: 80%;
+          text-align: center;
+          border: none;
+          padding: 3px;
+          color: $textoClaro;
+          background-color: $fondoInputFiltroCliente;
+          border: 2px solid black;
+          border-radius: 5px;
+          transition: all 0.3s;
+
+          &:focus{
+            border:2px solid $focusInputFiltroCliente;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    .busqueda_avanzada{
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      .titulo_filtro{
+        height: $altoTituloFiltroCliente+px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        background-color: $fondoTituloFiltroCliente;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      
+      .cuerpo_filtro{
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        align-items: center;
+
+        button{
+          height: $altoBotonBusqAvanzCliente+px;
+          width: 80%;
+          margin-bottom: 18px;
+          background-color: $fondoBotonFiltroCliente;
+          text-decoration: none;
+          border: none;
+          color: $textoClaro;
+          cursor: pointer;
+          border-radius: 5px;
+          transition: all 0.3s;
+        }
+
+        .morosos{
+          margin-top: 17px;
+        }
+
+        .seleccionado_true{
+          background-color: $fondoBotonSeleccionadoFiltroCliente;
+        }
+
+        .deshabilitado{
+          background-color: $deshabilitadoFiltroCliente;
+          color: $textoDeshabilitadoFiltroCliente;
+          cursor: default;
+        }
+      }
+    }
+
+    .borrar_filtros{
+      height: $altoBorrarFiltroCliente+px;
+      background: #585858c5;
+      width: 100%;
+      justify-content: center;
+
+      button{
+        height: 100%;
+        width: 100%;
+        background-color: $fondoBorrarFiltroCliente;
+        text-decoration: none;
+        border: none;
+        color: $textoClaro;
+        cursor: pointer;
+
+        &:hover{
+          background-color: $colorClaroTransparenteCliente;
+        }
+      }
+    }
   }
 }
 
@@ -159,14 +273,10 @@
       align-items: center;
       justify-content: center;
       flex-grow: 1;
-      height: $altoTitulo + px;
-      border-bottom: 1px solid black;
-      box-sizing: border-box;
+      height: $altoTituloCliente + px;
       background: rgba(0, 0, 0, 0.8);
       font-size: 22px;
       font-weight: bold;
-      border-left: 4px solid black;
-      border-right: 4px solid black;
       box-sizing: border-box;
     }
 
@@ -179,9 +289,6 @@
       -ms-overflow-style: -ms-autohiding-scrollbar;
       font-size: 15px;
       font-weight: normal;
-      border-left: 4px solid black;
-      border-right: 4px solid black;
-      border-bottom: 4px solid black;
       box-sizing: border-box;
 
       .table {
@@ -250,15 +357,14 @@
       justify-content: center;
       flex-grow: 1;
       height: $altoNuevo + px;
-      border-top: 1px solid black;
       box-sizing: border-box;
-      background: rgba(0, 0, 0, 0.6);
+      background: #00000099;
       font-size: 22px;
       font-weight: bold;
       cursor: pointer;
     }
     .nuevo:hover {
-      background: rgba(0, 0, 0, 0.5);
+      background: #00000080;
     }
   }
 
@@ -266,8 +372,129 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     width: $anchoFiltros + px;
     height: 100%;
-    background: rgba(88, 88, 88, 0.774);
+    background: $fondoFiltroCliente;
+
+    .busqueda{
+      height: $altoBusquedaCliente+px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      
+      .titulo_filtro{
+        height: $altoTituloFiltroCliente+px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        background-color: $fondoTituloFiltroCliente;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .cuerpo_filtro{
+        flex-grow: 1;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+
+        label{
+          height: $altoLabelFiltroCliente+px;
+        }
+        input{
+          margin-bottom: 6px;
+          height: 18px;
+          width: 80%;
+          text-align: center;
+          border: none;
+          padding: 3px;
+          color: $textoClaro;
+          background-color: $fondoInputFiltroCliente;
+          border: 2px solid black;
+          border-radius: 5px;
+          transition: all 0.3s;
+
+          &:focus{
+            border:2px solid $focusInputFiltroCliente;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    .busqueda_avanzada{
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      .titulo_filtro{
+        height: $altoTituloFiltroCliente+px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        background-color: $fondoTituloFiltroCliente;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      
+      .cuerpo_filtro{
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        align-items: center;
+
+        button{
+          height: $altoBotonBusqAvanzCliente+px;
+          width: 80%;
+          margin-bottom: 18px;
+          background-color: $fondoBotonFiltroCliente;
+          text-decoration: none;
+          border: none;
+          color: $textoClaro;
+          cursor: pointer;
+          border-radius: 5px;
+          transition: all 0.3s;
+        }
+
+        .morosos{
+          margin-top: 17px;
+        }
+
+        .seleccionado_true{
+          background-color: $fondoBotonSeleccionadoFiltroCliente;
+        }
+
+        .deshabilitado{
+          background-color: $deshabilitadoFiltroCliente;
+          color: $textoDeshabilitadoFiltroCliente;
+          cursor: default;
+        }
+      }
+    }
+
+    .borrar_filtros{
+      height: $altoBorrarFiltroCliente+px;
+      background: #585858c5;
+      width: 100%;
+      justify-content: center;
+
+      button{
+        height: 100%;
+        width: 100%;
+        background-color: $fondoBorrarFiltroCliente;
+        text-decoration: none;
+        border: none;
+        color: $textoClaro;
+        cursor: pointer;
+
+        &:hover{
+          background-color: $colorClaroTransparenteCliente;
+        }
+      }
+    }
   }
 }

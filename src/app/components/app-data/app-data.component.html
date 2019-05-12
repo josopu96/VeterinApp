@@ -2,37 +2,27 @@
   <app-selecciones class="top"></app-selecciones>
   <div class="bottom">
     <app-menu class="menu"></app-menu>
-    <div class="seccion{{tema}}">
-      <ng-container>
-        <div>
-          <div class="veterinarios">
-            <fieldset [routerLink]="['/veterinarios']" routerLinkActive="router-link-active" >
-              <p class="title">Veterinarios</p>
-              <p>Añade, edita, elimina, selecciona o visualiza a los veterinarios que hay en la clínica trabajando</p>
-            </fieldset>
-          </div>
-          <div class="clinica">
-            <fieldset [routerLink]="['/']" routerLinkActive="router-link-active">
-              <p class="title">Clínica</p>
-              <p>Edita los datos relacionados con la clínica veterinaria</p>
-            </fieldset>
-          </div>
+    <div class="seccion{{tema}} columna">
+      <div class="seccion_interna">
+        <div class="recuadro" [routerLink]="['/veterinarios']">
+            <p class="title">Veterinarios</p>
+            <p class="texto">Añade, edita, elimina, selecciona o visualiza a los veterinarios que hay en la clínica trabajando</p>
         </div>
-        <div>
-          <div class="usuarios">
-              <fieldset [routerLink]="['/']" routerLinkActive="router-link-active">
-                <p class="title">Usuarios</p>
-                <p>Añade, edita o elimina los usuarios con los que podrás acceder a la aplicación</p>
-              </fieldset>
-            </div>
-          <div class="gestion">
-            <fieldset [routerLink]="['/']" routerLinkActive="router-link-active">
-              <p class="title">Gestión</p>
-              <p>Gestiona los tipos de trataminetos, pruebas, tarifas y productos del almacén</p>
-            </fieldset>
-          </div>
+        <div class="recuadro" [routerLink]="['/']">
+            <p class="title">Clínica</p>
+            <p class="texto">Edita los datos relacionados con la clínica veterinaria</p>
         </div>
-      </ng-container>
+      </div>
+      <div class="seccion_interna">
+        <div class="recuadro" [routerLink]="['/']">
+              <p class="title">Usuarios</p>
+              <p class="texto">Añade, edita o elimina los usuarios con los que podrás acceder a la aplicación</p>
+          </div>
+        <div class="recuadro" [routerLink]="['/']">
+            <p class="title">Gestión</p>
+            <p class="texto">Gestiona los tipos de trataminetos, pruebas, tarifas y productos del almacén</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

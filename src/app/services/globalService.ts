@@ -1,136 +1,219 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { DataManagement } from '../services/dataManagement';
-import { Ajustes, Usuario, Mascota, Veterinario, Cliente } from '../app.dataModels';
+import { Ajustes, Usuario, Mascota, Veterinario, Cliente, Clinica } from '../app.dataModels';
+import { FiltroCliente } from '../models/filtros';
 
 @Injectable()
 export class GlobalService {
-    cliente: Cliente;
-    veterinario: Veterinario;
-    mascota: Mascota;
-    usuario: Usuario;
-    token: string;
-    ajustes: Ajustes;
+  cliente: Cliente;
+  veterinario: Veterinario;
+  mascota: Mascota;
+  usuario: Usuario;
+  token: string;
+  ajustes: Ajustes;
+  clientes: Cliente[];
+  mascotas: Mascota[];
+  clinica: Clinica;
+  veterinarios: Veterinario[];
+  filtroCliente: FiltroCliente;
 
-    constructor(
-      private coockieService: CookieService,
-      private dm: DataManagement
-      ) {
-        this.cliente = new Cliente();
-        this.cliente.setId("0");
-        this.veterinario = new Veterinario();
-        this.veterinario.setId("0");
-        this.mascota = new Mascota();
-        this.mascota.setId("0");
-        this.token = this.coockieService.get("token");
-        if (this.token == "undefined") {
-          this.metodoParaDesarrollo();
-        } else {
-          this.usuario = new Usuario();
-        }
+  constructor(
+    private coockieService: CookieService,
+    private dm: DataManagement
+  ) {
+    this.initialize();
+  }
+
+  private initialize(){
+
+    //Inicializamos el cliente, el veterinario y la mascota con id=0
+    this.cliente = new Cliente();
+    this.cliente._id = "0";
+    this.veterinario = new Veterinario();
+    this.veterinario._id = "0";
+    this.mascota = new Mascota();
+    this.mascota._id = "0";
+
+    //Comprobamos si disponemos de token, en caso positivo, guardamos el usuario perteneciente al token.
+    this.token = this.coockieService.get("token");
+    if (this.token == "undefined") {
+      //Este método se ha realizado para el entorno de desarrollo, donde en ocasiones se pierde el token al guardar cambios en caliente.
+      this.metodoParaDesarrollo();
+    } else if (this.token) {
+      this.getUsuarioPorToken();
     }
 
-    metodoParaDesarrollo() {
-      this.token = "5ca0e4fc34eaf00d889a9fee";
-      this.dm.getUserByToken(this.token).then((res:Usuario) => {
-        this.setUsuario(res);
-        this.coockieService.set("token",res._id);
-      });
-    }
+    //Inicializamos los filtros
+    this.inicializaFiltroCliente();
 
-    setCliente( nuevoCliente: Cliente) {
-      this.cliente = nuevoCliente;
-    }
+    //Inicializamos las colecciones que usaremos más adelante en la aplicación.
+    this.getClientes();
+    this.getMascotas();
+    this.getClinica();
+    this.getCalendario();
+    this.getTarifas();
 
-    getCliente() {
-      return this.cliente;
-    }
+  }
 
-    setVeterinario( nuevoVeterinario: Veterinario) {
-      this.veterinario = nuevoVeterinario;
-    }
+  private getClientes() {
+    this.clientes = [];
+    this.dm.getClients().then((clientes: Cliente[]) => {
+      this.clientes = clientes;
+    });
+  }
 
-    getVeterinario() {
-      return this.veterinario;
-    }
+  private getMascotas() {
+    this.mascotas = [];
+    this.dm.getMascotas().then((mascotas: Mascota[]) => {
+      this.mascotas = mascotas;
+    });
+  }
 
-    setMascota( nuevaMascota: Mascota) {
-      this.mascota = nuevaMascota;
-    }
+  private getClinica() {
+    //TODO
+    this.clinica = new Clinica();
+    this.veterinarios = [];
+  }
 
-    getMascota() {
-      return this.mascota;
-    }
+  private getCalendario() {
+    //TODO
+  }
 
-    limpiarCliente() {
-      this.limpiarMascota();
-      this.cliente = new Cliente();
-      this.cliente.setId("0");
-      return this.cliente;
-    }
+  private getTarifas() {
+    //TODO
+  }
 
-    limpiarMascota() {
-      this.mascota = new Mascota();
-      this.mascota.setId("0");
-      return this.mascota;
-    }
+  // --- CLIENTE ---
 
-    limpiarVeterinario() {
-      this.veterinario = new Veterinario();
-      this.veterinario.setId("0");
-      return this.veterinario;
-    }
+  setCliente(nuevoCliente: Cliente) {
+    this.cliente = nuevoCliente;
+  }
 
-    getUsuario() {
-      return this.usuario;
-    }
+  getCliente() {
+    return this.cliente;
+  }
 
-    setUsuario(user: Usuario) {
-      this.usuario=new Usuario();
-      this.ajustes=new Ajustes();
-      this.ajustes.contructor(
-        user.ajustes.id,
-        user.ajustes.tamLetra,
-        user.ajustes.tema,
-        user.ajustes.recordatorio
-      );
-      this.usuario.contructor(
-        user._id,
-        user.nombre,
-        user.clave,
-        user.isAdmin,
-        user.email,
-        this.ajustes
-      );
+  // --- VETERINARIO ---
 
-    }
+  setVeterinario(nuevoVeterinario: Veterinario) {
+    this.veterinario = nuevoVeterinario;
+  }
 
-    getTema(){
-      if (this.getUsuario()) {
-        if (this.ajustes) {
-          return this.getUsuario().ajustes.tema;
-        } else {
-          return "oscuro";
-        }
+  getVeterinario() {
+    return this.veterinario;
+  }
+
+  // --- MASCOTA ---
+
+  setMascota(nuevaMascota: Mascota) {
+    this.mascota = nuevaMascota;
+  }
+
+  getMascota() {
+    return this.mascota;
+  }
+
+  // --- SELECTORES ---
+
+  limpiarCliente() {
+    this.limpiarMascota();
+    this.cliente = new Cliente();
+    this.cliente._id = "0";
+    return this.cliente;
+  }
+
+  limpiarMascota() {
+    this.mascota = new Mascota();
+    this.mascota._id = "0";
+    return this.mascota;
+  }
+
+  limpiarVeterinario() {
+    this.veterinario = new Veterinario();
+    this.veterinario._id = "0";
+    return this.veterinario;
+  }
+
+  // --- USUARIO ---
+
+  getUsuario() {
+    return this.usuario;
+  }
+
+  getUsuarioPorToken() {
+    this.dm.getUserByToken(this.token).then((res: Usuario) => {
+      this.setUsuario(res);
+      this.coockieService.set("token", res._id);
+    });
+  }
+
+  setUsuario(user: Usuario) {
+    this.usuario = new Usuario();
+    this.ajustes = new Ajustes();
+    this.ajustes = user.ajustes;
+    this.usuario = user;
+
+  }
+
+  getTema() {
+    if (this.getUsuario()) {
+      if (this.ajustes) {
+        return this.getUsuario().ajustes.tema;
       } else {
         return "oscuro";
       }
+    } else {
+      return "oscuro";
     }
+  }
 
-    cambiarTema(tema: string) {
-      if(this.getUsuario()) {
-        this.ajustes = new Ajustes();
-        this.ajustes.contructor(
-          this.getUsuario().ajustes.id,
-          this.getUsuario().ajustes.tamLetra,
-          this.getUsuario().ajustes.tema,
-          this.getUsuario().ajustes.recordatorio);
-        this.ajustes.setTema(tema);
-        //this.ajustes.setTema(tema);
-        //console.log(this.usuario);
-        this.usuario.setAjustes(this.ajustes);
-      }
-      return this.ajustes;
+  cambiarTema(tema: string) {
+    if (this.getUsuario()) {
+      this.ajustes.tema = tema;
+      this.usuario.ajustes = this.ajustes;
     }
+    return this.ajustes;
+  }
+
+  cerrarSesion() {
+    this.coockieService.deleteAll();
+    this.cliente = new Cliente();
+    this.veterinario = new Veterinario();
+    this.mascota = new Mascota();
+    this.cliente._id = "0";
+    this.veterinario._id = "0";
+    this.mascota._id = "0";
+    this.usuario = new Usuario();
+    this.token = "";
+    this.ajustes = new Ajustes();
+    return this.ajustes;
+  }
+
+  // --- FILTROS ---
+  
+  inicializaFiltroCliente(){
+    this.filtroCliente = new FiltroCliente();
+    this.filtroCliente.nombre = '';
+    this.filtroCliente.apellidos = '';
+    this.filtroCliente.dni = '';
+    this.filtroCliente.telefono = '';
+    this.filtroCliente.morosos = false;
+    this.filtroCliente.citados = false;
+    this.filtroCliente.porMascota = false;
+    this.filtroCliente.atendidos = false;
+  }
+
+  setFiltroCliente(filtro:FiltroCliente){
+    this.filtroCliente = filtro;
+  }
+
+  // --- OTROS ---
+
+  private metodoParaDesarrollo() {
+    this.token = "5ca0e4fc34eaf00d889a9fee";
+    this.getUsuarioPorToken();
+  }
+
 
 }

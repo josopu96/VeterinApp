@@ -161,10 +161,10 @@ export class RestWS extends AbstractWS {
     const fd = new HttpParams()
       .set('nombre', veterinario.nombre)
       .set('apellidos', veterinario.apellidos)
-      .set('fecNac', veterinario.fecNac.toString())
+      .set('fecNac', String(veterinario.fecNac))
       .set('dni', veterinario.dni)
       .set('telefono', veterinario.telefono)
-      .set('numColegiado', veterinario.numColegiado.toString());
+      .set('numColegiado', String(veterinario.numColegiado));
     return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinario/create', fd).then((_) => {
       return Promise.resolve();
     }).catch(error => {

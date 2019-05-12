@@ -80,7 +80,7 @@ exports.updateVeterinario = function (req, res) {
       'veterinarios.$.telefono'     : tlf,
       'veterinarios.$.numColegiado' : req.body.numColegiado,
   }}, function (err, resp) {
-    res.send(resp.veterinarios.find(x => x._id == req.params.veter_id));
+    res.send();
   });
 };
 

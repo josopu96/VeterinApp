@@ -1,14 +1,14 @@
 //Colores usados en la aplicación
-$color1:#195E52;
-$color2:#22B24C;
-$color3:#7CC543;
-$color4:#2CBC92;
-$color5:#ABFCC2;
-$color6:#103a34;
-$color7:#cbe9e4;
-$textoOscuro: #0e0e0e;
-$textoClaro: #FAFAFA;
-$textoDeshabilitado: #dadada;
+$color1:rgb(25, 94, 82);
+$color2:rgb(34, 178, 76);
+$color3:rgb(123, 197, 67);
+$color4:rgb(44, 188, 146);
+$color5:rgb(171, 252, 194);
+$color6:rgb(16, 58, 52);
+$color7:rgb(203, 233, 228);
+$textoOscuro: rgb(14, 14, 14);
+$textoClaro: rgb(250, 250, 250);
+$textoDeshabilitado: rgb(218, 218, 218);
 
 //Variables que definen la interfaz básica
 $altoTop: 160;
@@ -31,10 +31,10 @@ $altoExterior: 153;
 $altoInterior: 128;
 $altoTexto: 25;
 $anchoSeccion1: 120;
-$colorFondoOscuro: #575757;
-$colorFondoClaro: #d1d1d1;
-$colorFondoOscuroTransparente: #00000033;
-$colorFondoClaroTransparente: #ffffff33;
+$colorFondoOscuro: rgb(87, 87, 87);
+$colorFondoClaro: rgb(209, 209, 209);
+$colorFondoOscuroTransparente: rgba(0, 0, 0, 0.2);
+$colorFondoClaroTransparente: rgba(255, 255, 255, 0.2);
 $altoImagenSelector: 120;
 $anchoImagenSelector: 120;
 
@@ -50,58 +50,58 @@ $altoLabelFiltroCliente: 20;
 $altoInputFiltroCliente: 27;
 $altoBorrarFiltroCliente: 42;
 $altoBotonBusqAvanzCliente: 30;
-$fondoFiltroCliente: #1d1d1d;
-$focusInputFiltroCliente: #cacaca;
-$fondoTituloFiltroCliente: #000000;
-$fondoInputFiltroCliente: #6b6b6b;
-$fondoBorrarFiltroCliente: #6b6b6b;
-$fondoBotonFiltroCliente: #6b6b6b;
-$fondoBotonSeleccionadoFiltroCliente: #352c3f;
-$colorClaroTransparenteCliente: #ffffff4d;
-$deshabilitadoFiltroCliente: #292929;
-$textoDeshabilitadoFiltroCliente: #666666;
+$fondoFiltroCliente: rgb(29, 29, 29);
+$focusInputFiltroCliente: rgb(202, 202, 202);
+$fondoTituloFiltroCliente: rgb(0, 0, 0);
+$fondoInputFiltroCliente: rgb(107, 107, 107);
+$fondoBorrarFiltroCliente: rgb(107, 107, 107);
+$fondoBotonFiltroCliente: rgb(107, 107, 107);
+$fondoBotonSeleccionadoFiltroCliente: rgb(53, 44, 63);
+$colorClaroTransparenteCliente: rgba(255, 255, 255, 0.302);
+$deshabilitadoFiltroCliente: rgb(41, 41, 41);
+$textoDeshabilitadoFiltroCliente: rgb(102, 102, 102);
 
 //Variables para la lista de mascotas
 $altoTituloMascota: 42;
 $altoTituloFiltroMascota: 42;
-$altoBusquedaMascota: 450;
+$altoBusquedaMascota: 380;
 $altoLabelFiltroMascota: 20;
 $altoInputFiltroMascota: 27;
 $altoBorrarFiltroMascota: 42;
 $altoBotonBusqAvanzMascota: 30;
-$fondoFiltroMascota: #1d1d1d;
-$focusInputFiltroMascota: #cacaca;
-$fondoTituloFiltroMascota: #000000;
-$fondoInputFiltroMascota: #6b6b6b;
-$fondoBorrarFiltroMascota: #6b6b6b;
-$fondoBotonFiltroMascota: #6b6b6b;
-$fondoBotonSeleccionadoFiltroMascota: #352c3f;
-$colorClaroTransparenteMascota: #ffffff4d;
-$deshabilitadoFiltroMascota: #292929;
-$textoDeshabilitadoFiltroMascota: #666666;
+$fondoFiltroMascota: rgb(29, 29, 29);
+$focusInputFiltroMascota: rgb(202, 202, 202);
+$fondoTituloFiltroMascota: rgb(0, 0, 0);
+$fondoInputFiltroMascota: rgb(107, 107, 107);
+$fondoBorrarFiltroMascota: rgb(107, 107, 107);
+$fondoBotonFiltroMascota: rgb(107, 107, 107);
+$fondoBotonSeleccionadoFiltroMascota: rgb(53, 44, 63);
+$colorClaroTransparenteMascota: rgba(255, 255, 255, 0.302);
+$deshabilitadoFiltroMascota: rgb(41, 41, 41);
+$textoDeshabilitadoFiltroMascota: rgb(102, 102, 102);
 
 //Variables para la pantalla de bienvenida
-$fondoDegradado: #08251de1;
-$textoInicio: #ffffff8f;
+$fondoDegradado: rgba(8, 37, 29, 0.882);
+$textoInicio: rgba(255, 255, 255, 0.561);
 
 //Variables para la sección de ajustes
 $altoTitulo: 62;
 $altoFieldSet: 109;
 $altoCerrarSesion: 40;
-$tituloOscuro: #00000085;
-$tituloOscuroHover: #00000070;
-$border: #000000;
-$fondoBoton: #e0e0e0;
-$fondoBotonSeleccionado: #4690ffbe;
-$fondoBotonHover: #383838be;
-$textoOscuroAjustes: #383838;
-$fondoBotonDeshabilitado: #535353;
+$tituloOscuro: rgba(0, 0, 0, 0.522);
+$tituloOscuroHover: rgba(0, 0, 0, 0.439);
+$border: rgb(0, 0, 0);
+$fondoBoton: rgb(224, 224, 224);
+$fondoBotonSeleccionado: rgba(70, 144, 255, 0.745);
+$fondoBotonHover: rgba(56, 56, 56, 0.745);
+$textoOscuroAjustes: rgb(56, 56, 56);
+$fondoBotonDeshabilitado: rgb(83, 83, 83);
 
 //Variables para el formulario de veterinarios
 $altoGuardar: 50;
-$bordeGuardar: #5f5f5f;
-$colorFondoGuardar: #00000031;
-$colorFondoHoverGuardar: #0000006e;
-$colorFondoFieldset: #00000023;
-$colorInput: #9292927a;
-$bordeInput: #4b4b4b;
+$bordeGuardar: rgb(95, 95, 95);
+$colorFondoGuardar: rgba(0, 0, 0, 0.192);
+$colorFondoHoverGuardar: rgba(0, 0, 0, 0.431);
+$colorFondoFieldset: rgba(0, 0, 0, 0.137);
+$colorInput: rgba(146, 146, 146, 0.478);
+$bordeInput: rgb(75, 75, 75);

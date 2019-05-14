@@ -20,9 +20,9 @@
                   <td class="cabeceraNombre" (click)="onSelect(el)">{{ el.nombre }}</td>
                   <td class="cabeceraApellidos">{{ el.apellidos }}</td>
                   <td class="cabeceraDNI">{{ el.dni }}</td>
-                  <td class="cabeceraVisualizar">a</td>
-                  <td class="cabeceraEditar" (click)="editar(el)">a</td>
-                  <td class="cabeceraSeleccionar" (click)="borrar(el.id)">a</td>
+                  <td class="cabeceraVisualizar"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px" height="13px"></td>
+                  <td class="cabeceraEditar"><img src="../../../../assets/img/editar-oscuro.png" width="25px" height="25px" (click)="editar(el)"></td>
+                  <td class="cabeceraSeleccionar"><img src="../../../../assets/img/seleccionar-oscuro.png" width="20px" height="20px" (click)="borrar(el.id)"></td>
                 </tr>
               </tbody>
             </table>

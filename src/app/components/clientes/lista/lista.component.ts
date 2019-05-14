@@ -65,13 +65,13 @@ export class ListaComponent implements OnInit {
     entrada4.nombre = 'Teléfono';
     entrada4.clase = 'cabeceraTelefono';
     this.headElements.push(entrada4);
-    entrada5.nombre = 'Visualizar';
+    entrada5.nombre = 'Ver';
     entrada5.clase = 'cabeceraVisualizar';
     this.headElements.push(entrada5);
     entrada6.nombre = 'Editar';
     entrada6.clase = 'cabeceraEditar';
     this.headElements.push(entrada6);
-    entrada7.nombre = 'Seleccionar';
+    entrada7.nombre = 'Elegir';
     entrada7.clase = 'cabeceraSeleccionar';
     this.headElements.push(entrada7);
   }

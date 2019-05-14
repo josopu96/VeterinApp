@@ -54,7 +54,7 @@ $fondoFiltroCliente: rgb(29, 29, 29);
 $focusInputFiltroCliente: rgb(202, 202, 202);
 $fondoTituloFiltroCliente: rgb(0, 0, 0);
 $fondoInputFiltroCliente: rgb(107, 107, 107);
-$fondoBorrarFiltroCliente: rgb(107, 107, 107);
+$fondoBorrarFiltroCliente: rgb(87, 87, 87);
 $fondoBotonFiltroCliente: rgb(107, 107, 107);
 $fondoBotonSeleccionadoFiltroCliente: rgb(53, 44, 63);
 $colorClaroTransparenteCliente: rgba(255, 255, 255, 0.302);
@@ -73,12 +73,31 @@ $fondoFiltroMascota: rgb(29, 29, 29);
 $focusInputFiltroMascota: rgb(202, 202, 202);
 $fondoTituloFiltroMascota: rgb(0, 0, 0);
 $fondoInputFiltroMascota: rgb(107, 107, 107);
-$fondoBorrarFiltroMascota: rgb(107, 107, 107);
+$fondoBorrarFiltroMascota: rgb(87, 87, 87);
 $fondoBotonFiltroMascota: rgb(107, 107, 107);
 $fondoBotonSeleccionadoFiltroMascota: rgb(53, 44, 63);
 $colorClaroTransparenteMascota: rgba(255, 255, 255, 0.302);
 $deshabilitadoFiltroMascota: rgb(41, 41, 41);
 $textoDeshabilitadoFiltroMascota: rgb(102, 102, 102);
+
+//Variables para la lista de veterinarios
+$altoTituloVeterinario: 42;
+$altoTituloFiltroVeterinario: 42;
+$altoBusquedaVeterinario: 380;
+$altoLabelFiltroVeterinario: 20;
+$altoInputFiltroVeterinario: 27;
+$altoBorrarFiltroVeterinario: 42;
+$altoBotonBusqAvanzVeterinario: 30;
+$fondoFiltroVeterinario: rgb(29, 29, 29);
+$focusInputFiltroVeterinario: rgb(202, 202, 202);
+$fondoTituloFiltroVeterinario: rgb(0, 0, 0);
+$fondoInputFiltroVeterinario: rgb(107, 107, 107);
+$fondoBorrarFiltroVeterinario: rgb(87, 87, 87);
+$fondoBotonFiltroVeterinario: rgb(107, 107, 107);
+$fondoBotonSeleccionadoFiltroVeterinario: rgb(53, 44, 63);
+$colorClaroTransparenteVeterinario: rgba(255, 255, 255, 0.302);
+$deshabilitadoFiltroVeterinario: rgb(41, 41, 41);
+$textoDeshabilitadoFiltroVeterinario: rgb(102, 102, 102);
 
 //Variables para la pantalla de bienvenida
 $fondoDegradado: rgba(8, 37, 29, 0.882);

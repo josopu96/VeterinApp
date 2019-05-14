@@ -287,9 +287,6 @@
       display: flex;
       flex-grow: 1;
       height: $altoLista + px;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      -ms-overflow-style: -ms-autohiding-scrollbar;
       font-size: 15px;
       font-weight: normal;
 
@@ -329,6 +326,17 @@
       .table-hover .table-active:hover > th {
         background-color: rgba(0, 0, 0, 0.075);
       }
+      thead, tbody{
+        display: block;
+      }
+
+      .tbody-dark {
+        height: 437px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+      }
 
       .table .thead-dark th {
         color: #fff;
@@ -358,18 +366,18 @@
       }
       
       .cabeceraNombre{
-        width: 192px;
-        max-width: 192px;
+        width: 213px;
+        max-width: 213px;
         overflow: hidden;
       }
       .cabeceraFecha{
-        width: 192px;
-        max-width: 192px;
+        width: 151px;
+        max-width: 151px;
         overflow: hidden;
       }
       .cabeceraChip{
-        width: 192px;
-        max-width: 192px;
+        width: 213px;
+        max-width: 213px;
         overflow: hidden;
       }
       .cabeceraVisualizar{

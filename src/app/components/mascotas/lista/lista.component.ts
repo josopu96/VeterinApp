@@ -203,7 +203,6 @@ export class ListaComponent implements OnInit {
             dataList.appendChild(option);
           }
         }
-        console.log(dataList);
         this.dataListNombreInicializado = true;
       }
     }
@@ -224,7 +223,6 @@ export class ListaComponent implements OnInit {
             dataList.appendChild(option);
           }
         }
-        console.log(dataList);
         this.dataListChipInicializado = true;
       }
     }
@@ -245,7 +243,6 @@ export class ListaComponent implements OnInit {
             dataList.appendChild(option);
           }
         }
-        console.log(dataList);
         this.dataListRazaInicializado = true;
       }
     }
@@ -266,7 +263,6 @@ export class ListaComponent implements OnInit {
             dataList.appendChild(option);
           }
         }
-        console.log(dataList);
         this.dataListPeloInicializado = true;
       }
     }
@@ -287,7 +283,6 @@ export class ListaComponent implements OnInit {
             dataList.appendChild(option);
           }
         }
-        console.log(dataList);
         this.dataListEspecieInicializado = true;
       }
     }
@@ -308,7 +303,6 @@ export class ListaComponent implements OnInit {
             dataList.appendChild(option);
           }
         }
-        console.log(dataList);
         this.dataListSexoInicializado = true;
       }
     }

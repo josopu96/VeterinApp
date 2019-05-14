@@ -19,3 +19,8 @@ export class FiltroMascota {
   atendidas: boolean;
   porCliente: boolean;
 }
+export class FiltroVeterinario {
+  nombre: string;
+  apellidos: string;
+  dni: string;
+}

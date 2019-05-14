@@ -284,9 +284,6 @@
       display: flex;
       flex-grow: 1;
       height: $altoLista + px;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      -ms-overflow-style: -ms-autohiding-scrollbar;
       font-size: 15px;
       font-weight: normal;
       box-sizing: border-box;
@@ -327,15 +324,30 @@
       .table-hover .table-active:hover > th {
         background-color: rgba(0, 0, 0, 0.075);
       }
+      thead, tbody{
+        display: block;
+      }
+
+      .tbody-dark {
+        height: 437px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+      }
 
       .table .thead-dark th {
         color: #fff;
         background-color: #21252980;
         border-color: #121416;
-        padding: 10px;
+        padding: 0px;
+        padding-top: 10px;
+        padding-bottom: 10px;
       }
       .table .tbody-dark td {
-        padding: 7px;
+        padding: 0px;
+        padding-top: 7px;
+        padding-bottom: 7px;
       }
 
       .table-dark {
@@ -349,6 +361,42 @@
 
       .table-dark.table-hover tbody tr:hover {
         background-color: rgba(255, 255, 255, 0.075);
+      }
+      
+      .cabeceraNombre{
+        width: 144px;
+        max-width: 144px;
+        overflow: hidden;
+      }
+      .cabeceraApellidos{
+        width: 185px;
+        max-width: 185px;
+        overflow: hidden;
+      }
+      .cabeceraDNI{
+        width: 124px;
+        max-width: 124px;
+        overflow: hidden;
+      }
+      .cabeceraTelefono{
+        width: 124px;
+        max-width: 124px;
+        overflow: hidden;
+      }
+      .cabeceraVisualizar{
+        width: 95px;
+        max-width: 95px;
+        overflow: hidden;
+      }
+      .cabeceraSeleccionar{
+        width: 95px;
+        max-width: 95px;
+        overflow: hidden;
+      }
+      .cabeceraEditar{
+        width: 95px;
+        max-width: 95px;
+        overflow: hidden;
       }
     }
     .nuevo {
@@ -393,6 +441,9 @@
         font-weight: bold;
       }
 
+      .labelNombre{
+        margin-top: 6px;
+      }
       .cuerpo_filtro{
         flex-grow: 1;
         justify-content: center;
@@ -406,7 +457,7 @@
         }
         input{
           margin-bottom: 6px;
-          height: 18px;
+          height: 30px;
           width: 80%;
           text-align: center;
           border: none;
@@ -421,6 +472,13 @@
             border:2px solid $focusInputFiltroCliente;
             font-size: 16px;
           }
+        }
+        
+        input[type="search"]::-webkit-search-cancel-button {
+          -webkit-appearance: none;
+        }
+        input[type="search"]::-webkit-calendar-picker-indicator {
+          display: none;
         }
       }
     }
@@ -446,11 +504,11 @@
         flex-direction: column;
         flex-grow: 1;
         align-items: center;
+        justify-content: space-evenly;
 
         button{
           height: $altoBotonBusqAvanzCliente+px;
           width: 80%;
-          margin-bottom: 18px;
           background-color: $fondoBotonFiltroCliente;
           text-decoration: none;
           border: none;
@@ -458,10 +516,6 @@
           cursor: pointer;
           border-radius: 5px;
           transition: all 0.3s;
-        }
-
-        .morosos{
-          margin-top: 17px;
         }
 
         .seleccionado_true{

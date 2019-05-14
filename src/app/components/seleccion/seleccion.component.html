@@ -29,7 +29,7 @@
     </ng-template>
     <ng-template [ngIf]="veterinario">
       <ng-template [ngIf]="veterinario._id==0">
-          <div class="seccion1 selectvet"></div>
+          <div class="seccion1 selectvet" [routerLink]="['/veterinarios']"></div>
       </ng-template>
       <ng-template [ngIf]="veterinario._id!=0">
           <div class="seccion1">{{ veterinario.nombre }}</div>

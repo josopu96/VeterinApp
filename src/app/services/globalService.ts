@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { DataManagement } from '../services/dataManagement';
 import { Ajustes, Usuario, Mascota, Veterinario, Cliente, Clinica } from '../app.dataModels';
-import { FiltroCliente, FiltroMascota } from '../models/filtros';
+import { FiltroCliente, FiltroMascota, FiltroVeterinario } from '../models/filtros';
 
 @Injectable()
 export class GlobalService {
@@ -24,6 +24,7 @@ export class GlobalService {
   //Variables de filtros
   filtroCliente: FiltroCliente;
   filtroMascota: FiltroMascota;
+  filtroVeterinario: FiltroVeterinario;
 
   constructor(
     private coockieService: CookieService,
@@ -54,10 +55,12 @@ export class GlobalService {
     //Inicializamos los filtros
     this.inicializaFiltroCliente();
     this.inicializaFiltroMascota();
+    this.inicializaFiltroVeterinario();
 
     //Inicializamos las colecciones que usaremos más adelante en la aplicación.
     this.getClientes();
     this.getMascotas();
+    this.getVeterinarios();
     this.getClinica();
     this.getCalendario();
     this.getTarifas();
@@ -68,6 +71,8 @@ export class GlobalService {
     this.clientes = [];
     this.dm.getClients().then((clientes: Cliente[]) => {
       this.clientes = clientes;
+    }).catch((err) => {
+      console.error(err);
     });
   }
 
@@ -75,6 +80,16 @@ export class GlobalService {
     this.mascotas = [];
     this.dm.getMascotas().then((mascotas: Mascota[]) => {
       this.mascotas = mascotas;
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+
+  private getVeterinarios() {
+    this.dm.getVeterinarios().then((veterinarios: Veterinario[]) => {
+      this.veterinarios = veterinarios;
+    }).catch((err) => {
+      console.error(err);
     });
   }
 
@@ -225,12 +240,23 @@ export class GlobalService {
     this.filtroMascota.porCliente = false;
   }
 
+  inicializaFiltroVeterinario(){
+    this.filtroVeterinario = new FiltroVeterinario();
+    this.filtroVeterinario.nombre = '';
+    this.filtroVeterinario.apellidos = '';
+    this.filtroVeterinario.dni = '';
+  }
+
   setFiltroCliente(filtro:FiltroCliente){
     this.filtroCliente = filtro;
   }
 
   setFiltroMascota(filtro:FiltroMascota){
     this.filtroMascota = filtro;
+  }
+
+  setFiltroVeterinario(filtro:FiltroVeterinario){
+    this.filtroVeterinario = filtro;
   }
 
   // --- OTROS ---

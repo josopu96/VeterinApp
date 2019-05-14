@@ -98,6 +98,7 @@
       .table-dark.table-hover tbody tr:hover {
         background-color: rgba(255, 255, 255, 0.075);
       }
+
     }
     .nuevo {
       display: flex;
@@ -286,9 +287,6 @@
       display: flex;
       flex-grow: 1;
       height: $altoLista + px;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      -ms-overflow-style: -ms-autohiding-scrollbar;
       font-size: 15px;
       font-weight: normal;
 
@@ -328,15 +326,30 @@
       .table-hover .table-active:hover > th {
         background-color: rgba(0, 0, 0, 0.075);
       }
+      thead, tbody{
+        display: block;
+      }
+
+      .tbody-dark {
+        height: 437px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+      }
 
       .table .thead-dark th {
         color: #fff;
         background-color: #21252980;
         border-color: #121416;
-        padding: 10px;
+        padding: 0px;
+        padding-top: 10px;
+        padding-bottom: 10px;
       }
       .table .tbody-dark td {
-        padding: 7px;
+        padding: 0px;
+        padding-top: 7px;
+        padding-bottom: 7px;
       }
 
       .table-dark {
@@ -350,6 +363,37 @@
 
       .table-dark.table-hover tbody tr:hover {
         background-color: rgba(255, 255, 255, 0.075);
+      }
+      
+      .cabeceraNombre{
+        width: 213px;
+        max-width: 213px;
+        overflow: hidden;
+      }
+      .cabeceraFecha{
+        width: 151px;
+        max-width: 151px;
+        overflow: hidden;
+      }
+      .cabeceraChip{
+        width: 213px;
+        max-width: 213px;
+        overflow: hidden;
+      }
+      .cabeceraVisualizar{
+        width: 95px;
+        max-width: 95px;
+        overflow: hidden;
+      }
+      .cabeceraSeleccionar{
+        width: 95px;
+        max-width: 95px;
+        overflow: hidden;
+      }
+      .cabeceraEditar{
+        width: 95px;
+        max-width: 95px;
+        overflow: hidden;
       }
     }
     .nuevo {

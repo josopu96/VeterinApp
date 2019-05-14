@@ -3,6 +3,8 @@ import { DataManagement } from '../../../services/dataManagement';
 import { GlobalService } from '../../../services/globalService';
 import { Router, NavigationExtras } from '@angular/router';
 import { Veterinario } from '../../../app.dataModels';
+import { FiltroVeterinario } from '../../../models/filtros';
+import { CabeceraTabla } from '../../../models/tablas';
 
 @Component({
   selector: 'app-lista',
@@ -11,34 +13,64 @@ import { Veterinario } from '../../../app.dataModels';
 })
 export class ListaComponent implements OnInit {
 
-  headElements = ['Nombre', 'Apellidos', 'Fecha Nacimiento', 'DNI', 'Teléfono', 'Num Colegiado', 'Editar', 'Borrar'];
+  headElements: CabeceraTabla[] = [];
 
-  elements: any[];
+  elements: Veterinario[];
   tema = "_oscuro";
+  veterinariosTotales: Veterinario[];
+
+  //Campos del formulario para filtrar
+  filtroVeterinario: FiltroVeterinario;
+
+  dataListNombreInicializado: Boolean;
+  dataListApellidosInicializado: Boolean;
+  dataListDniInicializado: Boolean;
 
   constructor(
-    private dm: DataManagement,
     private globalService: GlobalService,
     private router: Router,
   ) { }
 
   ngOnInit() {
-    this.getItems();
+    this.inicializaCabecera();
+    this.filtroVeterinario = this.globalService.filtroVeterinario;
+    this.elements = this.globalService.veterinarios;
+    this.veterinariosTotales = this.globalService.veterinarios;
     this.tema = "_" + this.globalService.getTema();
+    this.aplicarFiltros();
   }
 
-  private getItems (filters?: any[]) {
-    this.dm.getVeterinarios(filters).then((response) => {
-      this.elements = response;
-    }).catch((err) => {
-      console.log(err);
-    });
+  inicializaCabecera(){
+    let entrada1: CabeceraTabla = new CabeceraTabla();
+    let entrada2: CabeceraTabla = new CabeceraTabla();
+    let entrada3: CabeceraTabla = new CabeceraTabla();
+    let entrada4: CabeceraTabla = new CabeceraTabla();
+    let entrada5: CabeceraTabla = new CabeceraTabla();
+    let entrada6: CabeceraTabla = new CabeceraTabla();
+    entrada1.nombre = 'Nombre';
+    entrada1.clase = 'cabeceraNombre';
+    this.headElements.push(entrada1);
+    entrada2.nombre = 'Apellidos';
+    entrada2.clase = 'cabeceraApellidos';
+    this.headElements.push(entrada2);
+    entrada3.nombre = 'DNI';
+    entrada3.clase = 'cabeceraDNI';
+    this.headElements.push(entrada3);
+    entrada4.nombre = 'Visualizar';
+    entrada4.clase = 'cabeceraVisualizar';
+    this.headElements.push(entrada4);
+    entrada5.nombre = 'Editar';
+    entrada5.clase = 'cabeceraEditar';
+    this.headElements.push(entrada5);
+    entrada6.nombre = 'Seleccionar';
+    entrada6.clase = 'cabeceraSeleccionar';
+    this.headElements.push(entrada6);
   }
 
   onSelect(veterinario: Veterinario): void {
 
   }
-
+  
   editar(veterinario: Veterinario) {
     let params = {
         'id': veterinario._id,
@@ -54,5 +86,108 @@ export class ListaComponent implements OnInit {
 
   borrar(id: string) {
 
+  }
+
+  buscarPorNombre() {
+    if (this.filtroVeterinario.nombre.length >= 1) {
+      this.inicializaDataListNombre('dataListNombre');
+    } else {
+      this.dataListNombreInicializado = false;
+    }
+    this.aplicarFiltros();
+  }
+  buscarPorApellidos() {
+    if (this.filtroVeterinario.apellidos.length >= 1) {
+      this.inicializaDataListApellidos('dataListApellidos');
+    } else {
+      this.dataListApellidosInicializado = false;
+    }
+    this.aplicarFiltros();
+  }
+  buscarPorDni() {
+    if (this.filtroVeterinario.dni.length >= 1) {
+      this.inicializaDataListDni('dataListDni');
+    } else {
+      this.dataListDniInicializado = false;
+    }
+    this.aplicarFiltros();
+  }
+
+  borrarFiltros(){
+    this.globalService.inicializaFiltroVeterinario();
+    this.filtroVeterinario = this.globalService.filtroVeterinario;
+    
+    this.dataListNombreInicializado = false;
+    this.dataListApellidosInicializado = false;
+    this.dataListDniInicializado = false;
+    this.aplicarFiltros();
+  }
+
+  private aplicarFiltros() {
+    this.elements = this.veterinariosTotales.filter(veterinario =>
+      veterinario.nombre.toLowerCase().includes(this.filtroVeterinario.nombre.toLowerCase()) &&
+      veterinario.apellidos.toLowerCase().includes(this.filtroVeterinario.apellidos.toLowerCase()) &&
+      veterinario.dni.toLowerCase().includes(this.filtroVeterinario.dni.toLowerCase())
+    );
+  }
+
+  //Inicializar dataList
+  
+  inicializaDataListNombre(nombreDataList: string) {
+    if (!this.dataListNombreInicializado) {
+
+      let dataList = document.getElementById(nombreDataList);
+      if (dataList) {
+        let lista: string[] = [];
+        let option;
+        for (let veterinario of this.veterinariosTotales) {
+          if (!lista.includes(veterinario.nombre)) {
+            lista.push(veterinario.nombre);
+            option = document.createElement('option');
+            option.value = veterinario.nombre;
+            dataList.appendChild(option);
+          }
+        }
+        this.dataListNombreInicializado = true;
+      }
+    }
+  }
+  inicializaDataListApellidos(nombreDataList: string) {
+    if (!this.dataListApellidosInicializado) {
+
+      let dataList = document.getElementById(nombreDataList);
+      if (dataList) {
+        let lista: string[] = [];
+        let option;
+        for (let veterinario of this.veterinariosTotales) {
+          if (!lista.includes(veterinario.apellidos)) {
+            lista.push(veterinario.apellidos);
+            option = document.createElement('option');
+            option.value = veterinario.apellidos;
+            dataList.appendChild(option);
+          }
+        }
+        this.dataListApellidosInicializado = true;
+      }
+    }
+  }
+  inicializaDataListDni(nombreDataList: string) {
+    if (!this.dataListDniInicializado) {
+
+      let dataList = document.getElementById(nombreDataList);
+      if (dataList) {
+        let lista: string[] = [];
+        let option;
+        for (let veterinario of this.veterinariosTotales) {
+          if (!lista.includes(veterinario.dni)) {
+            lista.push(veterinario.dni);
+            option = document.createElement('option');
+            option.value = veterinario.dni;
+            dataList.appendChild(option);
+          }
+        }
+        this.dataListDniInicializado = true;
+      }
+    }
   }
 }

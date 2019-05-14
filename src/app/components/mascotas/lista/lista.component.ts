@@ -4,6 +4,7 @@ import { GlobalService } from '../../../services/globalService';
 import { Router } from '@angular/router';
 import { Mascota } from '../../../app.dataModels';
 import { FiltroMascota } from '../../../models/filtros';
+import { CabeceraTabla } from '../../../models/tablas';
 
 @Component({
   selector: 'app-lista',
@@ -12,7 +13,9 @@ import { FiltroMascota } from '../../../models/filtros';
 })
 export class ListaComponent implements OnInit {
 
-  headElements = ['Nombre', 'Fecha Nacimiento', 'Chip', 'Visualizar', 'Editar', 'Seleccionar'];
+
+  
+  headElements: CabeceraTabla[] = [];
 
   elements: Mascota[];
   tema = "_oscuro";
@@ -38,11 +41,40 @@ export class ListaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.inicializaCabecera();
     this.filtroMascota = this.globalService.filtroMascota;
     this.elements = this.globalService.mascotas;
     this.tema = "_" + this.globalService.getTema();
     this.mascotasTotales = this.globalService.mascotas;
     this.aplicarFiltros();
+    
+  }
+
+  inicializaCabecera(){
+    let entrada1: CabeceraTabla = new CabeceraTabla();
+    let entrada2: CabeceraTabla = new CabeceraTabla();
+    let entrada3: CabeceraTabla = new CabeceraTabla();
+    let entrada4: CabeceraTabla = new CabeceraTabla();
+    let entrada5: CabeceraTabla = new CabeceraTabla();
+    let entrada6: CabeceraTabla = new CabeceraTabla();
+    entrada1.nombre = 'Nombre';
+    entrada1.clase = 'cabeceraNombre';
+    this.headElements.push(entrada1);
+    entrada2.nombre = 'Fecha Nacimiento';
+    entrada2.clase = 'cabeceraFecha';
+    this.headElements.push(entrada2);
+    entrada3.nombre = 'Chip';
+    entrada3.clase = 'cabeceraChip';
+    this.headElements.push(entrada3);
+    entrada4.nombre = 'Visualizar';
+    entrada4.clase = 'cabeceraVisualizar';
+    this.headElements.push(entrada4);
+    entrada5.nombre = 'Editar';
+    entrada5.clase = 'cabeceraEditar';
+    this.headElements.push(entrada5);
+    entrada6.nombre = 'Seleccionar';
+    entrada6.clase = 'cabeceraSeleccionar';
+    this.headElements.push(entrada6);
   }
 
   onSelect(mascota: Mascota): void {
@@ -171,7 +203,6 @@ export class ListaComponent implements OnInit {
             dataList.appendChild(option);
           }
         }
-        console.log(dataList);
         this.dataListNombreInicializado = true;
       }
     }
@@ -192,7 +223,6 @@ export class ListaComponent implements OnInit {
             dataList.appendChild(option);
           }
         }
-        console.log(dataList);
         this.dataListChipInicializado = true;
       }
     }
@@ -213,7 +243,6 @@ export class ListaComponent implements OnInit {
             dataList.appendChild(option);
           }
         }
-        console.log(dataList);
         this.dataListRazaInicializado = true;
       }
     }
@@ -234,7 +263,6 @@ export class ListaComponent implements OnInit {
             dataList.appendChild(option);
           }
         }
-        console.log(dataList);
         this.dataListPeloInicializado = true;
       }
     }
@@ -255,7 +283,6 @@ export class ListaComponent implements OnInit {
             dataList.appendChild(option);
           }
         }
-        console.log(dataList);
         this.dataListEspecieInicializado = true;
       }
     }
@@ -276,7 +303,6 @@ export class ListaComponent implements OnInit {
             dataList.appendChild(option);
           }
         }
-        console.log(dataList);
         this.dataListSexoInicializado = true;
       }
     }

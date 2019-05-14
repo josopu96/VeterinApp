@@ -10,31 +10,50 @@
           </div>
           <div class="lista">
             <table mdbTable striped="true" class="table table-striped table-dark table-hover">
-                <thead class=thead-dark>
-                  <tr>
-                    <th *ngFor="let head of headElements" scope="col">{{head}} </th>
-                  </tr>
-                </thead>
-                <tbody class=tbody-dark>
-                  <tr mdbTableCol *ngFor="let el of elements">
-                    <td (click)="onSelect(el)">{{ el.nombre }}</td>
-                    <td>{{ el.apellidos }}</td>
-                    <td>{{ el.fecNac | date:"dd/MM/yyyy" }}</td>
-                    <td>{{ el.dni }}</td>
-                    <td>{{ el.telefono }}</td>
-                    <td>{{ el.numColegiado }}</td>
-                    <td (click)="editar(el)"></td>
-                    <td (click)="borrar(el.id)"></td>
-                  </tr>
+              <thead class=thead-dark>
+                <tr>
+                  <th *ngFor="let head of headElements" class="{{head.clase}}" scope="col">{{head.nombre}} </th>
+                </tr>
+              </thead>
+              <tbody class=tbody-dark>
+                <tr mdbTableCol *ngFor="let el of elements">
+                  <td class="cabeceraNombre" (click)="onSelect(el)">{{ el.nombre }}</td>
+                  <td class="cabeceraApellidos">{{ el.apellidos }}</td>
+                  <td class="cabeceraDNI">{{ el.dni }}</td>
+                  <td class="cabeceraVisualizar">a</td>
+                  <td class="cabeceraEditar" (click)="editar(el)">a</td>
+                  <td class="cabeceraSeleccionar" (click)="borrar(el.id)">a</td>
+                </tr>
               </tbody>
             </table>
           </div>
-          <div class="nuevo" [routerLink]="['/formVeterinario']" routerLinkActive="router-link-active" >
+          <div class="nuevo" [routerLink]="['/formVeterinario']" routerLinkActive="router-link-active">
             Nuevo veterinario
           </div>
         </div>
         <div class="filtros">
-          Filtros
+          <div class="busqueda">
+            <div class="titulo_filtro">
+              Buscar veterinarios
+            </div>
+            <div class="cuerpo_filtro">
+              <label class="labelNombre" for="nombre">Nombre</label>
+              <input id="nombre" type="search" list="dataListNombre" [(ngModel)]="filtroVeterinario.nombre"
+                (ngModelChange)="buscarPorNombre()" />
+              <datalist id="dataListNombre" *ngIf="filtroVeterinario.nombre.length>=1"></datalist>
+              <label for="apellidos">Apellidos</label>
+              <input id="apellidos" type="search" list="dataListApellidos" [(ngModel)]="filtroVeterinario.apellidos"
+                (ngModelChange)="buscarPorApellidos()" />
+              <datalist id="dataListApellidos" *ngIf="filtroVeterinario.apellidos.length>=1"></datalist>
+              <label for="dni">DNI</label>
+              <input id="dni" type="search" list="dataListDni" [(ngModel)]="filtroVeterinario.dni"
+                (ngModelChange)="buscarPorDni()" />
+              <datalist id="dataListDni" *ngIf="filtroVeterinario.dni.length>=1"></datalist>
+            </div>
+          </div>
+          <div class="borrar_filtros">
+            <button (click)="borrarFiltros()">Borrar todos los filtros</button>
+          </div>
         </div>
       </ng-container>
     </div>

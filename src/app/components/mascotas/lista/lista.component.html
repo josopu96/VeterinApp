@@ -12,17 +12,17 @@
             <table mdbTable striped="true" class="table table-striped table-dark table-hover">
                 <thead class=thead-dark>
                   <tr>
-                    <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+                    <th *ngFor="let head of headElements" class="{{head.clase}}" scope="col">{{head.nombre}} </th>
                   </tr>
                 </thead>
                 <tbody class=tbody-dark>
                   <tr mdbTableCol *ngFor="let el of elements">
-                    <td (click)="onSelect(el)">{{ el.nombre }}</td>
-                    <td>{{ el.fecNac | date:"dd/MM/yyyy" }}</td>
-                    <td>{{ el.chip }}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="cabeceraNombre" (click)="onSelect(el)">{{ el.nombre }}</td>
+                    <td class="cabeceraFecha">{{ el.fecNac | date:"dd/MM/yyyy" }}</td>
+                    <td class="cabeceraChip">{{ el.chip }}</td>
+                    <td class="cabeceraVisualizar">a</td>
+                    <td class="cabeceraEditar">a</td>
+                    <td class="cabeceraSeleccionar">a</td>
                   </tr>
               </tbody>
             </table>

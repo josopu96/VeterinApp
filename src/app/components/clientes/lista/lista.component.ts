@@ -4,6 +4,7 @@ import { GlobalService } from '../../../services/globalService';
 import { Cliente, Contacto } from '../../../app.dataModels';
 import { Router } from '@angular/router';
 import { FiltroCliente } from '../../../models/filtros';
+import { CabeceraTabla } from '../../../models/tablas';
 
 @Component({
   selector: 'app-lista',
@@ -12,7 +13,7 @@ import { FiltroCliente } from '../../../models/filtros';
 })
 export class ListaComponent implements OnInit {
 
-  headElements = ['Nombre', 'Apellidos', 'DNI', 'Teléfono', 'Visualizar', 'Editar', 'Seleccionar'];
+  headElements: CabeceraTabla[] = [];
 
   elements: Cliente[];
   tema = "_oscuro";
@@ -23,9 +24,12 @@ export class ListaComponent implements OnInit {
   //Campos del formulario para filtrar
   filtroCliente: FiltroCliente;
 
+  dataListNombreInicializado: Boolean;
+  dataListApellidosInicializado: Boolean;
+  dataListDniInicializado: Boolean;
+  dataListTelefonoInicializado: Boolean;
 
   constructor(
-    private dm: DataManagement,
     private globalService: GlobalService,
     private router: Router
   ) {
@@ -33,6 +37,7 @@ export class ListaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.inicializaCabecera();
     this.filtroCliente = this.globalService.filtroCliente;
     this.elements = this.globalService.clientes;
     this.clientesTotales = this.globalService.clientes;
@@ -40,13 +45,76 @@ export class ListaComponent implements OnInit {
     this.aplicarFiltros();
   }
 
+  inicializaCabecera(){
+    let entrada1: CabeceraTabla = new CabeceraTabla();
+    let entrada2: CabeceraTabla = new CabeceraTabla();
+    let entrada3: CabeceraTabla = new CabeceraTabla();
+    let entrada4: CabeceraTabla = new CabeceraTabla();
+    let entrada5: CabeceraTabla = new CabeceraTabla();
+    let entrada6: CabeceraTabla = new CabeceraTabla();
+    let entrada7: CabeceraTabla = new CabeceraTabla();
+    entrada1.nombre = 'Nombre';
+    entrada1.clase = 'cabeceraNombre';
+    this.headElements.push(entrada1);
+    entrada2.nombre = 'Apellidos';
+    entrada2.clase = 'cabeceraApellidos';
+    this.headElements.push(entrada2);
+    entrada3.nombre = 'DNI';
+    entrada3.clase = 'cabeceraDNI';
+    this.headElements.push(entrada3);
+    entrada4.nombre = 'Teléfono';
+    entrada4.clase = 'cabeceraTelefono';
+    this.headElements.push(entrada4);
+    entrada5.nombre = 'Visualizar';
+    entrada5.clase = 'cabeceraVisualizar';
+    this.headElements.push(entrada5);
+    entrada6.nombre = 'Editar';
+    entrada6.clase = 'cabeceraEditar';
+    this.headElements.push(entrada6);
+    entrada7.nombre = 'Seleccionar';
+    entrada7.clase = 'cabeceraSeleccionar';
+    this.headElements.push(entrada7);
+  }
+
   onSelect(cliente: Cliente): void {
     this.globalService.setCliente(cliente);
     this.router.navigateByUrl('/seleccionaCliente', { skipLocationChange: true }).then(() =>
       this.router.navigate(["clientes"]));
   }
+  
+  buscarPorNombre() {
+    if (this.filtroCliente.nombre.length >= 1) {
+      this.inicializaDataListNombre('dataListNombre');
+    } else {
+      this.dataListNombreInicializado = false;
+    }
+    this.aplicarFiltros();
+  }
 
-  buscar() {
+  buscarPorApellidos() {
+    if (this.filtroCliente.apellidos.length >= 1) {
+      this.inicializaDataListApellidos('dataListApellidos');
+    } else {
+      this.dataListApellidosInicializado = false;
+    }
+    this.aplicarFiltros();
+  }
+
+  buscarPorDni() {
+    if (this.filtroCliente.dni.length >= 1) {
+      this.inicializaDataListDni('dataListDni');
+    } else {
+      this.dataListDniInicializado = false;
+    }
+    this.aplicarFiltros();
+  }
+
+  buscarPorTelefono() {
+    if (this.filtroCliente.telefono.length >= 1) {
+      this.inicializaDataListTelefono('dataListTelefono');
+    } else {
+      this.dataListTelefonoInicializado = false;
+    }
     this.aplicarFiltros();
   }
 
@@ -76,6 +144,11 @@ export class ListaComponent implements OnInit {
   borrarFiltros(){
     this.globalService.inicializaFiltroCliente();
     this.filtroCliente = this.globalService.filtroCliente;
+    
+    this.dataListNombreInicializado = false;
+    this.dataListApellidosInicializado = false;
+    this.dataListDniInicializado = false;
+    this.dataListTelefonoInicializado = false;
     this.aplicarFiltros();
 
   }
@@ -109,6 +182,89 @@ export class ListaComponent implements OnInit {
           this.time.setHours(0, 0, 0, 0) <= new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) &&
           new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
       );
+    }
+  }
+
+  
+  //Inicializar dataList
+  
+
+  inicializaDataListNombre(nombreDataList: string) {
+    if (!this.dataListNombreInicializado) {
+
+      let dataList = document.getElementById(nombreDataList);
+      if (dataList) {
+        let lista: string[] = [];
+        let option;
+        for (let cliente of this.clientesTotales) {
+          if (!lista.includes(cliente.nombre)) {
+            lista.push(cliente.nombre);
+            option = document.createElement('option');
+            option.value = cliente.nombre;
+            dataList.appendChild(option);
+          }
+        }
+        this.dataListNombreInicializado = true;
+      }
+    }
+  }
+  inicializaDataListApellidos(nombreDataList: string) {
+    if (!this.dataListApellidosInicializado) {
+
+      let dataList = document.getElementById(nombreDataList);
+      if (dataList) {
+        let lista: string[] = [];
+        let option;
+        for (let cliente of this.clientesTotales) {
+          if (!lista.includes(cliente.apellidos)) {
+            lista.push(cliente.apellidos);
+            option = document.createElement('option');
+            option.value = cliente.apellidos;
+            dataList.appendChild(option);
+          }
+        }
+        this.dataListApellidosInicializado = true;
+      }
+    }
+  }
+  inicializaDataListDni(nombreDataList: string) {
+    if (!this.dataListDniInicializado) {
+
+      let dataList = document.getElementById(nombreDataList);
+      if (dataList) {
+        let lista: string[] = [];
+        let option;
+        for (let cliente of this.clientesTotales) {
+          if (!lista.includes(cliente.dni)) {
+            lista.push(cliente.dni);
+            option = document.createElement('option');
+            option.value = cliente.dni;
+            dataList.appendChild(option);
+          }
+        }
+        this.dataListDniInicializado = true;
+      }
+    }
+  }
+  inicializaDataListTelefono(nombreDataList: string) {
+    if (!this.dataListTelefonoInicializado) {
+
+      let dataList = document.getElementById(nombreDataList);
+      if (dataList) {
+        let lista: string[] = [];
+        let option;
+        for (let cliente of this.clientesTotales) {
+          for(let contacto of cliente.contactos){
+            if (!lista.includes(contacto.telefono)) {
+              lista.push(contacto.telefono);
+              option = document.createElement('option');
+              option.value = contacto.telefono;
+              dataList.appendChild(option);
+            }
+          }
+        }
+        this.dataListTelefonoInicializado = true;
+      }
     }
   }
 }

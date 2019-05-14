@@ -7,6 +7,26 @@ html, body {
   height: 100%;
   cursor: default;
 }
+::-webkit-scrollbar {
+  width: 2px;     /* Tamaño del scroll en vertical */
+  height: 2px;    /* Tamaño del scroll en horizontal */
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(56, 56, 56);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1f1f1f;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+::-webkit-scrollbar-track {
+  background: #cccccc;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track:hover,
+::-webkit-scrollbar-track:active {
+background: #d4d4d4;
+}
 :focus{
   outline: 0px;
 }

@@ -25,7 +25,7 @@ export class SeleccionesComponent implements OnInit {
   cliente: Cliente;
   veterinario: Veterinario;
   mascota: Mascota;
-  tema: string = "_claro";
+  tema: string = "_oscuro";
 
   ngOnInit() {
     this.getCliente();

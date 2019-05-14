@@ -10,7 +10,7 @@ import { DataManagement } from '../../services/dataManagement';
 })
 export class AppDataComponent implements OnInit {
 
-  tema = "_claro";
+  tema = "_oscuro";
 
   constructor(
     private dm: DataManagement,

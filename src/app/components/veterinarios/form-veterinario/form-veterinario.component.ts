@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class FormVeterinarioComponent implements OnInit {
 
-  tema = "_claro";
+  tema = "_oscuro";
   new: boolean;
   ready = false;
   veterinarioEditado: Veterinario = new Veterinario;

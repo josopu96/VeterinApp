@@ -12,7 +12,7 @@ import { Ajustes } from '../../app.dataModels';
 })
 export class AjustesComponent implements OnInit {
 
-  tema: string = "_claro";
+  tema: string = "_oscuro";
   ajustes: Ajustes;
   token: string;
 

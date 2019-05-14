@@ -32,7 +32,46 @@
           </div>
         </div>
         <div class="filtros">
-          Filtros
+          <div class="busqueda">
+            <div class="titulo_filtro">
+              Buscar mascotas
+            </div>
+            <div class="cuerpo_filtro">
+              <label for="nombre" class="labelNombre">Nombre</label>
+              <input id="nombre" type="search" list="nombres" [(ngModel)]="filtroMascota.nombre" (ngModelChange)="buscarPorNombre()" />
+              <datalist id="nombres" *ngIf="filtroMascota.nombre.length>=1"></datalist>
+              <label for="chip">Chip</label>
+              <input id="chip"  type="search" list="chips" [(ngModel)]="filtroMascota.chip" (ngModelChange)="buscarPorChip()" />
+              <datalist id="chips" *ngIf="filtroMascota.chip.length>=1"></datalist>
+              <label for="raza">Raza</label>
+              <input id="raza"  type="search" list="razas" [(ngModel)]="filtroMascota.raza" (ngModelChange)="buscarPorRaza()" />
+              <datalist id="razas" *ngIf="filtroMascota.raza.length>=1"></datalist>
+              <label for="pelo">Pelo</label>
+              <input id="pelo"  type="search" list="pelos" [(ngModel)]="filtroMascota.pelo" (ngModelChange)="buscarPorPelo()" />
+              <datalist id="pelos" *ngIf="filtroMascota.pelo.length>=1"></datalist>
+              <label for="especie">Especie</label>
+              <input id="especie"  type="search" list="especies" [(ngModel)]="filtroMascota.especie" (ngModelChange)="buscarPorEspecie()" />
+              <datalist id="especies" *ngIf="filtroMascota.especie.length>=1"></datalist>
+              <label for="sexo">Sexo</label>
+              <input id="sexo"  type="search" list="sexos" [(ngModel)]="filtroMascota.sexo" (ngModelChange)="buscarPorSexo()" />
+              <datalist id="sexos" *ngIf="filtroMascota.sexo.length>=1"></datalist>
+            </div>
+          </div>
+          <div class="busqueda_avanzada">
+            <div class="titulo_filtro">
+              Búsqueda avanzada
+            </div>
+            <div class="cuerpo_filtro">
+              <button class="seleccionado_{{filtroMascota.porCliente}}" (click)="filtroCliente()"
+                *ngIf="filtroMascota.porCliente">Por cliente seleccionado</button>
+              <button class="deshabilitado" *ngIf="!filtroMascota.porCliente">Por cliente seleccionado</button>
+              <button class="seleccionado_{{filtroMascota.atendidas}}" (click)="filtroAtendidas()">Atendidas
+                hoy</button>
+            </div>
+          </div>
+          <div class="borrar_filtros">
+            <button (click)="borrarFiltros()">Borrar todos los filtros</button>
+          </div>
         </div>
       </ng-container>
     </div>

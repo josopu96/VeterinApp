@@ -24,6 +24,7 @@ export class FormVeterinarioComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    (<HTMLInputElement>document.getElementById('dt')).max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
     this.tema = "_" + this.globalService.getTema();
     this.route.params.forEach(params => {
       if (params) {
@@ -84,5 +85,7 @@ export class FormVeterinarioComponent implements OnInit {
 
     return disabled;
   }
+
+
 
 }

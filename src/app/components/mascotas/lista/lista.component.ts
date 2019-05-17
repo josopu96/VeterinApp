@@ -14,7 +14,7 @@ import { CabeceraTabla } from '../../../models/tablas';
 export class ListaComponent implements OnInit {
 
 
-  
+
   headElements: CabeceraTabla[] = [];
 
   elements: Mascota[];
@@ -47,7 +47,7 @@ export class ListaComponent implements OnInit {
     this.tema = "_" + this.globalService.getTema();
     this.mascotasTotales = this.globalService.mascotas;
     this.aplicarFiltros();
-    
+
   }
 
   inicializaCabecera(){
@@ -186,7 +186,7 @@ export class ListaComponent implements OnInit {
   }
 
   //Inicializar dataList
-  
+
 
   inicializaDataListNombre(nombreDataList: string) {
     if (!this.dataListNombreInicializado) {
@@ -227,7 +227,7 @@ export class ListaComponent implements OnInit {
       }
     }
   }
-  
+
   inicializaDataListRaza(nombreDataList: string) {
     if (!this.dataListRazaInicializado) {
 
@@ -306,5 +306,22 @@ export class ListaComponent implements OnInit {
         this.dataListSexoInicializado = true;
       }
     }
+  }
+
+  editar(mascota: Mascota) {
+    let params = {
+        'id': mascota._id,
+        'nombre': mascota.nombre,
+        'chip': mascota.chip,
+        'fecNac': mascota.fecNac,
+        'fecBaj': mascota.fecBaj,
+        'sexo': mascota.sexo,
+        'estado': mascota.estado,
+        'pelo': mascota.pelo,
+        'capa': mascota.capa,
+        'especie': mascota.especie,
+        'raza': mascota.raza
+      };
+    this.router.navigate(['formMascotas', params]);
   }
 }

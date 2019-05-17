@@ -9,6 +9,7 @@ import { SeleccionComponent } from './components/seleccion/seleccion.component';
 import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { AppDataComponent } from './components/app-data/app-data.component';
 import { FormVeterinarioComponent } from './components/veterinarios/form-veterinario/form-veterinario.component';
+import { FormMascotasComponent } from './components/mascotas/form-mascotas/form-mascotas.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -21,7 +22,7 @@ const routes: Routes = [
     { path: 'appData' , component: AppDataComponent },
     { path: 'veterinarios' , component: ListaVeterinarios },
     { path: 'formVeterinario' , component: FormVeterinarioComponent },
-
+    { path: 'formMascotas' , component: FormMascotasComponent },
 ];
 
 @NgModule({

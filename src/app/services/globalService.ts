@@ -76,7 +76,7 @@ export class GlobalService {
     });
   }
 
-  private getMascotas() {
+  public getMascotas() {
     this.mascotas = [];
     this.dm.getMascotas().then((mascotas: Mascota[]) => {
       this.mascotas = mascotas;

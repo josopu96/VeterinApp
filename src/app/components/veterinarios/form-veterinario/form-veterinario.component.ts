@@ -29,7 +29,7 @@ export class FormVeterinarioComponent implements OnInit {
     }
     this.tema = "_" + this.globalService.getTema();
     this.route.params.forEach(params => {
-      if (params) {
+      if (params && params["id"]) {
         this.new = false;
         this.veterinarioEditado._id = params["id"];
         this.veterinarioEditado.nombre = params["nombre"];

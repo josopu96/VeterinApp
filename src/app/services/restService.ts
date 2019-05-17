@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './../../config/configService';
 import { AbstractWS } from './abstractService';
 import { Injectable } from '@angular/core';
-import { Usuario, Ajustes, Global, Veterinario } from '../app.dataModels';
+import { Usuario, Ajustes, Global, Veterinario, Mascota } from '../app.dataModels';
 import { Cliente } from '../app.dataModels';
 
 @Injectable()
@@ -30,7 +30,7 @@ export class RestWS extends AbstractWS {
     });
   }
 
-  public getClients(filters?):Promise<Cliente[]> {
+  public getClients(filters?): Promise<Cliente[]> {
     const fd = new HttpParams();
     if (filters) {
       fd.set('filters', filters);
@@ -172,5 +172,44 @@ export class RestWS extends AbstractWS {
     });
   }
 
+  public createMascota(mascota: Mascota) {
+    const fd = new HttpParams()
+      .set('nombre', mascota.nombre)
+      .set('chip', mascota.chip)
+      .set('fecNac', String(mascota.fecNac))
+      .set('fecBaj', String(mascota.fecBaj))
+      .set('fecModificacion', String(new Date()))
+      .set('sexo', mascota.sexo)
+      .set('estado', mascota.estado)
+      .set('pelo', mascota.pelo)
+      .set('capa', mascota.capa)
+      .set('especie', mascota.especie)
+      .set('raza', mascota.raza);
+    return this.makePostRequest(this.path + 'mascotas/create', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public updateMascota(mascota: Mascota) {
+    const fd = new HttpParams()
+      .set('nombre', mascota.nombre)
+      .set('chip', mascota.chip)
+      .set('fecNac', String(mascota.fecNac))
+      .set('fecBaj', String(mascota.fecBaj))
+      .set('fecModificacion', String(new Date()))
+      .set('sexo', mascota.sexo)
+      .set('estado', mascota.estado)
+      .set('pelo', mascota.pelo)
+      .set('capa', mascota.capa)
+      .set('especie', mascota.especie)
+      .set('raza', mascota.raza);
+    return this.makePostRequest(this.path + 'mascotas/' + mascota._id + '/update', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
 
 }

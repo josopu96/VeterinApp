@@ -25,11 +25,9 @@
         </fieldset>
         <fieldset>
           <legend>Datos opcionales</legend>
-          <ng-container *ngIf="!veterinarioEditado.fecNac">
             <div class="texto">
-              <span>Fecha de Nacimiento</span><input type="date" [(ngModel)]="veterinarioEditado.fecNac" id="dt" />
+              <span>Fecha de Nacimiento</span><input type="date" [ngModel]="veterinarioEditado.fecNac | date:'yyyy-MM-dd'"  (ngModelChange)="veterinarioEditado.fecNac=$event"  id="dt" />
             </div>
-          </ng-container>
           <div class="texto">
             <span>Telefono</span><input type="text" [(ngModel)]="veterinarioEditado.telefono" />
           </div>

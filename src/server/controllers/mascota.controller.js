@@ -20,11 +20,12 @@ exports.getMascota = function(req, res) {
 };
 
 exports.createMascota = function (req, res) {
+  var fecBaj = req.body.fecBaj != "undefined" && req.body.fecBaj != null ? req.body.fecBaj : null;
   let mascota = new Mascota ({
     nombre            : req.body.nombre,
     chip              : req.body.chip,
-    fecNac            : req.body.fechNac,
-    fecBaj            : req.body.fecBaj,
+    fecNac            : req.body.fecNac,
+    fecBaj            : fecBaj,
     fecModificacion   : req.body.fecModificacion,
     sexo              : req.body.sexo,
     estado            : req.body.estado,
@@ -43,6 +44,10 @@ exports.createMascota = function (req, res) {
 };
 
 exports.updateMascota = function (req, res) {
+  console.log(req.body);
+  var fecBaj = req.body.fecBaj != "undefined" && req.body.fecBaj != null ? req.body.fecBaj : null;
+  req.body.fecBaj = fecBaj;
+  console.log(req.body);
   Mascota.findByIdAndUpdate(req.params.id, {
     $set: req.body
   }, function (err, mascota) {

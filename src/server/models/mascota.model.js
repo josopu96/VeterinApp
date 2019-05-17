@@ -5,7 +5,7 @@ let mascotaSchema = new Schema({
   nombre:           { type: String, required: true },
   chip:             { type: String, required: true },
   fecNac:           { type: Date,   required: true },
-  fecBaj:           { type: Date,   required: true },
+  fecBaj:           { type: Date,   required: false},
   fecModificacion:  { type: Date,   required: true },
   sexo:             { type: String, required: true },
   estado:           { type: String, required: true },

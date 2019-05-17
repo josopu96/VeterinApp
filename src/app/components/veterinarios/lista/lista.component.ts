@@ -70,7 +70,7 @@ export class ListaComponent implements OnInit {
   onSelect(veterinario: Veterinario): void {
 
   }
-  
+
   editar(veterinario: Veterinario) {
     let params = {
         'id': veterinario._id,
@@ -116,7 +116,7 @@ export class ListaComponent implements OnInit {
   borrarFiltros(){
     this.globalService.inicializaFiltroVeterinario();
     this.filtroVeterinario = this.globalService.filtroVeterinario;
-    
+
     this.dataListNombreInicializado = false;
     this.dataListApellidosInicializado = false;
     this.dataListDniInicializado = false;
@@ -132,7 +132,7 @@ export class ListaComponent implements OnInit {
   }
 
   //Inicializar dataList
-  
+
   inicializaDataListNombre(nombreDataList: string) {
     if (!this.dataListNombreInicializado) {
 

@@ -67,8 +67,8 @@ exports.createVeterinario = function (req, res) {
 };
 
 exports.updateVeterinario = function (req, res) {
-  var fechaNac = req.body.fecNac != "undefined" ? req.body.fecNac : "";
-  var tlf = req.body.telefono != "undefined" ? req.body.telefono : "";
+  var fechaNac = req.body.fecNac != "null" ? req.body.fecNac : "";
+  var tlf = req.body.telefono != "null" ? req.body.telefono : "";
   Clinica.findOneAndUpdate(
     {'_id': req.params.id, 'veterinarios': { $elemMatch: {_id: req.params.veter_id }}
   }, {

@@ -85,7 +85,7 @@ export class GlobalService {
     });
   }
 
-  private getVeterinarios() {
+  public getVeterinarios() {
     this.dm.getVeterinarios().then((veterinarios: Veterinario[]) => {
       this.veterinarios = veterinarios;
     }).catch((err) => {
@@ -214,7 +214,7 @@ export class GlobalService {
   }
 
   // --- FILTROS ---
-  
+
   inicializaFiltroCliente(){
     this.filtroCliente = new FiltroCliente();
     this.filtroCliente.nombre = '';

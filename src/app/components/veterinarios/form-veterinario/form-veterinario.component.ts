@@ -24,7 +24,9 @@ export class FormVeterinarioComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    (<HTMLInputElement>document.getElementById('dt')).max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
+    if ((<HTMLInputElement>document.getElementById('dt'))) {
+      (<HTMLInputElement>document.getElementById('dt')).max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
+    }
     this.tema = "_" + this.globalService.getTema();
     this.route.params.forEach(params => {
       if (params) {
@@ -35,7 +37,7 @@ export class FormVeterinarioComponent implements OnInit {
         this.veterinarioEditado.dni = params["dni"];
         this.veterinarioEditado.fecNac = params["fecNac"];
         this.veterinarioEditado.numColegiado = params["numColegiado"];
-        this.veterinarioEditado.telefono = params["telefono"];
+        this.veterinarioEditado.telefono = params["telefono"] != null ? params["telefono"] : "" ;
         this.ready = true;
       } else {
         this.new = true;
@@ -53,15 +55,6 @@ export class FormVeterinarioComponent implements OnInit {
 
   actualizar() {
     this.dm.updateVeterinario(this.veterinarioEditado).then((res) => {
-      let params = {
-        'id': this.veterinarioEditado._id,
-        'nombre': this.veterinarioEditado.nombre,
-        'apellidos': this.veterinarioEditado.apellidos,
-        'fecNac': this.veterinarioEditado.fecNac,
-        'dni': this.veterinarioEditado.dni,
-        'telefono': this.veterinarioEditado.telefono,
-        'numColegiado': this.veterinarioEditado.numColegiado
-      };
       this.router.navigateByUrl('/veterinarios');
     }).catch((err) => {
       this.router.navigateByUrl('/veterinarios');
@@ -70,8 +63,10 @@ export class FormVeterinarioComponent implements OnInit {
 
   crear() {
     this.dm.createVeterinario(this.veterinarioEditado).then((res) => {
+      this.globalService.getVeterinarios();
       this.router.navigateByUrl('/veterinarios');
     }).catch((err) => {
+      this.globalService.getVeterinarios();
       this.router.navigateByUrl('/veterinarios');
     });
   }
@@ -85,7 +80,5 @@ export class FormVeterinarioComponent implements OnInit {
 
     return disabled;
   }
-
-
 
 }

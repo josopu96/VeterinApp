@@ -135,13 +135,18 @@ export class RestWS extends AbstractWS {
   }
 
   public updateVeterinario(veterinario: Veterinario) {
-    const fd = new HttpParams()
+    let fd = new HttpParams()
       .set('nombre', veterinario.nombre)
       .set('apellidos', veterinario.apellidos)
-      .set('fecNac', veterinario.fecNac.toString())
       .set('dni', veterinario.dni)
       .set('telefono', veterinario.telefono)
-      .set('numColegiado', veterinario.numColegiado.toString());
+      .set('numColegiado', veterinario.numColegiado.toString())
+      .set('fecModificacion', String(new Date()));
+
+      if (veterinario.fecNac) {
+        fd = fd.append('fecNac', String(veterinario.fecNac));
+      }
+
     return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinario/' + veterinario._id + '/update', fd).then((_) => {
       return Promise.resolve();
     }).catch(error => {

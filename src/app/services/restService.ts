@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './../../config/configService';
 import { AbstractWS } from './abstractService';
 import { Injectable } from '@angular/core';
-import { Usuario, Ajustes, Global, Veterinario } from '../app.dataModels';
+import { Usuario, Ajustes, Global, Veterinario, Clinica } from '../app.dataModels';
 import { Cliente } from '../app.dataModels';
 
 @Injectable()
@@ -171,6 +171,53 @@ export class RestWS extends AbstractWS {
       return Promise.reject(error);
     });
   }
+
+  public updateClinica(clinica: Clinica) {
+    const fd = new HttpParams()
+      .set('cif', clinica.cif)
+      .set('nombre', clinica.nombre)
+      .set('direccion', clinica.direccion)
+      .set('provincia', clinica.provincia)
+      .set('poblacion', clinica.poblacion)
+      .set('codPostal', String(clinica.codPostal))
+      .set('pais', clinica.pais)
+      .set('propietario', clinica.propietario)
+      .set('dniPropietario', clinica.dniPropietario);
+
+      if (clinica.telefono) {
+        fd.set('telefono', clinica.telefono);
+      }
+      if (clinica.movil) {
+        fd.set('movil', clinica.movil);
+      }
+      if (clinica.fax) {
+        fd.set('fax', clinica.fax);
+      }
+      if (clinica.web) {
+        fd.set('web', clinica.web);
+      }
+      if (clinica.email) {
+        fd.set('email', clinica.email);
+      }
+
+    return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/update', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public getClinicaById(id: string) {
+    const fd = new HttpParams();
+
+    return this.makeGetRequest(this.path + 'clinicas/' + this.clinicaId, fd).then((res: String) => {
+      return Promise.resolve(res);
+    }).catch(error => {
+      console.log('Error: ' + error);
+      return Promise.reject(error);
+    });
+  }
+
 
 
 }

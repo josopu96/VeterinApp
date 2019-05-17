@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DataManagement } from '../../../services/dataManagement';
-import { GlobalService } from '../../../services/globalService';
+import { GlobalService } from '../../../../services/globalService';
 import { Router, NavigationExtras } from '@angular/router';
-import { Veterinario } from '../../../app.dataModels';
-import { FiltroVeterinario } from '../../../models/filtros';
-import { CabeceraTabla } from '../../../models/tablas';
+import { Veterinario } from '../../../../app.dataModels';
+import { FiltroVeterinario } from '../../../../models/filtros';
+import { CabeceraTabla } from '../../../../models/tablas';
 
 @Component({
   selector: 'app-lista',

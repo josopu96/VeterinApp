@@ -30,13 +30,14 @@ import { ConfigService } from '../config/configService';
 import { Utils } from './utilities/Utils';
 import { ListaComponent as ListaUsuarios } from './components/clientes/lista/lista.component';
 import { ListaComponent as ListaMascotas } from './components/mascotas/lista/lista.component';
-import { ListaComponent as ListaVeterinarios } from './components/veterinarios/lista/lista.component';
+import { ListaComponent as ListaVeterinarios } from './components/app-data/veterinarios/lista/lista.component';
 import { GlobalService } from './services/globalService';
 import { NumberComponent } from './components/home/number/number.component';
 import { DotComponent } from './components/home/dot/dot.component';
 import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { AppDataComponent } from './components/app-data/app-data.component';
-import { FormVeterinarioComponent } from './components/veterinarios/form-veterinario/form-veterinario.component';
+import { FormVeterinarioComponent } from './components/app-data/veterinarios/form-veterinario/form-veterinario.component';
+import { FormClinicaComponent } from './components/app-data/clinica/form-clinica/form-clinica.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -60,7 +61,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DotComponent,
     AjustesComponent,
     AppDataComponent,
-    FormVeterinarioComponent
+    FormVeterinarioComponent,
+    FormClinicaComponent
   ],
   imports: [
     BrowserModule,

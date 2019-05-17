@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RestWS } from './restService';
-import { Usuario, Ajustes, Global, Veterinario } from '../app.dataModels';
+import { Usuario, Ajustes, Global, Veterinario, Clinica } from '../app.dataModels';
 import { Cliente } from '../app.dataModels';
 
 @Injectable()
@@ -111,4 +111,19 @@ export class DataManagement {
     });
   }
 
+  public updateClinica(clinica: Clinica): Promise<any> {
+    return this.restService.updateClinica(clinica).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public getClinicaById(id: string): Promise<any> {
+    return this.restService.getClinicaById(id).then((data: any) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
 }

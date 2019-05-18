@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataManagement } from '../../../services/dataManagement';
 import { GlobalService } from '../../../services/globalService';
 import { Router } from '@angular/router';
-import { Mascota } from '../../../app.dataModels';
+import { Mascota, Cliente } from '../../../app.dataModels';
 import { FiltroMascota } from '../../../models/filtros';
 import { CabeceraTabla } from '../../../models/tablas';
 
@@ -21,6 +21,10 @@ export class ListaComponent implements OnInit {
   tema = "_oscuro";
 
   mascotasTotales: Mascota[];
+  
+  //Selecciones
+  clienteSeleccionado: Cliente;
+  mascotaSeleccionada: Mascota;
 
   time: Date = new Date();
 
@@ -42,6 +46,8 @@ export class ListaComponent implements OnInit {
 
   ngOnInit() {
     this.inicializaCabecera();
+    this.clienteSeleccionado = this.globalService.cliente;
+    this.mascotaSeleccionada = this.globalService.mascota;
     this.filtroMascota = this.globalService.filtroMascota;
     this.elements = this.globalService.mascotas;
     this.tema = "_" + this.globalService.getTema();
@@ -78,8 +84,20 @@ export class ListaComponent implements OnInit {
   }
 
   onSelect(mascota: Mascota): void {
+
+    this.clienteSeleccionado = this.globalService.clientes.find(cliente => cliente._id==mascota.idCliente);
+    if(!this.clienteSeleccionado){
+      this.clienteSeleccionado = this.globalService.clienteEspecial;
+    }
+    this.globalService.setCliente(this.clienteSeleccionado);
     this.globalService.setMascota(mascota);
     this.router.navigateByUrl('/seleccionaMascota', { skipLocationChange: true }).then(() =>
+      this.router.navigate(["mascotas"]));
+  }
+  
+  limpiarMascota():void{
+      this.globalService.limpiarMascota();
+      this.router.navigateByUrl('/seleccionaMascota', {skipLocationChange: true}).then(()=>
       this.router.navigate(["mascotas"]));
   }
 

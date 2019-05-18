@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataManagement } from '../../../services/dataManagement';
 import { GlobalService } from '../../../services/globalService';
-import { Cliente, Contacto } from '../../../app.dataModels';
+import { Cliente, Contacto, Mascota } from '../../../app.dataModels';
 import { Router } from '@angular/router';
 import { FiltroCliente } from '../../../models/filtros';
 import { CabeceraTabla } from '../../../models/tablas';
@@ -18,6 +18,10 @@ export class ListaComponent implements OnInit {
   elements: Cliente[];
   tema = "_oscuro";
   clientesTotales: Cliente[];
+
+  //Selecciones
+  clienteSeleccionado: Cliente;
+  mascotaSeleccionada: Mascota;
 
   time: Date = new Date();
 
@@ -38,6 +42,8 @@ export class ListaComponent implements OnInit {
 
   ngOnInit() {
     this.inicializaCabecera();
+    this.clienteSeleccionado = this.globalService.cliente;
+    this.mascotaSeleccionada = this.globalService.mascota;
     this.filtroCliente = this.globalService.filtroCliente;
     this.elements = this.globalService.clientes;
     this.clientesTotales = this.globalService.clientes;
@@ -45,7 +51,7 @@ export class ListaComponent implements OnInit {
     this.aplicarFiltros();
   }
 
-  inicializaCabecera(){
+  inicializaCabecera() {
     let entrada1: CabeceraTabla = new CabeceraTabla();
     let entrada2: CabeceraTabla = new CabeceraTabla();
     let entrada3: CabeceraTabla = new CabeceraTabla();
@@ -78,10 +84,17 @@ export class ListaComponent implements OnInit {
 
   onSelect(cliente: Cliente): void {
     this.globalService.setCliente(cliente);
+    this.globalService.limpiarMascota();
     this.router.navigateByUrl('/seleccionaCliente', { skipLocationChange: true }).then(() =>
       this.router.navigate(["clientes"]));
   }
-  
+
+  limpiarCliente(): void {
+    this.globalService.limpiarCliente();
+    this.router.navigateByUrl('/seleccionaCliente', { skipLocationChange: true }).then(() =>
+      this.router.navigate(["clientes"]));
+  }
+
   buscarPorNombre() {
     if (this.filtroCliente.nombre.length >= 1) {
       this.inicializaDataListNombre('dataListNombre');
@@ -128,8 +141,8 @@ export class ListaComponent implements OnInit {
     }
   }
 
-  filtroAtendidos(){
-    if(this.filtroCliente.atendidos){
+  filtroAtendidos() {
+    if (this.filtroCliente.atendidos) {
       this.filtroCliente.atendidos = false;
       this.aplicarFiltros();
     } else {
@@ -141,10 +154,10 @@ export class ListaComponent implements OnInit {
     }
   }
 
-  borrarFiltros(){
+  borrarFiltros() {
     this.globalService.inicializaFiltroCliente();
     this.filtroCliente = this.globalService.filtroCliente;
-    
+
     this.dataListNombreInicializado = false;
     this.dataListApellidosInicializado = false;
     this.dataListDniInicializado = false;
@@ -179,15 +192,15 @@ export class ListaComponent implements OnInit {
     }
     if (this.filtroCliente.atendidos) {
       this.elements = this.elements.filter(cliente =>
-          this.time.setHours(0, 0, 0, 0) <= new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) &&
-          new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
+        this.time.setHours(0, 0, 0, 0) <= new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) &&
+        new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
       );
     }
   }
 
-  
+
   //Inicializar dataList
-  
+
 
   inicializaDataListNombre(nombreDataList: string) {
     if (!this.dataListNombreInicializado) {
@@ -254,7 +267,7 @@ export class ListaComponent implements OnInit {
         let lista: string[] = [];
         let option;
         for (let cliente of this.clientesTotales) {
-          for(let contacto of cliente.contactos){
+          for (let contacto of cliente.contactos) {
             if (!lista.includes(contacto.telefono)) {
               lista.push(contacto.telefono);
               option = document.createElement('option');

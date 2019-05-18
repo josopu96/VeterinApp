@@ -21,6 +21,9 @@ export class GlobalService {
   mascotas: Mascota[];
   veterinarios: Veterinario[];
 
+  //Especiales
+  clienteEspecial: Cliente;
+
   //Variables de filtros
   filtroCliente: FiltroCliente;
   filtroMascota: FiltroMascota;
@@ -71,6 +74,11 @@ export class GlobalService {
     this.clientes = [];
     this.dm.getClients().then((clientes: Cliente[]) => {
       this.clientes = clientes;
+      let index = this.clientes.indexOf(
+        this.clientes.find(x => x._id === "100000000000000000000000")
+      );
+      this.clienteEspecial = this.clientes[index];
+      this.clientes.splice(index,1);
     }).catch((err) => {
       console.error(err);
     });

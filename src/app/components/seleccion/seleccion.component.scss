@@ -160,10 +160,47 @@
             justify-content: center;
             width: $anchoSeccion1+px;
             height: 100%;
+            overflow: hidden;
+            flex-direction: column;
 
             .imagenSelector{
                 width: $anchoImagenSelector+px;
                 height: $altoImagenSelector+px;
+            }
+
+            hr{
+                width: 60%;
+            }
+            .seccionNombre{
+                width: 100%;
+                text-align: center;
+                padding-top: 10%;
+                flex-grow: 1;
+                font-weight: bold;
+                font-size: 20px;
+            }
+            .seccionEspecial{
+                width: 100%;
+                flex-grow: 1;
+                font-weight: bold;
+                font-size: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .seccionDatos{
+                width: 100%;
+                text-align: center;
+                flex-grow: 1;
+            }
+            .letraMedia{
+                font-size: 16px;
+            }
+            .letraPequeña{
+                font-size: 13px;
+            }
+            .letraMuyPequeña{
+                font-size: 11px;
             }
         }
 

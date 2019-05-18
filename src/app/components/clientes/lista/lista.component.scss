@@ -387,16 +387,37 @@
         width: 70px;
         max-width: 70px;
         overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover{
+          background-color: #00000056;
+        }
       }
       .cabeceraSeleccionar{
         width: 70px;
         max-width: 70px;
         overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover{
+          background-color: #00000056;
+        }
       }
       .cabeceraEditar{
         width: 70px;
         max-width: 70px;
         overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover{
+          background-color: #00000056;
+        }
+      }
+      .seleccionado{
+        background-color: #00000080;
       }
     }
     .nuevo {

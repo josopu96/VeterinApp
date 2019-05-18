@@ -1,14 +1,14 @@
 <div class="exterior{{tema}}">
   <div class="texto">
-      <ng-template [ngIf]="cliente">
-        CLIENTE
-      </ng-template>
-      <ng-template [ngIf]="mascota">
-        MASCOTA
-      </ng-template>
-      <ng-template [ngIf]="veterinario">
-        VETERINARIO
-      </ng-template>
+    <ng-template [ngIf]="cliente">
+      CLIENTE
+    </ng-template>
+    <ng-template [ngIf]="mascota">
+      MASCOTA
+    </ng-template>
+    <ng-template [ngIf]="veterinario">
+      VETERINARIO
+    </ng-template>
   </div>
   <div class="interior">
     <ng-template [ngIf]="cliente">
@@ -16,37 +16,50 @@
         <div class="seccion1 addclient"></div>
       </ng-template>
       <ng-template [ngIf]="cliente._id!=0">
-          <div class="seccion1">{{ cliente.nombre }}</div>
+        <div class="seccion1">
+          <div *ngIf="sinCliente" class="seccionEspecial">{{ cliente.nombre }}</div>
+          <div *ngIf="!sinCliente" class="seccionNombre {{claseNombreCliente}}">{{ cliente.nombre }}</div>
+          <hr *ngIf="!sinCliente">
+          <div *ngIf="!sinCliente"class="seccionDatos {{claseApellidosCliente}}">{{ cliente.apellidos }}</div>
+          <div *ngIf="!sinCliente"class="seccionDatos {{claseDniCliente}}">{{ cliente.dni }}</div>
+          <div *ngIf="!sinCliente && contacto" class="seccionDatos {{claseTelefonoCliente}}">{{ contacto.telefono }}</div>
+        </div>
       </ng-template>
     </ng-template>
     <ng-template [ngIf]="mascota">
       <ng-template [ngIf]="mascota._id==0">
-          <div class="seccion1 addpet"></div>
+        <div class="seccion1 addpet"></div>
       </ng-template>
       <ng-template [ngIf]="mascota._id!=0">
-          <div class="seccion1">{{ mascota.nombre }}</div>
+        <div class="seccion1">
+          <div class="seccionNombre {{claseNombreMascota}}">{{ mascota.nombre }}</div>
+          <hr>
+          <div class="seccionDatos {{claseChipMascota}}">{{ mascota.chip }}</div>
+          <div class="seccionDatos {{claseEspecieMascota}}">{{ mascota.especie }}</div>
+          <div class="seccionDatos letraPequeña">{{ edadMascota }}</div>
+        </div>
       </ng-template>
     </ng-template>
     <ng-template [ngIf]="veterinario">
       <ng-template [ngIf]="veterinario._id==0">
-          <div class="seccion1 selectvet" [routerLink]="['/veterinarios']"></div>
+        <div class="seccion1 selectvet" [routerLink]="['/veterinarios']"></div>
       </ng-template>
       <ng-template [ngIf]="veterinario._id!=0">
-          <div class="seccion1">{{ veterinario.nombre }}</div>
+        <div class="seccion1">{{ veterinario.nombre }}</div>
       </ng-template>
     </ng-template>
     <div class="seccion2">
       <div class="botonCambiar">
       </div>
-        <ng-template [ngIf]="cliente">
-          <div class="botonLimpiar" (click)="limpiarCliente()"></div>
-        </ng-template>
-        <ng-template [ngIf]="mascota">
-          <div class="botonLimpiar" (click)="limpiarMascota()"></div>
-        </ng-template>
-        <ng-template [ngIf]="veterinario">
-          <div class="botonLimpiar" (click)="limpiarVeterinario()"></div>
-        </ng-template>
+      <ng-template [ngIf]="cliente">
+        <div class="botonLimpiar" (click)="limpiarCliente()"></div>
+      </ng-template>
+      <ng-template [ngIf]="mascota">
+        <div class="botonLimpiar" (click)="limpiarMascota()"></div>
+      </ng-template>
+      <ng-template [ngIf]="veterinario">
+        <div class="botonLimpiar" (click)="limpiarVeterinario()"></div>
+      </ng-template>
     </div>
   </div>
 </div>

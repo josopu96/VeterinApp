@@ -173,7 +173,7 @@ export class RestWS extends AbstractWS {
   }
 
   public updateClinica(clinica: Clinica) {
-    const fd = new HttpParams()
+    let fd = new HttpParams()
       .set('cif', clinica.cif)
       .set('nombre', clinica.nombre)
       .set('direccion', clinica.direccion)
@@ -185,19 +185,29 @@ export class RestWS extends AbstractWS {
       .set('dniPropietario', clinica.dniPropietario);
 
       if (clinica.telefono) {
-        fd.set('telefono', clinica.telefono);
+        fd = fd.append('telefono', clinica.telefono);
+      } else {
+        fd = fd.append('telefono', '');
       }
       if (clinica.movil) {
-        fd.set('movil', clinica.movil);
+        fd = fd.append('movil', clinica.movil);
+      } else {
+        fd = fd.append('movil', '');
       }
       if (clinica.fax) {
-        fd.set('fax', clinica.fax);
+        fd = fd.append('fax', clinica.fax);
+      } else {
+        fd = fd.append('fax', '');
       }
       if (clinica.web) {
-        fd.set('web', clinica.web);
+        fd = fd.append('web', clinica.web);
+      } else {
+        fd = fd.append('web', '');
       }
       if (clinica.email) {
-        fd.set('email', clinica.email);
+        fd = fd.append('email', clinica.email);
+      } else {
+        fd = fd.append('email', '');
       }
 
     return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/update', fd).then((_) => {

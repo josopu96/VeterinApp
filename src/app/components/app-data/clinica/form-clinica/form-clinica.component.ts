@@ -59,9 +59,10 @@ export class FormClinicaComponent implements OnInit {
 
   actualizar() {
     this.dm.updateClinica(this.clinicaEditada).then((res) => {
+      this.globalService.clinica = this.clinicaEditada;
       this.router.navigateByUrl('/appData');
     }).catch((err) => {
-      this.router.navigateByUrl('/appData');
+      console.log(err);
     });
   }
 

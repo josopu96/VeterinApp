@@ -39,7 +39,7 @@ export class FormMascotasComponent implements OnInit {
         this.mascotaEditada.nombre = params["nombre"];
         this.mascotaEditada.chip = params["chip"];
         this.mascotaEditada.fecNac = params["fecNac"];
-        this.mascotaEditada.fecBaj = params["fecBaj"];
+        this.mascotaEditada.fecBaj = params["fecBaj"] !== 'null' ? params["fecBaj"] : null;
         this.mascotaEditada.sexo = params["sexo"];
         this.mascotaEditada.estado = params["estado"];
         this.mascotaEditada.pelo = params["pelo"];
@@ -58,23 +58,27 @@ export class FormMascotasComponent implements OnInit {
       this.actualizar();
     } else {
       this.crear();
-      this.globalService.mascotas.push(this.mascotaEditada);
     }
   }
 
   actualizar() {
     this.dm.updateMascota(this.mascotaEditada).then((res) => {
+      let index = this.globalService.mascotas.indexOf(
+        this.globalService.mascotas.find(x => x._id === this.mascotaEditada._id)
+      );
+      this.globalService.mascotas[index] = this.mascotaEditada;
       this.router.navigateByUrl('/mascotas');
     }).catch((err) => {
-      this.router.navigateByUrl('/mascotas');
+      console.log(err);
     });
   }
 
   crear() {
     this.dm.createMascota(this.mascotaEditada).then((res) => {
+      this.globalService.mascotas.push(this.mascotaEditada);
       this.router.navigateByUrl('/mascotas');
     }).catch((err) => {
-      this.router.navigateByUrl('/mascotas');
+      console.log(err);
     });
   }
 

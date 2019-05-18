@@ -163,13 +163,17 @@ export class RestWS extends AbstractWS {
   }
 
   public createVeterinario(veterinario: Veterinario) {
-    const fd = new HttpParams()
+    let fd = new HttpParams()
       .set('nombre', veterinario.nombre)
       .set('apellidos', veterinario.apellidos)
-      .set('fecNac', String(veterinario.fecNac))
       .set('dni', veterinario.dni)
       .set('telefono', veterinario.telefono)
       .set('numColegiado', String(veterinario.numColegiado));
+
+      if (veterinario.fecNac) {
+        fd = fd.append('fecNac', String(veterinario.fecNac));
+      }
+
     return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinario/create', fd).then((_) => {
       return Promise.resolve();
     }).catch(error => {
@@ -178,11 +182,10 @@ export class RestWS extends AbstractWS {
   }
 
   public createMascota(mascota: Mascota) {
-    const fd = new HttpParams()
+    let fd = new HttpParams()
       .set('nombre', mascota.nombre)
       .set('chip', mascota.chip)
       .set('fecNac', String(mascota.fecNac))
-      .set('fecBaj', String(mascota.fecBaj))
       .set('fecModificacion', String(new Date()))
       .set('sexo', mascota.sexo)
       .set('estado', mascota.estado)
@@ -190,6 +193,10 @@ export class RestWS extends AbstractWS {
       .set('capa', mascota.capa)
       .set('especie', mascota.especie)
       .set('raza', mascota.raza);
+
+      if (mascota.fecBaj) {
+        fd = fd.append('fecBaj', String(mascota.fecBaj));
+      }
     return this.makePostRequest(this.path + 'mascotas/create', fd).then((_) => {
       return Promise.resolve();
     }).catch(error => {

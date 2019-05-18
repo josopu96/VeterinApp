@@ -40,7 +40,6 @@ exports.getVeterinario = function(req, res) {
 };
 
 exports.createVeterinario = function (req, res) {
-  var fechaNac = req.body.fecNac != "undefined" ? req.body.fecNac : "";
   var tlf = req.body.telefono != "undefined" ? req.body.telefono : "";
   console.log(req.body.fecNac);
   var veterinario = {

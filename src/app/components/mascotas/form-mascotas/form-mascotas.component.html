@@ -41,10 +41,10 @@
           </fieldset>
           <fieldset>
             <legend>Datos opcionales</legend>
-            <div class="texto" *ngIf="mascotaEditada.fecBaj != 'null'">
+            <div class="texto" *ngIf="mascotaEditada.fecBaj">
               <span>Fecha de Fallecimiento</span><input type="date" [ngModel]="mascotaEditada.fecBaj | date:'yyyy-MM-dd'"  (ngModelChange)="mascotaEditada.fecBaj=$event" id="nac_dt" />
             </div>
-            <div class="texto" *ngIf="mascotaEditada.fecBaj == 'null'">
+            <div class="texto" *ngIf="!mascotaEditada.fecBaj">
               <span>Fecha de Fallecimiento</span><input type="date" [(ngModel)]="mascotaEditada.fecBaj" id="nac_dt" />
             </div>
           </fieldset>

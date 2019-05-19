@@ -18,6 +18,7 @@ const routes: Routes = [
     { path: 'mascotas' , component: ListaMascotas },
     { path: 'seleccionaCliente' , component: SeleccionComponent },
     { path: 'seleccionaMascota' , component: SeleccionComponent },
+    { path: 'seleccionaVeterinario' , component: SeleccionComponent },
     { path: 'ajustes' , component: AjustesComponent },
     { path: 'appData' , component: AppDataComponent },
     { path: 'veterinarios' , component: ListaVeterinarios },

@@ -79,8 +79,8 @@
             </div>
             <div class="cuerpo_filtro">
               <button class="seleccionado_{{filtroMascota.porCliente}}" (click)="filtroCliente()"
-                *ngIf="filtroMascota.porCliente">Por cliente seleccionado</button>
-              <button class="deshabilitado" *ngIf="!filtroMascota.porCliente">Por cliente seleccionado</button>
+                *ngIf="clienteSeleccionado._id!='0'">Por cliente seleccionado</button>
+              <button class="deshabilitado" *ngIf="clienteSeleccionado._id=='0'">Por cliente seleccionado</button>
               <button class="seleccionado_{{filtroMascota.atendidas}}" (click)="filtroAtendidas()">Atendidas
                 hoy</button>
             </div>

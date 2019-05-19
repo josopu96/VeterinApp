@@ -167,13 +167,10 @@ export class ListaComponent implements OnInit {
 
     );
     if (this.filtroMascota.porCliente) {
-      //TODO
+      this.elements = this.getMascotasPorCliente();
     }
     if (this.filtroMascota.atendidas) {
-      this.elements = this.elements.filter(mascota =>
-        this.time.setHours(0, 0, 0, 0) <= new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) &&
-        new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
-      );
+      this.elements = this.getMascotasAtendidas();
     }
   }
 
@@ -182,12 +179,32 @@ export class ListaComponent implements OnInit {
       this.filtroMascota.atendidas = false;
       this.aplicarFiltros();
     } else {
-      this.elements = this.elements.filter(mascota =>
-        this.time.setHours(0, 0, 0, 0) <= new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) &&
-        new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
-      );
+      this.elements = this.getMascotasAtendidas();
       this.filtroMascota.atendidas = true;
     }
+  }
+
+  filtroCliente(){
+    if(this.filtroMascota.porCliente){
+      this.filtroMascota.porCliente = false;
+      this.aplicarFiltros();
+    } else {
+      this.elements = this.getMascotasPorCliente();
+      this.filtroMascota.porCliente = true;
+    }
+  }
+
+  private getMascotasPorCliente() {
+    return this.elements.filter(mascota => 
+      mascota.idCliente == this.clienteSeleccionado._id
+    );
+  }
+
+  private getMascotasAtendidas(){
+    return this.elements.filter(mascota =>
+      this.time.setHours(0, 0, 0, 0) <= new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) &&
+      new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
+    );
   }
 
   borrarFiltros() {

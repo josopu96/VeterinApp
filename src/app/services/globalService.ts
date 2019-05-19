@@ -149,6 +149,7 @@ export class GlobalService {
 
   limpiarCliente() {
     this.limpiarMascota();
+    this.filtroMascota.porCliente = false;
     this.cliente = new Cliente();
     this.cliente._id = "0";
     return this.cliente;
@@ -156,6 +157,7 @@ export class GlobalService {
 
   limpiarMascota() {
     this.mascota = new Mascota();
+    this.filtroCliente.porMascota = false;
     this.mascota._id = "0";
     return this.mascota;
   }

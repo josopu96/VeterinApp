@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataManagement } from '../../../services/dataManagement';
 import { GlobalService } from '../../../services/globalService';
-import { Cliente, Contacto, Mascota } from '../../../app.dataModels';
+import { Cliente, Contacto, Mascota, Cuidado } from '../../../app.dataModels';
 import { Router } from '@angular/router';
 import { FiltroCliente } from '../../../models/filtros';
 import { CabeceraTabla } from '../../../models/tablas';
@@ -84,6 +84,7 @@ export class ListaComponent implements OnInit {
 
   onSelect(cliente: Cliente): void {
     this.globalService.setCliente(cliente);
+    this.globalService.filtroMascota.porCliente = true;
     this.globalService.limpiarMascota();
     this.router.navigateByUrl('/seleccionaCliente', { skipLocationChange: true }).then(() =>
       this.router.navigate(["clientes"]));
@@ -136,7 +137,7 @@ export class ListaComponent implements OnInit {
       this.filtroCliente.morosos = false;
       this.aplicarFiltros();
     } else {
-      this.elements = this.elements.filter(cliente => this.getClientesMorosos().includes(cliente));
+      this.elements = this.getClientesMorosos();
       this.filtroCliente.morosos = true;
     }
   }
@@ -146,11 +147,18 @@ export class ListaComponent implements OnInit {
       this.filtroCliente.atendidos = false;
       this.aplicarFiltros();
     } else {
-      this.elements = this.elements.filter(cliente =>
-        this.time.setHours(0, 0, 0, 0) <= new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) &&
-        new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
-      );
+      this.elements = this.getClientesAtendidos();
       this.filtroCliente.atendidos = true;
+    }
+  }
+
+  filtroMascota(){
+    if (this.filtroCliente.porMascota) {
+      this.filtroCliente.porMascota = false;
+      this.aplicarFiltros();
+    } else {
+      this.elements = this.getClientesPorMascota();
+      this.filtroCliente.porMascota = true;
     }
   }
 
@@ -172,6 +180,19 @@ export class ListaComponent implements OnInit {
     );
   }
 
+  private getClientesPorMascota() {
+    return this.elements.filter(cliente => 
+      cliente.cuidados.includes(cliente.cuidados.filter(cuidado => cuidado.idMascota == this.mascotaSeleccionada._id)[0])
+    );
+  }
+
+  private getClientesAtendidos() {
+    return this.elements.filter(cliente =>
+      this.time.setHours(0, 0, 0, 0) <= new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) &&
+      new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
+    );
+  }
+
   private aplicarFiltros() {
     this.elements = this.clientesTotales.filter(cliente =>
       cliente.nombre.toLowerCase().includes(this.filtroCliente.nombre.toLowerCase()) &&
@@ -182,19 +203,16 @@ export class ListaComponent implements OnInit {
       )
     );
     if (this.filtroCliente.morosos) {
-      this.elements = this.elements.filter(cliente => this.getClientesMorosos().includes(cliente));
+      this.elements = this.getClientesMorosos();
     }
     if (this.filtroCliente.citados) {
       //TODO: Incluir filtro cuando esté desarrollado el calendario
     }
     if (this.filtroCliente.porMascota) {
-      //TODO: Incluir filtro por mascota (es posible que haya que modificar los selectores para que modifiquen esta variable también)
+      this.elements = this.getClientesPorMascota();
     }
     if (this.filtroCliente.atendidos) {
-      this.elements = this.elements.filter(cliente =>
-        this.time.setHours(0, 0, 0, 0) <= new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) &&
-        new Date(cliente.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
-      );
+      this.elements = this.getClientesAtendidos();
     }
   }
 

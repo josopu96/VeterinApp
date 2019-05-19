@@ -123,6 +123,7 @@ export class Global {
     vacunas: Vacuna[];
     tratamientos: Tratamiento[];
     fecModificacion: Date;
+    idCliente: string;
   }
   export class Operacion {
     idOperacion: string;

@@ -10,20 +10,30 @@
           </div>
           <div class="lista">
             <table mdbTable striped="true" class="table table-striped table-dark table-hover">
-                <thead class=thead-dark>
-                  <tr>
-                    <th *ngFor="let head of headElements" class="{{head.clase}}" scope="col">{{head.nombre}} </th>
+              <thead class=thead-dark>
+                <tr>
+                  <th *ngFor="let head of headElements" class="{{head.clase}}" scope="col">{{head.nombre}} </th>
+                </tr>
+              </thead>
+              <tbody class=tbody-dark>
+                <ng-container *ngFor="let el of elements">
+                  <tr mdbTableCol *ngIf="el._id == mascotaSeleccionada._id">
+                    <td class="cabeceraNombre seleccionado">{{ el.nombre }}</td>
+                    <td class="cabeceraFecha seleccionado">{{ el.fecNac | date:"dd/MM/yyyy" }}</td>
+                    <td class="cabeceraChip seleccionado">{{ el.chip }}</td>
+                    <td class="cabeceraVisualizar seleccionado"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px" height="13px"></td>
+                    <td class="cabeceraEditar seleccionado"><img src="../../../../assets/img/editar-oscuro.png" width="25px" height="25px" (click)="editar(el)"></td>
+                    <td class="cabeceraSeleccionar seleccionado" (click)="limpiarMascota()"><img src="../../../../assets/img/limpiar-oscuro.png" width="25px" height="25px"></td>
                   </tr>
-                </thead>
-                <tbody class=tbody-dark>
-                  <tr mdbTableCol *ngFor="let el of elements">
-                    <td class="cabeceraNombre" (click)="onSelect(el)">{{ el.nombre }}</td>
+                  <tr mdbTableCol *ngIf="el._id != mascotaSeleccionada._id">
+                    <td class="cabeceraNombre">{{ el.nombre }}</td>
                     <td class="cabeceraFecha">{{ el.fecNac | date:"dd/MM/yyyy" }}</td>
                     <td class="cabeceraChip">{{ el.chip }}</td>
                     <td class="cabeceraVisualizar"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px" height="13px"></td>
                     <td class="cabeceraEditar"><img src="../../../../assets/img/editar-oscuro.png" width="25px" height="25px" (click)="editar(el)"></td>
-                    <td class="cabeceraSeleccionar"><img src="../../../../assets/img/seleccionar-oscuro.png" width="20px" height="20px"></td>
+                    <td class="cabeceraSeleccionar" (click)="onSelect(el)"><img src="../../../../assets/img/seleccionar-oscuro.png" width="20px" height="20px"></td>
                   </tr>
+                </ng-container>
               </tbody>
             </table>
           </div>
@@ -38,22 +48,28 @@
             </div>
             <div class="cuerpo_filtro">
               <label for="nombre" class="labelNombre">Nombre</label>
-              <input id="nombre" type="search" list="nombres" [(ngModel)]="filtroMascota.nombre" (ngModelChange)="buscarPorNombre()" />
+              <input id="nombre" type="search" list="nombres" [(ngModel)]="filtroMascota.nombre"
+                (ngModelChange)="buscarPorNombre()" />
               <datalist id="nombres" *ngIf="filtroMascota.nombre.length>=1"></datalist>
               <label for="chip">Chip</label>
-              <input id="chip"  type="search" list="chips" [(ngModel)]="filtroMascota.chip" (ngModelChange)="buscarPorChip()" />
+              <input id="chip" type="search" list="chips" [(ngModel)]="filtroMascota.chip"
+                (ngModelChange)="buscarPorChip()" />
               <datalist id="chips" *ngIf="filtroMascota.chip.length>=1"></datalist>
               <label for="raza">Raza</label>
-              <input id="raza"  type="search" list="razas" [(ngModel)]="filtroMascota.raza" (ngModelChange)="buscarPorRaza()" />
+              <input id="raza" type="search" list="razas" [(ngModel)]="filtroMascota.raza"
+                (ngModelChange)="buscarPorRaza()" />
               <datalist id="razas" *ngIf="filtroMascota.raza.length>=1"></datalist>
               <label for="pelo">Pelo</label>
-              <input id="pelo"  type="search" list="pelos" [(ngModel)]="filtroMascota.pelo" (ngModelChange)="buscarPorPelo()" />
+              <input id="pelo" type="search" list="pelos" [(ngModel)]="filtroMascota.pelo"
+                (ngModelChange)="buscarPorPelo()" />
               <datalist id="pelos" *ngIf="filtroMascota.pelo.length>=1"></datalist>
               <label for="especie">Especie</label>
-              <input id="especie"  type="search" list="especies" [(ngModel)]="filtroMascota.especie" (ngModelChange)="buscarPorEspecie()" />
+              <input id="especie" type="search" list="especies" [(ngModel)]="filtroMascota.especie"
+                (ngModelChange)="buscarPorEspecie()" />
               <datalist id="especies" *ngIf="filtroMascota.especie.length>=1"></datalist>
               <label for="sexo">Sexo</label>
-              <input id="sexo"  type="search" list="sexos" [(ngModel)]="filtroMascota.sexo" (ngModelChange)="buscarPorSexo()" />
+              <input id="sexo" type="search" list="sexos" [(ngModel)]="filtroMascota.sexo"
+                (ngModelChange)="buscarPorSexo()" />
               <datalist id="sexos" *ngIf="filtroMascota.sexo.length>=1"></datalist>
             </div>
           </div>
@@ -63,8 +79,8 @@
             </div>
             <div class="cuerpo_filtro">
               <button class="seleccionado_{{filtroMascota.porCliente}}" (click)="filtroCliente()"
-                *ngIf="filtroMascota.porCliente">Por cliente seleccionado</button>
-              <button class="deshabilitado" *ngIf="!filtroMascota.porCliente">Por cliente seleccionado</button>
+                *ngIf="clienteSeleccionado._id!='0'">Por cliente seleccionado</button>
+              <button class="deshabilitado" *ngIf="clienteSeleccionado._id=='0'">Por cliente seleccionado</button>
               <button class="seleccionado_{{filtroMascota.atendidas}}" (click)="filtroAtendidas()">Atendidas
                 hoy</button>
             </div>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataManagement } from '../../../services/dataManagement';
 import { GlobalService } from '../../../services/globalService';
 import { Router } from '@angular/router';
-import { Mascota } from '../../../app.dataModels';
+import { Mascota, Cliente } from '../../../app.dataModels';
 import { FiltroMascota } from '../../../models/filtros';
 import { CabeceraTabla } from '../../../models/tablas';
 
@@ -21,6 +21,10 @@ export class ListaComponent implements OnInit {
   tema = "_oscuro";
 
   mascotasTotales: Mascota[];
+  
+  //Selecciones
+  clienteSeleccionado: Cliente;
+  mascotaSeleccionada: Mascota;
 
   time: Date = new Date();
 
@@ -42,6 +46,8 @@ export class ListaComponent implements OnInit {
 
   ngOnInit() {
     this.inicializaCabecera();
+    this.clienteSeleccionado = this.globalService.cliente;
+    this.mascotaSeleccionada = this.globalService.mascota;
     this.filtroMascota = this.globalService.filtroMascota;
     this.elements = this.globalService.mascotas;
     this.tema = "_" + this.globalService.getTema();
@@ -78,8 +84,20 @@ export class ListaComponent implements OnInit {
   }
 
   onSelect(mascota: Mascota): void {
+
+    this.clienteSeleccionado = this.globalService.clientes.find(cliente => cliente._id==mascota.idCliente);
+    if(!this.clienteSeleccionado){
+      this.clienteSeleccionado = this.globalService.clienteEspecial;
+    }
+    this.globalService.setCliente(this.clienteSeleccionado);
     this.globalService.setMascota(mascota);
     this.router.navigateByUrl('/seleccionaMascota', { skipLocationChange: true }).then(() =>
+      this.router.navigate(["mascotas"]));
+  }
+  
+  limpiarMascota():void{
+      this.globalService.limpiarMascota();
+      this.router.navigateByUrl('/seleccionaMascota', {skipLocationChange: true}).then(()=>
       this.router.navigate(["mascotas"]));
   }
 
@@ -149,13 +167,10 @@ export class ListaComponent implements OnInit {
 
     );
     if (this.filtroMascota.porCliente) {
-      //TODO
+      this.elements = this.getMascotasPorCliente();
     }
     if (this.filtroMascota.atendidas) {
-      this.elements = this.elements.filter(mascota =>
-        this.time.setHours(0, 0, 0, 0) <= new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) &&
-        new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
-      );
+      this.elements = this.getMascotasAtendidas();
     }
   }
 
@@ -164,12 +179,32 @@ export class ListaComponent implements OnInit {
       this.filtroMascota.atendidas = false;
       this.aplicarFiltros();
     } else {
-      this.elements = this.elements.filter(mascota =>
-        this.time.setHours(0, 0, 0, 0) <= new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) &&
-        new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
-      );
+      this.elements = this.getMascotasAtendidas();
       this.filtroMascota.atendidas = true;
     }
+  }
+
+  filtroCliente(){
+    if(this.filtroMascota.porCliente){
+      this.filtroMascota.porCliente = false;
+      this.aplicarFiltros();
+    } else {
+      this.elements = this.getMascotasPorCliente();
+      this.filtroMascota.porCliente = true;
+    }
+  }
+
+  private getMascotasPorCliente() {
+    return this.elements.filter(mascota => 
+      mascota.idCliente == this.clienteSeleccionado._id
+    );
+  }
+
+  private getMascotasAtendidas(){
+    return this.elements.filter(mascota =>
+      this.time.setHours(0, 0, 0, 0) <= new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) &&
+      new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
+    );
   }
 
   borrarFiltros() {

@@ -16,15 +16,34 @@
                 </tr>
               </thead>
               <tbody class=tbody-dark>
-                <tr mdbTableCol *ngFor="let el of elements">
-                  <td class="cabeceraNombre" (click)="onSelect(el)">{{ el.nombre }}</td>
-                  <td class="cabeceraApellidos">{{ el.apellidos }}</td>
-                  <td class="cabeceraDNI">{{ el.dni }}</td>
-                  <td class="cabeceraTelefono"><span *ngIf="el.contactos && el.contactos[0]">{{ el.contactos[0].telefono }}</span></td>
-                  <td class="cabeceraVisualizar"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px" height="13px"></td>
-                  <td class="cabeceraEditar"><img src="../../../../assets/img/editar-oscuro.png" width="25px" height="25px"></td>
-                  <td class="cabeceraSeleccionar"><img src="../../../../assets/img/seleccionar-oscuro.png" width="20px" height="20px"></td>
-                </tr>
+                <ng-container *ngFor="let el of elements">
+                  <tr mdbTableCol *ngIf="el._id == clienteSeleccionado._id">
+                    <td class="cabeceraNombre seleccionado">{{ el.nombre }}</td>
+                    <td class="cabeceraApellidos seleccionado">{{ el.apellidos }}</td>
+                    <td class="cabeceraDNI seleccionado">{{ el.dni }}</td>
+                    <td class="cabeceraTelefono seleccionado"><span
+                        *ngIf="el.contactos && el.contactos[0]">{{ el.contactos[0].telefono }}</span></td>
+                    <td class="cabeceraVisualizar seleccionado"><img src="../../../../assets/img/visualizar-oscuro.png"
+                        width="25px" height="13px"></td>
+                    <td class="cabeceraEditar seleccionado"><img src="../../../../assets/img/editar-oscuro.png"
+                        width="25px" height="25px"></td>
+                    <td class="cabeceraSeleccionar seleccionado" (click)="limpiarCliente()"><img
+                        src="../../../../assets/img/limpiar-oscuro.png" width="25px" height="25px"></td>
+                  </tr>
+                  <tr mdbTableCol *ngIf="el._id != clienteSeleccionado._id">
+                    <td class="cabeceraNombre">{{ el.nombre }}</td>
+                    <td class="cabeceraApellidos">{{ el.apellidos }}</td>
+                    <td class="cabeceraDNI">{{ el.dni }}</td>
+                    <td class="cabeceraTelefono"><span
+                        *ngIf="el.contactos && el.contactos[0]">{{ el.contactos[0].telefono }}</span></td>
+                    <td class="cabeceraVisualizar"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px"
+                        height="13px"></td>
+                    <td class="cabeceraEditar"><img src="../../../../assets/img/editar-oscuro.png" width="25px"
+                        height="25px"></td>
+                    <td class="cabeceraSeleccionar" (click)="onSelect(el)"><img
+                        src="../../../../assets/img/seleccionar-oscuro.png" width="20px" height="20px"></td>
+                  </tr>
+                </ng-container>
               </tbody>
             </table>
           </div>
@@ -39,16 +58,20 @@
             </div>
             <div class="cuerpo_filtro">
               <label class="labelNombre" for="nombre">Nombre</label>
-              <input id="nombre" type="search" list="dataListNombre" [(ngModel)]="filtroCliente.nombre" (ngModelChange)="buscarPorNombre()" />
+              <input id="nombre" type="search" list="dataListNombre" [(ngModel)]="filtroCliente.nombre"
+                (ngModelChange)="buscarPorNombre()" />
               <datalist id="dataListNombre" *ngIf="filtroCliente.nombre.length>=1"></datalist>
               <label for="apellidos">Apellidos</label>
-              <input id="apellidos" type="search" list="dataListApellidos" [(ngModel)]="filtroCliente.apellidos" (ngModelChange)="buscarPorApellidos()" />
+              <input id="apellidos" type="search" list="dataListApellidos" [(ngModel)]="filtroCliente.apellidos"
+                (ngModelChange)="buscarPorApellidos()" />
               <datalist id="dataListApellidos" *ngIf="filtroCliente.apellidos.length>=1"></datalist>
               <label for="dni">DNI</label>
-              <input id="dni" type="search" list="dataListDni" [(ngModel)]="filtroCliente.dni" (ngModelChange)="buscarPorDni()" />
+              <input id="dni" type="search" list="dataListDni" [(ngModel)]="filtroCliente.dni"
+                (ngModelChange)="buscarPorDni()" />
               <datalist id="dataListDni" *ngIf="filtroCliente.dni.length>=1"></datalist>
               <label for="telefono">Telefono</label>
-              <input id="telefono" type="search" list="dataListTelefono" [(ngModel)]="filtroCliente.telefono" (ngModelChange)="buscarPorTelefono()" />
+              <input id="telefono" type="search" list="dataListTelefono" [(ngModel)]="filtroCliente.telefono"
+                (ngModelChange)="buscarPorTelefono()" />
               <datalist id="dataListTelefono" *ngIf="filtroCliente.telefono.length>=1"></datalist>
             </div>
           </div>
@@ -60,10 +83,10 @@
               <button class="morosos seleccionado_{{filtroCliente.morosos}}" (click)="filtroMorosos()">Morosos</button>
               <button class="seleccionado_{{filtroCliente.citados}}" (click)="filtroCitados()"
                 *ngIf="filtroCliente.citados">Citados para hoy</button>
-              <button class="seleccionado_{{filtroCliente.porMascota}}" (click)="filtroMascota()"
-                *ngIf="filtroCliente.porMascota">Por mascota seleccionada</button>
               <button class="deshabilitado" *ngIf="!filtroCliente.citados">Citados para hoy</button>
-              <button class="deshabilitado" *ngIf="!filtroCliente.porMascota">Por mascota seleccionada</button>
+              <button class="seleccionado_{{filtroCliente.porMascota}}" (click)="filtroMascota()"
+                *ngIf="mascotaSeleccionada._id!='0'">Por mascota seleccionada</button>
+              <button class="deshabilitado" *ngIf="mascotaSeleccionada._id=='0'">Por mascota seleccionada</button>
               <button class="seleccionado_{{filtroCliente.atendidos}}" (click)="filtroAtendidos()">Atendidos
                 hoy</button>
             </div>

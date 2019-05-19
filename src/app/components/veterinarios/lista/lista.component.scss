@@ -250,38 +250,60 @@
       .table-dark.table-hover tbody tr:hover {
         background-color: rgba(255, 255, 255, 0.075);
       }
+      
+      .cabeceraNombre{
+        width: 244px;
+        max-width: 244px;
+        overflow: hidden;
+      }
+      .cabeceraApellidos{
+        width: 265px;
+        max-width: 265px;
+        overflow: hidden;
+      }
+      .cabeceraDNI{
+        width: 143px;
+        max-width: 143px;
+        overflow: hidden;
+      }
+      .cabeceraVisualizar{
+        width: 70px;
+        max-width: 70px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover{
+          background-color: #00000056;
+        }
+      }
+      .cabeceraSeleccionar{
+        width: 70px;
+        max-width: 70px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover{
+          background-color: #00000056;
+        }
+      }
+      .cabeceraEditar{
+        width: 70px;
+        max-width: 70px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover{
+          background-color: #00000056;
+        }
+      }
+      .seleccionado{
+        background-color: #00000080;
+      }
     }
   
-    .cabeceraNombre{
-      width: 244px;
-      max-width: 244px;
-      overflow: hidden;
-    }
-    .cabeceraApellidos{
-      width: 265px;
-      max-width: 265px;
-      overflow: hidden;
-    }
-    .cabeceraDNI{
-      width: 143px;
-      max-width: 143px;
-      overflow: hidden;
-    }
-    .cabeceraVisualizar{
-      width: 70px;
-      max-width: 70px;
-      overflow: hidden;
-    }
-    .cabeceraSeleccionar{
-      width: 70px;
-      max-width: 70px;
-      overflow: hidden;
-    }
-    .cabeceraEditar{
-      width: 70px;
-      max-width: 70px;
-      overflow: hidden;
-    }
     .nuevo {
       display: flex;
       align-items: center;

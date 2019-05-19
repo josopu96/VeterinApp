@@ -36,6 +36,9 @@ export class SeleccionComponent implements OnInit {
   claseNombreMascota: string = "";
   claseChipMascota: string = "";
   claseEspecieMascota: string = "";
+  claseNombreVeterinario: string = "";
+  claseApellidosVeterinario: string = "";
+  claseDniVeterinario: string = "";
 
   ngOnInit() {
     this.tema = "_" + this.globalService.getTema();
@@ -47,6 +50,7 @@ export class SeleccionComponent implements OnInit {
     this.getContacto();
     this.getClasesCliente();
     this.getClasesMascota();
+    this.getClasesVeterinario();
     this.getEdadMascota();
   }
 
@@ -69,6 +73,26 @@ export class SeleccionComponent implements OnInit {
         }
         if (this.cliente.dni.length > 14) {
           this.claseDniCliente = "letraPequeña";
+        }
+      }
+    }
+  }
+
+  getClasesVeterinario() {
+    if (this.veterinario) {
+      if (this.veterinario._id != "0") {
+        if (this.veterinario.nombre.length > 15) {
+          this.claseNombreVeterinario = "letraPequeña";
+        } else if (this.veterinario.nombre.length > 11) {
+          this.claseNombreVeterinario = "letraMedia";
+        }
+        if (this.veterinario.apellidos.length > 20) {
+          this.claseApellidosVeterinario = "letraMuyPequeña";
+        } else if (this.veterinario.apellidos.length > 15) {
+          this.claseApellidosVeterinario = "letraPequeña";
+        }
+        if (this.veterinario.dni.length > 14) {
+          this.claseDniVeterinario = "letraPequeña";
         }
       }
     }

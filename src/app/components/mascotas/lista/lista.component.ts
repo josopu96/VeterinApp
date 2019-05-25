@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { DataManagement } from '../../../services/dataManagement';
 import { GlobalService } from '../../../services/globalService';
-import { Router } from '@angular/router';
+import { Router, UrlHandlingStrategy } from '@angular/router';
 import { Mascota, Cliente } from '../../../app.dataModels';
 import { FiltroMascota } from '../../../models/filtros';
 import { CabeceraTabla } from '../../../models/tablas';
-import { remote, Remote, Rectangle } from 'electron';
+import { remote } from 'electron';
 
 @Component({
   selector: 'app-lista',
@@ -405,10 +405,11 @@ export class ListaComponent implements OnInit {
     let back = new remote.BrowserWindow({
       x: location.x,
       y: location.y,
-      width: 1280,
-      height: 749,
-      minHeight: 749,
-      show: true,
+      width: location.width,
+      height: location.height,
+      minHeight: location.height,
+      frame: false,
+      show: false,
       parent: currentWindows,
       resizable: false,
       backgroundColor: "#000",
@@ -420,8 +421,7 @@ export class ListaComponent implements OnInit {
       width: ancho,
       minHeight: alto,
       height: alto,
-      modal: true,
-      parent: currentWindows,
+      parent: back,
       show: false,
       resizable: false,
       backgroundColor: "#2e5f49",
@@ -429,6 +429,7 @@ export class ListaComponent implements OnInit {
         devTools: true,
         nodeIntegration: true,
       },
+      frame: false,
       opacity: 1,
       minimizable: false,
       
@@ -436,9 +437,24 @@ export class ListaComponent implements OnInit {
     win.webContents.openDevTools()
     win.setMenu(null);
     back.setMenu(null);
-    win.loadURL('http://localhost:4200');
+    const path = require('path');
+    const url = require('url');
+    win.loadURL(url.format({
+      pathname: path.join('localhost:4200'),
+      protocol: 'http:',
+      slashes: true,
+      hash: '/avisoNuevaMascota'
+    }));
+    win.on('closed', () => {
+      back.close();
+      win = null;
+    })
+    back.on('closed', () => {
+      back = null;
+    })
     win.once('ready-to-show', () => {
-      win.show()
+      back.show();
+      win.show();
     })
   }
 

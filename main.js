@@ -11,16 +11,14 @@ function createWindow() {
     var size = electronScreen.getPrimaryDisplay().workAreaSize;
     var anchoVentana = 1280;
     var altoVentana = 720;
-    if (serve) {
-        anchoVentana = anchoVentana;
-    }
     var margenHorizontal = Math.floor((size.width - anchoVentana) / 2);
     var margenVertical = Math.floor((size.height - altoVentana) / 2);
     // Create the browser window.
     win = new electron_1.BrowserWindow({
         x: margenHorizontal,
         y: margenVertical,
-        width: 1280,
+        minWidth: anchoVentana,
+        width: anchoVentana,
         minHeight: 749,
         height: 749,
         webPreferences: {

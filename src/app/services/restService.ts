@@ -56,7 +56,6 @@ export class RestWS extends AbstractWS {
   public getUserByToken(token: string) {
     const fd = new HttpParams();
     return this.makeGetRequest(this.path + 'usuarios/token/' + token, fd).then((res: Usuario) => {
-      console.log("la respuesta del server es: " + res);
       return Promise.resolve(res);
     }).catch(error => {
       console.error('Error: ' + error);
@@ -228,6 +227,49 @@ export class RestWS extends AbstractWS {
     });
   }
 
+  public getUsuarios(filters?) {
+    const fd = new HttpParams();
+    if (filters) {
+      fd.set('filters', filters);
+    }
+    return this.makeGetRequest(this.path + 'usuarios/', fd).then((res: String) => {
+      return Promise.resolve(res);
+    }).catch(error => {
+      console.log('Error: ' + error);
+      return Promise.reject(error);
+    });
+  }
 
+  public createUsuario(usuario: Usuario) {
+    const fd = new HttpParams()
+      .set('nombre', usuario.nombre)
+      .set('clave', usuario.clave)
+      .set('email', usuario.email)
+      .set('isAdmin', usuario.isAdmin + "");
+    return this.makePostRequest(this.path + 'usuario/create', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public updateUsuario(usuario: Usuario) {
+    let fd = new HttpParams()
+      .set('nombre', usuario.nombre)
+      .set('isAdmin', usuario.isAdmin + "")
+      .set('email', usuario.email);
+
+      console.log(usuario);
+      if (usuario.clave && usuario.oldClave) {
+        console.log(usuario);
+        fd = fd.append('oldClave', usuario.oldClave);
+        fd = fd.append('clave', usuario.clave);
+      }
+    return this.makePostRequest(this.path + 'usuarios/' + usuario._id + '/update', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
 
 }

@@ -24,3 +24,6 @@ export class FiltroVeterinario {
   apellidos: string;
   dni: string;
 }
+export class FiltroUsuario {
+  nombre: string;
+}

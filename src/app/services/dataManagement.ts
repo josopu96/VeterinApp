@@ -126,4 +126,28 @@ export class DataManagement {
       return Promise.reject('error');
     });
   }
+
+  public getUsuarios(filters?): Promise<any> {
+    return this.restService.getUsuarios(filters).then((data: string) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public createUsuario(usuario: Usuario): Promise<any> {
+    return this.restService.createUsuario(usuario).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public updateUsuario(usuario: Usuario): Promise<any> {
+    return this.restService.updateUsuario(usuario).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
 }

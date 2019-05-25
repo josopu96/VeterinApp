@@ -28,9 +28,10 @@ import { DataManagement } from './services/dataManagement';
 import { RestWS } from './services/restService';
 import { ConfigService } from '../config/configService';
 import { Utils } from './utilities/Utils';
-import { ListaComponent as ListaUsuarios } from './components/clientes/lista/lista.component';
+import { ListaComponent as ListaCliente } from './components/clientes/lista/lista.component';
 import { ListaComponent as ListaMascotas } from './components/mascotas/lista/lista.component';
 import { ListaComponent as ListaVeterinarios } from './components/app-data/veterinarios/lista/lista.component';
+import { ListaComponent as ListaUsuarios } from './components/app-data/usuarios/lista/lista.component';
 import { GlobalService } from './services/globalService';
 import { NumberComponent } from './components/home/number/number.component';
 import { DotComponent } from './components/home/dot/dot.component';
@@ -38,6 +39,7 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { AppDataComponent } from './components/app-data/app-data.component';
 import { FormVeterinarioComponent } from './components/app-data/veterinarios/form-veterinario/form-veterinario.component';
 import { FormClinicaComponent } from './components/app-data/clinica/form-clinica/form-clinica.component';
+import { FormUsuarioComponent } from './components/app-data/usuarios/form-usuario/form-usuario.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -54,15 +56,17 @@ export function HttpLoaderFactory(http: HttpClient) {
     MenuComponent,
     SeleccionesComponent,
     LoginComponent,
-    ListaUsuarios,
+    ListaCliente,
     ListaMascotas,
     ListaVeterinarios,
+    ListaUsuarios,
     NumberComponent,
     DotComponent,
     AjustesComponent,
     AppDataComponent,
     FormVeterinarioComponent,
-    FormClinicaComponent
+    FormClinicaComponent,
+    FormUsuarioComponent,
   ],
   imports: [
     BrowserModule,

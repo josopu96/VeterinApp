@@ -33,7 +33,7 @@ export class Global {
     facturas: Factura[];
     cuidados: Cuidado[];
     fecModificacion: Date;
-    
+
     setFecModificacion(fecModificacion: Date){
       this.fecModificacion = new Date(fecModificacion);
     }
@@ -85,7 +85,7 @@ export class Global {
     porcentajeTarifa: number;
     operaciones: Operacion[];
     itemsFactura: ItemFactura[];
-  
+
     actualizaImporteTotal(){
       this.importeTotal = 0;
       for(let t of this.operaciones){
@@ -176,7 +176,7 @@ export class Global {
     hora: number;
     estado: boolean;
   }
-  
+
   export class Tratamiento {
     _id: string;
     anamnesis: string;
@@ -190,6 +190,7 @@ export class Global {
     _id: string;
     nombre: string;
     clave: string;
+    oldClave: string;
     isAdmin: boolean;
     email: string;
     ajustes: Ajustes;

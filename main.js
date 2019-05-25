@@ -14,8 +14,8 @@ function createWindow() {
     if (serve) {
         anchoVentana = anchoVentana;
     }
-    var margenHorizontal = (size.width - anchoVentana) / 2;
-    var margenVertical = (size.height - altoVentana) / 2;
+    var margenHorizontal = Math.floor((size.width - anchoVentana) / 2);
+    var margenVertical = Math.floor((size.height - altoVentana) / 2);
     // Create the browser window.
     win = new electron_1.BrowserWindow({
         x: margenHorizontal,

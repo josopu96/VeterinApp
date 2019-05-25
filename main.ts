@@ -18,8 +18,8 @@ function createWindow() {
     anchoVentana = anchoVentana;
   }
 
-  const margenHorizontal = (size.width - anchoVentana) / 2;
-  const margenVertical = (size.height - altoVentana) /2;
+  const margenHorizontal = Math.floor((size.width - anchoVentana) / 2);
+  const margenVertical = Math.floor((size.height - altoVentana) /2);
   // Create the browser window.
   win = new BrowserWindow({
     x: margenHorizontal,

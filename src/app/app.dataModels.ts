@@ -191,6 +191,7 @@ export class Global {
     _id: string;
     nombre: string;
     clave: string;
+    oldClave: string;
     isAdmin: boolean;
     email: string;
     ajustes: Ajustes;

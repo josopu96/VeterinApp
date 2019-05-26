@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { DataManagement } from '../services/dataManagement';
 import { Ajustes, Usuario, Mascota, Veterinario, Cliente, Clinica } from '../app.dataModels';
-import { FiltroCliente, FiltroMascota, FiltroVeterinario } from '../models/filtros';
+import { FiltroCliente, FiltroMascota, FiltroVeterinario, FiltroUsuario } from '../models/filtros';
 
 @Injectable()
 export class GlobalService {
@@ -20,6 +20,7 @@ export class GlobalService {
   clientes: Cliente[];
   mascotas: Mascota[];
   veterinarios: Veterinario[];
+  usuarios: Usuario[];
 
   //Especiales
   clienteEspecial: Cliente;
@@ -28,6 +29,7 @@ export class GlobalService {
   filtroCliente: FiltroCliente;
   filtroMascota: FiltroMascota;
   filtroVeterinario: FiltroVeterinario;
+  filtroUsuario: FiltroUsuario;
 
   constructor(
     private coockieService: CookieService,
@@ -59,6 +61,7 @@ export class GlobalService {
     this.inicializaFiltroCliente();
     this.inicializaFiltroMascota();
     this.inicializaFiltroVeterinario();
+    this.inicializaFiltroUsuario();
 
     //Inicializamos las colecciones que usaremos más adelante en la aplicación.
     this.getClientes();
@@ -67,7 +70,7 @@ export class GlobalService {
     this.getClinica();
     this.getCalendario();
     this.getTarifas();
-
+    this.getUsuarios();
   }
 
   private getClientes() {
@@ -113,6 +116,14 @@ export class GlobalService {
 
   private getTarifas() {
     //TODO
+  }
+
+  private getUsuarios() {
+    this.dm.getUsuarios().then((usuarios: Usuario[]) => {
+      this.usuarios = usuarios;
+    }).catch((err) => {
+      console.error(err);
+    });
   }
 
   // --- CLIENTE ---
@@ -257,16 +268,25 @@ export class GlobalService {
     this.filtroVeterinario.dni = '';
   }
 
-  setFiltroCliente(filtro:FiltroCliente){
+  inicializaFiltroUsuario(){
+    this.filtroUsuario = new FiltroUsuario();
+    this.filtroUsuario.nombre = '';
+  }
+
+  setFiltroCliente(filtro: FiltroCliente){
     this.filtroCliente = filtro;
   }
 
-  setFiltroMascota(filtro:FiltroMascota){
+  setFiltroMascota(filtro: FiltroMascota){
     this.filtroMascota = filtro;
   }
 
-  setFiltroVeterinario(filtro:FiltroVeterinario){
+  setFiltroVeterinario(filtro: FiltroVeterinario){
     this.filtroVeterinario = filtro;
+  }
+
+  setFiltroUsuario(filtro: FiltroUsuario) {
+    this.filtroUsuario = filtro;
   }
 
   // --- OTROS ---

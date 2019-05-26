@@ -94,3 +94,11 @@ exports.deleteVeterinario = function (req, res) {
   });
 };
 
+exports.updateClinica = function (req, res) {
+  Clinica.findByIdAndUpdate(req.params.id, {
+    $set: req.body
+  }, function (err, clinica) {
+    if (err) res.send(err);
+    res.send(clinica);
+  });
+};

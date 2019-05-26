@@ -8,13 +8,13 @@
             <p class="title">Veterinarios</p>
             <p class="texto">Añade, edita, elimina, selecciona o visualiza a los veterinarios que hay en la clínica trabajando</p>
         </div>
-        <div class="recuadro" [routerLink]="['/']">
+        <div class="recuadro" (click)="editarClinica()">
             <p class="title">Clínica</p>
             <p class="texto">Edita los datos relacionados con la clínica veterinaria</p>
         </div>
       </div>
       <div class="seccion_interna">
-        <div class="recuadro" [routerLink]="['/']">
+        <div class="recuadro" [routerLink]="['/usuarios']">
               <p class="title">Usuarios</p>
               <p class="texto">Añade, edita o elimina los usuarios con los que podrás acceder a la aplicación</p>
           </div>

@@ -22,4 +22,27 @@ export class AppDataComponent implements OnInit {
     this.tema = "_" + this.globalService.getTema();
   }
 
+  editarClinica() {
+    this.dm.getClinicaById("5cb9a4d4dd4f5326044c59f6").then((res) => {
+      let params = {
+        'id': res._id,
+        'cif': res.cif,
+        'nombre': res.nombre,
+        'direccion': res.direccion,
+        'provincia': res.provincia,
+        'poblacion': res.poblacion,
+        'codPostal': res.codPostal,
+        'pais': res.pais,
+        'propietario': res.propietario,
+        'dniPropietario': res.dniPropietario,
+        'telefono': res.telefono,
+        'movil': res.movil,
+        'fax': res.fax,
+        'web': res.web,
+        'email': res.email
+      };
+      this.router.navigate(['formClinica', params]);
+    });
+
+  }
 }

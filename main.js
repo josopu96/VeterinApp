@@ -25,6 +25,7 @@ function createWindow() {
             nodeIntegration: true,
         },
         resizable: false,
+        show: false,
     });
     var express = require('express');
     var bodyParser = require('body-parser');
@@ -71,6 +72,10 @@ function createWindow() {
         win.webContents.openDevTools();
     }
     win.setSize(anchoVentana, altoVentana + 29);
+    var ipcMain = require('electron').ipcMain;
+    ipcMain.on('request-update-in-window', function (event, arg) {
+        win.webContents.send('action-update', arg);
+    });
     // Emitted when the window is closed.
     win.on('closed', function () {
         // Dereference the window object, usually you would store window
@@ -78,12 +83,17 @@ function createWindow() {
         // when you should delete the corresponding element.
         win = null;
     });
+    win.once('ready-to-show', function () {
+        win.show();
+    });
 }
 try {
     // This method will be called when Electron has finished
     // initialization and is ready to create browser windows.
     // Some APIs can only be used after this event occurs.
-    electron_1.app.on('ready', createWindow);
+    electron_1.app.on('ready', function () {
+        createWindow();
+    });
     // Quit when all windows are closed.
     electron_1.app.on('window-all-closed', function () {
         // On OS X it is common for applications and their menu bar

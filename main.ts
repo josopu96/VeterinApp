@@ -28,6 +28,7 @@ function createWindow() {
       nodeIntegration: true,
     },
     resizable: false,
+    show: false,
   });
 
   const express = require('express');
@@ -83,6 +84,11 @@ function createWindow() {
 
   win.setSize(anchoVentana,altoVentana+29);
 
+  const { ipcMain } = require('electron');
+
+  ipcMain.on('request-update-in-window', (event, arg) => {
+    win.webContents.send('action-update', arg);
+  });
 
   // Emitted when the window is closed.
   win.on('closed', () => {
@@ -92,6 +98,9 @@ function createWindow() {
     win = null;
   });
 
+  win.once('ready-to-show', () => {
+    win.show();
+  })
 }
 
 try {
@@ -100,7 +109,9 @@ try {
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
-  app.on('ready', createWindow);
+  app.on('ready', () => {
+    createWindow();
+  });
 
   // Quit when all windows are closed.
   app.on('window-all-closed', () => {

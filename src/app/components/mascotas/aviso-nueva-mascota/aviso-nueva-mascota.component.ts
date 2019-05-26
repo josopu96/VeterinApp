@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { remote } from 'electron';
+import { remote, ipcRenderer } from 'electron';
 
 @Component({
   selector: 'app-aviso-nueva-mascota',
@@ -7,6 +7,7 @@ import { remote } from 'electron';
   styleUrls: ['./aviso-nueva-mascota.component.scss']
 })
 export class AvisoNuevaMascotaComponent implements OnInit {
+
 
   constructor() { }
 
@@ -16,6 +17,18 @@ export class AvisoNuevaMascotaComponent implements OnInit {
 
   cerrarVentana(){
     let window = remote.getCurrentWindow(); 
+    ipcRenderer.send('request-update-in-window', null);
     window.close(); 
+  }
+
+  continuarSinCliente(){
+    let window = remote.getCurrentWindow(); 
+    let Data = {
+        action: "continuar"
+    };
+
+    // Trigger the event listener action to this event in the renderer process and send the data
+    ipcRenderer.send('request-update-in-window', Data);
+    window.close();
   }
 }

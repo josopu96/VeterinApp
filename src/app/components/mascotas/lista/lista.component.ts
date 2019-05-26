@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { DataManagement } from '../../../services/dataManagement';
 import { GlobalService } from '../../../services/globalService';
-import { Router, UrlHandlingStrategy } from '@angular/router';
+import { Router } from '@angular/router';
 import { Mascota, Cliente } from '../../../app.dataModels';
 import { FiltroMascota } from '../../../models/filtros';
 import { CabeceraTabla } from '../../../models/tablas';
-import { remote } from 'electron';
+import { remote, ipcRenderer, webContents } from 'electron';
 
 @Component({
   selector: 'app-lista',
@@ -17,7 +17,7 @@ export class ListaComponent implements OnInit {
 
 
   headElements: CabeceraTabla[] = [];
-
+  showAlert: Boolean = false;
   elements: Mascota[];
   tema = "_oscuro";
 
@@ -43,6 +43,7 @@ export class ListaComponent implements OnInit {
     private dm: DataManagement,
     private globalService: GlobalService,
     private router: Router,
+    private ngZone: NgZone
   ) { }
 
   ngOnInit() {
@@ -364,98 +365,18 @@ export class ListaComponent implements OnInit {
   // Registro de mascotas
 
   nuevaMascota() {
-    let showAlert = true;
+    this.showAlert = true;
     if (this.clienteSeleccionado) {
       if (this.clienteSeleccionado._id != "0") {
-        showAlert = false;
+        this.showAlert = false;
       }
     }
 
-    if (showAlert) {
-      const options = {
-        type: 'question',
-        buttons: ['Cancel', 'Yes, please', 'No, thanks'],
-        defaultId: 2,
-        title: 'Question',
-        message: 'Do you want to do this?',
-        detail: 'It does not really matter',
-        checkboxLabel: 'Remember my answer',
-        checkboxChecked: true,
-      };
-      let currentWindows = remote.BrowserWindow.getFocusedWindow();
-      currentWindows.setHasShadow(true);
-      this.generaVentana(350, 350);
+    if (this.showAlert) {
+      this.globalService.generaVentana(350, 350, '/avisoNuevaMascota', 'nueva-mascota');
     } else {
       this.router.navigate(['formMascotas']);
     }
-  }
-
-  generaVentana(alto, ancho) {
-    let currentWindows = remote.BrowserWindow.getFocusedWindow();
-    let location = currentWindows.getBounds();
-    let posicionX = Math.floor(location.x + (location.width - ancho) / 2);
-    let posicionY = Math.floor(location.y + (location.height - alto) / 2);
-    console.log("================================")
-    console.log("Alto: " + location.height);
-    console.log("Ancho: " + location.width);
-    console.log("X: " + location.x);
-    console.log("Y: " + location.y);
-    console.log("PosX: " + posicionX);
-    console.log("PosY: " + posicionY);
-    let back = new remote.BrowserWindow({
-      x: location.x,
-      y: location.y,
-      width: location.width,
-      height: location.height,
-      minHeight: location.height,
-      frame: false,
-      show: false,
-      parent: currentWindows,
-      resizable: false,
-      backgroundColor: "#000",
-      opacity: 0.6,
-    });
-    let win = new remote.BrowserWindow({
-      x: posicionX,
-      y: posicionY,
-      width: ancho,
-      minHeight: alto,
-      height: alto,
-      parent: back,
-      show: false,
-      resizable: false,
-      backgroundColor: "#2e5f49",
-      webPreferences: {
-        devTools: true,
-        nodeIntegration: true,
-      },
-      frame: false,
-      opacity: 1,
-      minimizable: false,
-      
-    });
-    win.webContents.openDevTools()
-    win.setMenu(null);
-    back.setMenu(null);
-    const path = require('path');
-    const url = require('url');
-    win.loadURL(url.format({
-      pathname: path.join('localhost:4200'),
-      protocol: 'http:',
-      slashes: true,
-      hash: '/avisoNuevaMascota'
-    }));
-    win.on('closed', () => {
-      back.close();
-      win = null;
-    })
-    back.on('closed', () => {
-      back = null;
-    })
-    win.once('ready-to-show', () => {
-      back.show();
-      win.show();
-    })
   }
 
 }

@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './../../config/configService';
 import { AbstractWS } from './abstractService';
 import { Injectable } from '@angular/core';
-import { Usuario, Ajustes, Global, Veterinario, Clinica } from '../app.dataModels';
+import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota } from '../app.dataModels';
 import { Cliente } from '../app.dataModels';
 
 @Injectable()
@@ -30,7 +30,7 @@ export class RestWS extends AbstractWS {
     });
   }
 
-  public getClients(filters?):Promise<Cliente[]> {
+  public getClients(filters?): Promise<Cliente[]> {
     const fd = new HttpParams();
     if (filters) {
       fd.set('filters', filters);
@@ -134,13 +134,18 @@ export class RestWS extends AbstractWS {
   }
 
   public updateVeterinario(veterinario: Veterinario) {
-    const fd = new HttpParams()
+    let fd = new HttpParams()
       .set('nombre', veterinario.nombre)
       .set('apellidos', veterinario.apellidos)
-      .set('fecNac', veterinario.fecNac.toString())
       .set('dni', veterinario.dni)
       .set('telefono', veterinario.telefono)
-      .set('numColegiado', veterinario.numColegiado.toString());
+      .set('numColegiado', veterinario.numColegiado.toString())
+      .set('fecModificacion', String(new Date()));
+
+      if (veterinario.fecNac) {
+        fd = fd.append('fecNac', String(veterinario.fecNac));
+      }
+
     return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinario/' + veterinario._id + '/update', fd).then((_) => {
       return Promise.resolve();
     }).catch(error => {
@@ -157,13 +162,17 @@ export class RestWS extends AbstractWS {
   }
 
   public createVeterinario(veterinario: Veterinario) {
-    const fd = new HttpParams()
+    let fd = new HttpParams()
       .set('nombre', veterinario.nombre)
       .set('apellidos', veterinario.apellidos)
-      .set('fecNac', String(veterinario.fecNac))
       .set('dni', veterinario.dni)
       .set('telefono', veterinario.telefono)
       .set('numColegiado', String(veterinario.numColegiado));
+
+      if (veterinario.fecNac) {
+        fd = fd.append('fecNac', String(veterinario.fecNac));
+      }
+
     return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinario/create', fd).then((_) => {
       return Promise.resolve();
     }).catch(error => {
@@ -266,6 +275,49 @@ export class RestWS extends AbstractWS {
         fd = fd.append('clave', usuario.clave);
       }
     return this.makePostRequest(this.path + 'usuarios/' + usuario._id + '/update', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public createMascota(mascota: Mascota) {
+    let fd = new HttpParams()
+      .set('nombre', mascota.nombre)
+      .set('chip', mascota.chip)
+      .set('fecNac', String(mascota.fecNac))
+      .set('fecModificacion', String(new Date()))
+      .set('sexo', mascota.sexo)
+      .set('estado', mascota.estado)
+      .set('pelo', mascota.pelo)
+      .set('capa', mascota.capa)
+      .set('especie', mascota.especie)
+      .set('raza', mascota.raza);
+
+      if (mascota.fecBaj) {
+        fd = fd.append('fecBaj', String(mascota.fecBaj));
+      }
+    return this.makePostRequest(this.path + 'mascotas/create', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public updateMascota(mascota: Mascota) {
+    const fd = new HttpParams()
+      .set('nombre', mascota.nombre)
+      .set('chip', mascota.chip)
+      .set('fecNac', String(mascota.fecNac))
+      .set('fecBaj', String(mascota.fecBaj))
+      .set('fecModificacion', String(new Date()))
+      .set('sexo', mascota.sexo)
+      .set('estado', mascota.estado)
+      .set('pelo', mascota.pelo)
+      .set('capa', mascota.capa)
+      .set('especie', mascota.especie)
+      .set('raza', mascota.raza);
+    return this.makePostRequest(this.path + 'mascotas/' + mascota._id + '/update', fd).then((_) => {
       return Promise.resolve();
     }).catch(error => {
       return Promise.reject(error);

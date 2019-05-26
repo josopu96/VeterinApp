@@ -18,6 +18,9 @@ export class ListaComponent implements OnInit {
   tema = "_oscuro";
   veterinariosTotales: Veterinario[];
 
+  //Selección
+  veterinarioSeleccionado: Veterinario;
+
   //Campos del formulario para filtrar
   filtroVeterinario: FiltroVeterinario;
 
@@ -32,6 +35,7 @@ export class ListaComponent implements OnInit {
 
   ngOnInit() {
     this.inicializaCabecera();
+    this.veterinarioSeleccionado = this.globalService.veterinario;
     this.filtroVeterinario = this.globalService.filtroVeterinario;
     this.elements = this.globalService.veterinarios;
     this.veterinariosTotales = this.globalService.veterinarios;
@@ -67,7 +71,14 @@ export class ListaComponent implements OnInit {
   }
 
   onSelect(veterinario: Veterinario): void {
-
+    this.globalService.setVeterinario(veterinario);
+    this.router.navigateByUrl('/seleccionaVeterinario', { skipLocationChange: true }).then(() =>
+      this.router.navigate(["veterinarios"]));
+  }
+  limpiarVeterinario():void{
+      this.globalService.limpiarVeterinario();
+      this.router.navigateByUrl('/seleccionaVeterinario', {skipLocationChange: true}).then(()=>
+      this.router.navigate(["veterinarios"]));
   }
 
   editar(veterinario: Veterinario) {

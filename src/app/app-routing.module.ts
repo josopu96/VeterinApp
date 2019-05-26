@@ -12,6 +12,7 @@ import { AppDataComponent } from './components/app-data/app-data.component';
 import { FormVeterinarioComponent } from './components/app-data/veterinarios/form-veterinario/form-veterinario.component';
 import { FormClinicaComponent } from './components/app-data/clinica/form-clinica/form-clinica.component';
 import { FormUsuarioComponent } from './components/app-data/usuarios/form-usuario/form-usuario.component';
+import { FormMascotasComponent } from './components/mascotas/form-mascotas/form-mascotas.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
     { path: 'mascotas' , component: ListaMascotas },
     { path: 'seleccionaCliente' , component: SeleccionComponent },
     { path: 'seleccionaMascota' , component: SeleccionComponent },
+    { path: 'seleccionaVeterinario' , component: SeleccionComponent },
     { path: 'ajustes' , component: AjustesComponent },
     { path: 'usuarios' , component: ListaUsuarios },
     { path: 'appData' , component: AppDataComponent },
@@ -27,6 +29,7 @@ const routes: Routes = [
     { path: 'formVeterinario' , component: FormVeterinarioComponent },
     { path: 'formClinica' , component: FormClinicaComponent },
     { path: 'formUsuario' , component: FormUsuarioComponent },
+    { path: 'formMascotas' , component: FormMascotasComponent },
 ];
 
 @NgModule({

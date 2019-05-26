@@ -22,6 +22,9 @@ export class GlobalService {
   veterinarios: Veterinario[];
   usuarios: Usuario[];
 
+  //Especiales
+  clienteEspecial: Cliente;
+
   //Variables de filtros
   filtroCliente: FiltroCliente;
   filtroMascota: FiltroMascota;
@@ -74,12 +77,17 @@ export class GlobalService {
     this.clientes = [];
     this.dm.getClients().then((clientes: Cliente[]) => {
       this.clientes = clientes;
+      let index = this.clientes.indexOf(
+        this.clientes.find(x => x._id === "100000000000000000000000")
+      );
+      this.clienteEspecial = this.clientes[index];
+      this.clientes.splice(index,1);
     }).catch((err) => {
       console.error(err);
     });
   }
 
-  private getMascotas() {
+  public getMascotas() {
     this.mascotas = [];
     this.dm.getMascotas().then((mascotas: Mascota[]) => {
       this.mascotas = mascotas;
@@ -152,6 +160,7 @@ export class GlobalService {
 
   limpiarCliente() {
     this.limpiarMascota();
+    this.filtroMascota.porCliente = false;
     this.cliente = new Cliente();
     this.cliente._id = "0";
     return this.cliente;
@@ -159,6 +168,7 @@ export class GlobalService {
 
   limpiarMascota() {
     this.mascota = new Mascota();
+    this.filtroCliente.porMascota = false;
     this.mascota._id = "0";
     return this.mascota;
   }

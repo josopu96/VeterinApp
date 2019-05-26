@@ -1,0 +1,59 @@
+<div class="container{{tema}}">
+  <app-selecciones class="top"></app-selecciones>
+  <div class="bottom">
+    <app-menu class="menu"></app-menu>
+    <div class="seccion{{tema}} columna">
+      <div style="overflow: scroll">
+        <div class="titulo">
+          <span *ngIf="new"> Nueva mascota </span>
+          <span *ngIf="!new"> Editando mascota </span>
+        </div>
+        <div class="formulario">
+          <fieldset>
+            <legend>Datos obligatorios</legend>
+            <div class="texto">
+              <span>Nombre</span><input type="text" [(ngModel)]="mascotaEditada.nombre" />
+            </div>
+            <div class="texto">
+              <span>Chip</span><input type="text" [(ngModel)]="mascotaEditada.chip" />
+            </div>
+            <div class="texto">
+                <span>Fecha de Nacimiento</span><input type="date" [ngModel]="mascotaEditada.fecNac | date:'yyyy-MM-dd'"  (ngModelChange)="mascotaEditada.fecNac=$event" id="nac_dt" />
+            </div>
+            <div class="texto">
+              <span>Sexo</span><input type="text" [(ngModel)]="mascotaEditada.sexo" />
+            </div>
+            <div class="texto">
+              <span>Estado</span><input type="text" [(ngModel)]="mascotaEditada.estado" />
+            </div>
+            <div class="texto">
+              <span>Pelo</span><input type="text" [(ngModel)]="mascotaEditada.pelo" />
+            </div>
+            <div class="texto">
+              <span>Capa</span><input type="text" [(ngModel)]="mascotaEditada.capa" />
+            </div>
+            <div class="texto">
+              <span>Especie</span><input type="text" [(ngModel)]="mascotaEditada.especie" />
+            </div>
+            <div class="texto">
+              <span>Raza</span><input type="text" [(ngModel)]="mascotaEditada.raza" />
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Datos opcionales</legend>
+            <div class="texto" *ngIf="mascotaEditada.fecBaj">
+              <span>Fecha de Fallecimiento</span><input type="date" [ngModel]="mascotaEditada.fecBaj | date:'yyyy-MM-dd'"  (ngModelChange)="mascotaEditada.fecBaj=$event" id="nac_dt" />
+            </div>
+            <div class="texto" *ngIf="!mascotaEditada.fecBaj">
+              <span>Fecha de Fallecimiento</span><input type="date" [(ngModel)]="mascotaEditada.fecBaj" id="nac_dt" />
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <div class="guardar">
+        <button [routerLink]="['/mascotas']"> Volver </button>
+        <button (click)="guardar()" [disabled]="checkFormIsFullfilled()"> Guardar </button>
+      </div>
+    </div>
+  </div>
+</div>

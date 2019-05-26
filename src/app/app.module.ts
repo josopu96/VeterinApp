@@ -40,6 +40,7 @@ import { AppDataComponent } from './components/app-data/app-data.component';
 import { FormVeterinarioComponent } from './components/app-data/veterinarios/form-veterinario/form-veterinario.component';
 import { FormClinicaComponent } from './components/app-data/clinica/form-clinica/form-clinica.component';
 import { FormUsuarioComponent } from './components/app-data/usuarios/form-usuario/form-usuario.component';
+import { FormMascotasComponent } from './components/mascotas/form-mascotas/form-mascotas.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -67,6 +68,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormVeterinarioComponent,
     FormClinicaComponent,
     FormUsuarioComponent,
+    FormMascotasComponent
   ],
   imports: [
     BrowserModule,

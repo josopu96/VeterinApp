@@ -109,7 +109,7 @@ export class Global {
     nombre: string;
     chip: string;
     fecNac: Date;
-    fecBaja: Date;
+    fecBaj: Date;
     sexo: string;
     estado: string;
     pelo: string;
@@ -123,6 +123,7 @@ export class Global {
     vacunas: Vacuna[];
     tratamientos: Tratamiento[];
     fecModificacion: Date;
+    idCliente: string;
   }
   export class Operacion {
     idOperacion: string;

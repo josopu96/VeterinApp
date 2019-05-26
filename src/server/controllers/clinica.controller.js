@@ -40,7 +40,6 @@ exports.getVeterinario = function(req, res) {
 };
 
 exports.createVeterinario = function (req, res) {
-  var fechaNac = req.body.fecNac != "undefined" ? req.body.fecNac : "";
   var tlf = req.body.telefono != "undefined" ? req.body.telefono : "";
   console.log(req.body.fecNac);
   var veterinario = {
@@ -62,12 +61,11 @@ exports.createVeterinario = function (req, res) {
     if (err) {
       res.send(err);
     }
-    res.send('Veterinario creado satisfactoriamente');
+    res.send( {'respuesta': 'Veterinario creado satisfactoriamente'} );
   });
 };
 
 exports.updateVeterinario = function (req, res) {
-  var fechaNac = req.body.fecNac != "null" ? req.body.fecNac : "";
   var tlf = req.body.telefono != "null" ? req.body.telefono : "";
   Clinica.findOneAndUpdate(
     {'_id': req.params.id, 'veterinarios': { $elemMatch: {_id: req.params.veter_id }}
@@ -75,12 +73,12 @@ exports.updateVeterinario = function (req, res) {
     $set: {
       'veterinarios.$.nombre'       : req.body.nombre,
       'veterinarios.$.apellidos'    : req.body.apellidos,
-      'veterinarios.$.fecNac'       : fechaNac,
+      'veterinarios.$.fecNac'       : req.body.fecNac,
       'veterinarios.$.dni'          : req.body.dni,
       'veterinarios.$.telefono'     : tlf,
       'veterinarios.$.numColegiado' : req.body.numColegiado,
   }}, function (err, resp) {
-    res.send();
+    res.send( {'respuesta': 'Veterinario editado satisfactoriamente'} );
   });
 };
 

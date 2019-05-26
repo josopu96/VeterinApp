@@ -29,14 +29,14 @@ export class FormVeterinarioComponent implements OnInit {
     }
     this.tema = "_" + this.globalService.getTema();
     this.route.params.forEach(params => {
-      if (params) {
+      if (params && params["id"]) {
         this.new = false;
         this.veterinarioEditado._id = params["id"];
         this.veterinarioEditado.nombre = params["nombre"];
         this.veterinarioEditado.apellidos = params["apellidos"];
         this.veterinarioEditado.dni = params["dni"];
-        this.veterinarioEditado.fecNac = params["fecNac"];
         this.veterinarioEditado.numColegiado = params["numColegiado"];
+        this.veterinarioEditado.fecNac = params["fecNac"] !== 'null' ? params["fecNac"] : null;
         this.veterinarioEditado.telefono = params["telefono"] != null ? params["telefono"] : "" ;
         this.ready = true;
       } else {
@@ -55,19 +55,22 @@ export class FormVeterinarioComponent implements OnInit {
 
   actualizar() {
     this.dm.updateVeterinario(this.veterinarioEditado).then((res) => {
+      let index = this.globalService.veterinarios.indexOf(
+        this.globalService.veterinarios.find(x => x._id === this.veterinarioEditado._id)
+      );
+      this.globalService.veterinarios[index] = this.veterinarioEditado;
       this.router.navigateByUrl('/veterinarios');
     }).catch((err) => {
-      this.router.navigateByUrl('/veterinarios');
+      console.log(err);
     });
   }
 
   crear() {
     this.dm.createVeterinario(this.veterinarioEditado).then((res) => {
-      this.globalService.getVeterinarios();
+      this.globalService.veterinarios.push(this.veterinarioEditado);
       this.router.navigateByUrl('/veterinarios');
     }).catch((err) => {
-      this.globalService.getVeterinarios();
-      this.router.navigateByUrl('/veterinarios');
+      console.log(err);
     });
   }
 

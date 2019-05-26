@@ -1,4 +1,5 @@
 const Usuario = require('../models/usuario.model');
+var mongoose = require('mongoose');
 
 exports.test = function (req, res) {
   res.send('Greetings from the Test controller!');
@@ -25,7 +26,13 @@ exports.createUsuario = function (req, res) {
     nombre: req.body.nombre,
     clave: req.body.clave,
     email: req.body.email,
-    isAdmin: req.body.isAdmin
+    isAdmin: req.body.isAdmin,
+    ajustes: {
+      _id: new mongoose.mongo.ObjectID,
+      tamLetra: "medio",
+      tema: "oscuro",
+      recordatorio: "0"
+    }
   });
 
   usuario.save(function (err) {
@@ -76,7 +83,6 @@ function _updateUsuario(req, res) {
       "nombre": req.body.nombre,
       "email": req.body.email,
       "isAdmin": req.body.isAdmin,
-      "ajustes": {}
     }
   }, {new: true}, function (err, usuario) {
     if (err) return next(err);

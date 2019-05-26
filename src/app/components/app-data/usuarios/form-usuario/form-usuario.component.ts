@@ -36,6 +36,7 @@ export class FormUsuarioComponent implements OnInit {
         this.usuarioEditado.isAdmin = params["isAdmin"];
         this.ready = true;
       } else {
+        this.usuarioEditado.isAdmin = false;
         this.new = true;
       }
     });
@@ -77,8 +78,14 @@ export class FormUsuarioComponent implements OnInit {
   checkFormIsFullfilled() {
     let disabled = true;
 
-    if (this.usuarioEditado.nombre && this.usuarioEditado.email && this.checkPasswordEquals()) {
-      disabled = false;
+    if (!this.new) {
+      if (this.usuarioEditado.nombre && this.usuarioEditado.email && this.checkPasswordEquals()) {
+        disabled = false;
+      }
+    } else {
+      if (this.usuarioEditado.nombre && this.usuarioEditado.email && this.usuarioEditado.clave && this.checkPasswordEquals()) {
+        disabled = false;
+      }
     }
 
     return disabled;

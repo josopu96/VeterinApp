@@ -1,0 +1,41 @@
+<div class="container{{tema}}">
+  <app-selecciones class="top"></app-selecciones>
+  <div class="bottom">
+    <app-menu class="menu"></app-menu>
+    <div class="seccion{{tema}} columna">
+      <div class="titulo">
+        <span *ngIf="new"> Nuevo usuario </span>
+        <span *ngIf="!new"> Editando usuario </span>
+      </div>
+      <div class="formulario">
+        <fieldset>
+          <legend>Datos obligatorios</legend>
+          <div class="texto">
+            <span>Nombre de usuario</span><input type="text" [(ngModel)]="usuarioEditado.nombre" />
+          </div>
+          <div class="texto">
+            <span>Permisos de administrador</span><input type="checkbox" [(ngModel)]="usuarioEditado.isAdmin" />
+          </div>
+          <div class="texto">
+            <span>Email</span><input type="email" [(ngModel)]="usuarioEditado.email" />
+          </div>
+          <ng-container *ngIf="!new">
+            <div class="texto">
+              <span>Antigua Contraseña</span><input type="text" [(ngModel)]="usuarioEditado.oldClave" />
+            </div>
+          </ng-container>
+          <div class="texto">
+            <span>Contraseña</span><input type="text" [(ngModel)]="clave1" (change)="checkPasswordEquals()" />
+          </div>
+          <div class="texto">
+            <span>Repita contraseña</span><input type="text" [(ngModel)]="clave2" (change)="checkPasswordEquals()">
+          </div>
+        </fieldset>
+      </div>
+      <div class="guardar">
+        <button [routerLink]="['/usuarios']"> Volver </button>
+        <button (click)="guardar()" [disabled]="checkFormIsFullfilled()"> Guardar </button>
+      </div>
+    </div>
+  </div>
+</div>

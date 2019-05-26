@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RestWS } from './restService';
+import { Usuario, Ajustes, Global, Veterinario, Clinica } from '../app.dataModels';
 import { Usuario, Ajustes, Global, Veterinario, Mascota } from '../app.dataModels';
 import { Cliente } from '../app.dataModels';
 
@@ -111,6 +112,45 @@ export class DataManagement {
     });
   }
 
+  public updateClinica(clinica: Clinica): Promise<any> {
+    return this.restService.updateClinica(clinica).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public getClinicaById(id: string): Promise<any> {
+    return this.restService.getClinicaById(id).then((data: any) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public getUsuarios(filters?): Promise<any> {
+    return this.restService.getUsuarios(filters).then((data: string) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public createUsuario(usuario: Usuario): Promise<any> {
+    return this.restService.createUsuario(usuario).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public updateUsuario(usuario: Usuario): Promise<any> {
+    return this.restService.updateUsuario(usuario).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
   public createMascota(mascota: Mascota): Promise<any> {
     return this.restService.createMascota(mascota).then((data) => {
       return Promise.resolve(data);

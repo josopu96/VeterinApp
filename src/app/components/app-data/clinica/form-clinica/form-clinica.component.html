@@ -1,0 +1,69 @@
+<div class="container{{tema}}">
+  <app-selecciones class="top"></app-selecciones>
+  <div class="bottom">
+    <app-menu class="menu"></app-menu>
+    <div class="seccion{{tema}} columna">
+      <div style="overflow: scroll">
+        <div class="titulo">
+          <span *ngIf="new"> Nuevo veterinario </span>
+          <span *ngIf="!new"> Editando clinica </span>
+        </div>
+        <div class="formulario">
+          <fieldset>
+            <legend>Datos obligatorios</legend>
+            <div class="texto">
+              <span>CIF</span><input type="text" [(ngModel)]="clinicaEditada.cif" />
+            </div>
+            <div class="texto">
+              <span>Nombre</span><input type="text" [(ngModel)]="clinicaEditada.nombre" />
+            </div>
+            <div class="texto">
+              <span>Direccion</span><input type="text" [(ngModel)]="clinicaEditada.direccion" />
+            </div>
+            <div class="texto">
+              <span>Provincia</span><input type="text" [(ngModel)]="clinicaEditada.provincia" />
+            </div>
+            <div class="texto">
+              <span>Población</span><input type="text" [(ngModel)]="clinicaEditada.poblacion" />
+            </div>
+            <div class="texto">
+              <span>Código postal</span><input type="text" [(ngModel)]="clinicaEditada.codPostal" />
+            </div>
+            <div class="texto">
+              <span>País</span><input type="text" [(ngModel)]="clinicaEditada.pais" />
+            </div>
+            <div class="texto">
+              <span>Nombre y apellidos del propietario</span><input type="text"
+                [(ngModel)]="clinicaEditada.propietario" />
+            </div>
+            <div class="texto">
+              <span>DNI/NIF del propietario</span><input type="text" [(ngModel)]="clinicaEditada.dniPropietario" />
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Datos opcionales</legend>
+            <div class="texto">
+              <span>Telefono</span><input type="text" [(ngModel)]="clinicaEditada.telefono" />
+            </div>
+            <div class="texto">
+              <span>Movil</span><input type="text" [(ngModel)]="clinicaEditada.movil" />
+            </div>
+            <div class="texto">
+              <span>Fax</span><input type="text" [(ngModel)]="clinicaEditada.fax" />
+            </div>
+            <div class="texto">
+              <span>Web</span><input type="text" [(ngModel)]="clinicaEditada.web" />
+            </div>
+            <div class="texto">
+              <span>Email</span><input type="text" [(ngModel)]="clinicaEditada.email" />
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <div class="guardar">
+        <button [routerLink]="['/appData']"> Volver </button>
+        <button (click)="guardar()" [disabled]="checkFormIsFullfilled()"> Guardar </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './../../config/configService';
 import { AbstractWS } from './abstractService';
 import { Injectable } from '@angular/core';
-import { Usuario, Ajustes, Global, Veterinario, Mascota } from '../app.dataModels';
+import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota } from '../app.dataModels';
 import { Cliente } from '../app.dataModels';
 
 @Injectable()
@@ -56,7 +56,6 @@ export class RestWS extends AbstractWS {
   public getUserByToken(token: string) {
     const fd = new HttpParams();
     return this.makeGetRequest(this.path + 'usuarios/token/' + token, fd).then((res: Usuario) => {
-      console.log("la respuesta del server es: " + res);
       return Promise.resolve(res);
     }).catch(error => {
       console.error('Error: ' + error);
@@ -175,6 +174,107 @@ export class RestWS extends AbstractWS {
       }
 
     return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinario/create', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public updateClinica(clinica: Clinica) {
+    let fd = new HttpParams()
+      .set('cif', clinica.cif)
+      .set('nombre', clinica.nombre)
+      .set('direccion', clinica.direccion)
+      .set('provincia', clinica.provincia)
+      .set('poblacion', clinica.poblacion)
+      .set('codPostal', String(clinica.codPostal))
+      .set('pais', clinica.pais)
+      .set('propietario', clinica.propietario)
+      .set('dniPropietario', clinica.dniPropietario);
+
+      if (clinica.telefono) {
+        fd = fd.append('telefono', clinica.telefono);
+      } else {
+        fd = fd.append('telefono', '');
+      }
+      if (clinica.movil) {
+        fd = fd.append('movil', clinica.movil);
+      } else {
+        fd = fd.append('movil', '');
+      }
+      if (clinica.fax) {
+        fd = fd.append('fax', clinica.fax);
+      } else {
+        fd = fd.append('fax', '');
+      }
+      if (clinica.web) {
+        fd = fd.append('web', clinica.web);
+      } else {
+        fd = fd.append('web', '');
+      }
+      if (clinica.email) {
+        fd = fd.append('email', clinica.email);
+      } else {
+        fd = fd.append('email', '');
+      }
+
+    return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/update', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public getClinicaById(id: string) {
+    const fd = new HttpParams();
+
+    return this.makeGetRequest(this.path + 'clinicas/' + this.clinicaId, fd).then((res: String) => {
+      return Promise.resolve(res);
+    }).catch(error => {
+      console.log('Error: ' + error);
+      return Promise.reject(error);
+    });
+  }
+
+  public getUsuarios(filters?) {
+    const fd = new HttpParams();
+    if (filters) {
+      fd.set('filters', filters);
+    }
+    return this.makeGetRequest(this.path + 'usuarios/', fd).then((res: String) => {
+      return Promise.resolve(res);
+    }).catch(error => {
+      console.log('Error: ' + error);
+      return Promise.reject(error);
+    });
+  }
+
+  public createUsuario(usuario: Usuario) {
+    const fd = new HttpParams()
+      .set('nombre', usuario.nombre)
+      .set('clave', usuario.clave)
+      .set('email', usuario.email)
+      .set('isAdmin', usuario.isAdmin + "");
+    return this.makePostRequest(this.path + 'usuarios/create', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public updateUsuario(usuario: Usuario) {
+    let fd = new HttpParams()
+      .set('nombre', usuario.nombre)
+      .set('isAdmin', usuario.isAdmin + "")
+      .set('email', usuario.email);
+
+      console.log(usuario);
+      if (usuario.clave && usuario.oldClave) {
+        console.log(usuario);
+        fd = fd.append('oldClave', usuario.oldClave);
+        fd = fd.append('clave', usuario.clave);
+      }
+    return this.makePostRequest(this.path + 'usuarios/' + usuario._id + '/update', fd).then((_) => {
       return Promise.resolve();
     }).catch(error => {
       return Promise.reject(error);

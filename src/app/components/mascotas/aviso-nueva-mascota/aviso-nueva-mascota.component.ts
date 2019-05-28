@@ -21,6 +21,17 @@ export class AvisoNuevaMascotaComponent implements OnInit {
     window.close(); 
   }
 
+  elegirCliente(){
+    let window = remote.getCurrentWindow(); 
+    let Data = {
+        action: "elegir"
+    };
+
+    // Trigger the event listener action to this event in the renderer process and send the data
+    ipcRenderer.send('request-update-in-window', Data);
+    window.close();
+  }
+
   continuarSinCliente(){
     let window = remote.getCurrentWindow(); 
     let Data = {

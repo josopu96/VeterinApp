@@ -373,7 +373,7 @@ export class ListaComponent implements OnInit {
     }
 
     if (this.showAlert) {
-      this.globalService.generaVentana(350, 350, '/avisoNuevaMascota', 'nueva-mascota');
+      this.globalService.generaVentana(300, 552, '/avisoNuevaMascota', 'nueva-mascota');
     } else {
       this.router.navigate(['formMascotas']);
     }

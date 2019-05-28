@@ -391,10 +391,8 @@ export class GlobalService {
     if (arg) {
       //Esta ventana sólo se moestrará si se intenta crear una mascota sin haber seleccionado un cliente previamente
       if (arg.action == "continuar") {
-        console.log("he llegado");
         //En caso de continuar sin cliente, seleccionaremos el cliente especial de manera automática.
         this.setCliente(this.clienteEspecial);
-        console.log(this.clienteEspecial);
         this.router.navigate(['formMascotas']);
       } else if (arg.action == "elegir") {
         //En caso de seleccionar elegir cliente, redirigimos a la lista de clientes

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Mascota } from '../../../app.dataModels';
+import { Mascota, Cliente, Contacto } from '../../../app.dataModels';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from '../../../services/globalService';
 import { DataManagement } from '../../../services/dataManagement';
@@ -15,6 +15,9 @@ export class FormMascotasComponent implements OnInit {
   new: boolean;
   ready = false;
   mascotaEditada: Mascota = new Mascota();
+  clienteSeleccionado: Cliente;
+  sinCliente: Boolean = false;
+  telefono: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +28,21 @@ export class FormMascotasComponent implements OnInit {
 
   ngOnInit() {
     this.globalService.getMascotas();
+    this.clienteSeleccionado = this.globalService.cliente;
+    if(this.clienteSeleccionado._id != "0"){
+      if(this.clienteSeleccionado._id == this.globalService.clienteEspecial._id){
+        this.sinCliente = true;
+      } else {
+        if(this.clienteSeleccionado.contactos){
+          if(this.clienteSeleccionado.contactos.length>0){
+            this.telefono = this.clienteSeleccionado.contactos[0].telefono;
+          }
+        }
+      }
+    } else {
+      //esta opción sólo se dará en desarrollo, cuando se reinicia el servidor en esta página.
+      this.metodoDesarrollo();
+    }
     if ((<HTMLInputElement>document.getElementById('nac_dt'))) {
       (<HTMLInputElement>document.getElementById('nac_dt')).max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
     }
@@ -51,6 +69,19 @@ export class FormMascotasComponent implements OnInit {
         this.new = true;
       }
     });
+  }
+
+  metodoDesarrollo(){
+    this.sinCliente = false;
+    this.clienteSeleccionado = new Cliente();
+    this.clienteSeleccionado._id = "0";
+    this.clienteSeleccionado.nombre = "Dev";
+    this.clienteSeleccionado.apellidos = "Dev";
+    this.clienteSeleccionado.dni = "Dev";
+    this.clienteSeleccionado.contactos = [];
+    let contacto: Contacto = new Contacto();
+    contacto.telefono = "tel_dev";
+    this.clienteSeleccionado.contactos.push(contacto);
   }
 
   guardar() {

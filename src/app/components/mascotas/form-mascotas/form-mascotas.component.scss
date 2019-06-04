@@ -1,6 +1,5 @@
 @import "../../../utilities/variables.scss";
 
-
 .seccion_oscuro {
   display: flex;
   background-color: rgba(#8a8a8a, $alpha: 0.3);
@@ -21,70 +20,153 @@
     justify-content: center;
     align-items: center;
 
-    span{
+    span {
       font-size: 30px;
       font-weight: bold;
     }
   }
 
-  .formulario{
-    width: 70%;
+  .formulario {
+    width: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     flex-grow: 1;
 
-    fieldset{
-      margin: 0px 40px 20px 40px;
-      padding-top: 20px;
-      padding-bottom: 30px;
-      padding-left: 40px;
-      padding-right: 40px;
-      background-color: $colorFondoFieldset;
+    .form_izq {
+      display: flex;
+      width: 35%;
+      flex-direction: column;
+      margin-left: 9%;
+      margin-top: 60px;
+      margin-bottom: 60px;
+      padding: 3%;
+      padding-top: 2%;
+      padding-bottom: 2%;
+      border: 2px groove #eeeeee;
+      border-right: none;
+      justify-content: space-around;
+    }
+    .form_dcha {
+      display: flex;
+      width: 50%;
+      flex-direction: column;
 
-      legend{
-        font-weight: bold;
-        font-size: 18px;
-      }
-      .texto{
+      .datos_cliente{
+        flex-grow: 1;
+        margin-top: 60px;
+        margin-right: 18%;
+        border-left: 2px groove #eeeeee;
         display: flex;
-        justify-content: center;
 
-        span{
-          flex-grow: 1;
-          margin-bottom: 10px;
-          margin-top: 10px;
-        }
-        input{
-          width: 400px;
-          margin: 0px;
-          margin-bottom: 5px;
-          margin-top: 5px;
-          border: none;
-          text-align: center;
-          background-color: #00000000;
-          border-bottom: 1px solid #cccccc;
-          transition: all ease-out 0.3s;
-          box-sizing: border-box;
-          color: $textoClaro;
+        .seccion_cliente{
+          display: flex;
+          width: 100%;
+          margin: 6%;
+          margin-right: 0;
+          margin-top: 0;
+          border: 2px groove #eeeeee;
+          flex-direction: column;
 
-          &:focus{
-            margin-bottom: 2px;
-            margin-top: 2px;
-            font-size: 20px;
-            background-color: $colorInput;
-            border: 1px solid #cccccc;
+          .titulo_dueño{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #00000070;
+            height: 30px;
+            font-size: 18px;
+            font-weight: bold;
+          }
+
+          .datos_dueño{
+            display: flex;
+            flex-grow: 1;
+            flex-wrap: wrap;
+
+            .item_datos{
+              display: flex;
+              width: 50%;
+              flex-direction: column;
+              overflow: hidden;
+              border: 1px solid #00000070;
+              box-sizing: border-box;
+
+              .item_titulo{
+                display: flex;
+                justify-content: center;
+                background-color: #d8d8d889;
+                color: black;
+                font-size: 13px;
+
+              }
+              .item_contenido{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-grow: 1;
+                background-color: #ffffff89;
+                color: black;
+
+              }
+            }
           }
         }
       }
+
+      .datos_mascota{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        margin-bottom: 60px;
+        padding: 6%;
+        padding-top: 4%;
+        padding-bottom: 4%;
+        border: 2px groove #eeeeee;
+        border-left: none;
+        margin-right: 18%;
+      }
     }
 
+    .texto {
+      display: flex;
+      justify-content: center;
+
+      label {
+        flex-grow: 1;
+        margin-bottom: 10px;
+        margin-top: 10px;
+      }
+      input {
+        width: 200px;
+        margin: 0px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        border: none;
+        text-align: center;
+        background-color: #00000000;
+        border-bottom: 1px solid #cccccc;
+        transition: all ease-out 0.3s;
+        box-sizing: border-box;
+        color: $textoClaro;
+
+        &:focus {
+          margin-bottom: 2px;
+          margin-top: 2px;
+          font-size: 20px;
+          background-color: $colorInput;
+          border: 1px solid #cccccc;
+        }
+
+        &[type=text]{
+          width: 300px;
+        }
+      }
+    }
   }
 
-  .guardar{
+  .guardar {
     width: 100%;
     display: flex;
-    height: $altoGuardar+px;
+    height: $altoGuardar + px;
     justify-content: center;
     align-items: center;
     border-top: 2px solid $colorFondoOscuro;
@@ -109,5 +191,4 @@
       }
     }
   }
-
 }

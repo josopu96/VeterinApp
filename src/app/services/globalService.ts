@@ -344,10 +344,10 @@ export class GlobalService {
       transparent: true,
     });
 
-    //TODO: Borrar la siguiente linea cuando se termine de programar
-    win.webContents.openDevTools()
-    win.setMenu(null);
-    back.setMenu(null);
+    // Comentar las siguientes lineas cuando se termine de programar la nueva ventana
+    // win.webContents.openDevTools()
+    // win.setMenu(null);
+    // back.setMenu(null);
 
     //Especificamos la ruta donde se encuentra el componente que vamos a cargar en la nueva página
     const path = require('path');

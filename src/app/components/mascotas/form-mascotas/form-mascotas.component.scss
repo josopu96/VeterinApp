@@ -82,6 +82,16 @@
             flex-grow: 1;
             flex-wrap: wrap;
 
+            .sin_cliente{
+              display: flex;
+              flex-grow: 1;
+              justify-content: center;
+              align-items: center;
+              font-size: 30px;
+              font-weight: bold;
+              background-color: #b3b3b389;
+            }
+
             .item_datos{
               display: flex;
               width: 50%;
@@ -130,6 +140,21 @@
       display: flex;
       justify-content: center;
 
+      span {
+        display:none;
+      }
+      &:hover span {
+        display:block;
+        position:fixed;
+        overflow:hidden;
+        border: 1px solid #b1b1b1ea;
+        background-color: #ff6767c0;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+
+      }
+
       label {
         flex-grow: 1;
         margin-bottom: 10px;
@@ -154,6 +179,57 @@
           font-size: 20px;
           background-color: $colorInput;
           border: 1px solid #cccccc;
+        }
+
+        &[type=text]{
+          width: 300px;
+        }
+      }
+    }
+
+    .texto_error{
+      display: flex;
+      justify-content: center;
+
+      span {
+        display:none;
+      }
+      &:hover span {
+        display:block;
+        position:fixed;
+        overflow:hidden;
+        border: 1px solid #b1b1b1ea;
+        background-color: #ff6767c0;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+
+      }
+
+      label {
+        flex-grow: 1;
+        margin-bottom: 10px;
+        margin-top: 10px;
+      }
+      input {
+        width: 200px;
+        margin: 0px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        border: none;
+        text-align: center;
+        background-color: #00000000;
+        border-bottom: 1px solid #ca0000;
+        transition: all ease-out 0.3s;
+        box-sizing: border-box;
+        color: $textoClaro;
+
+        &:focus {
+          margin-bottom: 2px;
+          margin-top: 2px;
+          font-size: 20px;
+          background-color: $colorInputError;
+          border: 1px solid #ca0000;
         }
 
         &[type=text]{

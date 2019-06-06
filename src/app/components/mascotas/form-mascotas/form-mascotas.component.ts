@@ -3,6 +3,7 @@ import { Mascota, Cliente, Contacto } from '../../../app.dataModels';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from '../../../services/globalService';
 import { DataManagement } from '../../../services/dataManagement';
+import { ErroresFormMascota } from '../../../models/errores';
 
 @Component({
   selector: 'app-form-mascotas',
@@ -18,6 +19,7 @@ export class FormMascotasComponent implements OnInit {
   clienteSeleccionado: Cliente;
   sinCliente: Boolean = false;
   telefono: string = '';
+  errores: ErroresFormMascota = new ErroresFormMascota();
 
   constructor(
     private route: ActivatedRoute,
@@ -27,14 +29,15 @@ export class FormMascotasComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.inicializaErrores();
     this.globalService.getMascotas();
     this.clienteSeleccionado = this.globalService.cliente;
-    if(this.clienteSeleccionado._id != "0"){
-      if(this.clienteSeleccionado._id == this.globalService.clienteEspecial._id){
+    if (this.clienteSeleccionado._id != "0") {
+      if (this.clienteSeleccionado._id == this.globalService.clienteEspecial._id) {
         this.sinCliente = true;
       } else {
-        if(this.clienteSeleccionado.contactos){
-          if(this.clienteSeleccionado.contactos.length>0){
+        if (this.clienteSeleccionado.contactos) {
+          if (this.clienteSeleccionado.contactos.length > 0) {
             this.telefono = this.clienteSeleccionado.contactos[0].telefono;
           }
         }
@@ -71,7 +74,20 @@ export class FormMascotasComponent implements OnInit {
     });
   }
 
-  metodoDesarrollo(){
+  inicializaErrores() {
+    this.errores.nombre = '';
+    this.errores.chip = '';
+    this.errores.fechaNac = '';
+    this.errores.fechaFac = '';
+    this.errores.sexo = '';
+    this.errores.estado = '';
+    this.errores.pelo = '';
+    this.errores.capa = '';
+    this.errores.especie = '';
+    this.errores.raza = '';
+  }
+
+  metodoDesarrollo() {
     this.sinCliente = false;
     this.clienteSeleccionado = new Cliente();
     this.clienteSeleccionado._id = "0";
@@ -85,10 +101,12 @@ export class FormMascotasComponent implements OnInit {
   }
 
   guardar() {
-    if (this.mascotaEditada._id) {
-      this.actualizar();
-    } else {
-      this.crear();
+    if (this.compruebaFallos()) {
+      if (this.compruebaFallos() && this.mascotaEditada._id) {
+        this.actualizar();
+      } else {
+        this.crear();
+      }
     }
   }
 
@@ -124,4 +142,141 @@ export class FormMascotasComponent implements OnInit {
 
     return disabled;
   }
+
+  tooltip(e) {
+    let tooltips: NodeListOf<HTMLElement> = document.querySelectorAll('.texto_error span');
+    let x = (e.clientX + 20) + 'px',
+      y = (e.clientY + 20) + 'px';
+    if (tooltips) {
+      for (let i = 0; i < tooltips.length; i++) {
+        tooltips[i].style.top = y;
+        tooltips[i].style.left = x;
+      }
+    }
+  };
+
+  cambia(key) {
+    switch (key) {
+      case 'nombre':
+        if (this.errores.nombre != '') {
+          if (this.mascotaEditada.nombre) {
+            this.errores.nombre = '';
+          }
+        }
+        break;
+
+      case 'chip':
+        if (this.errores.chip != '') {
+          if (this.mascotaEditada.chip) {
+            this.errores.chip = '';
+          }
+        }
+        break;
+
+      case 'fecNac':
+        console.log("cambiando");
+        if (this.errores.fechaNac != '') {
+          if (this.mascotaEditada.fecNac) {
+            this.errores.fechaNac = '';
+          }
+        }
+        break;
+
+      case 'sexo':
+        if (this.errores.sexo != '') {
+          if (this.mascotaEditada.sexo) {
+            this.errores.sexo = '';
+          }
+        }
+        break;
+
+      case 'estado':
+        if (this.errores.estado != '') {
+          if (this.mascotaEditada.estado) {
+            this.errores.estado = '';
+          }
+        }
+        break;
+
+      case 'pelo':
+        if (this.errores.pelo != '') {
+          if (this.mascotaEditada.pelo) {
+            this.errores.pelo = '';
+          }
+        }
+        break;
+
+      case 'capa':
+        if (this.errores.capa != '') {
+          if (this.mascotaEditada.capa) {
+            this.errores.capa = '';
+          }
+        }
+        break;
+
+      case 'especie':
+        if (this.errores.especie != '') {
+          if (this.mascotaEditada.especie) {
+            this.errores.especie = '';
+          }
+        }
+        break;
+
+      case 'raza':
+        if (this.errores.raza != '') {
+          if (this.mascotaEditada.raza) {
+            this.errores.raza = '';
+          }
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
+
+
+  compruebaFallos() {
+    let res = true;
+    if (!this.mascotaEditada.nombre) {
+      this.errores.nombre = "obligatorio";
+      res = false;
+    }
+    if (!this.mascotaEditada.chip) {
+      this.errores.chip = "obligatorio";
+      res = false;
+    }
+    if (!this.mascotaEditada.fecNac) {
+      this.errores.fechaNac = "obligatorio";
+      res = false;
+    }
+    if (!this.mascotaEditada.sexo) {
+      this.errores.sexo = "obligatorio";
+      res = false;
+    }
+    if (!this.mascotaEditada.estado) {
+      this.errores.estado = "obligatorio";
+      res = false;
+    }
+    if (!this.mascotaEditada.pelo) {
+      this.errores.pelo = "obligatorio";
+      res = false;
+    }
+    if (!this.mascotaEditada.capa) {
+      this.errores.capa = "obligatorio";
+      res = false;
+    }
+    if (!this.mascotaEditada.especie) {
+      this.errores.especie = "obligatorio";
+      res = false;
+    }
+    if (!this.mascotaEditada.raza) {
+      this.errores.raza = "obligatorio";
+      res = false;
+    }
+    console.log("this.errores");
+    console.log(this.mascotaEditada.fecNac);
+    return res;
+  }
+
 }

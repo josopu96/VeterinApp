@@ -174,7 +174,6 @@ export class FormMascotasComponent implements OnInit {
         break;
 
       case 'fecNac':
-        console.log("cambiando");
         if (this.errores.fechaNac != '') {
           if (this.mascotaEditada.fecNac) {
             this.errores.fechaNac = '';
@@ -274,8 +273,42 @@ export class FormMascotasComponent implements OnInit {
       this.errores.raza = "obligatorio";
       res = false;
     }
-    console.log("this.errores");
-    console.log(this.mascotaEditada.fecNac);
+    if(this.comparaFechas(this.mascotaEditada.fecNac, this.mascotaEditada.fecBaj)){
+      this.errores.fechaNac = "fechaBaja";
+      this.errores.fechaFac = "fechaAlta";
+      res = false;
+    }
+    if(this.compruebaFechaFuturo(this.mascotaEditada.fecNac)){
+      this.errores.fechaNac = "fechaFuturo";
+      res = false;
+    }
+    if(this.compruebaFechaFuturo(this.mascotaEditada.fecBaj)){
+      this.errores.fechaFac = "fechaFuturo";
+      res = false;
+    }
+    return res;
+  }
+
+  compruebaFechaFuturo(fecha){
+    let res: boolean = false;
+    let now: Date = new Date();
+    if(fecha){
+      if(new Date(fecha)>now){
+        res = true;
+      }
+    }
+    return res;
+  }
+
+  comparaFechas(fecNac, fecBaj){
+    let res: boolean = false;
+    if(fecNac){
+      if(fecBaj){
+        if(fecNac>fecBaj){
+          res = true;
+        }
+      }
+    }
     return res;
   }
 

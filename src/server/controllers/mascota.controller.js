@@ -1,5 +1,7 @@
 const Mascota = require('../models/mascota.model');
 const Analitica = require('../models/cliente.model');
+const Cliente = require('../models/cliente.model');
+var mongoose = require('mongoose');
 
 exports.getMascotas = function(req, res) {
   Mascota.find({}, function(err, mascotas) {
@@ -32,13 +34,39 @@ exports.createMascota = function (req, res) {
     capa              : req.body.capa,
     especie           : req.body.especie,
     raza              : req.body.raza,
+    idCliente         : req.body.idCliente,
   });
+
+  var hoy = new Date();
 
   mascota.save(function (err) {
     if (err) {
       res.send(err);
     }
-    res.send( {'respuesta': 'Mascota creada satisfactoriamente'} );
+
+    Cliente.findById(req.body.idCliente, function (err, cliente) {
+      if (err) {
+        res.send(err);
+      } else {
+        var cuidados = cliente.cuidados;
+
+        var nuevoCuidado = {
+          _id: new mongoose.mongo.ObjectID,
+          fechaInicio: hoy,
+          idMascota: mascota._id
+        };
+        cuidados.push(nuevoCuidado);
+
+        cliente.save(function (err) {
+          if (err) {
+            res.send(err);
+          } else {
+            res.send({'cliente': cliente, 'mascota':  mascota});
+          }
+        });
+      }
+    });
+    
   });
 };
 

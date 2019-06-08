@@ -67,9 +67,11 @@ export class FormMascotasComponent implements OnInit {
         this.mascotaEditada.capa = params["capa"];
         this.mascotaEditada.especie = params["especie"];
         this.mascotaEditada.raza = params["raza"];
+        this.mascotaEditada.idCliente = params["idCliente"];
         this.ready = true;
       } else {
         this.new = true;
+        this.mascotaEditada.idCliente = this.clienteSeleccionado._id;
       }
     });
   }
@@ -102,7 +104,7 @@ export class FormMascotasComponent implements OnInit {
 
   guardar() {
     if (this.compruebaFallos()) {
-      if (this.compruebaFallos() && this.mascotaEditada._id) {
+      if (this.mascotaEditada._id) {
         this.actualizar();
       } else {
         this.crear();
@@ -124,7 +126,16 @@ export class FormMascotasComponent implements OnInit {
 
   crear() {
     this.dm.createMascota(this.mascotaEditada).then((res) => {
+      let resCliente: Cliente = res.cliente;
+      let resMascota: Mascota = res.mascota;
+      console.log(resCliente);
+      console.log(resMascota);
       this.globalService.mascotas.push(this.mascotaEditada);
+      let index = this.globalService.clientes.indexOf(
+        this.globalService.clientes.find(x => x._id === resCliente._id)
+      );
+      this.globalService.clientes[index] = resCliente;
+      this.globalService.setMascota(this.mascotaEditada);
       this.router.navigateByUrl('/mascotas');
     }).catch((err) => {
       console.log(err);

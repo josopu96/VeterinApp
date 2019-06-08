@@ -182,7 +182,9 @@ export class ListaComponent implements OnInit {
 
   private getClientesPorMascota() {
     return this.elements.filter(cliente => 
-      cliente.cuidados.includes(cliente.cuidados.filter(cuidado => cuidado.idMascota == this.mascotaSeleccionada._id)[0])
+      cliente.cuidados.includes(cliente.cuidados.filter(cuidado => 
+        cuidado.idMascota == this.mascotaSeleccionada._id)[0]
+      )
     );
   }
 

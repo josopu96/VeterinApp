@@ -71,7 +71,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormClinicaComponent,
     FormUsuarioComponent,
     FormMascotasComponent,
-    AvisoNuevaMascotaComponent
+    AvisoNuevaMascotaComponent,
     FormClienteComponent
   ],
   imports: [

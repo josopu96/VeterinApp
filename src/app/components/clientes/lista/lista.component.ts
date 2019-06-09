@@ -181,7 +181,7 @@ export class ListaComponent implements OnInit {
   }
 
   private getClientesPorMascota() {
-    return this.elements.filter(cliente => 
+    return this.elements.filter(cliente =>
       cliente.cuidados.includes(cliente.cuidados.filter(cuidado => cuidado.idMascota == this.mascotaSeleccionada._id)[0])
     );
   }
@@ -297,5 +297,21 @@ export class ListaComponent implements OnInit {
         this.dataListTelefonoInicializado = true;
       }
     }
+  }
+
+  editar(cliente: Cliente) {
+    let params = {
+        'id': cliente._id,
+        'nombre': cliente.nombre,
+        'apellidos': cliente.apellidos,
+        'dni': cliente.dni,
+        'poblacion': cliente.poblacion,
+        'direccion': cliente.direccion,
+        'codPostal': cliente.codPostal,
+        'email': cliente.email,
+        'fecNac': cliente.fecNac,
+      };
+    console.log(params);
+    this.router.navigate(['formClientes', params]);
   }
 }

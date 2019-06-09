@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 let contactoSchema = new Schema({
     nombre:             { type: String, required: true },
     telefono:           { type: String, required: true },
-  _id:           {   type: mongoose.Schema.Types.ObjectId, required: true}
-    tipo:               { type: String, required: true }
+    tipo:               { type: String, required: true },
+    _id:                { type: mongoose.Schema.Types.ObjectId, required: true}
 });
 
 let operacionSchema = new Schema({
@@ -23,9 +23,9 @@ let itemFacturaSchema = new Schema({
 });
 
 let cuidadoSchema = new Schema({
-    fechaInicio:        { type: String, required: true },
-    fechaFin:           { type: String },
-    idMascota:          { type: String, required: true }
+    fechaInicio:        { type: String, required: true  },
+    fechaFin:           { type: String, required: false },
+    idMascota:          { type: String, required: true  }
 });
 
 let facturaSchema = new Schema({
@@ -40,14 +40,14 @@ let facturaSchema = new Schema({
 });
 
 let clienteSchema = new Schema({
-    nombre:             { type: String, required: true },
-    apellidos:          { type: String, required: true },
-  direccion:       {   type: String,  required: false  },
-  poblacion:       {   type: String,  required: false  },
-    codPostal:          { type: Number },
-  email:           {   type: String,  required: false  },
-  fecNac:          {   type: Date,    required: false  },
-    fecModificacion:    { type: Date,   required: true },
+    nombre:             { type: String,   required: true  },
+    apellidos:          { type: String,   required: true  },
+    direccion:          { type: String,   required: false },
+    poblacion:          { type: String,   required: false },
+    codPostal:          { type: Number,   required: false },
+    email:              { type: String,   required: false },
+    fecNac:             { type: Date,     required: false },
+    fecModificacion:    { type: Date,     required: true  },
     contactos:          [ contactoSchema ],
     facturas:           [ facturaSchema  ],
     cuidados:           [ cuidadoSchema  ]

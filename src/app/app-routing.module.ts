@@ -32,7 +32,7 @@ const routes: Routes = [
     { path: 'formClinica' , component: FormClinicaComponent },
     { path: 'formUsuario' , component: FormUsuarioComponent },
     { path: 'formMascotas' , component: FormMascotasComponent },
-    { path: 'formClientes', component: FormClienteComponent}
+    { path: 'formClientes', component: FormClienteComponent},
     { path: 'avisoNuevaMascota' , component: AvisoNuevaMascotaComponent },
 ];
 

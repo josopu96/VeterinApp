@@ -1,0 +1,53 @@
+<div class="container{{tema}}">
+  <app-selecciones class="top"></app-selecciones>
+  <div class="bottom">
+    <app-menu class="menu"></app-menu>
+    <div class="seccion{{tema}} columna">
+      <div style="overflow: scroll">
+        <div class="titulo">
+          <span *ngIf="new"> Nuevo cliente </span>
+          <span *ngIf="!new"> Editando cliente </span>
+        </div>
+        <div class="formulario">
+          <fieldset>
+            <legend>Datos obligatorios</legend>
+            <div class="texto">
+              <span>Nombre</span><input type="text" [(ngModel)]="clienteEditado.nombre" />
+            </div>
+            <div class="texto">
+              <span>Apellidos</span><input type="text" [(ngModel)]="clienteEditado.apellidos" />
+            </div>
+            <div class="texto">
+              <span>DNI</span><input type="text" [(ngModel)]="clienteEditado.dni" />
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Datos opcionales</legend>
+            <div class="texto">
+              <span>Direccion</span><input type="text" [(ngModel)]="clienteEditado.direccion" />
+            </div>
+            <div class="texto">
+              <span>Poblacion</span><input type="text" [(ngModel)]="clienteEditado.poblacion" />
+            </div>
+            <div class="texto">
+              <span>Código Postal</span><input type="number" [(ngModel)]="clienteEditado.codPostal" />
+            </div>
+            <div class="texto">
+              <span>Email</span><input type="email" [(ngModel)]="clienteEditado.email" />
+            </div>
+            <div class="texto" *ngIf="clienteEditado.fecNac">
+              <span>Fecha de Nacimiento</span><input type="date" [ngModel]="clienteEditado.fecNac | date:'yyyy-MM-dd'"  (ngModelChange)="clienteEditado.fecNac=$event"  id="dt" />
+            </div>
+            <div class="texto" *ngIf="!clienteEditado.fecNac">
+              <span>Fecha de Nacimiento</span><input type="date" [ngModel]="clienteEditado.fecNac"  (ngModelChange)="clienteEditado.fecNac=$event"  id="dt" />
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <div class="guardar">
+        <button [routerLink]="['/clientes']"> Volver </button>
+        <button (click)="guardar()" [disabled]="checkFormIsFullfilled()"> Guardar </button>
+      </div>
+    </div>
+  </div>
+</div>

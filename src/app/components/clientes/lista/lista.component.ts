@@ -300,4 +300,20 @@ export class ListaComponent implements OnInit {
       }
     }
   }
+
+  editar(cliente: Cliente) {
+    let params = {
+        'id': cliente._id,
+        'nombre': cliente.nombre,
+        'apellidos': cliente.apellidos,
+        'dni': cliente.dni,
+        'poblacion': cliente.poblacion,
+        'direccion': cliente.direccion,
+        'codPostal': cliente.codPostal,
+        'email': cliente.email,
+        'fecNac': cliente.fecNac,
+      };
+    console.log(params);
+    this.router.navigate(['formClientes', params]);
+  }
 }

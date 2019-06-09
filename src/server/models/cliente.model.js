@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-
 let contactoSchema = new Schema({
     nombre:             { type: String, required: true },
     telefono:           { type: String, required: true },
+  _id:           {   type: mongoose.Schema.Types.ObjectId, required: true}
     tipo:               { type: String, required: true }
 });
 
@@ -12,8 +12,8 @@ let operacionSchema = new Schema({
     idOperacion:        { type: String, required: true },
     tipo:               { type: String, required: true },
     precio:             { type: Number, required: true },
-    concepto:           { type: String }
 });
+    concepto:           { type: String }
 
 let itemFacturaSchema = new Schema({
     cantidad:           { type: Number, required: true },
@@ -42,16 +42,18 @@ let facturaSchema = new Schema({
 let clienteSchema = new Schema({
     nombre:             { type: String, required: true },
     apellidos:          { type: String, required: true },
-    direccion:          { type: String },
+  direccion:       {   type: String,  required: false  },
+  poblacion:       {   type: String,  required: false  },
     codPostal:          { type: Number },
-    poblacion:          { type: String },
-    dni:                { type: String, required: true },
-    email:              { type: String },
-    fecNac:             { type: Date,   required: true },
+  email:           {   type: String,  required: false  },
+  fecNac:          {   type: Date,    required: false  },
     fecModificacion:    { type: Date,   required: true },
     contactos:          [ contactoSchema ],
     facturas:           [ facturaSchema  ],
     cuidados:           [ cuidadoSchema  ]
 });
+
+
+
 
 module.exports = mongoose.model('Cliente', clienteSchema, 'Cliente');

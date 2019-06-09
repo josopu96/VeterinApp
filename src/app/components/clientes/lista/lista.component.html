@@ -26,7 +26,7 @@
                     <td class="cabeceraVisualizar seleccionado"><img src="../../../../assets/img/visualizar-oscuro.png"
                         width="25px" height="13px"></td>
                     <td class="cabeceraEditar seleccionado"><img src="../../../../assets/img/editar-oscuro.png"
-                        width="25px" height="25px"></td>
+                        width="25px" height="25px" (click)="editar(el)"></td>
                     <td class="cabeceraSeleccionar seleccionado" (click)="limpiarCliente()"><img
                         src="../../../../assets/img/limpiar-oscuro.png" width="25px" height="25px"></td>
                   </tr>
@@ -39,7 +39,7 @@
                     <td class="cabeceraVisualizar"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px"
                         height="13px"></td>
                     <td class="cabeceraEditar"><img src="../../../../assets/img/editar-oscuro.png" width="25px"
-                        height="25px"></td>
+                        height="25px" (click)="editar(el)"></td>
                     <td class="cabeceraSeleccionar" (click)="onSelect(el)"><img
                         src="../../../../assets/img/seleccionar-oscuro.png" width="20px" height="20px"></td>
                   </tr>
@@ -47,7 +47,7 @@
               </tbody>
             </table>
           </div>
-          <div class="nuevo">
+          <div class="nuevo" [routerLink]="['/formClientes']" >
             Nuevo cliente
           </div>
         </div>

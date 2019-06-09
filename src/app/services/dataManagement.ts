@@ -150,6 +150,7 @@ export class DataManagement {
       return Promise.reject('error');
     });
   }
+
   public createMascota(mascota: Mascota): Promise<any> {
     return this.restService.createMascota(mascota).then((data) => {
       return Promise.resolve(data);
@@ -160,6 +161,22 @@ export class DataManagement {
 
   public updateMascota(mascota: Mascota): Promise<any> {
     return this.restService.updateMascota(mascota).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public createCliente(cliente: Cliente): Promise<any> {
+    return this.restService.createCliente(cliente).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public updateCliente(cliente: Cliente): Promise<any> {
+    return this.restService.updateCliente(cliente).then((data) => {
       return Promise.resolve(data);
     }).catch(error => {
       return Promise.reject('error');

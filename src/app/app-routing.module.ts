@@ -13,6 +13,7 @@ import { FormVeterinarioComponent } from './components/app-data/veterinarios/for
 import { FormClinicaComponent } from './components/app-data/clinica/form-clinica/form-clinica.component';
 import { FormUsuarioComponent } from './components/app-data/usuarios/form-usuario/form-usuario.component';
 import { FormMascotasComponent } from './components/mascotas/form-mascotas/form-mascotas.component';
+import { FormClienteComponent } from './components/clientes/form-cliente/form-cliente.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
     { path: 'formClinica' , component: FormClinicaComponent },
     { path: 'formUsuario' , component: FormUsuarioComponent },
     { path: 'formMascotas' , component: FormMascotasComponent },
+    { path: 'formClientes', component: FormClienteComponent}
 ];
 
 @NgModule({

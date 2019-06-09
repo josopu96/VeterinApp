@@ -324,4 +324,61 @@ export class RestWS extends AbstractWS {
     });
   }
 
+  public createCliente(cliente: Cliente) {
+    let fd = new HttpParams()
+      .set('nombre', cliente.nombre)
+      .set('apellidos', cliente.apellidos)
+      .set('dni', String(cliente.dni));
+
+      if (cliente.direccion) {
+        fd = fd.append('direccion', cliente.direccion);
+      }
+      if (cliente.poblacion) {
+        fd = fd.append('poblacion', cliente.poblacion);
+      }
+      if (cliente.codPostal) {
+        fd = fd.append('codPostal', cliente.codPostal + "");
+      }
+      if (cliente.email) {
+        fd = fd.append('email', cliente.email);
+      }
+      if (cliente.fecNac) {
+        fd = fd.append('fecNac', String(cliente.fecNac));
+      }
+
+    return this.makePostRequest(this.path + 'clientes/create', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public updateCliente(cliente: Cliente) {
+    let fd = new HttpParams()
+      .set('nombre', cliente.nombre)
+      .set('apellidos', cliente.apellidos)
+      .set('dni', String(cliente.dni));
+
+      if (cliente.direccion) {
+        fd = fd.append('direccion', cliente.direccion);
+      }
+      if (cliente.poblacion) {
+        fd = fd.append('poblacion', cliente.poblacion);
+      }
+      if (cliente.codPostal) {
+        fd = fd.append('codPostal', cliente.codPostal + "");
+      }
+      if (cliente.email) {
+        fd = fd.append('email', cliente.email);
+      }
+      if (cliente.fecNac) {
+        fd = fd.append('fecNac', String(cliente.fecNac));
+      }
+
+    return this.makePostRequest(this.path + 'clientes/' + cliente._id + '/update', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
 }

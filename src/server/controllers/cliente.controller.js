@@ -10,7 +10,6 @@ exports.getClientes = function(req, res) {
 };
 
 exports.getCliente = function(req, res) {
-  console.log("Parámetro id: "+req.params.id);
   Cliente.findById(req.params.id, function(err, cliente) {
       if (err)  {
           res.send(err);
@@ -18,3 +17,59 @@ exports.getCliente = function(req, res) {
       res.send(cliente);
   });
 };
+
+exports.createCliente = function (req, res) {
+  let direccion = req.body.direccion ? req.body.direccion : "";
+  let poblacion = req.body.poblacion ? req.body.poblacion : "";
+  let codPostal = req.body.codPostal ? req.body.codPostal : "";
+  let email = req.body.email ? req.body.email : "";
+  let fecNac = req.body.fecNac ? req.body.fecNac : "";
+
+  let cliente = new Cliente({
+    nombre: req.body.nombre,
+    apellidos: req.body.apellidos,
+    dni: req.body.dni,
+    direccion: direccion,
+    poblacion: poblacion,
+    codPostal: codPostal,
+    email: email,
+    fecNac: fecNac,
+    fecModificacion: new Date(),
+    contactos: [],
+    facturas: [],
+    cuidados: []
+  });
+  console.log(cliente);
+
+  cliente.save(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.send({ "response": 'Cliente creado satisfactoriamente' });
+  });
+};
+
+exports.updateCliente = function (req, res) {
+  let direccion = req.body.direccion ? req.body.direccion : "";
+  let poblacion = req.body.poblacion ? req.body.poblacion : "";
+  let codPostal = req.body.codPostal ? req.body.codPostal : "";
+  let email = req.body.email ? req.body.email : "";
+  let fecNac = req.body.fecNac ? req.body.fecNac : "";
+
+  Cliente.findByIdAndUpdate(req.params.id, {
+    $set: {
+      "nombre"          : req.body.nombre,
+      "apellidos"       : req.body.apellidos,
+      "dni"             : req.body.dni,
+      "direccion"       : direccion,
+      "poblacion"       : poblacion,
+      "codPostal"       : codPostal,
+      "email"           : email,
+      "fecNac"          : fecNac,
+      "fecModificacion" : new Date()
+    }
+  }, {new: true}, function (err, usuario) {
+    if (err) return next(err);
+    res.send(usuario);
+  });
+}

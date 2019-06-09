@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Mascota } from '../../../app.dataModels';
+import { Mascota, Cliente, Contacto } from '../../../app.dataModels';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from '../../../services/globalService';
 import { DataManagement } from '../../../services/dataManagement';
+import { ErroresFormMascota } from '../../../models/errores';
 
 @Component({
   selector: 'app-form-mascotas',
@@ -15,6 +16,10 @@ export class FormMascotasComponent implements OnInit {
   new: boolean;
   ready = false;
   mascotaEditada: Mascota = new Mascota();
+  clienteSeleccionado: Cliente;
+  sinCliente: Boolean = false;
+  telefono: string = '';
+  errores: ErroresFormMascota = new ErroresFormMascota();
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +29,23 @@ export class FormMascotasComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.inicializaErrores();
     this.globalService.getMascotas();
+    this.clienteSeleccionado = this.globalService.cliente;
+    if (this.clienteSeleccionado._id != "0") {
+      if (this.clienteSeleccionado._id == this.globalService.clienteEspecial._id) {
+        this.sinCliente = true;
+      } else {
+        if (this.clienteSeleccionado.contactos) {
+          if (this.clienteSeleccionado.contactos.length > 0) {
+            this.telefono = this.clienteSeleccionado.contactos[0].telefono;
+          }
+        }
+      }
+    } else {
+      //esta opción sólo se dará en desarrollo, cuando se reinicia el servidor en esta página.
+      this.metodoDesarrollo();
+    }
     if ((<HTMLInputElement>document.getElementById('nac_dt'))) {
       (<HTMLInputElement>document.getElementById('nac_dt')).max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
     }
@@ -46,18 +67,48 @@ export class FormMascotasComponent implements OnInit {
         this.mascotaEditada.capa = params["capa"];
         this.mascotaEditada.especie = params["especie"];
         this.mascotaEditada.raza = params["raza"];
+        this.mascotaEditada.idCliente = params["idCliente"];
         this.ready = true;
       } else {
         this.new = true;
+        this.mascotaEditada.idCliente = this.clienteSeleccionado._id;
       }
     });
   }
 
+  inicializaErrores() {
+    this.errores.nombre = '';
+    this.errores.chip = '';
+    this.errores.fechaNac = '';
+    this.errores.fechaFac = '';
+    this.errores.sexo = '';
+    this.errores.estado = '';
+    this.errores.pelo = '';
+    this.errores.capa = '';
+    this.errores.especie = '';
+    this.errores.raza = '';
+  }
+
+  metodoDesarrollo() {
+    this.sinCliente = false;
+    this.clienteSeleccionado = new Cliente();
+    this.clienteSeleccionado._id = "0";
+    this.clienteSeleccionado.nombre = "Dev";
+    this.clienteSeleccionado.apellidos = "Dev";
+    this.clienteSeleccionado.dni = "Dev";
+    this.clienteSeleccionado.contactos = [];
+    let contacto: Contacto = new Contacto();
+    contacto.telefono = "tel_dev";
+    this.clienteSeleccionado.contactos.push(contacto);
+  }
+
   guardar() {
-    if (this.mascotaEditada._id) {
-      this.actualizar();
-    } else {
-      this.crear();
+    if (this.compruebaFallos()) {
+      if (this.mascotaEditada._id) {
+        this.actualizar();
+      } else {
+        this.crear();
+      }
     }
   }
 
@@ -75,7 +126,16 @@ export class FormMascotasComponent implements OnInit {
 
   crear() {
     this.dm.createMascota(this.mascotaEditada).then((res) => {
+      let resCliente: Cliente = res.cliente;
+      let resMascota: Mascota = res.mascota;
+      console.log(resCliente);
+      console.log(resMascota);
       this.globalService.mascotas.push(this.mascotaEditada);
+      let index = this.globalService.clientes.indexOf(
+        this.globalService.clientes.find(x => x._id === resCliente._id)
+      );
+      this.globalService.clientes[index] = resCliente;
+      this.globalService.setMascota(this.mascotaEditada);
       this.router.navigateByUrl('/mascotas');
     }).catch((err) => {
       console.log(err);
@@ -93,4 +153,174 @@ export class FormMascotasComponent implements OnInit {
 
     return disabled;
   }
+
+  tooltip(e) {
+    let tooltips: NodeListOf<HTMLElement> = document.querySelectorAll('.texto_error span');
+    let x = (e.clientX + 20) + 'px',
+      y = (e.clientY + 20) + 'px';
+    if (tooltips) {
+      for (let i = 0; i < tooltips.length; i++) {
+        tooltips[i].style.top = y;
+        tooltips[i].style.left = x;
+      }
+    }
+  };
+
+  cambia(key) {
+    switch (key) {
+      case 'nombre':
+        if (this.errores.nombre != '') {
+          if (this.mascotaEditada.nombre) {
+            this.errores.nombre = '';
+          }
+        }
+        break;
+
+      case 'chip':
+        if (this.errores.chip != '') {
+          if (this.mascotaEditada.chip) {
+            this.errores.chip = '';
+          }
+        }
+        break;
+
+      case 'fecNac':
+        if (this.errores.fechaNac != '') {
+          if (this.mascotaEditada.fecNac) {
+            this.errores.fechaNac = '';
+          }
+        }
+        break;
+
+      case 'sexo':
+        if (this.errores.sexo != '') {
+          if (this.mascotaEditada.sexo) {
+            this.errores.sexo = '';
+          }
+        }
+        break;
+
+      case 'estado':
+        if (this.errores.estado != '') {
+          if (this.mascotaEditada.estado) {
+            this.errores.estado = '';
+          }
+        }
+        break;
+
+      case 'pelo':
+        if (this.errores.pelo != '') {
+          if (this.mascotaEditada.pelo) {
+            this.errores.pelo = '';
+          }
+        }
+        break;
+
+      case 'capa':
+        if (this.errores.capa != '') {
+          if (this.mascotaEditada.capa) {
+            this.errores.capa = '';
+          }
+        }
+        break;
+
+      case 'especie':
+        if (this.errores.especie != '') {
+          if (this.mascotaEditada.especie) {
+            this.errores.especie = '';
+          }
+        }
+        break;
+
+      case 'raza':
+        if (this.errores.raza != '') {
+          if (this.mascotaEditada.raza) {
+            this.errores.raza = '';
+          }
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
+
+
+  compruebaFallos() {
+    let res = true;
+    if (!this.mascotaEditada.nombre) {
+      this.errores.nombre = "obligatorio";
+      res = false;
+    }
+    if (!this.mascotaEditada.chip) {
+      this.errores.chip = "obligatorio";
+      res = false;
+    }
+    if (!this.mascotaEditada.fecNac) {
+      this.errores.fechaNac = "obligatorio";
+      res = false;
+    }
+    if (!this.mascotaEditada.sexo) {
+      this.errores.sexo = "obligatorio";
+      res = false;
+    }
+    if (!this.mascotaEditada.estado) {
+      this.errores.estado = "obligatorio";
+      res = false;
+    }
+    if (!this.mascotaEditada.pelo) {
+      this.errores.pelo = "obligatorio";
+      res = false;
+    }
+    if (!this.mascotaEditada.capa) {
+      this.errores.capa = "obligatorio";
+      res = false;
+    }
+    if (!this.mascotaEditada.especie) {
+      this.errores.especie = "obligatorio";
+      res = false;
+    }
+    if (!this.mascotaEditada.raza) {
+      this.errores.raza = "obligatorio";
+      res = false;
+    }
+    if(this.comparaFechas(this.mascotaEditada.fecNac, this.mascotaEditada.fecBaj)){
+      this.errores.fechaNac = "fechaBaja";
+      this.errores.fechaFac = "fechaAlta";
+      res = false;
+    }
+    if(this.compruebaFechaFuturo(this.mascotaEditada.fecNac)){
+      this.errores.fechaNac = "fechaFuturo";
+      res = false;
+    }
+    if(this.compruebaFechaFuturo(this.mascotaEditada.fecBaj)){
+      this.errores.fechaFac = "fechaFuturo";
+      res = false;
+    }
+    return res;
+  }
+
+  compruebaFechaFuturo(fecha){
+    let res: boolean = false;
+    let now: Date = new Date();
+    if(fecha){
+      if(new Date(fecha)>now){
+        res = true;
+      }
+    }
+    return res;
+  }
+
+  comparaFechas(fecNac, fecBaj){
+    let res: boolean = false;
+    if(fecNac){
+      if(fecBaj){
+        if(fecNac>fecBaj){
+          res = true;
+        }
+      }
+    }
+    return res;
+  }
+
 }

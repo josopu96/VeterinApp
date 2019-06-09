@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { DataManagement } from '../../../services/dataManagement';
 import { GlobalService } from '../../../services/globalService';
 import { Router } from '@angular/router';
 import { Mascota, Cliente } from '../../../app.dataModels';
 import { FiltroMascota } from '../../../models/filtros';
 import { CabeceraTabla } from '../../../models/tablas';
+import { remote, ipcRenderer, webContents } from 'electron';
 
 @Component({
   selector: 'app-lista',
@@ -16,12 +17,12 @@ export class ListaComponent implements OnInit {
 
 
   headElements: CabeceraTabla[] = [];
-
+  showAlert: Boolean = false;
   elements: Mascota[];
   tema = "_oscuro";
 
   mascotasTotales: Mascota[];
-  
+
   //Selecciones
   clienteSeleccionado: Cliente;
   mascotaSeleccionada: Mascota;
@@ -41,7 +42,8 @@ export class ListaComponent implements OnInit {
   constructor(
     private dm: DataManagement,
     private globalService: GlobalService,
-    private router: Router
+    private router: Router,
+    private ngZone: NgZone
   ) { }
 
   ngOnInit() {
@@ -56,7 +58,7 @@ export class ListaComponent implements OnInit {
 
   }
 
-  inicializaCabecera(){
+  inicializaCabecera() {
     let entrada1: CabeceraTabla = new CabeceraTabla();
     let entrada2: CabeceraTabla = new CabeceraTabla();
     let entrada3: CabeceraTabla = new CabeceraTabla();
@@ -85,8 +87,8 @@ export class ListaComponent implements OnInit {
 
   onSelect(mascota: Mascota): void {
 
-    this.clienteSeleccionado = this.globalService.clientes.find(cliente => cliente._id==mascota.idCliente);
-    if(!this.clienteSeleccionado){
+    this.clienteSeleccionado = this.globalService.clientes.find(cliente => cliente._id == mascota.idCliente);
+    if (!this.clienteSeleccionado) {
       this.clienteSeleccionado = this.globalService.clienteEspecial;
     }
     this.globalService.setCliente(this.clienteSeleccionado);
@@ -94,10 +96,10 @@ export class ListaComponent implements OnInit {
     this.router.navigateByUrl('/seleccionaMascota', { skipLocationChange: true }).then(() =>
       this.router.navigate(["mascotas"]));
   }
-  
-  limpiarMascota():void{
-      this.globalService.limpiarMascota();
-      this.router.navigateByUrl('/seleccionaMascota', {skipLocationChange: true}).then(()=>
+
+  limpiarMascota(): void {
+    this.globalService.limpiarMascota();
+    this.router.navigateByUrl('/seleccionaMascota', { skipLocationChange: true }).then(() =>
       this.router.navigate(["mascotas"]));
   }
 
@@ -159,11 +161,11 @@ export class ListaComponent implements OnInit {
 
     this.elements = this.mascotasTotales.filter(mascota =>
       mascota.nombre.toLowerCase().includes(this.filtroMascota.nombre.toLowerCase()) &&
-        mascota.chip.toLowerCase().includes(this.filtroMascota.chip.toLowerCase()) &&
-        mascota.raza.toLowerCase().includes(this.filtroMascota.raza.toLowerCase()) &&
-        mascota.pelo.toLowerCase().includes(this.filtroMascota.pelo.toLowerCase()) &&
-        mascota.especie.toLowerCase().includes(this.filtroMascota.especie.toLowerCase()) &&
-        mascota.sexo.toLowerCase().includes(this.filtroMascota.sexo.toLowerCase())
+      mascota.chip.toLowerCase().includes(this.filtroMascota.chip.toLowerCase()) &&
+      mascota.raza.toLowerCase().includes(this.filtroMascota.raza.toLowerCase()) &&
+      mascota.pelo.toLowerCase().includes(this.filtroMascota.pelo.toLowerCase()) &&
+      mascota.especie.toLowerCase().includes(this.filtroMascota.especie.toLowerCase()) &&
+      mascota.sexo.toLowerCase().includes(this.filtroMascota.sexo.toLowerCase())
 
     );
     if (this.filtroMascota.porCliente) {
@@ -174,8 +176,8 @@ export class ListaComponent implements OnInit {
     }
   }
 
-  filtroAtendidas(){
-    if(this.filtroMascota.atendidas){
+  filtroAtendidas() {
+    if (this.filtroMascota.atendidas) {
       this.filtroMascota.atendidas = false;
       this.aplicarFiltros();
     } else {
@@ -184,8 +186,8 @@ export class ListaComponent implements OnInit {
     }
   }
 
-  filtroCliente(){
-    if(this.filtroMascota.porCliente){
+  filtroCliente() {
+    if (this.filtroMascota.porCliente) {
       this.filtroMascota.porCliente = false;
       this.aplicarFiltros();
     } else {
@@ -195,12 +197,12 @@ export class ListaComponent implements OnInit {
   }
 
   private getMascotasPorCliente() {
-    return this.elements.filter(mascota => 
+    return this.elements.filter(mascota =>
       mascota.idCliente == this.clienteSeleccionado._id
     );
   }
 
-  private getMascotasAtendidas(){
+  private getMascotasAtendidas() {
     return this.elements.filter(mascota =>
       this.time.setHours(0, 0, 0, 0) <= new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) &&
       new Date(mascota.fecModificacion).setHours(0, 0, 0, 0) <= this.time.setHours(0, 0, 0, 0)
@@ -345,18 +347,36 @@ export class ListaComponent implements OnInit {
 
   editar(mascota: Mascota) {
     let params = {
-        'id': mascota._id,
-        'nombre': mascota.nombre,
-        'chip': mascota.chip,
-        'fecNac': mascota.fecNac,
-        'fecBaj': mascota.fecBaj,
-        'sexo': mascota.sexo,
-        'estado': mascota.estado,
-        'pelo': mascota.pelo,
-        'capa': mascota.capa,
-        'especie': mascota.especie,
-        'raza': mascota.raza
-      };
+      'id': mascota._id,
+      'nombre': mascota.nombre,
+      'chip': mascota.chip,
+      'fecNac': mascota.fecNac,
+      'fecBaj': mascota.fecBaj,
+      'sexo': mascota.sexo,
+      'estado': mascota.estado,
+      'pelo': mascota.pelo,
+      'capa': mascota.capa,
+      'especie': mascota.especie,
+      'raza': mascota.raza
+    };
     this.router.navigate(['formMascotas', params]);
   }
+
+  // Registro de mascotas
+
+  nuevaMascota() {
+    this.showAlert = true;
+    if (this.clienteSeleccionado) {
+      if (this.clienteSeleccionado._id != "0") {
+        this.showAlert = false;
+      }
+    }
+
+    if (this.showAlert) {
+      this.globalService.generaVentana(300, 552, '/avisoNuevaMascota', 'nueva-mascota');
+    } else {
+      this.router.navigate(['formMascotas']);
+    }
+  }
+
 }

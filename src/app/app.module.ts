@@ -41,6 +41,7 @@ import { FormVeterinarioComponent } from './components/app-data/veterinarios/for
 import { FormClinicaComponent } from './components/app-data/clinica/form-clinica/form-clinica.component';
 import { FormUsuarioComponent } from './components/app-data/usuarios/form-usuario/form-usuario.component';
 import { FormMascotasComponent } from './components/mascotas/form-mascotas/form-mascotas.component';
+import { AvisoNuevaMascotaComponent } from './components/mascotas/aviso-nueva-mascota/aviso-nueva-mascota.component';
 import { FormClienteComponent } from './components/clientes/form-cliente/form-cliente.component';
 
 // AoT requires an exported function for factories
@@ -70,6 +71,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormClinicaComponent,
     FormUsuarioComponent,
     FormMascotasComponent,
+    AvisoNuevaMascotaComponent
     FormClienteComponent
   ],
   imports: [

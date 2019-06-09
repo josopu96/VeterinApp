@@ -11,22 +11,21 @@ function createWindow() {
     var size = electronScreen.getPrimaryDisplay().workAreaSize;
     var anchoVentana = 1280;
     var altoVentana = 720;
-    if (serve) {
-        anchoVentana = anchoVentana;
-    }
-    var margenHorizontal = (size.width - anchoVentana) / 2;
-    var margenVertical = (size.height - altoVentana) / 2;
+    var margenHorizontal = Math.floor((size.width - anchoVentana) / 2);
+    var margenVertical = Math.floor((size.height - altoVentana) / 2);
     // Create the browser window.
     win = new electron_1.BrowserWindow({
         x: margenHorizontal,
         y: margenVertical,
-        width: 1280,
+        minWidth: anchoVentana,
+        width: anchoVentana,
         minHeight: 749,
         height: 749,
         webPreferences: {
             nodeIntegration: true,
         },
         resizable: false,
+        show: false,
     });
     var express = require('express');
     var bodyParser = require('body-parser');
@@ -73,6 +72,10 @@ function createWindow() {
         win.webContents.openDevTools();
     }
     win.setSize(anchoVentana, altoVentana + 29);
+    var ipcMain = require('electron').ipcMain;
+    ipcMain.on('request-update-in-window', function (event, arg) {
+        win.webContents.send('action-update', arg);
+    });
     // Emitted when the window is closed.
     win.on('closed', function () {
         // Dereference the window object, usually you would store window
@@ -80,12 +83,17 @@ function createWindow() {
         // when you should delete the corresponding element.
         win = null;
     });
+    win.once('ready-to-show', function () {
+        win.show();
+    });
 }
 try {
     // This method will be called when Electron has finished
     // initialization and is ready to create browser windows.
     // Some APIs can only be used after this event occurs.
-    electron_1.app.on('ready', createWindow);
+    electron_1.app.on('ready', function () {
+        createWindow();
+    });
     // Quit when all windows are closed.
     electron_1.app.on('window-all-closed', function () {
         // On OS X it is common for applications and their menu bar

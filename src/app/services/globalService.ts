@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { DataManagement } from '../services/dataManagement';
 import { Ajustes, Usuario, Mascota, Veterinario, Cliente, Clinica } from '../app.dataModels';
 import { FiltroCliente, FiltroMascota, FiltroVeterinario, FiltroUsuario } from '../models/filtros';
+import { remote, ipcRenderer, webContents } from 'electron';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class GlobalService {
@@ -33,12 +35,14 @@ export class GlobalService {
 
   constructor(
     private coockieService: CookieService,
-    private dm: DataManagement
+    private dm: DataManagement,
+    private router: Router,
+    private ngZone: NgZone
   ) {
     this.initialize();
   }
 
-  private initialize(){
+  private initialize() {
 
     //Inicializamos el cliente, el veterinario y la mascota con id=0
     this.cliente = new Cliente();
@@ -81,7 +85,7 @@ export class GlobalService {
         this.clientes.find(x => x._id === "100000000000000000000000")
       );
       this.clienteEspecial = this.clientes[index];
-      this.clientes.splice(index,1);
+      this.clientes.splice(index, 1);
     }).catch((err) => {
       console.error(err);
     });
@@ -236,7 +240,7 @@ export class GlobalService {
 
   // --- FILTROS ---
 
-  inicializaFiltroCliente(){
+  inicializaFiltroCliente() {
     this.filtroCliente = new FiltroCliente();
     this.filtroCliente.nombre = '';
     this.filtroCliente.apellidos = '';
@@ -248,7 +252,7 @@ export class GlobalService {
     this.filtroCliente.atendidos = false;
   }
 
-  inicializaFiltroMascota(){
+  inicializaFiltroMascota() {
     this.filtroMascota = new FiltroMascota();
     this.filtroMascota.nombre = '';
     this.filtroMascota.chip = '';
@@ -261,27 +265,27 @@ export class GlobalService {
     this.filtroMascota.porCliente = false;
   }
 
-  inicializaFiltroVeterinario(){
+  inicializaFiltroVeterinario() {
     this.filtroVeterinario = new FiltroVeterinario();
     this.filtroVeterinario.nombre = '';
     this.filtroVeterinario.apellidos = '';
     this.filtroVeterinario.dni = '';
   }
 
-  inicializaFiltroUsuario(){
+  inicializaFiltroUsuario() {
     this.filtroUsuario = new FiltroUsuario();
     this.filtroUsuario.nombre = '';
   }
 
-  setFiltroCliente(filtro: FiltroCliente){
+  setFiltroCliente(filtro: FiltroCliente) {
     this.filtroCliente = filtro;
   }
 
-  setFiltroMascota(filtro: FiltroMascota){
+  setFiltroMascota(filtro: FiltroMascota) {
     this.filtroMascota = filtro;
   }
 
-  setFiltroVeterinario(filtro: FiltroVeterinario){
+  setFiltroVeterinario(filtro: FiltroVeterinario) {
     this.filtroVeterinario = filtro;
   }
 
@@ -296,5 +300,106 @@ export class GlobalService {
     this.getUsuarioPorToken();
   }
 
+
+  generaVentana(alto, ancho, ruta, tipo) {
+
+    //Obtenemos la ventana actual junto a todos sus datos de ubicación y tamaño
+    let currentWindows = remote.BrowserWindow.getFocusedWindow();
+    let location = currentWindows.getBounds();
+    let posicionX = Math.floor(location.x + (location.width - ancho) / 2);
+    let posicionY = Math.floor(location.y + (location.height - alto) / 2);
+
+    //Creamos una ventana oscura que ocupará el 100% de la ventana principal
+    let back = new remote.BrowserWindow({
+      x: location.x,
+      y: location.y,
+      width: location.width,
+      height: location.height,
+      minHeight: location.height,
+      frame: false,
+      show: true,
+      parent: currentWindows,
+      resizable: false,
+      backgroundColor: "#000",
+      opacity: 0.6,
+    });
+
+    //Creamos la ventana que contendrá la información
+    let win = new remote.BrowserWindow({
+      x: posicionX,
+      y: posicionY,
+      width: ancho,
+      minHeight: alto,
+      height: alto,
+      parent: back,
+      show: false,
+      resizable: false,
+      webPreferences: {
+        devTools: true,
+        nodeIntegration: true,
+      },
+      frame: false,
+      opacity: 1,
+      minimizable: false,
+      transparent: true,
+    });
+
+    // Comentar las siguientes lineas cuando se termine de programar la nueva ventana
+    // win.webContents.openDevTools()
+    // win.setMenu(null);
+    // back.setMenu(null);
+
+    //Especificamos la ruta donde se encuentra el componente que vamos a cargar en la nueva página
+    const path = require('path');
+    const url = require('url');
+    win.loadURL(url.format({
+      pathname: path.join('localhost:4200'),
+      protocol: 'http:',
+      slashes: true,
+      hash: ruta,
+    }));
+
+    //Con esta función podremos actuar en la ventana principal en función de lo que se haya realizado en la ventana secundaria.
+    //Aquí es donde debemos añadir el tipo específico para diferenciar las funcionalidades de cada ventana.
+    ipcRenderer.once('action-update', (event, arg) => {
+      if (tipo == "nueva-mascota") {
+        this.ngZone.run(() => { this.actionUpdateNuevaMascota(arg) });
+      }
+    });
+
+    //Cuando se cierre la ventana secundaria, debemos cerrar también la ventana oscura que habíamos creado
+    win.on('closed', () => {
+      back.close();
+      win = null;
+    })
+
+    //Cierre de la ventana oscura
+    back.on('closed', () => {
+      back = null;
+    })
+
+    //Esta función la usaremos para mostrar la ventana cuando esté el contenido totalmente cargado
+    //Mientras se carga, se mostrará la ventana oscura que impedirá realizar otra acción simultánea
+    win.once('ready-to-show', () => {
+      // back.show();
+      win.show();
+    })
+  }
+
+  //Funcionalidad de la ventana para nuevas mascotas
+  async actionUpdateNuevaMascota(arg) {
+    if (arg) {
+      //Esta ventana sólo se moestrará si se intenta crear una mascota sin haber seleccionado un cliente previamente
+      if (arg.action == "continuar") {
+        //En caso de continuar sin cliente, seleccionaremos el cliente especial de manera automática.
+        this.setCliente(this.clienteEspecial);
+        this.router.navigate(['formMascotas']);
+      } else if (arg.action == "elegir") {
+        //En caso de seleccionar elegir cliente, redirigimos a la lista de clientes
+        this.router.navigate(['clientes']);
+      }
+      //En cualquier otro caso no hacemos nada
+    }
+  }
 
 }

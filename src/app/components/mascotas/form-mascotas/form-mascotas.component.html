@@ -1,58 +1,110 @@
-<div class="container{{tema}}">
+<div class="container{{tema}}" (document:mousemove)='tooltip($event)'>
   <app-selecciones class="top"></app-selecciones>
   <div class="bottom">
     <app-menu class="menu"></app-menu>
     <div class="seccion{{tema}} columna">
-      <div style="overflow: scroll">
-        <div class="titulo">
-          <span *ngIf="new"> Nueva mascota </span>
-          <span *ngIf="!new"> Editando mascota </span>
+      <div class="titulo">
+        <span *ngIf="new"> Nueva mascota </span>
+        <span *ngIf="!new"> Editando mascota </span>
+      </div>
+      <div class="formulario">
+        <div class="form_izq">
+          <div class="texto{{errores.nombre ? '_error' : ''}}">
+            <label for="nombre">Nombre</label><input type="text" id="nombre" [(ngModel)]="mascotaEditada.nombre"
+              (ngModelChange)="cambia('nombre')" />
+            <span class="tooltip" *ngIf="errores.nombre=='obligatorio'">Es obligatorio rellenar este campo</span>
+          </div>
+          <div class="texto{{errores.chip ? '_error' : ''}}">
+            <label for="chip">Chip</label><input type="text" id="chip" [(ngModel)]="mascotaEditada.chip"
+              (ngModelChange)="cambia('chip')" />
+            <span class="tooltip" *ngIf="errores.chip=='obligatorio'">Es obligatorio rellenar este campo</span>
+          </div>
+          <div class="texto{{errores.fechaNac ? '_error' : ''}}">
+            <label>Fecha de Nacimiento</label><input type="date" [ngModel]="mascotaEditada.fecNac | date:'yyyy-MM-dd'"
+              (ngModelChange)="mascotaEditada.fecNac=$event; cambia('fecNac')" id="nac_dt" required />
+            <span class="tooltip" *ngIf="errores.fechaNac=='obligatorio'">Es obligatorio rellenar este campo</span>
+            <span class="tooltip" *ngIf="errores.fechaNac=='fechaFuturo'">La fecha de nacimiento no puede estar en el futuro</span>
+            <span class="tooltip" *ngIf="errores.fechaNac=='fechaBaja'">La fecha de nacimiento no puede ser posterior a la fecha de fallecimiento</span>
+          </div>
+          <div class="texto{{errores.fechaFac ? '_error' : ''}}" *ngIf="mascotaEditada.fecBaj">
+            <label>Fecha de Fallecimiento</label><input type="date"
+              [ngModel]="mascotaEditada.fecBaj | date:'yyyy-MM-dd'" (ngModelChange)="mascotaEditada.fecBaj=$event; cambia('fecBaj')"
+              id="def_dt" />
+              <span class="tooltip" *ngIf="errores.fechaFac=='fechaFuturo'">La fecha de fallecimiento no puede estar en el futuro</span>
+              <span class="tooltip" *ngIf="errores.fechaFac=='fechaAlta'">La fecha de fallecimiento no puede ser anterior a la fecha de nacimiento</span>
+          </div>
+          <div class="texto{{errores.fechaFac ? '_error' : ''}}" *ngIf="!mascotaEditada.fecBaj">
+            <label>Fecha de Fallecimiento</label><input type="date" [(ngModel)]="mascotaEditada.fecBaj" (ngModelChange)="cambia('fecBaj')" id="def_dt" />
+            <span class="tooltip" *ngIf="errores.fechaFac=='fechaFuturo'">La fecha de fallecimiento no puede estar en el futuro</span>
+            <span class="tooltip" *ngIf="errores.fechaFac=='fechaAlta'">La fecha de fallecimiento no puede ser anterior a la fecha de nacimiento</span>
+          </div>
+          <div class="texto{{errores.sexo ? '_error' : ''}}">
+            <label for="sexo">Sexo</label><input type="text" id="sexo" [(ngModel)]="mascotaEditada.sexo"
+              (ngModelChange)="cambia('sexo')" />
+            <span class="tooltip" *ngIf="errores.sexo=='obligatorio'">Es obligatorio rellenar este campo</span>
+          </div>
+          <div class="texto{{errores.estado ? '_error' : ''}}">
+            <label for="estado">Estado</label><input type="text" id="estado" [(ngModel)]="mascotaEditada.estado"
+              (ngModelChange)="cambia('estado')" />
+            <span class="tooltip" *ngIf="errores.estado=='obligatorio'">Es obligatorio rellenar este campo</span>
+          </div>
+          <div class="texto{{errores.pelo ? '_error' : ''}}">
+            <label for="pelo">Pelo</label><input type="text" id="pelo" [(ngModel)]="mascotaEditada.pelo"
+              (ngModelChange)="cambia('pelo')" />
+            <span class="tooltip" *ngIf="errores.pelo=='obligatorio'">Es obligatorio rellenar este campo</span>
+          </div>
         </div>
-        <div class="formulario">
-          <fieldset>
-            <legend>Datos obligatorios</legend>
-            <div class="texto">
-              <span>Nombre</span><input type="text" [(ngModel)]="mascotaEditada.nombre" />
+        <div class="form_dcha">
+          <div class="datos_cliente">
+            <div class="seccion_cliente">
+              <div class="titulo_dueño">Dueño de la mascota</div>
+              <div class="datos_dueño" *ngIf="!sinCliente">
+                <div class="item_datos">
+                  <div class="item_titulo">Nombre</div>
+                  <div class="item_contenido">{{clienteSeleccionado.nombre}}</div>
+                </div>
+                <div class="item_datos">
+                  <div class="item_titulo">Apellidos</div>
+                  <div class="item_contenido">{{clienteSeleccionado.apellidos}}</div>
+                </div>
+                <div class="item_datos">
+                  <div class="item_titulo">Documento</div>
+                  <div class="item_contenido">{{clienteSeleccionado.dni}}</div>
+                </div>
+                <div class="item_datos">
+                  <div class="item_titulo">Teléfono</div>
+                  <div class="item_contenido">{{telefono}}</div>
+                </div>
+              </div>
+              <div class="datos_dueño" *ngIf="sinCliente">
+                <div class="sin_cliente">
+                  Sin dueño
+                </div>
+              </div>
             </div>
-            <div class="texto">
-              <span>Chip</span><input type="text" [(ngModel)]="mascotaEditada.chip" />
+          </div>
+          <div class="datos_mascota">
+            <div class="texto{{errores.capa ? '_error' : ''}}">
+              <label for="capa">Capa</label><input type="text" id="capa" [(ngModel)]="mascotaEditada.capa"
+                (ngModelChange)="cambia('capa')" />
+              <span class="tooltip" *ngIf="errores.capa=='obligatorio'">Es obligatorio rellenar este campo</span>
             </div>
-            <div class="texto">
-                <span>Fecha de Nacimiento</span><input type="date" [ngModel]="mascotaEditada.fecNac | date:'yyyy-MM-dd'"  (ngModelChange)="mascotaEditada.fecNac=$event" id="nac_dt" />
+            <div class="texto{{errores.especie ? '_error' : ''}}">
+              <label for="especie">Especie</label><input type="text" id="especie" [(ngModel)]="mascotaEditada.especie"
+                (ngModelChange)="cambia('especie')" />
+              <span class="tooltip" *ngIf="errores.especie=='obligatorio'">Es obligatorio rellenar este campo</span>
             </div>
-            <div class="texto">
-              <span>Sexo</span><input type="text" [(ngModel)]="mascotaEditada.sexo" />
+            <div class="texto{{errores.raza ? '_error' : ''}}">
+              <label for="raza">Raza</label><input type="text" id="raza" [(ngModel)]="mascotaEditada.raza"
+                (ngModelChange)="cambia('raza')" />
+              <span class="tooltip" *ngIf="errores.raza=='obligatorio'">Es obligatorio rellenar este campo</span>
             </div>
-            <div class="texto">
-              <span>Estado</span><input type="text" [(ngModel)]="mascotaEditada.estado" />
-            </div>
-            <div class="texto">
-              <span>Pelo</span><input type="text" [(ngModel)]="mascotaEditada.pelo" />
-            </div>
-            <div class="texto">
-              <span>Capa</span><input type="text" [(ngModel)]="mascotaEditada.capa" />
-            </div>
-            <div class="texto">
-              <span>Especie</span><input type="text" [(ngModel)]="mascotaEditada.especie" />
-            </div>
-            <div class="texto">
-              <span>Raza</span><input type="text" [(ngModel)]="mascotaEditada.raza" />
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Datos opcionales</legend>
-            <div class="texto" *ngIf="mascotaEditada.fecBaj">
-              <span>Fecha de Fallecimiento</span><input type="date" [ngModel]="mascotaEditada.fecBaj | date:'yyyy-MM-dd'"  (ngModelChange)="mascotaEditada.fecBaj=$event" id="nac_dt" />
-            </div>
-            <div class="texto" *ngIf="!mascotaEditada.fecBaj">
-              <span>Fecha de Fallecimiento</span><input type="date" [(ngModel)]="mascotaEditada.fecBaj" id="nac_dt" />
-            </div>
-          </fieldset>
+          </div>
         </div>
       </div>
       <div class="guardar">
         <button [routerLink]="['/mascotas']"> Volver </button>
-        <button (click)="guardar()" [disabled]="checkFormIsFullfilled()"> Guardar </button>
+        <button (click)="guardar()"> Guardar </button>
       </div>
     </div>
   </div>

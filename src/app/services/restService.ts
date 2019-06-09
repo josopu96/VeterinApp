@@ -292,13 +292,14 @@ export class RestWS extends AbstractWS {
       .set('pelo', mascota.pelo)
       .set('capa', mascota.capa)
       .set('especie', mascota.especie)
-      .set('raza', mascota.raza);
+      .set('raza', mascota.raza)
+      .set('idCliente', mascota.idCliente);
 
       if (mascota.fecBaj) {
         fd = fd.append('fecBaj', String(mascota.fecBaj));
       }
-    return this.makePostRequest(this.path + 'mascotas/create', fd).then((_) => {
-      return Promise.resolve();
+    return this.makePostRequest(this.path + 'mascotas/create', fd).then((data) => {
+      return Promise.resolve(data);
     }).catch(error => {
       return Promise.reject(error);
     });

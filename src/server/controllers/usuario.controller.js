@@ -55,12 +55,12 @@ exports.displayUsuario = function (req, res) {
 exports.updateUsuario = function (req, res) {
   if (req.body.oldClave && req.body.clave) {
     _updateUsuarioConClave(req, res);
+  } else {
+    _updateUsuario(req, res, function (err, usuario) {
+      if (err) return next(err);
+      res.send(usuario);
+    });
   }
-
-  _updateUsuario(req, res, function (err, usuario) {
-    if (err) return next(err);
-    res.send(usuario);
-  });
 };
 
 function _updateUsuarioConClave(req, res) {
@@ -69,9 +69,15 @@ function _updateUsuarioConClave(req, res) {
       if (usuario.clave == req.body.oldClave) {
         Usuario.findByIdAndUpdate(req.params.id, {
           $set: {"clave": req.body.clave},
-        }, {new: true}, function (err, usuario) {
-          if (err) return next(err);
+        }, {new: true}, function (err2, usuario) {
+          if (err2) return next(err2);
+          _updateUsuario(req, res, function (err, usuario) {
+            if (err) return next(err);
+            res.send(usuario);
+          });
         });
+      } else {
+        res.status(404).send({ "response": 'La contraseña es incorrecta' });
       }
     }
   });

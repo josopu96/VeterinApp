@@ -95,7 +95,6 @@ export class FormUsuarioComponent implements OnInit {
     let res = false;
     if (this.clave1 || this.clave2) {
       if (this.clave1 == this.clave2) {
-        console.log("Pasa el test");
         this.usuarioEditado.clave = this.clave1;
         res = true;
       }

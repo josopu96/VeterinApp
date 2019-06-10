@@ -22,10 +22,8 @@ export class RestWS extends AbstractWS {
   public login(email, clave) {
     const fd = new HttpParams().set('email', email).set('clave', clave);
     return this.makePostRequest(this.path + 'usuarios/login', fd).then((res: Usuario) => {
-      console.log('Logged successfully');
       return Promise.resolve(res);
     }).catch(error => {
-      console.log('Error: ' + error);
       return Promise.reject(error);
     });
   }
@@ -38,7 +36,6 @@ export class RestWS extends AbstractWS {
     return this.makeGetRequest(this.path + 'clientes', fd).then((res: Cliente[]) => {
       return Promise.resolve(res);
     }).catch(error => {
-      console.log('Error: ' + error);
       return Promise.reject(error);
     });
   }
@@ -48,7 +45,6 @@ export class RestWS extends AbstractWS {
     return this.makeGetRequest(this.path + 'clientes/' + id, fd).then((res: String) => {
       return Promise.resolve(res);
     }).catch(error => {
-      console.log('Error: ' + error);
       return Promise.reject(error);
     });
   }
@@ -70,7 +66,6 @@ export class RestWS extends AbstractWS {
       .set('recordatorio', ajustes.recordatorio.toString())
       .set('id', ajustes._id);
     return this.makePostRequest(this.path + 'usuarios/updateAjustes/' + token, fd).then((res) => {
-      console.log(res);
       return Promise.resolve(res);
     }).catch(error => {
       console.error('Error: ' + error);
@@ -106,7 +101,6 @@ export class RestWS extends AbstractWS {
     return this.makeGetRequest(this.path + 'mascotas', fd).then((res: String) => {
       return Promise.resolve(res);
     }).catch(error => {
-      console.log('Error: ' + error);
       return Promise.reject(error);
     });
   }
@@ -119,7 +113,6 @@ export class RestWS extends AbstractWS {
     return this.makeGetRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinarios', fd).then((res: String) => {
       return Promise.resolve(res);
     }).catch(error => {
-      console.log('Error: ' + error);
       return Promise.reject(error);
     });
   }
@@ -128,7 +121,6 @@ export class RestWS extends AbstractWS {
     return this.makeGetRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinario/' + id, null).then((res: Veterinario) => {
       return Promise.resolve(res);
     }).catch(error => {
-      console.log('Error: ' + error);
       return Promise.reject(error);
     });
   }
@@ -231,7 +223,6 @@ export class RestWS extends AbstractWS {
     return this.makeGetRequest(this.path + 'clinicas/' + this.clinicaId, fd).then((res: String) => {
       return Promise.resolve(res);
     }).catch(error => {
-      console.log('Error: ' + error);
       return Promise.reject(error);
     });
   }
@@ -244,7 +235,6 @@ export class RestWS extends AbstractWS {
     return this.makeGetRequest(this.path + 'usuarios/', fd).then((res: String) => {
       return Promise.resolve(res);
     }).catch(error => {
-      console.log('Error: ' + error);
       return Promise.reject(error);
     });
   }
@@ -268,9 +258,7 @@ export class RestWS extends AbstractWS {
       .set('isAdmin', usuario.isAdmin + "")
       .set('email', usuario.email);
 
-      console.log(usuario);
       if (usuario.clave && usuario.oldClave) {
-        console.log(usuario);
         fd = fd.append('oldClave', usuario.oldClave);
         fd = fd.append('clave', usuario.clave);
       }

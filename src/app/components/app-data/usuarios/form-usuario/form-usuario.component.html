@@ -7,14 +7,14 @@
         <span *ngIf="new"> Nuevo usuario </span>
         <span *ngIf="!new"> Editando usuario </span>
       </div>
-      <div class="formulario">
+      <div class="formulario" *ngIf="ready">
         <fieldset>
           <legend>Datos obligatorios</legend>
           <div class="texto">
             <span>Nombre de usuario</span><input type="text" [(ngModel)]="usuarioEditado.nombre" />
           </div>
           <div class="texto">
-            <span>Permisos de administrador</span><input type="checkbox" [(ngModel)]="usuarioEditado.isAdmin" />
+            <span>Permisos de administrador</span><input type="checkbox" [checked]="usuarioEditado.isAdmin == 'true' ? true: false" (change)="usuarioEditado.isAdmin = $event.target.checked"/>
           </div>
           <div class="texto">
             <span>Email</span><input type="email" [(ngModel)]="usuarioEditado.email" />

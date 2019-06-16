@@ -418,7 +418,7 @@
         cursor: pointer;
 
         &:hover{
-          background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.397) 0%, rgba(0, 0, 0, 0)80%);
+          background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.397) 0%, rgba(0, 0, 0, 0)80%);
         }
       }
       .colSeleccionar{
@@ -426,10 +426,9 @@
         max-width: 70px;
         overflow: hidden;
         cursor: pointer;
-        transition: all 0.3s;
 
         &:hover{
-          background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.397) 0%, rgba(0, 0, 0, 0)80%);
+          background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.397) 0%, rgba(0, 0, 0, 0)80%);
         }
       }
       .colEditar{
@@ -437,10 +436,9 @@
         max-width: 70px;
         overflow: hidden;
         cursor: pointer;
-        transition: all 0.3s;
 
         &:hover{
-          background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.397) 0%, rgba(0, 0, 0, 0)80%);
+          background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.397) 0%, rgba(0, 0, 0, 0)80%);
         }
       }
       .seleccionado{

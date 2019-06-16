@@ -47,6 +47,7 @@ export class ListaComponent implements OnInit {
     this.filtroCliente = this.globalService.filtroCliente;
     this.elements = this.globalService.clientes;
     this.clientesTotales = this.globalService.clientes;
+    this.ordenaLista();
     this.tema = "_" + this.globalService.getTema();
     this.aplicarFiltros();
   }
@@ -152,7 +153,7 @@ export class ListaComponent implements OnInit {
     }
   }
 
-  filtroMascota(){
+  filtroMascota() {
     if (this.filtroCliente.porMascota) {
       this.filtroCliente.porMascota = false;
       this.aplicarFiltros();
@@ -181,8 +182,8 @@ export class ListaComponent implements OnInit {
   }
 
   private getClientesPorMascota() {
-    return this.elements.filter(cliente => 
-      cliente.cuidados.includes(cliente.cuidados.filter(cuidado => 
+    return this.elements.filter(cliente =>
+      cliente.cuidados.includes(cliente.cuidados.filter(cuidado =>
         cuidado.idMascota == this.mascotaSeleccionada._id)[0]
       )
     );
@@ -303,17 +304,34 @@ export class ListaComponent implements OnInit {
 
   editar(cliente: Cliente) {
     let params = {
-        'id': cliente._id,
-        'nombre': cliente.nombre,
-        'apellidos': cliente.apellidos,
-        'dni': cliente.dni,
-        'poblacion': cliente.poblacion,
-        'direccion': cliente.direccion,
-        'codPostal': cliente.codPostal,
-        'email': cliente.email,
-        'fecNac': cliente.fecNac,
-      };
+      'id': cliente._id,
+      'nombre': cliente.nombre,
+      'apellidos': cliente.apellidos,
+      'dni': cliente.dni,
+      'poblacion': cliente.poblacion,
+      'direccion': cliente.direccion,
+      'codPostal': cliente.codPostal,
+      'email': cliente.email,
+      'fecNac': cliente.fecNac,
+    };
     console.log(params);
     this.router.navigate(['formClientes', params]);
+  }
+
+  ordenaLista() {
+    this.clientesTotales.sort((a: Cliente, b: Cliente): number => {
+      if (a.nombre.toLowerCase() > b.nombre.toLowerCase()) return 1;
+      if (a.nombre.toLowerCase() < b.nombre.toLowerCase()) return -1;
+      if (a.apellidos.toLowerCase() > b.apellidos.toLowerCase()) return 1;
+      if (a.apellidos.toLowerCase() < b.apellidos.toLowerCase()) return -1;
+      return 0;
+    })
+    this.elements.sort((a: Cliente, b: Cliente): number => {
+      if (a.nombre.toLowerCase() > b.nombre.toLowerCase()) return 1;
+      if (a.nombre.toLowerCase() < b.nombre.toLowerCase()) return -1;
+      if (a.apellidos.toLowerCase() > b.apellidos.toLowerCase()) return 1;
+      if (a.apellidos.toLowerCase() < b.apellidos.toLowerCase()) return -1;
+      return 0;
+    })
   }
 }

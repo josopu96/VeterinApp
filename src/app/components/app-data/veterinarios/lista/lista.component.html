@@ -18,20 +18,20 @@
               <tbody class=tbody-dark>
                 <ng-container *ngFor="let el of elements">
                   <tr mdbTableCol *ngIf="el._id == veterinarioSeleccionado._id">
-                    <td class="cabeceraNombre seleccionado" (click)="onSelect(el)">{{ el.nombre }}</td>
-                    <td class="cabeceraApellidos seleccionado">{{ el.apellidos }}</td>
-                    <td class="cabeceraDNI seleccionado">{{ el.dni }}</td>
-                    <td class="cabeceraVisualizar seleccionado"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px" height="13px"></td>
-                    <td class="cabeceraEditar seleccionado"><img src="../../../../assets/img/editar-oscuro.png" width="25px" height="25px" (click)="editar(el)"></td>
-                    <td class="cabeceraSeleccionar seleccionado" (click)="limpiarVeterinario()"><img src="../../../../assets/img/limpiar-oscuro.png" width="25px" height="25px"></td>
+                    <td class="colNombre seleccionado" (click)="onSelect(el)">{{ el.nombre }}</td>
+                    <td class="colApellidos seleccionado">{{ el.apellidos }}</td>
+                    <td class="colDNI seleccionado">{{ el.dni }}</td>
+                    <td class="colVisualizar seleccionado"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px" height="13px"></td>
+                    <td class="colEditar seleccionado" (click)="editar(el)"><img src="../../../../assets/img/editar-oscuro.png" width="25px" height="25px"></td>
+                    <td class="colSeleccionar seleccionado" (click)="limpiarVeterinario()"><img src="../../../../assets/img/limpiar-oscuro.png" width="25px" height="25px"></td>
                   </tr>
                   <tr mdbTableCol *ngIf="el._id != veterinarioSeleccionado._id">
-                    <td class="cabeceraNombre" (click)="onSelect(el)">{{ el.nombre }}</td>
-                    <td class="cabeceraApellidos">{{ el.apellidos }}</td>
-                    <td class="cabeceraDNI">{{ el.dni }}</td>
-                    <td class="cabeceraVisualizar"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px" height="13px"></td>
-                    <td class="cabeceraEditar" (click)="editar(el)"><img src="../../../../assets/img/editar-oscuro.png" width="25px" height="25px"></td>
-                    <td class="cabeceraSeleccionar" (click)="onSelect(el)"><img src="../../../../assets/img/seleccionar-oscuro.png" width="20px" height="20px"></td>
+                    <td class="colNombre" (click)="onSelect(el)">{{ el.nombre }}</td>
+                    <td class="colApellidos">{{ el.apellidos }}</td>
+                    <td class="colDNI">{{ el.dni }}</td>
+                    <td class="colVisualizar"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px" height="13px"></td>
+                    <td class="colEditar" (click)="editar(el)"><img src="../../../../assets/img/editar-oscuro.png" width="25px" height="25px"></td>
+                    <td class="colSeleccionar" (click)="onSelect(el)"><img src="../../../../assets/img/seleccionar-oscuro.png" width="20px" height="20px"></td>
                   </tr>
               </ng-container>
               </tbody>

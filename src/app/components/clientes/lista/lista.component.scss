@@ -387,37 +387,70 @@
         width: 70px;
         max-width: 70px;
         overflow: hidden;
-        cursor: pointer;
-        transition: all 0.3s;
-
-        &:hover{
-          background-color: #00000056;
-        }
       }
       .cabeceraSeleccionar{
         width: 70px;
         max-width: 70px;
         overflow: hidden;
-        cursor: pointer;
-        transition: all 0.3s;
-
-        &:hover{
-          background-color: #00000056;
-        }
       }
       .cabeceraEditar{
         width: 70px;
         max-width: 70px;
         overflow: hidden;
+      }
+
+      .colNombre{
+        width: 174px;
+        max-width: 174px;
+        overflow: hidden;
+      }
+      .colApellidos{
+        width: 225px;
+        max-width: 225px;
+        overflow: hidden;
+      }
+      .colDNI{
+        width: 129px;
+        max-width: 129px;
+        overflow: hidden;
+      }
+      .colTelefono{
+        width: 124px;
+        max-width: 124px;
+        overflow: hidden;
+      }
+      .colVisualizar{
+        width: 70px;
+        max-width: 70px;
+        overflow: hidden;
         cursor: pointer;
-        transition: all 0.3s;
 
         &:hover{
-          background-color: #00000056;
+          background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.397) 0%, rgba(0, 0, 0, 0)80%);
+        }
+      }
+      .colSeleccionar{
+        width: 70px;
+        max-width: 70px;
+        overflow: hidden;
+        cursor: pointer;
+
+        &:hover{
+          background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.397) 0%, rgba(0, 0, 0, 0)80%);
+        }
+      }
+      .colEditar{
+        width: 70px;
+        max-width: 70px;
+        overflow: hidden;
+        cursor: pointer;
+
+        &:hover{
+          background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.397) 0%, rgba(0, 0, 0, 0)80%);
         }
       }
       .seleccionado{
-        background-color: #00000080;
+        background-color: #00000080 !important;
       }
     }
     .nuevo {

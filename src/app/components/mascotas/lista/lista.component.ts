@@ -54,6 +54,7 @@ export class ListaComponent implements OnInit {
     this.elements = this.globalService.mascotas;
     this.tema = "_" + this.globalService.getTema();
     this.mascotasTotales = this.globalService.mascotas;
+    this.ordenaLista();
     this.aplicarFiltros();
 
   }
@@ -377,6 +378,23 @@ export class ListaComponent implements OnInit {
     } else {
       this.router.navigate(['formMascotas']);
     }
+  }
+  
+  ordenaLista() {
+    this.mascotasTotales.sort((a: Mascota, b: Mascota): number => {
+      if (a.nombre.toLowerCase() > b.nombre.toLowerCase()) return 1;
+      if (a.nombre.toLowerCase() < b.nombre.toLowerCase()) return -1;
+      if (a.fecNac > b.fecNac) return 1;
+      if (a.fecNac < b.fecNac) return -1;
+      return 0;
+    })
+    this.elements.sort((a: Mascota, b: Mascota): number => {
+      if (a.nombre.toLowerCase() > b.nombre.toLowerCase()) return 1;
+      if (a.nombre.toLowerCase() < b.nombre.toLowerCase()) return -1;
+      if (a.fecNac > b.fecNac) return 1;
+      if (a.fecNac < b.fecNac) return -1;
+      return 0;
+    })
   }
 
 }

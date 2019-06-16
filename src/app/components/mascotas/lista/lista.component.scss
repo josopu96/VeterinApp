@@ -384,25 +384,44 @@
         width: 70px;
         max-width: 70px;
         overflow: hidden;
-        cursor: pointer;
-        transition: all 0.3s;
-
-        &:hover{
-          background-color: #00000056;
-        }
       }
       .cabeceraSeleccionar{
         width: 70px;
         max-width: 70px;
         overflow: hidden;
-        cursor: pointer;
-        transition: all 0.3s;
-
-        &:hover{
-          background-color: #00000056;
-        }
       }
       .cabeceraEditar{
+        width: 70px;
+        max-width: 70px;
+        overflow: hidden;
+      }
+      
+      .colNombre{
+        width: 243px;
+        max-width: 243px;
+        overflow: hidden;
+      }
+      .colFecha{
+        width: 166px;
+        max-width: 166px;
+        overflow: hidden;
+      }
+      .colChip{
+        width: 243px;
+        max-width: 243px;
+        overflow: hidden;
+      }
+      .colVisualizar{
+        width: 70px;
+        max-width: 70px;
+        overflow: hidden;
+        cursor: pointer;
+
+        &:hover{
+          background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.397) 0%, rgba(0, 0, 0, 0)80%);
+        }
+      }
+      .colSeleccionar{
         width: 70px;
         max-width: 70px;
         overflow: hidden;
@@ -410,11 +429,22 @@
         transition: all 0.3s;
 
         &:hover{
-          background-color: #00000056;
+          background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.397) 0%, rgba(0, 0, 0, 0)80%);
+        }
+      }
+      .colEditar{
+        width: 70px;
+        max-width: 70px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover{
+          background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.397) 0%, rgba(0, 0, 0, 0)80%);
         }
       }
       .seleccionado{
-        background-color: #00000080;
+        background-color: #00000080 !important;
       }
     }
     .nuevo {

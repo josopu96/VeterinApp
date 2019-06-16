@@ -49,30 +49,17 @@ exports.createMascota = function (req, res) {
         res.send(err);
       } else {
         var cuidados = cliente.cuidados;
-        console.log("cuidados antes");
-        console.log(cuidados);
         var nuevoCuidado = {
           _id: new mongoose.mongo.ObjectID,
           fechaInicio: hoy,
           idMascota: mascota._id
         };
         cuidados.push(nuevoCuidado);
-        console.log("cuidados despues");
-        console.log(cuidados);
-        console.log("cliente");
-        console.log(cliente);
 
         cliente.save(function (err) {
           if (err) {
-            console.log("error");
-            console.log(err);
             res.send(err);
           } else {
-            console.log("todo bien");
-            console.log("cliente");
-            console.log(cliente);
-            console.log("mascota");
-            console.log(mascota);
             res.send({'cliente': cliente, 'mascota':  mascota});
           }
         });

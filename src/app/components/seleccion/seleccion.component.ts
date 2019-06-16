@@ -146,8 +146,11 @@ export class SeleccionComponent implements OnInit {
   getEdadMascota(){
     if(this.mascota){
       if(this.mascota._id != "0"){
-        
-        let diferencia = Math.abs(Date.now() - new Date(this.mascota.fecNac).getTime());
+        let fechaFinal: number = Date.now();
+        if(this.mascota.fecBaj){
+          fechaFinal = new Date(this.mascota.fecBaj).getTime();
+        }
+        let diferencia = Math.abs(fechaFinal - new Date(this.mascota.fecNac).getTime());
         let años = Math.floor((diferencia / (1000 * 3600 * 24))/365.25);
         let meses: number;
         let mesNac = new Date(this.mascota.fecNac).getMonth() + 1;

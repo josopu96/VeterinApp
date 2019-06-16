@@ -12,8 +12,8 @@ let operacionSchema = new Schema({
     idOperacion:        { type: String, required: true },
     tipo:               { type: String, required: true },
     precio:             { type: Number, required: true },
-});
     concepto:           { type: String }
+});
 
 let itemFacturaSchema = new Schema({
     cantidad:           { type: Number, required: true },
@@ -23,6 +23,7 @@ let itemFacturaSchema = new Schema({
 });
 
 let cuidadoSchema = new Schema({
+    _id:                { type: mongoose.Schema.Types.ObjectId, required: true},
     fechaInicio:        { type: String, required: true  },
     fechaFin:           { type: String, required: false },
     idMascota:          { type: String, required: true  }
@@ -41,7 +42,7 @@ let facturaSchema = new Schema({
 
 let clienteSchema = new Schema({
     nombre:             { type: String,   required: true  },
-    apellidos:          { type: String,   required: true  },
+    apellidos:          { type: String,   required: false },
     direccion:          { type: String,   required: false },
     poblacion:          { type: String,   required: false },
     codPostal:          { type: Number,   required: false },

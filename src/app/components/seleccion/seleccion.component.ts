@@ -169,7 +169,6 @@ export class SeleccionComponent implements OnInit {
         }
 
         this.edadMascota= años+a+"y "+meses+m;
-        console.log(this.edadMascota);
       }
     }
   }

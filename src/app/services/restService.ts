@@ -294,20 +294,24 @@ export class RestWS extends AbstractWS {
   }
 
   public updateMascota(mascota: Mascota) {
-    const fd = new HttpParams()
+    let fd = new HttpParams()
       .set('nombre', mascota.nombre)
       .set('chip', mascota.chip)
       .set('fecNac', String(mascota.fecNac))
-      .set('fecBaj', String(mascota.fecBaj))
       .set('fecModificacion', String(new Date()))
       .set('sexo', mascota.sexo)
       .set('estado', mascota.estado)
       .set('pelo', mascota.pelo)
       .set('capa', mascota.capa)
       .set('especie', mascota.especie)
-      .set('raza', mascota.raza);
-    return this.makePostRequest(this.path + 'mascotas/' + mascota._id + '/update', fd).then((_) => {
-      return Promise.resolve();
+      .set('raza', mascota.raza)
+      .set('idCliente', mascota.idCliente);
+
+    if (mascota.fecBaj) {
+      fd = fd.append('fecBaj', String(mascota.fecBaj));
+    }
+    return this.makePostRequest(this.path + 'mascotas/' + mascota._id + '/update', fd).then(res => {
+      return Promise.resolve(res);
     }).catch(error => {
       return Promise.reject(error);
     });

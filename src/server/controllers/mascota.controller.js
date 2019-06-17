@@ -36,9 +36,7 @@ exports.createMascota = function (req, res) {
     raza              : req.body.raza,
     idCliente         : req.body.idCliente,
   });
-
-  var hoy = new Date();
-
+  
   mascota.save(function (err) {
     if (err) {
       res.send(err);
@@ -51,7 +49,7 @@ exports.createMascota = function (req, res) {
         var cuidados = cliente.cuidados;
         var nuevoCuidado = {
           _id: new mongoose.mongo.ObjectID,
-          fechaInicio: hoy,
+          fechaInicio: req.body.fecModificacion,
           idMascota: mascota._id
         };
         cuidados.push(nuevoCuidado);
@@ -73,8 +71,11 @@ exports.updateMascota = function (req, res) {
   Mascota.findByIdAndUpdate(req.params.id, {
     $set: req.body
   }, function (err, mascota) {
-    if (err) res.send(err);
-    res.send(mascota);
+    if (err){
+      res.send(err);
+    } else {
+      res.send(mascota);
+    }
   });
 };
 

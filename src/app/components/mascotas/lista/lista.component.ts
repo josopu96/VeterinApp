@@ -358,7 +358,8 @@ export class ListaComponent implements OnInit {
       'pelo': mascota.pelo,
       'capa': mascota.capa,
       'especie': mascota.especie,
-      'raza': mascota.raza
+      'raza': mascota.raza,
+      'idCliente': mascota.idCliente
     };
     this.router.navigate(['formMascotas', params]);
   }

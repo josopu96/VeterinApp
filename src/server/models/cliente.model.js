@@ -9,6 +9,7 @@ let contactoSchema = new Schema({
 });
 
 let operacionSchema = new Schema({
+    _id:                { type: mongoose.Schema.Types.ObjectId, required: true},
     idOperacion:        { type: String, required: true },
     tipo:               { type: String, required: true },
     precio:             { type: Number, required: true },
@@ -16,6 +17,7 @@ let operacionSchema = new Schema({
 });
 
 let itemFacturaSchema = new Schema({
+    _id:                { type: mongoose.Schema.Types.ObjectId, required: true},
     cantidad:           { type: Number, required: true },
     precioVenta:        { type: Number, required: true },
     iva:                { type: Number, required: true },
@@ -24,12 +26,13 @@ let itemFacturaSchema = new Schema({
 
 let cuidadoSchema = new Schema({
     _id:                { type: mongoose.Schema.Types.ObjectId, required: true},
-    fechaInicio:        { type: String, required: true  },
-    fechaFin:           { type: String, required: false },
+    fechaInicio:        { type: Date, required: true  },
+    fechaFin:           { type: Date, required: false },
     idMascota:          { type: String, required: true  }
 });
 
 let facturaSchema = new Schema({
+    _id:                { type: mongoose.Schema.Types.ObjectId, required: true},
     numero:             { type: String, required: true },
     fecha:              { type: Date,   required: true },
     importeTotal:       { type: Number, required: true },

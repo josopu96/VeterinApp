@@ -4,6 +4,7 @@
     <app-menu class="menu"></app-menu>
     <div class="seccion{{tema}} columna">
       <div class="titulo">
+        <div class="volver" [routerLink]="['/veterinarios']"></div>
         <span *ngIf="new"> Nuevo veterinario </span>
         <span *ngIf="!new"> Editando veterinario </span>
       </div>
@@ -37,7 +38,6 @@
         </fieldset>
       </div>
       <div class="guardar">
-        <button [routerLink]="['/veterinarios']"> Volver </button>
         <button (click)="guardar()" [disabled]="checkFormIsFullfilled()"> Guardar </button>
       </div>
     </div>

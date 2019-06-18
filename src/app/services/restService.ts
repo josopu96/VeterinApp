@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './../../config/configService';
 import { AbstractWS } from './abstractService';
 import { Injectable } from '@angular/core';
-import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota, Tratamiento } from '../app.dataModels';
+import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota, Tratamiento, Prueba } from '../app.dataModels';
 import { Cliente } from '../app.dataModels';
 
 @Injectable()
@@ -400,6 +400,37 @@ export class RestWS extends AbstractWS {
     }
 
     return this.makePostRequest(this.path + 'mascotas/addTratamiento', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public getPruebaByMascotaId(mascotaId: string) {
+    const fd = new HttpParams();
+
+    return this.makeGetRequest(this.path + 'mascotas/' + mascotaId + '/pruebas', fd).then((res: String) => {
+      return Promise.resolve(res);
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public createPrueba (prueba: Prueba, mascotaId: string) {
+    let fd = new HttpParams()
+      .set('mascotaId', mascotaId);
+
+    if (prueba.concepto) {
+      fd = fd.append('concepto', prueba.concepto);
+    }
+    if (prueba.categoria) {
+      fd = fd.append('categoria', prueba.categoria);
+    }
+    if (prueba.tipoPrueba) {
+      fd = fd.append('tipoPrueba', prueba.tipoPrueba);
+    }
+
+    return this.makePostRequest(this.path + 'mascotas/addPrueba', fd).then((_) => {
       return Promise.resolve();
     }).catch(error => {
       return Promise.reject(error);

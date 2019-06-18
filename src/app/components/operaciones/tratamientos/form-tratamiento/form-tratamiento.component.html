@@ -1,0 +1,29 @@
+<div class="container{{tema}}">
+  <app-selecciones class="top"></app-selecciones>
+  <div class="bottom">
+    <app-menu class="menu"></app-menu>
+    <div class="seccion{{tema}} columna">
+      <div class="titulo">
+        <span *ngIf="new"> Nuevo usuario </span>
+        <span *ngIf="!new"> Editando usuario </span>
+      </div>
+      <div class="formulario" *ngIf="ready">
+        <fieldset>
+          <div class="texto">
+            <span>Anamnesis</span><input type="text" [(ngModel)]="tratamientoEditado.anamnesis" />
+          </div>
+          <div class="texto">
+            <span>Email</span><input type="email" [(ngModel)]="tratamientoEditado.diagnostico" />
+          </div>
+          <div class="texto">
+            <span>Email</span><input type="email" [(ngModel)]="tratamientoEditado.tipoTratamiento" />
+          </div>
+        </fieldset>
+      </div>
+      <div class="guardar">
+        <button [routerLink]="['/usuarios']"> Volver </button>
+        <button (click)="guardar()" [disabled]="checkFormIsFullfilled()"> Guardar </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="container{{tema}}">
+  <app-selecciones class="top"></app-selecciones>
+  <div class="bottom">
+    <app-menu class="menu"></app-menu>
+    <div class="seccion{{tema}} columna">
+      <div class="seccion_interna">
+        <div class="recuadro" [routerLink]="['/tratamientos']">
+            <p class="title">Tratamientos</p>
+        </div>
+        <div class="recuadro" [routerLink]="['/pruebas']">
+            <p class="title">Pruebas</p>
+        </div>
+    </div>
+  </div>
+</div>

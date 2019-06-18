@@ -1,0 +1,106 @@
+@import "../../utilities/variables.scss";
+
+.seccion_claro {
+  display: flex;
+  background-color: rgba(#ffffff, $alpha: 0.4);
+  flex-basis: $anchoSeccion + px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border-top: 2px solid $colorFondoOscuro;
+  border-left: 2px solid $colorFondoOscuro;
+  box-sizing: border-box;
+  border-top-left-radius: 5px;
+
+  .seccion_interna {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-grow: 1;
+    text-align: center;
+    justify-content: center;
+
+    .recuadro{
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      width: $anchoSeccion/2+px;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid $border;
+      transition: background-color 0.3s;
+      box-sizing: border-box;
+
+      .title {
+        font-size: 30pt;
+        font-weight: bold;
+        margin-block-end: 0;
+      }
+
+      .texto{
+        font-size: 13pt;
+        height: 50px;
+        margin: 30px 30px 30px 30px;
+      }
+
+      &:hover{
+        transition: background-color 0.5s;
+        background-color: $colorFondoOscuroTransparente;
+
+      }
+    }
+
+  }
+}
+.seccion_oscuro {
+  display: flex;
+  background-color: rgba(#ffffff, $alpha: 0.4);
+  flex-basis: $anchoSeccion + px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border-top: 2px solid $colorFondoOscuro;
+  border-left: 2px solid $colorFondoOscuro;
+  box-sizing: border-box;
+  border-top-left-radius: 5px;
+
+  .seccion_interna {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-grow: 1;
+    text-align: center;
+    justify-content: center;
+
+    .recuadro{
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      width: $anchoSeccion/2+px;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid $border;
+      transition: background-color 0.3s;
+      box-sizing: border-box;
+
+      .title {
+        font-size: 30pt;
+        font-weight: bold;
+        margin-block-end: 0;
+      }
+
+      .texto{
+        font-size: 13pt;
+        height: 50px;
+        margin: 30px 30px 30px 30px;
+      }
+
+      &:hover{
+        transition: background-color 0.5s;
+        background-color: $colorFondoOscuroTransparente;
+
+      }
+    }
+
+  }
+}

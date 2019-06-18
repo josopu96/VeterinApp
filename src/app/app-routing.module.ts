@@ -15,6 +15,12 @@ import { FormUsuarioComponent } from './components/app-data/usuarios/form-usuari
 import { FormMascotasComponent } from './components/mascotas/form-mascotas/form-mascotas.component';
 import { AvisoNuevaMascotaComponent } from './components/mascotas/aviso-nueva-mascota/aviso-nueva-mascota.component';
 import { FormClienteComponent } from './components/clientes/form-cliente/form-cliente.component';
+import { OperacionesComponent } from './components/operaciones/operaciones.component';
+import { ListaComponent as ListaTratamientos } from './components/operaciones/tratamientos/lista/lista.component';
+import { FormTratamientoComponent } from './components/operaciones/tratamientos/form-tratamiento/form-tratamiento.component';
+import { ListaComponent as ListaPruebas } from './components/operaciones/pruebas/lista/lista.component';
+import { FormPruebaComponent } from './components/operaciones/pruebas/form-prueba/form-prueba.component';
+
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -34,6 +40,12 @@ const routes: Routes = [
     { path: 'formMascotas' , component: FormMascotasComponent },
     { path: 'formClientes', component: FormClienteComponent},
     { path: 'avisoNuevaMascota' , component: AvisoNuevaMascotaComponent },
+    { path: 'operaciones', component: OperacionesComponent },
+    { path: 'tratamientos', component: ListaTratamientos },
+    { path: 'formTratamiento', component: FormTratamientoComponent },
+    { path: 'pruebas', component: ListaPruebas },
+    { path: 'formPrueba', component: FormPruebaComponent },
+
 ];
 
 @NgModule({

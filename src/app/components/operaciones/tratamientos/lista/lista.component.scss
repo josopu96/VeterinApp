@@ -1,0 +1,393 @@
+@import "../../../../utilities/variables.scss";
+
+.seccion_claro {
+  display: flex;
+  background-color: rgba(#ffffff, $alpha: 0.4);
+  flex-basis: $anchoSeccion + px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border-top: 2px solid $colorFondoOscuro;
+  border-left: 2px solid $colorFondoOscuro;
+  box-sizing: border-box;
+  border-top-left-radius: 5px;
+
+  .datos {
+    display: flex;
+    width: $anchoDatos + px;
+    height: 100%;
+    flex-direction: column;
+
+    .titulo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      height: $altoTitulo + px;
+      border-bottom: 1px solid black;
+      box-sizing: border-box;
+      background: rgba(0, 0, 0, 0.8);
+      font-size: 22px;
+      font-weight: bold;
+      border-left: 4px solid black;
+      border-right: 4px solid black;
+      box-sizing: border-box;
+    }
+
+    .lista {
+      display: flex;
+      flex-grow: 1;
+      height: $altoLista + px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+      font-size: 15px;
+      font-weight: normal;
+      border-left: 4px solid black;
+      border-right: 4px solid black;
+      border-bottom: 4px solid black;
+      box-sizing: border-box;
+
+      .table {
+        width: 100%;
+        background-color: transparent;
+        text-align: center;
+        border-spacing: 0px;
+      }
+
+      .table-dark,
+      .table-dark > th,
+      .table-dark > td {
+        background-color: #030303;
+      }
+
+      .table-hover .table-dark:hover {
+        background-color: #030303;
+      }
+
+      .table-hover .table-dark:hover > td,
+      .table-hover .table-dark:hover > th {
+        background-color: #030303;
+      }
+
+      .table-active,
+      .table-active > th,
+      .table-active > td {
+        background-color: rgba(0, 0, 0, 0.075);
+      }
+
+      .table-hover .table-active:hover {
+        background-color: rgba(0, 0, 0, 0.075);
+      }
+
+      .table-hover .table-active:hover > td,
+      .table-hover .table-active:hover > th {
+        background-color: rgba(0, 0, 0, 0.075);
+      }
+
+      .table .thead-dark th {
+        color: #fff;
+        background-color: #21252980;
+        border-color: #121416;
+        padding: 10px;
+      }
+      .table .tbody-dark td {
+        padding: 7px;
+      }
+
+      .table-dark {
+        color: #fff;
+        background-color: #21252980;
+      }
+
+      .table-dark.table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      .table-dark.table-hover tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.075);
+      }
+    }
+    .nuevo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      height: $altoNuevo + px;
+      border-top: 1px solid black;
+      box-sizing: border-box;
+      background: rgba(0, 0, 0, 0.6);
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .nuevo:hover {
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .filtros {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $anchoFiltros + px;
+    height: 100%;
+    background: rgba(88, 88, 88, 0.774);
+  }
+}
+
+.seccion_oscuro {
+  display: flex;
+  background-color: rgba(#ffffff, $alpha: 0.4);
+  flex-basis: $anchoSeccion + px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border-top: 2px solid $colorFondoOscuro;
+  border-left: 2px solid $colorFondoOscuro;
+  box-sizing: border-box;
+  border-top-left-radius: 5px;
+
+  .datos {
+    display: flex;
+    width: $anchoDatos + px;
+    height: 100%;
+    flex-direction: column;
+
+    .titulo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      height: $altoTituloVeterinario + px;
+      background: rgba(0, 0, 0, 0.8);
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .lista {
+      display: flex;
+      flex-grow: 1;
+      height: $altoLista + px;
+      font-size: 15px;
+      font-weight: normal;
+
+      table.scroll tbody,
+      table.scroll thead { display: block; }
+
+      .table {
+        width: 100%;
+        background-color: transparent;
+        text-align: center;
+        border-spacing: 0px;
+      }
+
+      .table-dark,
+      .table-dark > th,
+      .table-dark > td {
+        background-color: #030303;
+      }
+
+      .table-hover .table-dark:hover {
+        background-color: #030303;
+      }
+
+      .table-hover .table-dark:hover > td,
+      .table-hover .table-dark:hover > th {
+        background-color: #030303;
+      }
+
+      .table-active,
+      .table-active > th,
+      .table-active > td {
+        background-color: rgba(0, 0, 0, 0.075);
+      }
+
+      .table-hover .table-active:hover {
+        background-color: rgba(0, 0, 0, 0.075);
+      }
+
+      .table-hover .table-active:hover > td,
+      .table-hover .table-active:hover > th {
+        background-color: rgba(0, 0, 0, 0.075);
+      }
+
+      thead, tbody{
+        display: block;
+      }
+
+      .tbody-dark {
+        height: 437px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+      }
+
+      .table .thead-dark th {
+        color: #fff;
+        background-color: #21252980;
+        border-color: #121416;
+        padding: 0px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+      .table .tbody-dark td {
+        padding: 0px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+      }
+
+      .table-dark {
+        color: #fff;
+        background-color: #21252980;
+      }
+
+      .table-dark.table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      .table-dark.table-hover tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.075);
+      }
+    }
+
+    .cabeceraNombre{
+      width: 244px;
+      max-width: 244px;
+      overflow: hidden;
+    }
+    .cabeceraApellidos{
+      width: 265px;
+      max-width: 265px;
+      overflow: hidden;
+    }
+    .cabeceraDNI{
+      width: 143px;
+      max-width: 143px;
+      overflow: hidden;
+    }
+    .cabeceraVisualizar{
+      width: 70px;
+      max-width: 70px;
+      overflow: hidden;
+    }
+    .cabeceraSeleccionar{
+      width: 70px;
+      max-width: 70px;
+      overflow: hidden;
+    }
+    .cabeceraEditar{
+      width: 70px;
+      max-width: 70px;
+      overflow: hidden;
+    }
+    .nuevo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      height: $altoNuevo + px;
+      box-sizing: border-box;
+      background: rgba(0, 0, 0, 0.6);
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .nuevo:hover {
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .filtros {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: $anchoFiltros + px;
+    height: 100%;
+    background: $fondoFiltroVeterinario;
+
+    .busqueda{
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      .titulo_filtro{
+        height: $altoTituloFiltroVeterinario+px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        background-color: $fondoTituloFiltroVeterinario;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .labelNombre{
+        margin-top: 6px;
+      }
+      .cuerpo_filtro{
+        flex-grow: 1;
+        justify-content: flex-start;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+
+        .labelNombre{
+          margin-top: 7px;
+        }
+        label{
+          height: $altoLabelFiltroVeterinario+px;
+        }
+        input{
+          margin-bottom: 6px;
+          height: 30px;
+          width: 80%;
+          text-align: center;
+          border: none;
+          padding: 3px;
+          color: $textoClaro;
+          background-color: $fondoInputFiltroVeterinario;
+          border: 2px solid black;
+          border-radius: 5px;
+          transition: all 0.3s;
+
+          &:focus{
+            border:2px solid $focusInputFiltroVeterinario;
+            font-size: 16px;
+          }
+        }
+
+        input[type="search"]::-webkit-search-cancel-button {
+          -webkit-appearance: none;
+        }
+        input[type="search"]::-webkit-calendar-picker-indicator {
+          display: none;
+        }
+      }
+    }
+
+    .borrar_filtros{
+      height: $altoBorrarFiltroVeterinario+px;
+      background: #585858c5;
+      width: 100%;
+      justify-content: center;
+
+      button{
+        height: 100%;
+        width: 100%;
+        background-color: $fondoBorrarFiltroVeterinario;
+        text-decoration: none;
+        border: none;
+        color: $textoClaro;
+        cursor: pointer;
+
+        &:hover{
+          background-color: $colorClaroTransparenteVeterinario;
+        }
+      }
+    }
+  }
+}

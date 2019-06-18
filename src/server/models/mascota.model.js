@@ -6,6 +6,13 @@ let tratamientoSchema = new Schema({
   diagnostico:      { type: String, required: true },
   tipoTratamiento:  { type: String, required: true },
   fecModificacion:  { type: Date,   required: true },
+});
+
+let pruebaSchema = new Schema({
+  concepto:         { type: String, required: true },
+  categoria:        { type: String, required: true },
+  tipoPrueba:       { type: String, required: true },
+  fecModificacion:  { type: Date,   required: true },
 })
 
 let mascotaSchema = new Schema({
@@ -21,7 +28,8 @@ let mascotaSchema = new Schema({
   especie:          { type: String, required: true },
   raza:             { type: String, required: true },
   idCliente:        { type: String, required: true },
-  tratamientos:     [tratamientoSchema]
+  tratamientos:     [tratamientoSchema],
+  pruebas:          [pruebaSchema]
 });
 
 

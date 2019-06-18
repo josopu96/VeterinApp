@@ -63,7 +63,7 @@ exports.createMascota = function (req, res) {
         });
       }
     });
-    
+
   });
 };
 
@@ -78,4 +78,38 @@ exports.updateMascota = function (req, res) {
     }
   });
 };
+
+exports.getTratamientos = function (req, res) {
+  Mascota.findById(req.params.id, function (err1, mascota1) {
+    if (err1) {
+      res.status(404).send('Mascota no encontrada');
+    } else if (mascota1) {
+      res.send(mascota1.tratamientos);
+    }
+  })
+}
+
+exports.crearTratamiento = function (req, res) {
+  Mascota.findById(req.body.mascotaId, function (err1, mascota1) {
+    if (err1) {
+      res.status(404).send('Mascota no encontrada');
+    } else if (mascota1) {
+      var nuevoTratamiento = {
+        anamnesis: req.body.anamnesis,
+        diagnostico: req.body.diagnostico,
+        tipoTratamiento: req.body.tipoTratamiento,
+        fecModificacion: new Date()
+      }
+      Mascota.findByIdAndUpdate(req.body.mascotaId, {
+        $push: { "tratamientos": nuevoTratamiento },
+      }, {new: true}, function (err2, mascota2) {
+        if (err2) {
+          res.status(404).send(err2);
+        } else if (mascota2) {
+          res.send(mascota2);
+        }
+      })
+    }
+  })
+}
 

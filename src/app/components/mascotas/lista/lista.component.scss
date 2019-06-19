@@ -6,7 +6,7 @@
   flex-basis: $anchoSeccion + px;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: $altoSeccion+px;
   border-top: 2px solid $colorFondoOscuro;
   border-left: 2px solid $colorFondoOscuro;
   box-sizing: border-box;
@@ -260,7 +260,7 @@
   flex-basis: $anchoSeccion + px;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: $altoSeccion+px;
   border-top: 2px solid $colorFondoOscuro;
   border-left: 2px solid $colorFondoOscuro;
   box-sizing: border-box;

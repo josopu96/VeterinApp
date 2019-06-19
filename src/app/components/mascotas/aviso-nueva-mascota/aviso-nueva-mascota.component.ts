@@ -16,7 +16,7 @@ export class AvisoNuevaMascotaComponent implements OnInit {
   }
 
   cerrarVentana(){
-    let window = remote.getCurrentWindow(); 
+    let window = remote.getCurrentWindow();
     ipcRenderer.send('request-update-in-window', null);
     window.close(); 
   }

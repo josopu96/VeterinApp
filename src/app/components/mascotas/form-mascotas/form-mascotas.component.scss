@@ -6,7 +6,7 @@
   flex-basis: $anchoSeccion + px;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: $altoSeccion+px;
   border-top: 2px solid $colorFondoOscuro;
   border-left: 2px solid $colorFondoOscuro;
   box-sizing: border-box;
@@ -24,8 +24,7 @@
       background-image: url("../../../../assets/img/back_oscuro.png");
       width: 30px;
       height: 30px;
-      position: absolute;
-      top: 183px;
+      position: fixed;
       left: 200px;
       cursor: pointer;
 

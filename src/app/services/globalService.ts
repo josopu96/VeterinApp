@@ -369,6 +369,8 @@ export class GlobalService {
 
     //Cuando se cierre la ventana secundaria, debemos cerrar también la ventana oscura que habíamos creado
     win.on('closed', () => {
+      let padre = back.getParentWindow();
+      padre.show();
       back.close();
       win = null;
     })

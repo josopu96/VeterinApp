@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   password: String;
   showError: Boolean;
   rememberPass: Boolean;
+  isReady: Boolean = false;
 
   constructor(
     private dm: DataManagement,
@@ -31,15 +32,19 @@ export class LoginComponent implements OnInit {
       this.rememberPass = res.recordarPass;
       if (this.rememberPass === true) {
         this.dm.getUserByToken(res.usuarioId).then((usr) => {
+          console.log(usr);
           this.email = usr.email;
           this.password = usr.clave;
+          this.isReady = true;
         });
       }
     });
   }
 
   sendLogin() {
-    this.dm.login(this.email, this.password).then((res: Usuario) => {
+    let currentPass = (<HTMLInputElement> document.getElementById('password')).value;
+    console.log(currentPass);
+    this.dm.login(this.email, currentPass).then((res: Usuario) => {
       console.log("Login correcto");
       this.doRememberPass(res._id);
       this.cookieService.set('token', res._id);
@@ -57,5 +62,9 @@ export class LoginComponent implements OnInit {
     }).catch((err) => {
       console.log(err);
     });
+  }
+
+  test($event) {
+     console.log($event);
   }
 }

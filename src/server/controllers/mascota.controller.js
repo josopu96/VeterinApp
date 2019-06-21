@@ -68,8 +68,21 @@ exports.createMascota = function (req, res) {
 };
 
 exports.updateMascota = function (req, res) {
+  console.log(req.body);
   Mascota.findByIdAndUpdate(req.params.id, {
-    $set: req.body
+    $set: {
+      "nombre"              : req.body.nombre,
+      "chip"                : req.body.chip,
+      "fecNac"              : req.body.fecNac,
+      "fecModificacion"     : new Date(),
+      "sexo"                : req.body.sexo,
+      "estado"              : req.body.estado,
+      "pelo"                : req.body.pelo,
+      "capa"                : req.body.capa,
+      "especie"             : req.body.especie,
+      "raza"                : req.body.raza,
+      "fecBaj"              : req.body.fecBaj != "null" ? req.body.fecBaj : null
+    }
   }, function (err, mascota) {
     if (err){
       res.send(err);

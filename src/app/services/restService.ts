@@ -298,7 +298,6 @@ export class RestWS extends AbstractWS {
       .set('nombre', mascota.nombre)
       .set('chip', mascota.chip)
       .set('fecNac', String(mascota.fecNac))
-      .set('fecModificacion', String(new Date()))
       .set('sexo', mascota.sexo)
       .set('estado', mascota.estado)
       .set('pelo', mascota.pelo)
@@ -309,6 +308,8 @@ export class RestWS extends AbstractWS {
 
     if (mascota.fecBaj) {
       fd = fd.append('fecBaj', String(mascota.fecBaj));
+    } else {
+      fd = fd.append('fecBaj', null);
     }
     return this.makePostRequest(this.path + 'mascotas/' + mascota._id + '/update', fd).then(res => {
       return Promise.resolve(res);

@@ -3,6 +3,7 @@ import { Cliente } from '../../../app.dataModels';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from '../../../services/globalService';
 import { DataManagement } from '../../../services/dataManagement';
+import { CabeceraTabla } from '../../../models/tablas';
 
 @Component({
   selector: 'app-form-cliente',
@@ -11,6 +12,8 @@ import { DataManagement } from '../../../services/dataManagement';
 })
 export class FormClienteComponent implements OnInit {
 
+  headElements: CabeceraTabla[] = [];
+  
   tema = "_oscuro";
   new: boolean;
   ready = false;
@@ -24,6 +27,7 @@ export class FormClienteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.inicializaCabecera();
     if ((<HTMLInputElement>document.getElementById('nac_dt'))) {
       (<HTMLInputElement>document.getElementById('nac_dt')).max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
     }
@@ -48,6 +52,25 @@ export class FormClienteComponent implements OnInit {
         this.new = true;
       }
     });
+  }
+
+  inicializaCabecera() {
+    let entrada1: CabeceraTabla = new CabeceraTabla();
+    let entrada2: CabeceraTabla = new CabeceraTabla();
+    let entrada3: CabeceraTabla = new CabeceraTabla();
+    let entrada4: CabeceraTabla = new CabeceraTabla();
+    entrada1.nombre = 'Nombre';
+    entrada1.clase = 'cabeceraNombre';
+    this.headElements.push(entrada1);
+    entrada2.nombre = 'Telefono';
+    entrada2.clase = 'cabeceraTelefono';
+    this.headElements.push(entrada2);
+    entrada3.nombre = 'Tipo';
+    entrada3.clase = 'cabeceraTipo';
+    this.headElements.push(entrada3);
+    entrada4.nombre = 'Quitar';
+    entrada4.clase = 'cabeceraQuitar';
+    this.headElements.push(entrada4);
   }
 
   guardar() {

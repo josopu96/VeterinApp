@@ -10,3 +10,12 @@ export class ErroresFormMascota {
     especie: string;
     raza: string;
 }
+
+export class ErroresFormVeterinario {
+    nombre: string;
+    apellidos: string;
+    dni: string;
+    numColegiado: string;
+    fecNac: string;
+    telefono: string;
+}

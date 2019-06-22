@@ -45,7 +45,7 @@ exports.createVeterinario = function (req, res) {
   var veterinario = {
     'nombre'       : req.body.nombre,
     'apellidos'    : req.body.apellidos,
-    'fecNac'       : fechaNac,
+    'fecNac'       : req.body.fecNac != "null" ? req.body.fecNac : null,
     'dni'          : req.body.dni,
     'telefono'     : tlf,
     'numColegiado' : req.body.numColegiado,

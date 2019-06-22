@@ -21,14 +21,14 @@
             <span class="tooltip" *ngIf="errores.chip=='obligatorio'">Es obligatorio rellenar este campo</span>
           </div>
           <div class="texto{{errores.fechaNac ? '_error' : ''}}">
-            <label>Fecha de Nacimiento</label><input type="date" [ngModel]="mascotaEditada.fecNac | date:'yyyy-MM-dd'"
-              (ngModelChange)="mascotaEditada.fecNac=$event; cambia('fecNac')" id="nac_dt" required />
+            <label>Fecha de Nacimiento</label><input title="" type="date" [ngModel]="mascotaEditada.fecNac | date:'yyyy-MM-dd'"
+              (ngModelChange)="mascotaEditada.fecNac=$event; cambia('fecNac')" id="nac_dt" />
             <span class="tooltip" *ngIf="errores.fechaNac=='obligatorio'">Es obligatorio rellenar este campo</span>
             <span class="tooltip" *ngIf="errores.fechaNac=='fechaFuturo'">La fecha de nacimiento no puede estar en el futuro</span>
             <span class="tooltip" *ngIf="errores.fechaNac=='fechaBaja'">La fecha de nacimiento no puede ser posterior a la fecha de fallecimiento</span>
           </div>
           <div class="texto{{errores.fechaFac ? '_error' : ''}}">
-            <label>Fecha de Fallecimiento</label><input type="date"
+            <label>Fecha de Fallecimiento</label><input title="" type="date"
               [ngModel]="mascotaEditada.fecBaj | date:'yyyy-MM-dd'" (ngModelChange)="mascotaEditada.fecBaj=$event; cambia('fecBaj')"
               id="def_dt" />
               <span class="tooltip" *ngIf="errores.fechaFac=='fechaFuturo'">La fecha de fallecimiento no puede estar en el futuro</span>

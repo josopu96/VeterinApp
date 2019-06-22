@@ -167,7 +167,7 @@ export class FormMascotasComponent implements OnInit {
         tooltips[i].style.left = x;
       }
     }
-  };
+  }
 
   cambia(key) {
     switch (key) {

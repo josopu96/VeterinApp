@@ -9,39 +9,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
-<script type="text/javascript">
-
-
-  window.onload = function () {
-    const { remote, ipcRenderer } = require('electron');
-    console.log("compruebo");
-    var currentWindow = remote.BrowserWindow.getFocusedWindow();
-    try {
-      var parent = currentWindow.getParentWindow();
-    }
-    catch (error) {
-      console.log(error);
-      parent = null;
-    }
-    console.log(parent);
-    if (parent == null) {
-      document.getElementById("barra-titulo").style.display = "flex";
-
-      document.getElementById('minimize-button').addEventListener('click', () => {
-        remote.getCurrentWindow().minimize();
-      })
-
-      document.getElementById('close-button').addEventListener('click', () => {
-        remote.app.quit();
-      })
-    } else {
-      document.getElementById("texto-carga").style.display = "none";
-    }
-  }
-
-</script>
 
 <body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const { remote, ipcRenderer } = require('electron');
+      var currentWindow = remote.BrowserWindow.getFocusedWindow();
+      try {
+        var parent = currentWindow.getParentWindow();
+      }
+      catch (error) {
+        parent = null;
+      }
+      if (parent == null) {
+        document.getElementById("barra-titulo").style.display = "flex";
+
+        document.getElementById('minimize-button').addEventListener('click', () => {
+          remote.getCurrentWindow().minimize();
+        })
+
+        document.getElementById('close-button').addEventListener('click', () => {
+          remote.app.quit();
+        })
+      } else {
+        document.getElementById("texto-carga").style.display = "none";
+      }
+    }
+  </script>
   <div id="barra-titulo" class="title-bar">
     <div class="menu-button-container">
       <div id="menu-button" class="menu-button">

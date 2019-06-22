@@ -163,6 +163,8 @@ export class RestWS extends AbstractWS {
 
       if (veterinario.fecNac) {
         fd = fd.append('fecNac', String(veterinario.fecNac));
+      } else {
+        fd = fd.append('fecNac', null);
       }
 
     return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinario/create', fd).then((_) => {

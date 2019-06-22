@@ -64,8 +64,12 @@ export class FormClinicaComponent implements OnInit {
         this.clinicaEditada.imagen = params["imagen"];
         this.clinicaEditada.propietario = params["propietario"];
         this.clinicaEditada.dniPropietario = params["dniPropietario"];
+        if(this.clinica.imagen){
+          this.ocultaSpanImagen = false;
+        } else {
+          this.ocultaSpanImagen = true;
+        }
         this.ready = true;
-        console.log(params["imagen"]);
       }
     });
     this.edit = false;
@@ -380,19 +384,11 @@ export class FormClinicaComponent implements OnInit {
       this.errores.nombre = "obligatorio";
       res = false;
     }
-    if (this.compruebaTipoImagen(this.clinicaEditada.imagen)) {
-      this.errores.imagen = "tipoImagen";
-      res = false;
-    } else if (this.compruebaCapacidadImagen(this.clinicaEditada.imagen)) {
-      this.errores.imagen = "capacidadImagen";
-      res = false;
-    }
     return res;
   }
 
   compruebaTipoImagen(imagen) {
-    let res: boolean = false;
-    return res;
+    return imagen.type.includes("image");
   }
 
   compruebaCapacidadImagen(imagen) {
@@ -406,12 +402,32 @@ export class FormClinicaComponent implements OnInit {
   cargarImagen(event) {
     this.files = event.target.files;
     let img : Buffer;
-    console.log(this.files[0].size);
-    if (this.files[0].size > 62000) {
+    console.log(this.files[0]);
+    if (this.files[0].size > 162000) {
       // mostrar error de imagen grande
       console.log("archivo demasiado grande");
-      
-    } else {
+      this.ocultaSpanImagen = true;
+      this.errores.imagen = "capacidadImagen";
+      let tooltip: any = document.getElementById('mostrarImagen');
+      if (tooltip) {
+        if (tooltip.childNodes.length > 0) {
+          tooltip.removeChild(tooltip.childNodes[0]);
+        }
+      }
+      this.clinicaEditada.imagen = null;
+    } else if(!this.compruebaTipoImagen(this.files[0])){
+      // mostrar error de tipo no valido
+      console.log("el archivo no es una imagen");
+      this.ocultaSpanImagen = true;
+      this.errores.imagen = "tipoImagen";
+      let tooltip: any = document.getElementById('mostrarImagen');
+      if (tooltip) {
+        if (tooltip.childNodes.length > 0) {
+          tooltip.removeChild(tooltip.childNodes[0]);
+        }
+      }
+      this.clinicaEditada.imagen = null;
+    }  else {
       const reader = new FileReader();
       reader.readAsBinaryString(this.files[0]);
       reader.onload = this._handleReaderLoaded.bind(this);
@@ -427,7 +443,6 @@ export class FormClinicaComponent implements OnInit {
     let filestring = btoa(binaryString);  // Converting binary string data.
     filestring = "data:" + this.files[0].type + ";base64, " + filestring;
     this.clinicaEditada.imagen = filestring;
-    console.log(filestring);
     let tooltip: any = document.getElementById('mostrarImagen');
     if (tooltip) {
       let imagen = new Image();
@@ -438,6 +453,7 @@ export class FormClinicaComponent implements OnInit {
         tooltip.removeChild(tooltip.childNodes[0]);
       }
       tooltip.appendChild(imagen);
+      this.errores.imagen = "";
       this.ocultaSpanImagen = false;
     }
   }
@@ -445,15 +461,20 @@ export class FormClinicaComponent implements OnInit {
   actualizaImagenSpan(imagenString: string){
     let tooltip: any = document.getElementById('mostrarImagen');
     if (tooltip) {
-      let imagen = new Image();
-      imagen.width = 200;
-      imagen.height = 200;
-      imagen.src = imagenString;
       if (tooltip.childNodes.length > 0) {
         tooltip.removeChild(tooltip.childNodes[0]);
       }
-      tooltip.appendChild(imagen);
-      this.ocultaSpanImagen = false;
+      if(imagenString){
+        let imagen = new Image();
+        imagen.width = 200;
+        imagen.height = 200;
+        imagen.src = imagenString;
+        tooltip.appendChild(imagen);
+        this.ocultaSpanImagen = false;
+      } else {
+        this.ocultaSpanImagen = true;
+      }
+      this.errores.imagen = "";
     }
   }
 }

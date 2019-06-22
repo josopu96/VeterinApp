@@ -88,16 +88,16 @@
             <div class="texto{{errores.imagen ? '_error' : ''}} {{edit ? 'temp' : ''}}">
               <label for="imagen" class="imagen">Imagen (Opcional)</label>
               <!-- <input *ngIf="edit" id="imagen" type="text" [(ngModel)]="clinicaEditada.imagen" (ngModelChange)="cambia('imagen')" /> -->
-              <div *ngIf="edit && !clinica.imagen" class="btn btn-default btn-file">
+              <div *ngIf="edit && !clinica.imagen" class="btn-file{{errores.imagen ? '_error' : ''}}">
                   Subir imagen <input id="imagen" title=" " type="file" (change)="cargarImagen($event)">
               </div>
-              <div *ngIf="edit && clinica.imagen" class="btn btn-default btn-file">
+              <div *ngIf="edit && clinica.imagen" class="btn-file{{errores.imagen ? '_error' : ''}}">
                   Cambiar imagen <input id="imagen" title=" " type="file" (change)="cargarImagen($event)">
               </div>
-              <div *ngIf="!edit && clinica.imagen" class="btn btn-default btn-file">
+              <div *ngIf="!edit && clinica.imagen" class="btn-file">
                   Ver imagen
               </div>
-              <div *ngIf="!edit && !clinica.imagen" class="btn btn-default btn-file">
+              <div *ngIf="!edit && !clinica.imagen" class="btn-file">
                   No hay imagen
               </div>
               <span class="span_imagen {{ocultaSpanImagen ? 'ocultaSpan' : ''}}" id="mostrarImagen"></span>

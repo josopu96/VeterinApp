@@ -100,10 +100,10 @@
         justify-content: center;
         flex-direction: column;
 
-        span {
+        .tooltip {
           display: none;
         }
-        &:hover span {
+        &:hover .tooltip {
           display: block;
           position: fixed;
           overflow: hidden;
@@ -148,10 +148,10 @@
         justify-content: center;
         flex-direction: column;
 
-        span {
+        .tooltip {
           display: none;
         }
-        &:hover span {
+        &:hover .tooltip {
           display: block;
           position: fixed;
           overflow: hidden;
@@ -209,7 +209,37 @@
   border-radius: 5px;
 }
 
+.btn-file_error {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: $colorSubirImagenClinica;
+  background: #ca0000a8;
+  border-radius: 5px;
+}
+
 .btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  padding-top: 100%;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: pointer;
+  display: block;
+}
+
+.btn-file_error input[type=file] {
   position: absolute;
   top: 0;
   right: 0;
@@ -230,15 +260,15 @@
 }
 
 .texto:hover .span_imagen {
-  display: block !important;
-  z-index: 999 !important;
-  position: fixed !important;
-  overflow: hidden !important;
-  border: 1px solid #b1b1b1ea !important;
-  background-color: #2a772ec0 !important;
-  padding: 10px !important;
-  border-radius: 5px !important;
-  text-align: center !important;
+  display: block;
+  z-index: 999;
+  position: fixed;
+  overflow: hidden;
+  border: 1px solid #b1b1b1ea;
+  background-color: #2a772ec0;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
 }
 
 .temp:hover .span_imagen {

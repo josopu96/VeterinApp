@@ -4,9 +4,9 @@ const Schema = mongoose.Schema;
 let veterinarioSchema = new Schema({
   nombre:        {   type: String,  required: true   },
   apellidos:     {   type: String,  required: true   },
-  fecNac:        {   type: Date,    required: true   },
+  fecNac:        {   type: Date,    required: false   },
   dni:           {   type: String,  required: true   },
-  telefono:      {   type: String,  required: true   },
+  telefono:      {   type: String,  required: false   },
   numColegiado:  {   type: String,  required: true   },
   borrado:       {   type: Boolean, required: true   },
 });

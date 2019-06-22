@@ -1,6 +1,5 @@
 @import "../../../../utilities/variables.scss";
 
-
 .seccion_oscuro {
   display: flex;
   background-color: rgba(#8a8a8a, $alpha: 0.3);
@@ -17,97 +16,235 @@
     background-color: $tituloOscuro;
     width: 100%;
     display: flex;
-    height: $altoTitulo + px;
+    height: $altoTituloClinica + px;
     justify-content: center;
     align-items: center;
 
-    span{
-      font-size: 30px;
+    .volver {
+      background-image: url("../../../../../assets/img/back_oscuro.png");
+      width: 30px;
+      height: 30px;
+      position: fixed;
+      left: 200px;
+      cursor: pointer;
+
+      &:hover {
+        background-image: url("../../../../../assets/img/back_medio.png");
+      }
+    }
+
+    span {
+      font-size: $letraTituloClinica+px;
       font-weight: bold;
     }
   }
 
-  .formulario{
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  .container_formulario {
     flex-grow: 1;
+    display: flex;
+    width: 100%;
 
-    fieldset{
-      margin: 0px 40px 20px 40px;
-      padding-top: 20px;
-      padding-bottom: 30px;
-      padding-left: 40px;
-      padding-right: 40px;
+    .formulario {
+      display: flex;
+      justify-content: center;
+      flex-grow: 1;
+      margin: 30px;
+      border: 1px solid white;
       background-color: $colorFondoFieldset;
+      padding: 30px;
 
-      legend{
-        font-weight: bold;
-        font-size: 18px;
+      .form_izq {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
       }
-      .texto{
+
+      .form_dcha {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-end;
+
+        .guardar {
+          display: flex;
+          width: 100%;
+          align-items: flex-start;
+          justify-content: flex-end;
+          flex-grow: 1;
+
+          button{
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.5s;
+            width: 150px;
+            margin-left: 10px;
+            height: 35px;
+            background: $colorFondoGuardarClinica;
+            img{
+              margin-left: 10px;
+            }
+          }
+        }
+      }
+
+      .texto {
         display: flex;
         justify-content: center;
+        flex-direction: column;
 
-        span{
-          flex-grow: 1;
-          margin-bottom: 10px;
-          margin-top: 10px;
+        span {
+          display: none;
         }
-        input{
-          width: 400px;
+        &:hover span {
+          display: block;
+          position: fixed;
+          overflow: hidden;
+          border: 1px solid #b1b1b1ea;
+          background-color: #ff6767c0;
+          padding: 10px;
+          border-radius: 5px;
+          text-align: center;
+        }
+
+        label {
+          flex-grow: 1;
+          margin-top: 10px;
+          width: 470px;
+        }
+        input {
+          width: 470px;
           margin: 0px;
-          margin-bottom: 5px;
-          margin-top: 5px;
           border: none;
           text-align: center;
           background-color: #00000000;
+          border: 1px solid transparent;
           border-bottom: 1px solid #cccccc;
           transition: all ease-out 0.3s;
           box-sizing: border-box;
           color: $textoClaro;
+          height: 22px;
 
-          &:focus{
-            margin-bottom: 2px;
-            margin-top: 2px;
-            font-size: 20px;
+          &:focus {
             background-color: $colorInput;
             border: 1px solid #cccccc;
+            font-size: 16px;
           }
+        }
+        .cif {
+          margin-top: 0px !important;
+        }
+      }
+
+      .texto_error {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        span {
+          display: none;
+        }
+        &:hover span {
+          display: block;
+          position: fixed;
+          overflow: hidden;
+          border: 1px solid #b1b1b1ea;
+          background-color: #ff6767c0;
+          padding: 10px;
+          border-radius: 5px;
+          text-align: center;
+        }
+
+        label {
+          flex-grow: 1;
+          margin-top: 10px;
+          width: 470px;
+        }
+        input {
+          width: 470px;
+          margin: 0px;
+          border: none;
+          text-align: center;
+          background-color: #00000000;
+          border: 1px solid transparent;
+          border-bottom: 1px solid #ca0000;
+          transition: all ease-out 0.3s;
+          box-sizing: border-box;
+          color: $textoClaro;
+          height: 22px;
+
+          &:focus {
+            font-size: 16px;
+            background-color: $colorInputError;
+            border: 1px solid #ca0000;
+          }
+        }
+        .cif {
+          margin-top: 0px !important;
         }
       }
     }
-
   }
+}
 
-  .guardar{
-    width: 100%;
-    display: flex;
-    height: $altoGuardar+px;
-    justify-content: center;
-    align-items: center;
-    border-top: 2px solid $colorFondoOscuro;
-    box-sizing: border-box;
+/* Botón de subida de imagen */
 
-    button {
-      height: 100%;
-      background-color: $colorFondoGuardar;
-      width: 100%;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 22px;
-      border: 0px;
-      color: $textoClaro;
-      transition: all 0.5s;
-      &:hover {
-        background-color: $colorFondoHoverGuardar;
-      }
-    }
-  }
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: $colorSubirImagenClinica;
+  border-radius: 5px;
+}
 
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  padding-top: 100%;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: pointer;
+  display: block;
+}
+
+.span_imagen {
+  display: none;
+}
+
+.texto:hover .span_imagen {
+  display: block !important;
+  z-index: 999 !important;
+  position: fixed !important;
+  overflow: hidden !important;
+  border: 1px solid #b1b1b1ea !important;
+  background-color: #2a772ec0 !important;
+  padding: 10px !important;
+  border-radius: 5px !important;
+  text-align: center !important;
+}
+
+.temp:hover .span_imagen {
+  background-color: #ffca67c0 !important;
+}
+
+.ocultaSpan {
+  display: none !important;
 }

@@ -45,7 +45,7 @@ exports.createVeterinario = function (req, res) {
   var veterinario = {
     'nombre'       : req.body.nombre,
     'apellidos'    : req.body.apellidos,
-    'fecNac'       : fechaNac,
+    'fecNac'       : req.body.fecNac != "null" ? req.body.fecNac : null,
     'dni'          : req.body.dni,
     'telefono'     : tlf,
     'numColegiado' : req.body.numColegiado,
@@ -95,6 +95,9 @@ exports.deleteVeterinario = function (req, res) {
 };
 
 exports.updateClinica = function (req, res) {
+  if(req.body.imagen){
+    req.body.imagen = decodeURIComponent(req.body.imagen); 
+  }
   Clinica.findByIdAndUpdate(req.params.id, {
     $set: req.body
   }, function (err, clinica) {

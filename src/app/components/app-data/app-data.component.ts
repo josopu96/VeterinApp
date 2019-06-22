@@ -37,6 +37,7 @@ export class AppDataComponent implements OnInit {
         'dniPropietario': res.dniPropietario,
         'telefono': res.telefono,
         'movil': res.movil,
+        'imagen': res.imagen,
         'fax': res.fax,
         'web': res.web,
         'email': res.email

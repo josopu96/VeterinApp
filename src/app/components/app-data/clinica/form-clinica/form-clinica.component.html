@@ -1,68 +1,123 @@
-<div class="container{{tema}}">
+<div class="container{{tema}}" (document:mousemove)='tooltip($event)'>
   <app-selecciones class="top"></app-selecciones>
   <div class="bottom">
     <app-menu class="menu"></app-menu>
     <div class="seccion{{tema}} columna">
-      <div style="overflow: scroll">
-        <div class="titulo">
-          <span *ngIf="new"> Nuevo veterinario </span>
-          <span *ngIf="!new"> Editando clinica </span>
-        </div>
-        <div class="formulario">
-          <fieldset>
-            <legend>Datos obligatorios</legend>
-            <div class="texto">
-              <span>CIF</span><input type="text" [(ngModel)]="clinicaEditada.cif" />
-            </div>
-            <div class="texto">
-              <span>Nombre</span><input type="text" [(ngModel)]="clinicaEditada.nombre" />
-            </div>
-            <div class="texto">
-              <span>Direccion</span><input type="text" [(ngModel)]="clinicaEditada.direccion" />
-            </div>
-            <div class="texto">
-              <span>Provincia</span><input type="text" [(ngModel)]="clinicaEditada.provincia" />
-            </div>
-            <div class="texto">
-              <span>Población</span><input type="text" [(ngModel)]="clinicaEditada.poblacion" />
-            </div>
-            <div class="texto">
-              <span>Código postal</span><input type="text" [(ngModel)]="clinicaEditada.codPostal" />
-            </div>
-            <div class="texto">
-              <span>País</span><input type="text" [(ngModel)]="clinicaEditada.pais" />
-            </div>
-            <div class="texto">
-              <span>Nombre y apellidos del propietario</span><input type="text"
-                [(ngModel)]="clinicaEditada.propietario" />
-            </div>
-            <div class="texto">
-              <span>DNI/NIF del propietario</span><input type="text" [(ngModel)]="clinicaEditada.dniPropietario" />
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Datos opcionales</legend>
-            <div class="texto">
-              <span>Telefono</span><input type="text" [(ngModel)]="clinicaEditada.telefono" />
-            </div>
-            <div class="texto">
-              <span>Movil</span><input type="text" [(ngModel)]="clinicaEditada.movil" />
-            </div>
-            <div class="texto">
-              <span>Fax</span><input type="text" [(ngModel)]="clinicaEditada.fax" />
-            </div>
-            <div class="texto">
-              <span>Web</span><input type="text" [(ngModel)]="clinicaEditada.web" />
-            </div>
-            <div class="texto">
-              <span>Email</span><input type="text" [(ngModel)]="clinicaEditada.email" />
-            </div>
-          </fieldset>
-        </div>
+      <div class="titulo">
+        <div class="volver" [routerLink]="['/appData']"></div>
+        <span *ngIf="!edit"> Datos de la clínica </span>
+        <span *ngIf="edit"> Editando clinica </span>
       </div>
-      <div class="guardar">
-        <button [routerLink]="['/appData']"> Volver </button>
-        <button (click)="guardar()" [disabled]="checkFormIsFullfilled()"> Guardar </button>
+      <div class="container_formulario">
+        <div class="formulario">
+          <div class="form_izq">
+            <div class="texto{{errores.cif ? '_error' : ''}}">
+              <label for="cif" class="cif">CIF</label>
+              <input *ngIf="edit" id="cif" type="text" [(ngModel)]="clinicaEditada.cif" (ngModelChange)="cambia('cif')" />
+              <input *ngIf="!edit" id="cif" type="text" [(ngModel)]="clinica.cif" disabled />
+              <span class="tooltip" *ngIf="errores.cif=='obligatorio'">Es obligatorio rellenar este campo</span>
+            </div>
+            <div class="texto{{errores.nombre ? '_error' : ''}}">
+              <label for="nombre" class="nombre">Nombre</label>
+              <input *ngIf="edit" id="nombre" type="text" [(ngModel)]="clinicaEditada.nombre" (ngModelChange)="cambia('nombre')" />
+              <input *ngIf="!edit" id="nombre" type="text" [(ngModel)]="clinica.nombre" disabled />
+              <span class="tooltip" *ngIf="errores.nombre=='obligatorio'">Es obligatorio rellenar este campo</span>
+            </div>
+            <div class="texto{{errores.telefono ? '_error' : ''}}">
+              <label for="telefono" class="telefono">Telefono (Opcional)</label>
+              <input *ngIf="edit" id="telefono" type="text" [(ngModel)]="clinicaEditada.telefono" (ngModelChange)="cambia('telefono')" />
+              <input *ngIf="!edit" id="telefono" type="text" [(ngModel)]="clinica.telefono" disabled />
+            </div>
+            <div class="texto{{errores.movil ? '_error' : ''}}">
+              <label for="movil" class="movil">Movil (Opcional)</label>
+              <input *ngIf="edit" id="movil" type="text" [(ngModel)]="clinicaEditada.movil" (ngModelChange)="cambia('movil')" />
+              <input *ngIf="!edit" id="movil" type="text" [(ngModel)]="clinica.movil" disabled />
+            </div>
+            <div class="texto{{errores.fax ? '_error' : ''}}">
+              <label for="fax" class="fax">Fax (Opcional)</label>
+              <input *ngIf="edit" id="fax" type="text" [(ngModel)]="clinicaEditada.fax" (ngModelChange)="cambia('fax')" />
+              <input *ngIf="!edit" id="fax" type="text" [(ngModel)]="clinica.fax" disabled />
+            </div>
+            <div class="texto{{errores.direccion ? '_error' : ''}}">
+              <label for="direccion" class="direccion">Direccion</label>
+              <input *ngIf="edit" id="direccion" type="text" [(ngModel)]="clinicaEditada.direccion" (ngModelChange)="cambia('direccion')" />
+              <input *ngIf="!edit" id="direccion" type="text" [(ngModel)]="clinica.direccion" disabled />
+              <span class="tooltip" *ngIf="errores.direccion=='obligatorio'">Es obligatorio rellenar este campo</span>
+            </div>
+            <div class="texto{{errores.provincia ? '_error' : ''}}">
+              <label for="provincia" class="provincia">Provincia</label>
+              <input *ngIf="edit" id="provincia" type="text" [(ngModel)]="clinicaEditada.provincia" (ngModelChange)="cambia('provincia')" />
+              <input *ngIf="!edit" id="provincia" type="text" [(ngModel)]="clinica.provincia" disabled />
+              <span class="tooltip" *ngIf="errores.provincia=='obligatorio'">Es obligatorio rellenar este campo</span>
+            </div>
+            <div class="texto{{errores.poblacion ? '_error' : ''}}">
+              <label for="poblacion" class="poblacion">Población</label>
+              <input *ngIf="edit" id="poblacion" type="text" [(ngModel)]="clinicaEditada.poblacion" (ngModelChange)="cambia('poblacion')" />
+              <input *ngIf="!edit" id="poblacion" type="text" [(ngModel)]="clinica.poblacion" disabled />
+              <span class="tooltip" *ngIf="errores.poblacion=='obligatorio'">Es obligatorio rellenar este campo</span>
+            </div>
+          </div>
+          <div class="form_dcha">
+            <div class="guardar">
+              <button *ngIf="!edit" (click)="edit=!edit">Editar <img src="../../../../../assets/img/editar.png" /> </button>
+              <button *ngIf="edit" (click)="guardar()">Guardar <img src="../../../../../assets/img/guardar_claro.png" /></button>
+              <button *ngIf="edit" (click)="cancelar()">Cancelar <img src="../../../../../assets/img/close_claro.png" width="17" height="17"/></button>
+            </div>
+            <div class="texto{{errores.codPostal ? '_error' : ''}}">
+              <label for="codPostal" class="codPostal">Código postal</label>
+              <input *ngIf="edit" id="codPostal" type="text" [(ngModel)]="clinicaEditada.codPostal" (ngModelChange)="cambia('codPostal')" />
+              <input *ngIf="!edit" id="codPostal" type="text" [(ngModel)]="clinica.codPostal" disabled />
+              <span class="tooltip" *ngIf="errores.codPostal=='obligatorio'">Es obligatorio rellenar este campo</span>
+            </div>
+            <div class="texto{{errores.pais ? '_error' : ''}}">
+              <label for="pais" class="pais">País</label>
+              <input *ngIf="edit" id="pais" type="text" [(ngModel)]="clinicaEditada.pais" (ngModelChange)="cambia('pais')" />
+              <input *ngIf="!edit" id="pais" type="text" [(ngModel)]="clinica.pais" disabled />
+              <span class="tooltip" *ngIf="errores.pais=='obligatorio'">Es obligatorio rellenar este campo</span>
+            </div>
+            <div class="texto{{errores.web ? '_error' : ''}}">
+              <label for="web" class="web">Web (Opcional)</label>
+              <input *ngIf="edit" id="web" type="text" [(ngModel)]="clinicaEditada.web" (ngModelChange)="cambia('web')" />
+              <input *ngIf="!edit" id="web" type="text" [(ngModel)]="clinica.web" disabled />
+            </div>
+            <div class="texto{{errores.email ? '_error' : ''}}">
+              <label for="email" class="email">Email (Opcional)</label>
+              <input *ngIf="edit" id="email" type="text" [(ngModel)]="clinicaEditada.email" (ngModelChange)="cambia('email')" />
+              <input *ngIf="!edit" id="email" type="text" [(ngModel)]="clinica.email" disabled />
+            </div>
+            <div class="texto{{errores.imagen ? '_error' : ''}} {{edit ? 'temp' : ''}}">
+              <label for="imagen" class="imagen">Imagen (Opcional)</label>
+              <!-- <input *ngIf="edit" id="imagen" type="text" [(ngModel)]="clinicaEditada.imagen" (ngModelChange)="cambia('imagen')" /> -->
+              <div *ngIf="edit && !clinica.imagen" class="btn btn-default btn-file">
+                  Subir imagen <input id="imagen" title=" " type="file" (change)="cargarImagen($event)">
+              </div>
+              <div *ngIf="edit && clinica.imagen" class="btn btn-default btn-file">
+                  Cambiar imagen <input id="imagen" title=" " type="file" (change)="cargarImagen($event)">
+              </div>
+              <div *ngIf="!edit && clinica.imagen" class="btn btn-default btn-file">
+                  Ver imagen
+              </div>
+              <div *ngIf="!edit && !clinica.imagen" class="btn btn-default btn-file">
+                  No hay imagen
+              </div>
+              <span class="span_imagen {{ocultaSpanImagen ? 'ocultaSpan' : ''}}" id="mostrarImagen"></span>
+              <span class="tooltip" *ngIf="errores.imagen=='capacidadImagen'">La imagen seleccionada es demasiado grande.</span>
+              <span class="tooltip" *ngIf="errores.imagen=='tipoImagen'">El archivo seleccionado no es una imagen válida.</span>
+            </div>
+            <div class="texto{{errores.propietario ? '_error' : ''}}">
+              <label for="propietario" class="propietario">Nombre y apellidos del propietario</label>
+              <input *ngIf="edit" id="propietario" type="text" [(ngModel)]="clinicaEditada.propietario" (ngModelChange)="cambia('propietario')" />
+              <input *ngIf="!edit" id="propietario" type="text" [(ngModel)]="clinica.propietario" disabled />
+              <span class="tooltip" *ngIf="errores.propietario=='obligatorio'">Es obligatorio rellenar este campo</span>
+            </div>
+            <div class="texto{{errores.dniPropietario ? '_error' : ''}}">
+              <label for="dniPropietario" class="dniPropietario">DNI/NIF del propietario</label>
+              <input *ngIf="edit" id="dniPropietario" type="text" [(ngModel)]="clinicaEditada.dniPropietario" (ngModelChange)="cambia('dniPropietario')" />
+              <input *ngIf="!edit" id="dniPropietario" type="text" [(ngModel)]="clinica.dniPropietario" disabled />
+              <span class="tooltip" *ngIf="errores.dniPropietario=='obligatorio'">Es obligatorio rellenar este campo</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

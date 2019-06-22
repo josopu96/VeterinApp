@@ -163,6 +163,8 @@ export class RestWS extends AbstractWS {
 
       if (veterinario.fecNac) {
         fd = fd.append('fecNac', String(veterinario.fecNac));
+      } else {
+        fd = fd.append('fecNac', null);
       }
 
     return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinario/create', fd).then((_) => {
@@ -209,7 +211,11 @@ export class RestWS extends AbstractWS {
       } else {
         fd = fd.append('email', '');
       }
-
+      if (clinica.imagen) {
+        fd = fd.append('imagen', encodeURIComponent(clinica.imagen));
+      } else {
+        fd = fd.append('imagen', '');
+      }
     return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/update', fd).then((_) => {
       return Promise.resolve();
     }).catch(error => {

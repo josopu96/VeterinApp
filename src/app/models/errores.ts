@@ -19,3 +19,21 @@ export class ErroresFormVeterinario {
     fecNac: string;
     telefono: string;
 }
+
+export class ErroresFormClinica {
+    cif: string;
+    nombre: string;
+    direccion: string;
+    telefono: string;
+    movil: string;
+    fax: string;
+    poblacion: string;
+    provincia: string;
+    pais: string;
+    codPostal: string;
+    web: string;
+    imagen: string;
+    email: string;
+    propietario: string;
+    dniPropietario: string;
+}

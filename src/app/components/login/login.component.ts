@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
 
   sendLogin() {
     let currentPass = (<HTMLInputElement> document.getElementById('password')).value;
-    console.log(currentPass);
     this.dm.login(this.email, currentPass).then((res: Usuario) => {
       console.log("Login correcto");
       this.doRememberPass(res._id);

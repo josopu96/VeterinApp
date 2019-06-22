@@ -95,6 +95,9 @@ exports.deleteVeterinario = function (req, res) {
 };
 
 exports.updateClinica = function (req, res) {
+  if(req.body.imagen){
+    req.body.imagen = decodeURIComponent(req.body.imagen); 
+  }
   Clinica.findByIdAndUpdate(req.params.id, {
     $set: req.body
   }, function (err, clinica) {

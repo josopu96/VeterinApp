@@ -15,6 +15,7 @@ export class FormClinicaComponent implements OnInit {
   tema = "_oscuro";
   edit: boolean;
   ready = false;
+  clinica: Clinica = new Clinica;
   clinicaEditada: Clinica = new Clinica;
   errores: ErroresFormClinica = new ErroresFormClinica();
 
@@ -30,6 +31,23 @@ export class FormClinicaComponent implements OnInit {
     this.tema = "_" + this.globalService.getTema();
     this.route.params.forEach(params => {
       if (params && params['id']) {
+        this.clinica._id = params["id"];
+        this.clinica.cif = params["cif"];
+        this.clinica.nombre = params["nombre"];
+        this.clinica.telefono = params["telefono"] !== "null" ? params["telefono"] : "";
+        this.clinica.movil = params["movil"] !== "null" ? params["movil"] : "";
+        this.clinica.fax = params["fax"] !== "null" ? params["fax"] : "";
+        this.clinica.direccion = params["direccion"];
+        this.clinica.provincia = params["provincia"];
+        this.clinica.poblacion = params["poblacion"];
+        this.clinica.codPostal = params["codPostal"];
+        this.clinica.pais = params["pais"];
+        this.clinica.web = params["web"];
+        this.clinica.email = params["email"];
+        this.clinica.imagen = params["imagen"];
+        this.clinica.propietario = params["propietario"];
+        this.clinica.dniPropietario = params["dniPropietario"];
+
         this.clinicaEditada._id = params["id"];
         this.clinicaEditada.cif = params["cif"];
         this.clinicaEditada.nombre = params["nombre"];
@@ -43,9 +61,11 @@ export class FormClinicaComponent implements OnInit {
         this.clinicaEditada.pais = params["pais"];
         this.clinicaEditada.web = params["web"];
         this.clinicaEditada.email = params["email"];
+        this.clinicaEditada.imagen = params["imagen"];
         this.clinicaEditada.propietario = params["propietario"];
         this.clinicaEditada.dniPropietario = params["dniPropietario"];
         this.ready = true;
+        console.log(params["imagen"]);
       }
     });
     this.edit = false;
@@ -78,9 +98,49 @@ export class FormClinicaComponent implements OnInit {
     }
   }
 
+  cancelar(){
+    this.clinicaEditada = new Clinica();
+    this.clinicaEditada._id = this.clinica._id;
+    this.clinicaEditada.cif = this.clinica.cif;
+    this.clinicaEditada.nombre = this.clinica.nombre;
+    this.clinicaEditada.telefono = this.clinica.telefono;
+    this.clinicaEditada.movil = this.clinica.movil;
+    this.clinicaEditada.fax = this.clinica.fax;
+    this.clinicaEditada.direccion = this.clinica.direccion;
+    this.clinicaEditada.provincia = this.clinica.provincia;
+    this.clinicaEditada.poblacion = this.clinica.poblacion;
+    this.clinicaEditada.codPostal = this.clinica.codPostal;
+    this.clinicaEditada.pais = this.clinica.pais;
+    this.clinicaEditada.web = this.clinica.web;
+    this.clinicaEditada.email = this.clinica.email;
+    this.clinicaEditada.imagen = this.clinica.imagen;
+    this.clinicaEditada.propietario = this.clinica.propietario;
+    this.clinicaEditada.dniPropietario = this.clinica.dniPropietario;
+    this.actualizaImagenSpan(this.clinica.imagen);
+    this.edit = false;
+  }
+
   actualizar() {
     this.dm.updateClinica(this.clinicaEditada).then((res) => {
       this.globalService.clinica = this.clinicaEditada;
+      this.clinica = new Clinica();
+      this.clinica._id = this.clinicaEditada._id;
+      this.clinica.cif = this.clinicaEditada.cif;
+      this.clinica.nombre = this.clinicaEditada.nombre;
+      this.clinica.telefono = this.clinicaEditada.telefono;
+      this.clinica.movil = this.clinicaEditada.movil;
+      this.clinica.fax = this.clinicaEditada.fax;
+      this.clinica.direccion = this.clinicaEditada.direccion;
+      this.clinica.provincia = this.clinicaEditada.provincia;
+      this.clinica.poblacion = this.clinicaEditada.poblacion;
+      this.clinica.codPostal = this.clinicaEditada.codPostal;
+      this.clinica.pais = this.clinicaEditada.pais;
+      this.clinica.web = this.clinicaEditada.web;
+      this.clinica.email = this.clinicaEditada.email;
+      this.clinica.imagen = this.clinicaEditada.imagen;
+      this.clinica.propietario = this.clinicaEditada.propietario;
+      this.clinica.dniPropietario = this.clinicaEditada.dniPropietario;
+      this.actualizaImagenSpan(this.clinicaEditada.imagen);
       this.edit = false;
     }).catch((err) => {
       console.log(err);
@@ -99,14 +159,45 @@ export class FormClinicaComponent implements OnInit {
     return disabled;
   }
 
+  imagenReady: boolean;
+
   tooltip(e) {
+    if(!this.imagenReady){
+      this.inicializaSpanImagen();
+      this.imagenReady = true;
+    }
     let tooltips: NodeListOf<HTMLElement> = document.querySelectorAll('.texto_error span');
+    let tooltipImagen: any = document.getElementById('mostrarImagen');
     let x = (e.clientX + 20) + 'px',
       y = (e.clientY + 20) + 'px';
+    let x_imagen = (e.clientX - 230) + 'px',
+      y_imagen = (e.clientY - 230) + 'px';
+    if(tooltipImagen){
+      tooltipImagen.style.top = y_imagen;
+      tooltipImagen.style.left = x_imagen;
+    }
     if (tooltips) {
       for (let i = 0; i < tooltips.length; i++) {
         tooltips[i].style.top = y;
         tooltips[i].style.left = x;
+      }
+    }
+  }
+
+  inicializaSpanImagen(){
+    let tooltip: any = document.getElementById('mostrarImagen');
+    if (tooltip) {
+      if (tooltip.childNodes.length > 0) {
+        tooltip.removeChild(tooltip.childNodes[0]);
+      }
+      if (this.clinica.imagen) {
+        let imagen = new Image();
+        imagen.width = 200;
+        imagen.height = 200;
+        imagen.src = this.clinica.imagen;
+        tooltip.appendChild(imagen);
+      } else {
+        this.ocultaSpanImagen = true;
       }
     }
   }
@@ -307,5 +398,62 @@ export class FormClinicaComponent implements OnInit {
   compruebaCapacidadImagen(imagen) {
     let res: boolean = false;
     return res;
+  }
+
+  files: any;
+  ocultaSpanImagen: boolean;
+  //Subida de imágenes
+  cargarImagen(event) {
+    this.files = event.target.files;
+    let img : Buffer;
+    console.log(this.files[0].size);
+    if (this.files[0].size > 62000) {
+      // mostrar error de imagen grande
+      console.log("archivo demasiado grande");
+      
+    } else {
+      const reader = new FileReader();
+      reader.readAsBinaryString(this.files[0]);
+      reader.onload = this._handleReaderLoaded.bind(this);
+      let tooltip: any = document.getElementById('mostrarImagen');
+      if (tooltip) {
+        this.ocultaSpanImagen = true;
+      }
+    }
+  }
+
+  _handleReaderLoaded(readerEvt) {
+    const binaryString = readerEvt.target.result;
+    let filestring = btoa(binaryString);  // Converting binary string data.
+    filestring = "data:" + this.files[0].type + ";base64, " + filestring;
+    this.clinicaEditada.imagen = filestring;
+    console.log(filestring);
+    let tooltip: any = document.getElementById('mostrarImagen');
+    if (tooltip) {
+      let imagen = new Image();
+      imagen.width = 200;
+      imagen.height = 200;
+      imagen.src = filestring;
+      if (tooltip.childNodes.length > 0) {
+        tooltip.removeChild(tooltip.childNodes[0]);
+      }
+      tooltip.appendChild(imagen);
+      this.ocultaSpanImagen = false;
+    }
+  }
+
+  actualizaImagenSpan(imagenString: string){
+    let tooltip: any = document.getElementById('mostrarImagen');
+    if (tooltip) {
+      let imagen = new Image();
+      imagen.width = 200;
+      imagen.height = 200;
+      imagen.src = imagenString;
+      if (tooltip.childNodes.length > 0) {
+        tooltip.removeChild(tooltip.childNodes[0]);
+      }
+      tooltip.appendChild(imagen);
+      this.ocultaSpanImagen = false;
+    }
   }
 }

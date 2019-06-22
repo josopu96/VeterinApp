@@ -18,6 +18,9 @@ export class FormClinicaComponent implements OnInit {
   clinica: Clinica = new Clinica;
   clinicaEditada: Clinica = new Clinica;
   errores: ErroresFormClinica = new ErroresFormClinica();
+  files: any;
+  ocultaSpanImagen: boolean;
+  imagenReady: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -162,8 +165,6 @@ export class FormClinicaComponent implements OnInit {
 
     return disabled;
   }
-
-  imagenReady: boolean;
 
   tooltip(e) {
     if(!this.imagenReady){
@@ -396,8 +397,6 @@ export class FormClinicaComponent implements OnInit {
     return res;
   }
 
-  files: any;
-  ocultaSpanImagen: boolean;
   //Subida de imágenes
   cargarImagen(event) {
     this.files = event.target.files;

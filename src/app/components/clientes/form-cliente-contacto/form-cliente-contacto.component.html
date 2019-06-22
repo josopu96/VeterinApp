@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="imagen">
+    <img src="../../../../assets/img/rana.png" width="100px" height="100px" />
+  </div>
+  <div class="texto">
+    <fieldset>
+      <legend>Datos básicos</legend>
+      <div class="form_arriba">
+        <div class="texto">
+          <label>Nombre</label><input type="text" [(ngModel)]="contactoEditado.nombre" />
+        </div>
+        <div class="texto">
+          <label>Apellidos</label><input type="text" [(ngModel)]="contactoEditado.apellidos" />
+        </div>
+        <div class="texto">
+          <label>Documento de identidad</label><input class="documento" type="text" [(ngModel)]="contactoEditado.dni" />
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div class="botones">
+    <div id="cerrar" (click)="cerrarVentana()">Volver</div>
+    <div id="continuar" (click)="guardarContacto()">Guardar</div>
+  </div>
+</div>

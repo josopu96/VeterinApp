@@ -13,7 +13,7 @@ import { CabeceraTabla } from '../../../models/tablas';
 export class FormClienteComponent implements OnInit {
 
   headElements: CabeceraTabla[] = [];
-  
+
   tema = "_oscuro";
   new: boolean;
   ready = false;
@@ -110,6 +110,10 @@ export class FormClienteComponent implements OnInit {
     }
 
     return disabled;
+  }
+
+  agregarContacto() {
+    this.globalService.generaVentana(300, 552, '/formClientesContactos', null);
   }
 
 }

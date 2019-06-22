@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { DataManagement } from '../services/dataManagement';
-import { Ajustes, Usuario, Mascota, Veterinario, Cliente, Clinica } from '../app.dataModels';
+import { Ajustes, Usuario, Mascota, Veterinario, Cliente, Clinica, Contacto } from '../app.dataModels';
 import { FiltroCliente, FiltroMascota, FiltroVeterinario, FiltroUsuario } from '../models/filtros';
 import { remote, ipcRenderer, webContents } from 'electron';
 import { Router } from '@angular/router';
@@ -26,6 +26,7 @@ export class GlobalService {
 
   //Especiales
   clienteEspecial: Cliente;
+  clienteEnEdicion: string;
 
   //Variables de filtros
   filtroCliente: FiltroCliente;
@@ -364,6 +365,8 @@ export class GlobalService {
     ipcRenderer.once('action-update', (event, arg) => {
       if (tipo == "nueva-mascota") {
         this.ngZone.run(() => { this.actionUpdateNuevaMascota(arg) });
+      } else if (tipo == "nuevo-contacto") {
+        this.ngZone.run(() => { this.actionUpdateNuevoContacto(arg) });
       }
     });
 
@@ -402,6 +405,18 @@ export class GlobalService {
       }
       //En cualquier otro caso no hacemos nada
     }
+  }
+
+  async actionUpdateNuevoContacto(arg) {
+    this.dm.getCliente(this.clienteEnEdicion).then((cliente: Cliente) => {
+      if (arg) {
+        if (arg.action == "guardar") {
+          cliente.contactos.push(new Contacto());
+          this.router.navigate(['clientes']);
+        }
+        //En cualquier otro caso no hacemos nada
+      }
+    });
   }
 
 }

@@ -13,7 +13,7 @@ import { ErroresFormClinica } from '../../../../models/errores';
 export class FormClinicaComponent implements OnInit {
 
   tema = "_oscuro";
-  new: boolean;
+  edit: boolean;
   ready = false;
   clinicaEditada: Clinica = new Clinica;
   errores: ErroresFormClinica = new ErroresFormClinica();
@@ -30,7 +30,6 @@ export class FormClinicaComponent implements OnInit {
     this.tema = "_" + this.globalService.getTema();
     this.route.params.forEach(params => {
       if (params && params['id']) {
-        this.new = false;
         this.clinicaEditada._id = params["id"];
         this.clinicaEditada.cif = params["cif"];
         this.clinicaEditada.nombre = params["nombre"];
@@ -47,10 +46,9 @@ export class FormClinicaComponent implements OnInit {
         this.clinicaEditada.propietario = params["propietario"];
         this.clinicaEditada.dniPropietario = params["dniPropietario"];
         this.ready = true;
-      } else {
-        this.new = true;
       }
     });
+    this.edit = false;
   }
 
   inicializaErrores() {
@@ -76,7 +74,6 @@ export class FormClinicaComponent implements OnInit {
     if (this.compruebaFallos()) {
       if (this.clinicaEditada._id) {
         this.actualizar();
-      } else {
       }
     }
   }
@@ -84,7 +81,7 @@ export class FormClinicaComponent implements OnInit {
   actualizar() {
     this.dm.updateClinica(this.clinicaEditada).then((res) => {
       this.globalService.clinica = this.clinicaEditada;
-      this.router.navigateByUrl('/appData');
+      this.edit = false;
     }).catch((err) => {
       console.log(err);
     });

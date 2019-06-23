@@ -163,6 +163,11 @@
             overflow: hidden;
             flex-direction: column;
 
+            &:hover{
+                background-color: $colorFondoClaroTransparente;
+                cursor: pointer;
+            }
+            
             .imagenSelector{
                 width: $anchoImagenSelector+px;
                 height: $altoImagenSelector+px;
@@ -178,6 +183,7 @@
                 flex-grow: 1;
                 font-weight: bold;
                 font-size: 20px;
+                
             }
             .seccionEspecial{
                 width: 100%;

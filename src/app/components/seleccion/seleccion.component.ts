@@ -173,6 +173,17 @@ export class SeleccionComponent implements OnInit {
     }
   }
 
+  irA(key){
+    switch (key) {
+      case 'resumen_mascota':
+        this.router.navigate(["mascota/"+this.mascota._id]);
+        break;
+    
+      default:
+        break;
+    }
+  }
+
   limpiarCliente(): void {
     if (this.globalService.getCliente()._id != "0") {
       this.globalService.limpiarCliente();

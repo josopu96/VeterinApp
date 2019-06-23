@@ -1,0 +1,97 @@
+<div class="container{{tema}}">
+  <app-selecciones class="top"></app-selecciones>
+  <div class="bottom">
+    <app-menu class="menu"></app-menu>
+    <div class="seccion{{tema}} columna" *ngIf="ready && mascota">
+      <div class="titulo">
+        {{mascota.nombre}}
+      </div>
+     <div class="menu_mascota">
+        <div class="boton {{muestraSeccion=='resumen' ? 'seleccionado_primero' : ''}}" (click)="irA('resumen')">RESUMEN</div>
+        <div class="boton {{muestraSeccion=='analiticas' ? 'seleccionado' : ''}}" (click)="irA('analiticas')">ANALÍTICAS</div>
+        <div class="boton {{muestraSeccion=='radiografias' ? 'seleccionado' : ''}}" (click)="irA('radiografias')">RADIOGRAFÍAS</div>
+        <div class="boton {{muestraSeccion=='pruebas' ? 'seleccionado' : ''}}" (click)="irA('pruebas')">PRUEBAS</div>
+        <div class="boton {{muestraSeccion=='tratamientos' ? 'seleccionado' : ''}}" (click)="irA('tratamientos')">TRATAMIENTOS</div>
+        <div class="boton {{muestraSeccion=='vacunas' ? 'seleccionado' : ''}}" (click)="irA('vacunas')">VACUNAS</div>
+        <div class="boton_desparasitaciones {{muestraSeccion=='desparasitaciones' ? 'seleccionado_ultimo' : ''}}" (click)="irA('desparasitaciones')">DESPARASITACIONES</div>
+      </div>
+      <div class="resumen" *ngIf="muestraSeccion!='resumen'">
+        Esta sección no se ha completado todavía
+      </div>
+      <div class="resumen" *ngIf="muestraSeccion=='resumen'">
+        <div class="resumen_izq">
+          <fieldset>
+            <legend>
+              Datos
+            </legend>
+            <div class="datos">
+              <div class="item">
+                <p><u>Nombre</u> <strong>: {{mascota.nombre}}</strong></p>
+              </div>
+              <div class="item">
+                <p><u>Chip:</u> <strong> {{mascota.chip}}</strong></p>
+              </div>
+              <div class="item">
+                <p><u>Fecha de nacimiento:</u> <strong> {{mascota.fecNac | date:"dd/MM/yyyy" }}</strong></p>
+              </div>
+              <div class="item">
+                <p><u>Fecha de alta:</u> <strong> {{mascota.nombre}}</strong></p>
+              </div>
+              <div class="item">
+                <p><u>Fecha de fallecimiento:</u> <strong> {{mascota.fecBaj}}</strong></p>
+              </div>
+              <div class="item">
+                <p><u>Sexo:</u> <strong> {{mascota.sexo}}</strong></p>
+              </div>
+              <div class="item">
+                <p><u>Especie:</u> <strong> {{mascota.especie}}</strong></p>
+              </div>
+              <div class="item">
+                <p><u>Raza:</u> <strong> {{mascota.raza}}</strong></p>
+              </div>
+              <div class="item">
+                <p><u>Capa:</u> <strong> {{mascota.capa}}</strong></p>
+              </div>
+              <div class="item">
+                <p><u>Pelo:</u> <strong> {{mascota.pelo}}</strong></p>
+              </div>
+              <div class="item">
+                <p><u>Estado:</u> <strong> {{mascota.estado}}</strong></p>
+              </div>
+              <div class="item">
+                <p><u>Dueño actual:</u> <strong> {{cliente.nombre}} {{cliente.apellidos}}</strong></p>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <div class="resumen_dcha">
+          <div class="titulo_tabla">
+            Resumen del historial
+          </div>
+          <div class="tabla">
+            <table mdbTable striped="true" class="table table-striped table-dark table-hover">
+              <thead class=thead-dark>
+                <tr>
+                  <th *ngFor="let head of headElements" class="{{head.clase}}" scope="col">{{head.nombre}} </th>
+                </tr>
+              </thead>
+              <tbody class=tbody-dark>
+                <ng-container *ngFor="let el of elements">
+                  <tr mdbTableCol>
+                    <td class="colFecha">{{ el.fecha | date:"dd/MM/yyyy" }}</td>
+                    <td class="colTipo">{{ el.tipo }}</td>
+                    <td class="colDescripcion">{{ el.descripcion }}</td>
+                    <td class="colVisualizar"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px" height="13px"></td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="seccion{{tema}} error" *ngIf="!mascota">
+      Mascota no encontrada
+    </div>
+  </div>
+</div>

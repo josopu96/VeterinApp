@@ -17,9 +17,10 @@
               </thead>
               <tbody class=tbody-dark>
                 <tr mdbTableCol *ngFor="let el of elements">
-                  <td class="cabeceraNombre" (click)="onSelect(el)">{{ el.nombre }}</td>
-                  <td class="cabeceraApellidos">{{ el.isAdmin }}</td>
-                  <td class="cabeceraEditar"><img src="../../../../assets/img/editar-oscuro.png" width="25px" height="25px" (click)="editar(el)"></td>
+                  <td class="colNombre" (click)="onSelect(el)">{{ el.nombre }}</td>
+                  <td class="colAdministrador" *ngIf="el.isAdmin"><img src="../../../../../assets/img/true.png" width="25" height="25" /></td>
+                  <td class="colAdministrador" *ngIf="!el.isAdmin"><img src="../../../../../assets/img/false.png" width="25" height="25" /></td>
+                  <td class="colEditar" (click)="editar(el)"><img src="../../../../assets/img/editar-oscuro.png" width="25px" height="25px"></td>
                 </tr>
               </tbody>
             </table>

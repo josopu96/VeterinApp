@@ -48,15 +48,15 @@ export class FormClienteComponent implements OnInit {
         this.clienteEditado.codPostal = params["codPostal"];
         this.clienteEditado.email = params["email"];
         this.clienteEditado.fecNac = params["fecNac"];
+        this.dm.getContactos(this.clienteEditado._id).then((contactos: Contacto[]) => {
+          this.clienteEditado.contactos = contactos;
+          this.ready = true;
+        }).catch((_) => {});
       } else {
         this.new = true;
       }
     });
 
-    this.dm.getContactos(this.clienteEditado._id).then((contactos: Contacto[]) => {
-      this.clienteEditado.contactos = contactos;
-      this.ready = true;
-    }).catch((_) => {});
   }
 
   inicializaCabecera() {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente } from '../../../app.dataModels';
+import { Cliente, Contacto } from '../../../app.dataModels';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from '../../../services/globalService';
 import { DataManagement } from '../../../services/dataManagement';
@@ -18,6 +18,7 @@ export class FormClienteComponent implements OnInit {
   new: boolean;
   ready = false;
   clienteEditado: Cliente = new Cliente();
+  contactos: Contacto[];
 
   constructor(
     private route: ActivatedRoute,
@@ -47,11 +48,15 @@ export class FormClienteComponent implements OnInit {
         this.clienteEditado.codPostal = params["codPostal"];
         this.clienteEditado.email = params["email"];
         this.clienteEditado.fecNac = params["fecNac"];
-        this.ready = true;
       } else {
         this.new = true;
       }
     });
+
+    this.dm.getContactos(this.clienteEditado._id).then((contactos: Contacto[]) => {
+      this.clienteEditado.contactos = contactos;
+      this.ready = true;
+    }).catch((_) => {});
   }
 
   inicializaCabecera() {
@@ -113,7 +118,7 @@ export class FormClienteComponent implements OnInit {
   }
 
   agregarContacto() {
-    this.globalService.generaVentana(300, 552, '/formClientesContactos', null);
+    this.globalService.generaVentana(300, 552, '/formClientesContactos', 'nuevo-contacto');
   }
 
 }

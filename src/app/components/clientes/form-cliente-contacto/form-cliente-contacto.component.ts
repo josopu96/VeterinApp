@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { remote, ipcRenderer } from 'electron';
 import { Contacto } from '../../../app.dataModels';
 
@@ -9,7 +9,7 @@ import { Contacto } from '../../../app.dataModels';
 })
 export class FormClienteContactoComponent implements OnInit {
 
-  contactoEditado: Contacto;
+  contactoEditado: Contacto = new Contacto();
 
   constructor() { }
 
@@ -26,11 +26,12 @@ export class FormClienteContactoComponent implements OnInit {
   guardarContacto() {
     let window = remote.getCurrentWindow();
     let Data = {
-        action: "elegir"
+        action: "guardar",
+        contactoEditado: this.contactoEditado
     };
 
-    // Trigger the event listener action to this event in the renderer process and send the data
     ipcRenderer.send('request-update-in-window', Data);
     window.close();
   }
+
 }

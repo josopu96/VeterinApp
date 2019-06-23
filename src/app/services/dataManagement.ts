@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RestWS } from './restService';
-import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota, Tratamiento, Prueba } from '../app.dataModels';
+import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota, Tratamiento, Prueba, Contacto } from '../app.dataModels';
 import { Cliente } from '../app.dataModels';
 
 @Injectable()
@@ -209,6 +209,22 @@ export class DataManagement {
 
   public createPrueba(tratamiento: Prueba, mascotaId: string): Promise<any> {
     return this.restService.createPrueba(tratamiento, mascotaId).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public getContactos(clienteId: string): Promise<any> {
+    return this.restService.getContactos(clienteId).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public addContacto(clienteId: string, contacto: Contacto): Promise<any> {
+    return this.restService.addContacto(clienteId, contacto).then((data) => {
       return Promise.resolve(data);
     }).catch(error => {
       return Promise.reject('error');

@@ -7,10 +7,13 @@
           <label>Nombre</label><input type="text" [(ngModel)]="contactoEditado.nombre" />
         </div>
         <div class="texto">
-          <label>Apellidos</label><input type="text" [(ngModel)]="contactoEditado.apellidos" />
+          <label>Apellidos</label><input type="text" [(ngModel)]="contactoEditado.telefono" />
         </div>
         <div class="texto">
-          <label>Documento de identidad</label><input class="documento" type="text" [(ngModel)]="contactoEditado.dni" />
+          <form action="">
+            <input type="radio" [(ngModel)]="contactoEditado.tipo" name="buildTool" value="movil">Movil <br>
+            <input type="radio" [(ngModel)]="contactoEditado.tipo" name="buildTool" value="fijo">Fijo
+          </form>
         </div>
       </div>
     </fieldset>

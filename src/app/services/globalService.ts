@@ -408,15 +408,16 @@ export class GlobalService {
   }
 
   async actionUpdateNuevoContacto(arg) {
-    this.dm.getCliente(this.clienteEnEdicion).then((cliente: Cliente) => {
-      if (arg) {
+    if (arg) {
+      this.dm.getCliente(this.clienteEnEdicion).then((cliente: Cliente) => {
         if (arg.action == "guardar") {
-          cliente.contactos.push(new Contacto());
-          this.router.navigate(['clientes']);
+          this.dm.addContacto(cliente._id, arg.contactoEditado).then((_) => {
+            this.router.navigate(['clientes']);
+          });
         }
         //En cualquier otro caso no hacemos nada
-      }
-    });
+      });
+    }
   }
 
 }

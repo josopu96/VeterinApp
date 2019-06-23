@@ -48,6 +48,7 @@ import { OperacionesComponent } from './components/operaciones/operaciones.compo
 import { FormTratamientoComponent } from './components/operaciones/tratamientos/form-tratamiento/form-tratamiento.component';
 import { ListaComponent } from './components/operaciones/pruebas/lista/lista.component';
 import { FormPruebaComponent } from './components/operaciones/pruebas/form-prueba/form-prueba.component';
+import { ResumenComponent } from './components/mascotas/resumen/resumen.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -82,7 +83,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ListaTratamientos,
     FormTratamientoComponent,
     ListaComponent,
-    FormPruebaComponent
+    FormPruebaComponent,
+    ResumenComponent
   ],
   imports: [
     BrowserModule,

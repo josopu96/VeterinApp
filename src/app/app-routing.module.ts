@@ -21,6 +21,7 @@ import { FormTratamientoComponent } from './components/operaciones/tratamientos/
 import { ListaComponent as ListaPruebas } from './components/operaciones/pruebas/lista/lista.component';
 import { FormPruebaComponent } from './components/operaciones/pruebas/form-prueba/form-prueba.component';
 import { ResumenComponent } from './components/mascotas/resumen/resumen.component';
+import { FormClienteContactoComponent } from './components/clientes/form-cliente-contacto/form-cliente-contacto.component';
 
 
 const routes: Routes = [
@@ -40,13 +41,14 @@ const routes: Routes = [
     { path: 'formUsuario' , component: FormUsuarioComponent },
     { path: 'formMascotas' , component: FormMascotasComponent },
     { path: 'formClientes', component: FormClienteComponent},
+    { path: 'formClientesContactos', component: FormClienteContactoComponent },
     { path: 'avisoNuevaMascota' , component: AvisoNuevaMascotaComponent },
     { path: 'operaciones', component: OperacionesComponent },
     { path: 'tratamientos', component: ListaTratamientos },
     { path: 'formTratamiento', component: FormTratamientoComponent },
     { path: 'pruebas', component: ListaPruebas },
     { path: 'formPrueba', component: FormPruebaComponent },
-    { path: 'mascota/:idMascota', component: ResumenComponent }
+    { path: 'mascota/:idMascota', component: ResumenComponent },
 ];
 
 @NgModule({

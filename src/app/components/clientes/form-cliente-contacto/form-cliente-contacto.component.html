@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="texto">
+    <fieldset>
+      <legend>Datos básicos</legend>
+      <div class="form_arriba">
+        <div class="texto">
+          <label>Nombre</label><input type="text" [(ngModel)]="contactoEditado.nombre" />
+        </div>
+        <div class="texto">
+          <label>Apellidos</label><input type="text" [(ngModel)]="contactoEditado.telefono" />
+        </div>
+        <div class="texto">
+          <form action="">
+            <input type="radio" [(ngModel)]="contactoEditado.tipo" name="buildTool" value="movil">Movil <br>
+            <input type="radio" [(ngModel)]="contactoEditado.tipo" name="buildTool" value="fijo">Fijo
+          </form>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div class="botones">
+    <div id="cerrar" (click)="cerrarVentana()">Volver</div>
+    <div id="continuar" (click)="guardarContacto()">Guardar</div>
+  </div>
+</div>

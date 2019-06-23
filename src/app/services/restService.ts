@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './../../config/configService';
 import { AbstractWS } from './abstractService';
 import { Injectable } from '@angular/core';
-import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota, Tratamiento, Prueba } from '../app.dataModels';
+import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota, Tratamiento, Prueba, Contacto } from '../app.dataModels';
 import { Cliente } from '../app.dataModels';
 
 @Injectable()
@@ -444,4 +444,32 @@ export class RestWS extends AbstractWS {
     });
   }
 
+  public getContactos(clienteId: string): Promise<Contacto[]> {
+    const fd = new HttpParams();
+    return this.makeGetRequest(this.path + 'clientes/' + clienteId + '/contactos', fd).then((res) => {
+      return Promise.resolve(res);
+    }).catch(err => {
+      return Promise.reject(err);
+    });
+  }
+
+  public addContacto(clienteId: string, contacto: Contacto): Promise<any> {
+    let fd = new HttpParams();
+
+    if (contacto.nombre) {
+      fd = fd.append('nombre', contacto.nombre);
+    }
+    if (contacto.telefono) {
+      fd = fd.append('telefono', contacto.telefono);
+    }
+    if (contacto.tipo) {
+      fd = fd.append('tipo', contacto.tipo);
+    }
+
+    return this.makePostRequest(this.path + 'clientes/' + clienteId + '/addContacto', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(err => {
+      return Promise.reject(err);
+    });
+  }
 }

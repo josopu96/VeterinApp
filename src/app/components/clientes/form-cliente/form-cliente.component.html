@@ -1,4 +1,4 @@
-<div class="container{{tema}}">
+<div class="container{{tema}}" (document:mousemove)='tooltip($event)'>
   <app-selecciones class="top"></app-selecciones>
   <div class="bottom">
     <app-menu class="menu"></app-menu>
@@ -10,49 +10,79 @@
       </div>
       <div class="formulario">
         <div class="datos_y_contactos">
-          <div class="datos_basicos">
+          <div class="datos_basicos_nuevo" *ngIf="new">
             <fieldset>
               <legend>Datos básicos</legend>
               <div class="form_arriba">
-                <div class="texto">
-                  <label>Nombre</label><input type="text" [(ngModel)]="clienteEditado.nombre" />
+                <div class="texto{{errores.nombre ? '_error' : ''}}">
+                  <label for="nombre_nuevo">Nombre</label><input id="nombre_nuevo" type="text" [(ngModel)]="clienteEditado.nombre"
+                    (ngModelChange)="cambia('nombre')" />
+                  <span class="tooltip" *ngIf="errores.nombre=='obligatorio'">Es obligatorio rellenar este campo</span>
                 </div>
-                <div class="texto">
-                  <label>Apellidos</label><input type="text" [(ngModel)]="clienteEditado.apellidos" />
+                <div class="texto{{errores.apellidos ? '_error' : ''}}">
+                  <label for="apellidos_nuevo">Apellidos</label><input id="apellidos_nuevo" type="text"
+                    [(ngModel)]="clienteEditado.apellidos" (ngModelChange)="cambia('apellidos')" />
+                  <span class="tooltip" *ngIf="errores.apellidos=='obligatorio'">Es obligatorio rellenar este
+                    campo</span>
                 </div>
-                <div class="texto">
-                  <label>Documento de identidad</label><input class="documento" type="text" [(ngModel)]="clienteEditado.dni" />
+                <div class="texto{{errores.dni ? '_error' : ''}}">
+                  <label for="dni_nuevo">Documento de identidad</label><input id="dni_nuevo" class="documento" type="text"
+                    [(ngModel)]="clienteEditado.dni" (ngModelChange)="cambia('dni')" />
+                  <span class="tooltip" *ngIf="errores.dni=='obligatorio'">Es obligatorio rellenar este campo</span>
                 </div>
               </div>
             </fieldset>
           </div>
-          <div class="contactos">
+          <div class="datos_basicos" *ngIf="!new">
+            <fieldset>
+              <legend>Datos básicos</legend>
+              <div class="form_arriba">
+                <div class="texto{{errores.nombre ? '_error' : ''}}">
+                  <label for="nombre">Nombre</label><input id="nombre" type="text" [(ngModel)]="clienteEditado.nombre"
+                    (ngModelChange)="cambia('nombre')" />
+                  <span class="tooltip" *ngIf="errores.nombre=='obligatorio'">Es obligatorio rellenar este campo</span>
+                </div>
+                <div class="texto{{errores.apellidos ? '_error' : ''}}">
+                  <label for="apellidos">Apellidos</label><input id="apellidos" type="text"
+                    [(ngModel)]="clienteEditado.apellidos" (ngModelChange)="cambia('apellidos')" />
+                  <span class="tooltip" *ngIf="errores.apellidos=='obligatorio'">Es obligatorio rellenar este
+                    campo</span>
+                </div>
+                <div class="texto{{errores.dni ? '_error' : ''}}">
+                  <label for="dni">Documento de identidad</label><input id="dni" class="documento" type="text"
+                    [(ngModel)]="clienteEditado.dni" (ngModelChange)="cambia('dni')" />
+                  <span class="tooltip" *ngIf="errores.dni=='obligatorio'">Es obligatorio rellenar este campo</span>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="contactos" *ngIf="!new">
             <div class="titulo_tabla">
               Métodos de contacto
             </div>
             <div class="tabla_contactos">
-                <table mdbTable striped="true" class="table table-striped table-dark table-hover">
-                    <thead class=thead-dark>
-                      <tr>
-                        <th *ngFor="let head of headElements" class="{{head.clase}}" scope="col">{{head.nombre}} </th>
-                      </tr>
-                    </thead>
-                    <tbody class=tbody-dark>
-                      <ng-container *ngFor="let el of clienteEditado.contactos">
-                        <tr mdbTableCol>
-                          <td class="colNombre">{{ el.nombre }}</td>
-                          <td class="colTelefono">{{ el.telefono }}</td>
-                          <td class="colTipo">{{ el.tipo }}</td>
-                          <td class="colQuitar">
-                            <img src="../../../../assets/img/delete.png" width="20px" height="20px" />
-                          </td>
-                        </tr>
-                      </ng-container>
-                    </tbody>
-                  </table>
+              <table mdbTable striped="true" class="table table-striped table-dark table-hover">
+                <thead class=thead-dark>
+                  <tr>
+                    <th *ngFor="let head of headElements" class="{{head.clase}}" scope="col">{{head.nombre}} </th>
+                  </tr>
+                </thead>
+                <tbody class=tbody-dark>
+                  <ng-container *ngFor="let el of clienteEditado.contactos">
+                    <tr mdbTableCol>
+                      <td class="colNombre">{{ el.nombre }}</td>
+                      <td class="colTelefono">{{ el.telefono }}</td>
+                      <td class="colTipo">{{ el.tipo }}</td>
+                      <td class="colQuitar">
+                        <img src="../../../../assets/img/delete.png" width="20px" height="20px" />
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
             </div>
-            <div class="agregar_contacto">
-              Agregar método de contacto
+            <div class="agregar_contacto" (click)="agregarContacto()">
+              Agregar contacto
             </div>
           </div>
         </div>
@@ -61,33 +91,43 @@
             <legend>Datos opcionales</legend>
             <div class="form_abajo">
               <div class="opcionales_izq">
-                <div class="texto">
-                  <label>Direccion</label>
-                  <input type="text" [(ngModel)]="clienteEditado.direccion" />
+                <div class="texto{{errores.direccion ? '_error' : ''}}">
+                  <label for="direccion">Direccion</label>
+                  <input id="direccion" type="text" [(ngModel)]="clienteEditado.direccion"
+                    (ngModelChange)="cambia('direccion')" />
                 </div>
-                <div class="texto">
-                  <label>Poblacion</label>
-                  <input type="text" [(ngModel)]="clienteEditado.poblacion" />
+                <div class="texto{{errores.poblacion ? '_error' : ''}}">
+                  <label for="poblacion">Poblacion</label>
+                  <input id="poblacion" type="text" [(ngModel)]="clienteEditado.poblacion"
+                    (ngModelChange)="cambia('poblacion')" />
                 </div>
-                <div class="texto">
-                  <label>Código Postal</label>
-                  <input type="text" [(ngModel)]="clienteEditado.codPostal" />
+                <div class="texto{{errores.codPostal ? '_error' : ''}}">
+                  <label for="codPostal">Código Postal</label>
+                  <input id="codPostal" type="text" [(ngModel)]="clienteEditado.codPostal"
+                    (ngModelChange)="cambia('codPostal')" />
+                  <span class="tooltip" *ngIf="errores.codPostal=='patron'">El código postal sólo puede contener
+                    números</span>
                 </div>
               </div>
               <div class="opcionales_dcha">
-                <div class="texto">
-                  <label>Email</label>
-                  <input type="text" [(ngModel)]="clienteEditado.email" />
+                <div class="texto{{errores.email ? '_error' : ''}}">
+                  <label for="email">Email</label>
+                  <input id="email" type="text" [(ngModel)]="clienteEditado.email" (ngModelChange)="cambia('email')" />
+                  <span class="tooltip" *ngIf="errores.email=='formato'">El email introducido no es válido</span>
                 </div>
-                <div class="texto" *ngIf="clienteEditado.fecNac">
-                  <label>Fecha de Nacimiento</label>
+                <div class="texto{{errores.fecNac ? '_error' : ''}}" *ngIf="clienteEditado.fecNac">
+                  <label for="fecNac">Fecha de Nacimiento</label>
                   <input type="date" [ngModel]="clienteEditado.fecNac | date:'yyyy-MM-dd'"
-                    (ngModelChange)="clienteEditado.fecNac=$event" id="dt" />
+                    (ngModelChange)="clienteEditado.fecNac=$event; cambia('fecNac')" id="fecNac" />
+                  <span class="tooltip" *ngIf="errores.fecNac=='futuro'">La fecha de nacimiento no puede estar en el
+                    futuro</span>
                 </div>
-                <div class="texto" *ngIf="!clienteEditado.fecNac">
-                  <label>Fecha de Nacimiento</label>
-                  <input type="date" [ngModel]="clienteEditado.fecNac" (ngModelChange)="clienteEditado.fecNac=$event"
-                    id="dt" />
+                <div class="texto{{errores.fecNac ? '_error' : ''}}" *ngIf="!clienteEditado.fecNac">
+                  <label for="fecNac">Fecha de Nacimiento</label>
+                  <input type="date" [ngModel]="clienteEditado.fecNac"
+                    (ngModelChange)="clienteEditado.fecNac=$event; cambia('fecNac')" id="fecNac" />
+                  <span class="tooltip" *ngIf="errores.fecNac=='futuro'">La fecha de nacimiento no puede estar en el
+                    futuro</span>
                 </div>
               </div>
             </div>
@@ -95,7 +135,7 @@
         </div>
       </div>
       <div class="guardar">
-        <button (click)="guardar()" [disabled]="checkFormIsFullfilled()"> Guardar </button>
+        <button (click)="guardar()"> Guardar </button>
       </div>
     </div>
   </div>

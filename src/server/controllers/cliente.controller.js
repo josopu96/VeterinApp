@@ -1,4 +1,5 @@
 const Cliente = require('../models/cliente.model');
+var mongoose = require('mongoose');
 
 exports.getClientes = function(req, res) {
   Cliente.find({}, function(err, clientes) {
@@ -71,5 +72,30 @@ exports.updateCliente = function (req, res) {
   }, {new: true}, function (err, usuario) {
     if (err) return next(err);
     res.send(usuario);
+  });
+}
+
+exports.getContactos = function (req, res) {
+  Cliente.findById(req.params.id, function (err, cliente) {
+    if (err) res.status(404).send(err);
+    res.status(200).send(cliente.contactos);
+  });
+}
+
+exports.addContacto = function (req, res) {
+  var contacto = {
+    '_id'          : new mongoose.mongo.ObjectId(),
+    'nombre'       : req.body.nombre,
+    'telefono'     : req.body.telefono,
+    'tipo'         : req.body.tipo,
+  }
+  console.log(contacto);
+  Cliente.update(
+    {'_id': req.params.id},
+    { $push: { contactos: contacto }
+  }, {new: true}, function (err, cliente) {
+    console.log(err);
+    if (err) res.send(err);
+    res.status(200).send({ 'response': 'Contacto creado satisfactoriamente' });
   });
 }

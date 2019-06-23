@@ -37,3 +37,10 @@ export class ErroresFormClinica {
     propietario: string;
     dniPropietario: string;
 }
+
+export class ErroresFormTratamientos {
+  anamnesis: string;
+  diagnostico: string;
+  tipoTratamiento: string;
+  fecha: string;
+}

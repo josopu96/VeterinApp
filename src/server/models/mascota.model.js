@@ -5,6 +5,7 @@ let tratamientoSchema = new Schema({
   anamnesis:        { type: String, required: true },
   diagnostico:      { type: String, required: true },
   tipoTratamiento:  { type: String, required: true },
+  fecha:            { type: Date,   required: true },
   fecModificacion:  { type: Date,   required: true },
 });
 

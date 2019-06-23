@@ -111,6 +111,7 @@ exports.crearTratamiento = function (req, res) {
         anamnesis: req.body.anamnesis,
         diagnostico: req.body.diagnostico,
         tipoTratamiento: req.body.tipoTratamiento,
+        fecha: req.body.fecha,
         fecModificacion: new Date()
       }
       Mascota.findByIdAndUpdate(req.body.mascotaId, {
@@ -124,6 +125,21 @@ exports.crearTratamiento = function (req, res) {
       })
     }
   })
+}
+
+exports.updateTratamiento = function (req, res) {
+  Mascota.findOneAndUpdate(
+    {'_id': req.params.id, 'tratamientos': { $elemMatch: {_id: req.params.idTratamiento }}
+  }, {
+    $set: {
+      'tratamientos.$.anamnesis'        : req.body.anamnesis,
+      'tratamientos.$.diagnostico'      : req.body.diagnostico,
+      'tratamientos.$.tipoTratamiento'  : req.body.tipoTratamiento,
+      'tratamientos.$.fecha'            : req.body.fecha,
+      'tratamientos.$.fecModificacion'  : new Date()
+  }}, function (err, resp) {
+    res.status(200).send( {'respuesta': 'Tratamiento editado satisfactoriamente'} );
+  });
 }
 
 exports.getPruebas = function (req, res) {

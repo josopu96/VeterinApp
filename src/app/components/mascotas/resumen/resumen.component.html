@@ -35,10 +35,7 @@
                 <p><u>Fecha de nacimiento:</u> <strong> {{mascota.fecNac | date:"dd/MM/yyyy" }}</strong></p>
               </div>
               <div class="item">
-                <p><u>Fecha de alta:</u> <strong> {{mascota.nombre}}</strong></p>
-              </div>
-              <div class="item">
-                <p><u>Fecha de fallecimiento:</u> <strong> {{mascota.fecBaj}}</strong></p>
+                <p><u>Fecha de fallecimiento:</u> <strong> {{mascota.fecBaj ? (mascota.fecBaj | date:"dd/MM/yyyy") : '-' }}</strong></p>
               </div>
               <div class="item">
                 <p><u>Sexo:</u> <strong> {{mascota.sexo}}</strong></p>

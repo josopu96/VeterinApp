@@ -4,6 +4,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { Veterinario } from '../../../../app.dataModels';
 import { FiltroVeterinario } from '../../../../models/filtros';
 import { CabeceraTabla } from '../../../../models/tablas';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-lista',
@@ -31,6 +32,7 @@ export class ListaComponent implements OnInit {
   constructor(
     private globalService: GlobalService,
     private router: Router,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit() {
@@ -199,5 +201,10 @@ export class ListaComponent implements OnInit {
         this.dataListDniInicializado = true;
       }
     }
+  }
+
+  visualizar(el: Veterinario) {
+    this.cookieService.set('veterinarioDisplay', JSON.stringify(el));
+    this.globalService.generaVentana(300, 552, '/displayVeterinario', null);
   }
 }

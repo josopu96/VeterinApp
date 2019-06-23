@@ -38,6 +38,7 @@ export class FormUsuarioComponent implements OnInit {
       } else {
         this.usuarioEditado.isAdmin = false;
         this.new = true;
+        this.ready = true;
       }
     });
   }
@@ -68,6 +69,7 @@ export class FormUsuarioComponent implements OnInit {
 
   crear() {
     this.dm.createUsuario(this.usuarioEditado).then((res) => {
+      this.usuarioEditado._id = res._id;
       this.globalService.usuarios.push(this.usuarioEditado);
       this.router.navigateByUrl('/usuarios');
     }).catch((err) => {

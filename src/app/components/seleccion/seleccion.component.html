@@ -31,7 +31,7 @@
         <div class="seccion1 addpet"></div>
       </ng-template>
       <ng-template [ngIf]="mascota._id!=0">
-        <div class="seccion1">
+        <div class="seccion1" (click)="irA('resumen_mascota')">
           <div class="seccionNombre {{claseNombreMascota}}">{{ mascota.nombre }}</div>
           <hr>
           <div class="seccionDatos {{claseChipMascota}}">{{ mascota.chip }}</div>

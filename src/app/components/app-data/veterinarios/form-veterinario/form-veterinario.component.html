@@ -1,4 +1,4 @@
-<div class="container{{tema}}">
+<div class="container{{tema}}" (document:mousemove)='tooltip($event)'>
   <app-selecciones class="top"></app-selecciones>
   <div class="bottom">
     <app-menu class="menu"></app-menu>
@@ -11,34 +11,39 @@
       <div class="formulario">
         <fieldset>
           <legend>Datos obligatorios</legend>
-          <div class="texto">
-            <span>Nombre</span><input type="text" [(ngModel)]="veterinarioEditado.nombre" />
+          <div class="texto{{errores.nombre ? '_error' : ''}}">
+            <label for="nombre">Nombre</label><input type="text" id="nombre" [(ngModel)]="veterinarioEditado.nombre" (ngModelChange)="cambia('nombre')" />
+            <span class="tooltip" *ngIf="errores.nombre=='obligatorio'">Es obligatorio rellenar este campo</span>
           </div>
-          <div class="texto">
-            <span>Apellidos</span><input type="text" [(ngModel)]="veterinarioEditado.apellidos" />
+          <div class="texto{{errores.apellidos ? '_error' : ''}}">
+            <label for="apellidos">Apellidos</label><input type="text" id="apellidos" [(ngModel)]="veterinarioEditado.apellidos" (ngModelChange)="cambia('apellidos')" />
+            <span class="tooltip" *ngIf="errores.apellidos=='obligatorio'">Es obligatorio rellenar este campo</span>
           </div>
-          <div class="texto">
-            <span>DNI</span><input type="text" [(ngModel)]="veterinarioEditado.dni" />
+          <div class="texto{{errores.dni ? '_error' : ''}}">
+            <label for="dni">DNI</label><input type="text" id="dni" [(ngModel)]="veterinarioEditado.dni" (ngModelChange)="cambia('dni')" />
+            <span class="tooltip" *ngIf="errores.dni=='obligatorio'">Es obligatorio rellenar este campo</span>
           </div>
-          <div class="texto">
-            <span>Numero Colegiado</span><input type="text" [(ngModel)]="veterinarioEditado.numColegiado" />
+          <div class="texto{{errores.numColegiado ? '_error' : ''}}">
+            <label for="numColegiado">Numero Colegiado</label><input type="text" id="numColegiado" [(ngModel)]="veterinarioEditado.numColegiado" (ngModelChange)="cambia('numColegiado')" />
+            <span class="tooltip" *ngIf="errores.numColegiado=='obligatorio'">Es obligatorio rellenar este campo</span>
           </div>
         </fieldset>
         <fieldset>
           <legend>Datos opcionales</legend>
-            <div class="texto" *ngIf="veterinarioEditado.fecNac">
-              <span>Fecha de Nacimiento</span><input type="date" [ngModel]="veterinarioEditado.fecNac | date:'yyyy-MM-dd'"  (ngModelChange)="veterinarioEditado.fecNac=$event"  id="dt" />
+            <div class="texto{{errores.fecNac ? '_error' : ''}}" *ngIf="veterinarioEditado.fecNac">
+              <label for="fecNac">Fecha de Nacimiento</label><input id="fecNac" type="date" [ngModel]="veterinarioEditado.fecNac | date:'yyyy-MM-dd'"  (ngModelChange)="veterinarioEditado.fecNac=$event; cambia('fecNac')" />
+              <span class="tooltip" *ngIf="errores.fecNac=='fechaFuturo'">La fecha de nacimiento no puede estar en el futuro</span>
             </div>
-            <div class="texto" *ngIf="!veterinarioEditado.fecNac">
-              <span>Fecha de Nacimiento</span><input type="date" [ngModel]="veterinarioEditado.fecNac"  (ngModelChange)="veterinarioEditado.fecNac=$event"  id="dt" />
+            <div class="texto{{errores.fecNac ? '_error' : ''}}" *ngIf="!veterinarioEditado.fecNac">
+              <label for="fecNac">Fecha de Nacimiento</label><input id="fecNac" type="date" [ngModel]="veterinarioEditado.fecNac"  (ngModelChange)="veterinarioEditado.fecNac=$event; cambia('fecNac')" />
             </div>
           <div class="texto">
-            <span>Telefono</span><input type="text" [(ngModel)]="veterinarioEditado.telefono" />
+            <label for="telefono">Telefono</label><input id="telefono" type="text" [(ngModel)]="veterinarioEditado.telefono" />
           </div>
         </fieldset>
       </div>
       <div class="guardar">
-        <button (click)="guardar()" [disabled]="checkFormIsFullfilled()"> Guardar </button>
+        <button (click)="guardar()" > Guardar </button>
       </div>
     </div>
   </div>

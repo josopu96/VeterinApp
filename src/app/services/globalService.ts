@@ -141,6 +141,14 @@ export class GlobalService {
     return this.cliente;
   }
 
+  getClientePorId(idCliente: string){
+    let cli: Cliente = this.clientes.find(cliente => cliente._id==idCliente);
+    if(!cli){
+      cli = this.clienteEspecial;
+    }
+    return cli;
+  }
+
   // --- VETERINARIO ---
 
   setVeterinario(nuevoVeterinario: Veterinario) {
@@ -159,6 +167,10 @@ export class GlobalService {
 
   getMascota() {
     return this.mascota;
+  }
+
+  getMascotaPorId(idMascota: string){
+    return this.mascotas.find(mascota => mascota._id==idMascota);
   }
 
   // --- SELECTORES ---

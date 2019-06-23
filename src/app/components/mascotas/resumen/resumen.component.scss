@@ -1,0 +1,296 @@
+@import "../../../utilities/variables.scss";
+
+.seccion_oscuro {
+  display: flex;
+  background-color: rgba(#ffffff, $alpha: 0.4);
+  flex-basis: $anchoSeccion + px;
+  align-items: center;
+  justify-content: center;
+  height: $altoSeccion + px;
+  border-top: 2px solid $colorFondoOscuro;
+  border-left: 2px solid $colorFondoOscuro;
+  box-sizing: border-box;
+  border-top-left-radius: 5px;
+
+  .titulo {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: $altoTituloResumenMascota + px;
+    background: $fondoTituloResumenMascota;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .menu_mascota {
+    display: flex;
+    height: 28px;
+    width: 100%;
+
+    .boton {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        background: $fondoMenuResumenMascota;
+        border: 1px solid transparent;
+        border-bottom: 1px solid white;
+        transition: 0.3s all, 0s border-bottom;
+        cursor: pointer;
+        
+        &:hover{
+            background: #00000080;
+        }
+    }
+    .boton_desparasitaciones {
+        display: flex;
+        width: 120%;
+        justify-content: center;
+        align-items: center;
+        background: $fondoMenuResumenMascota;
+        border: 1px solid transparent;
+        border-bottom: 1px solid white;
+        transition: 0.3s all;
+        cursor: pointer;
+
+        &:hover{
+            background: #00000080;
+        }
+    }
+    .seleccionado{
+        border: 1px solid white;
+        border-bottom: 1px solid transparent;
+        background: rgba(17, 37, 33, 0.839);
+        cursor: default;
+
+        &:hover{
+            background: rgba(17, 37, 33, 0.839);
+        }
+    }
+    .seleccionado_primero{
+        border: 1px solid white;
+        border-bottom: 1px solid transparent;
+        border-left: 1px solid transparent;
+        background: rgba(17, 37, 33, 0.839);
+        cursor: default;
+
+        &:hover{
+            background: rgba(17, 37, 33, 0.839);
+        }
+    }
+    .seleccionado_ultimo{
+        border: 1px solid white;
+        border-bottom: 1px solid transparent;
+        border-right: 1px solid transparent;
+        background: rgba(17, 37, 33, 0.839);
+        cursor: default;
+
+        &:hover{
+            background: rgba(17, 37, 33, 0.839);
+        }
+    }
+  }
+  .resumen {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    background-color: $fondoSeccionResumenMascota;
+
+    .resumen_izq {
+      display: flex;
+      width: 400px;
+      flex-direction: column;
+      padding: 20px;
+      padding-right: 10px;
+
+      fieldset {
+        border-color: #d4d4d47a;
+
+        legend {
+          font-size: 19px;
+          font-weight: bold;
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+
+        .datos {
+          display: flex;
+          flex-direction: column;
+          padding-left: 10px;
+          margin-bottom: 13px;
+
+          .item {
+            display: flex;
+            margin-top: 17px;
+
+            p {
+              margin: 0;
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+    .resumen_dcha {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      margin: 20px;
+      margin-left: 10px;
+      margin-top: 28px;
+      border-width: 2px;
+      border-style: groove;
+      border-color: #d4d4d47a;
+      border-image: initial;
+      box-sizing: border-box;
+      height: 430px;
+      overflow: hidden;
+
+      .titulo_tabla {
+        display: flex;
+        height: 25px;
+        justify-content: center;
+        align-items: center;
+        background: #00000080;
+        font-size: 17px;
+        font-weight: bold;
+      }
+
+      .tabla {
+        display: flex;
+        flex-grow: 1;
+        height: 401px;
+        font-size: 15px;
+        font-weight: normal;
+
+        .table {
+          width: 100%;
+          background-color: transparent;
+          text-align: center;
+          border-spacing: 0px;
+        }
+
+        .table-dark,
+        .table-dark > th,
+        .table-dark > td {
+          background-color: #030303;
+        }
+
+        .table-hover .table-dark:hover {
+          background-color: #030303;
+        }
+
+        .table-hover .table-dark:hover > td,
+        .table-hover .table-dark:hover > th {
+          background-color: #030303;
+        }
+
+        .table-active,
+        .table-active > th,
+        .table-active > td {
+          background-color: rgba(0, 0, 0, 0.075);
+        }
+
+        .table-hover .table-active:hover {
+          background-color: rgba(0, 0, 0, 0.075);
+        }
+
+        .table-hover .table-active:hover > td,
+        .table-hover .table-active:hover > th {
+          background-color: rgba(0, 0, 0, 0.075);
+        }
+        thead,
+        tbody {
+          display: block;
+        }
+
+        .tbody-dark {
+          height: 364px;
+          overflow-y: auto;
+          overflow-x: hidden;
+          background: #647572a8;
+          -webkit-overflow-scrolling: touch;
+          -ms-overflow-style: -ms-autohiding-scrollbar;
+        }
+
+        .table .thead-dark th {
+          color: #fff;
+          background-color: #21252980;
+          border-color: #121416;
+          padding: 0px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+        .table .tbody-dark td {
+          padding: 0px;
+          padding-top: 7px;
+          padding-bottom: 7px;
+        }
+
+        .table-dark {
+          color: #fff;
+          background-color: #21252980;
+        }
+
+        .table-dark.table-striped tbody tr:nth-of-type(odd) {
+          background-color: rgba(0, 0, 0, 0.151);
+        }
+
+        .table-dark.table-striped tbody tr:nth-of-type(even) {
+          background-color: rgba(0, 0, 0, 0.308);
+        }
+
+        .table-dark.table-hover tbody tr:hover {
+          background-color: rgba(255, 255, 255, 0.185);
+        }
+
+        .cabeceraFecha {
+          width: 166px;
+          max-width: 166px;
+          overflow: hidden;
+        }
+        .cabeceraTipo {
+          width: 116px;
+          max-width: 116px;
+          overflow: hidden;
+        }
+        .cabeceraDescripcion {
+          width: 286px;
+          max-width: 286px;
+          overflow: hidden;
+        }
+        .cabeceraVisualizar {
+          width: 70px;
+          max-width: 70px;
+          overflow: hidden;
+        }
+
+        .colFecha {
+          width: 166px;
+          max-width: 166px;
+          overflow: hidden;
+        }
+        .colTipo {
+          width: 116px;
+          max-width: 116px;
+          overflow: hidden;
+        }
+        .colDescripcion {
+          width: 286px;
+          max-width: 286px;
+          overflow: hidden;
+        }
+        .colVisualizar {
+          width: 70px;
+          max-width: 70px;
+          overflow: hidden;
+          cursor: pointer;
+
+          &:hover {
+            background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.397) 0%, rgba(0, 0, 0, 0) 80%);
+          }
+        }
+      }
+    }
+  }
+}

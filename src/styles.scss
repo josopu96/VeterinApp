@@ -151,6 +151,9 @@ background: #d4d4d4;
   margin-left: 10px;
   margin-right: 10px;
   display: flex;
+  img{
+    -webkit-app-region: drag;
+  }
 }
 
 .minimize-button {

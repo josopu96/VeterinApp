@@ -2,7 +2,6 @@
 
 .seccionMenu_claro{
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
     width: $anchoMenu+px;
@@ -10,7 +9,7 @@
 
     .item{
         display: flex;
-        height: 100%;
+        margin-bottom: 30px;
         width: 100%;
 
         .fondo{
@@ -64,7 +63,6 @@
 
 .seccionMenu_oscuro{
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
     width: $anchoMenu+px;
@@ -72,7 +70,7 @@
 
     .item{
         display: flex;
-        height: 100%;
+        margin-bottom: 30px;
         width: 100%;
 
         .fondo{

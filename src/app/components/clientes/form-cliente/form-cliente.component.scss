@@ -1,13 +1,12 @@
 @import "../../../utilities/variables.scss";
 
-
 .seccion_oscuro {
   display: flex;
   background-color: rgba(#8a8a8a, $alpha: 0.3);
   flex-basis: $anchoSeccion + px;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: $altoSeccion + px;
   border-top: 2px solid $colorFondoOscuro;
   border-left: 2px solid $colorFondoOscuro;
   box-sizing: border-box;
@@ -21,70 +20,333 @@
     justify-content: center;
     align-items: center;
 
-    span{
+    .volver {
+      background-image: url("../../../../assets/img/back_oscuro.png");
+      width: 30px;
+      height: 30px;
+      position: fixed;
+      left: 200px;
+      cursor: pointer;
+
+      &:hover {
+        background-image: url("../../../../assets/img/back_medio.png");
+      }
+    }
+
+    span {
       font-size: 30px;
       font-weight: bold;
     }
   }
 
-  .formulario{
-    width: 70%;
+  .formulario {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-grow: 1;
 
-    fieldset{
-      margin: 0px 40px 20px 40px;
-      padding-top: 20px;
-      padding-bottom: 30px;
-      padding-left: 40px;
-      padding-right: 40px;
-      background-color: $colorFondoFieldset;
+    .datos_y_contactos {
+      display: flex;
+      height: 193px;
+      padding: 20px 50px 10px;
 
-      legend{
-        font-weight: bold;
-        font-size: 18px;
-      }
-      .texto{
+      .datos_basicos {
         display: flex;
-        justify-content: center;
+        width: 50%;
+        padding-right: 10px;
 
-        span{
-          flex-grow: 1;
-          margin-bottom: 10px;
-          margin-top: 10px;
+        fieldset {
+          display: flex;
+          background-color: $colorFondoFieldset;
+          width: 100%;
+
+          legend {
+            font-weight: bold;
+            font-size: 18px;
+          }
+
+          .form_arriba {
+            display: flex;
+            flex-direction: column;
+          }
         }
-        input{
-          width: 400px;
-          margin: 0px;
-          margin-bottom: 5px;
-          margin-top: 5px;
-          border: none;
-          text-align: center;
-          background-color: #00000000;
-          border-bottom: 1px solid #cccccc;
-          transition: all ease-out 0.3s;
-          box-sizing: border-box;
-          color: $textoClaro;
+      }
+      .contactos {
+        display: flex;
+        width: 50%;
+        margin-left: 10px;
+        flex-direction: column;
+        margin-top: 10px;
+        border: 1px solid white;
 
-          &:focus{
-            margin-bottom: 2px;
-            margin-top: 2px;
-            font-size: 20px;
-            background-color: $colorInput;
-            border: 1px solid #cccccc;
+        .titulo_tabla {
+          display: flex;
+          background-color: #b1b1b1ea;
+          height: 25px;
+          justify-content: center;
+          align-items: center;
+          font-weight: bold;
+        }
+
+        .tabla_contactos {
+          display: flex;
+          flex-grow: 1;
+          font-size: 15px;
+          font-weight: normal;
+          box-sizing: border-box;
+
+          .table {
+            width: 100%;
+            background-color: transparent;
+            text-align: center;
+            border-spacing: 0px;
+          }
+
+          .table-dark,
+          .table-dark > th,
+          .table-dark > td {
+            background-color: #030303;
+          }
+
+          .table-hover .table-dark:hover {
+            background-color: #030303;
+          }
+
+          .table-hover .table-dark:hover > td,
+          .table-hover .table-dark:hover > th {
+            background-color: #030303;
+          }
+
+          .table-active,
+          .table-active > th,
+          .table-active > td {
+            background-color: rgba(0, 0, 0, 0.075);
+          }
+
+          .table-hover .table-active:hover {
+            background-color: rgba(0, 0, 0, 0.075);
+          }
+
+          .table-hover .table-active:hover > td,
+          .table-hover .table-active:hover > th {
+            background-color: rgba(0, 0, 0, 0.075);
+          }
+          thead,
+          tbody {
+            display: block;
+          }
+
+          .tbody-dark {
+            height: 94px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+          }
+
+          .table .thead-dark th {
+            color: #fff;
+            background-color: #21252980;
+            border-color: #121416;
+            padding: 0px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+          }
+          .table .tbody-dark td {
+            padding: 0px;
+            padding-top: 7px;
+            padding-bottom: 7px;
+          }
+
+          .table-dark {
+            color: #fff;
+            background-color: #21252980;
+          }
+
+          .table-dark.table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(255, 255, 255, 0.05);
+          }
+
+          .table-dark.table-hover tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.075);
+          }
+
+          .cabeceraNombre {
+            width: 174px;
+            max-width: 174px;
+            overflow: hidden;
+          }
+          .cabeceraTelefono {
+            width: 225px;
+            max-width: 225px;
+            overflow: hidden;
+          }
+          .cabeceraTipo {
+            width: 129px;
+            max-width: 129px;
+            overflow: hidden;
+          }
+          .cabeceraQuitar {
+            width: 70px;
+            max-width: 70px;
+            overflow: hidden;
+          }
+        }
+        .agregar_contacto {
+          cursor: pointer;
+          display: flex;
+          background-color: #b1b1b173;
+          height: 25px;
+          justify-content: center;
+          align-items: center;
+          font-size: 14px;
+        }
+      }
+    }
+    .datos_opcionales {
+      display: flex;
+      flex-grow: 1;
+      padding: 10px 50px 20px;
+
+      fieldset {
+        display: flex;
+        background-color: $colorFondoFieldset;
+        width: 100%;
+
+        legend {
+          font-weight: bold;
+          font-size: 18px;
+        }
+        .form_abajo {
+          display: flex;
+
+          .opcionales_izq {
+            display: flex;
+            width: 50%;
+            flex-direction: column;
+          }
+          .opcionales_dcha {
+            display: flex;
+            width: 50%;
+            flex-direction: column;
           }
         }
       }
     }
 
+    .texto {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+      padding-left: 20px;
+      padding-right: 20px;
+
+      span {
+        display: none;
+      }
+      &:hover span {
+        display: block;
+        position: fixed;
+        overflow: hidden;
+        border: 1px solid #b1b1b1ea;
+        background-color: #ff6767c0;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+      }
+
+      label {
+        flex-grow: 1;
+        margin-bottom: 10px;
+        margin-top: 10px;
+      }
+      input {
+        width: 200px;
+        margin: 0px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        border: none;
+        text-align: center;
+        background-color: #00000000;
+        border-bottom: 1px solid #cccccc;
+        transition: all ease-out 0.3s;
+        box-sizing: border-box;
+        color: $textoClaro;
+
+        &:focus {
+          margin-bottom: 2px;
+          margin-top: 2px;
+          font-size: 20px;
+          background-color: $colorInput;
+          border: 1px solid #cccccc;
+        }
+
+        &[type="text"] {
+          width: 300px;
+        }
+      }
+    }
+
+    .documento {
+      width: 200px !important;
+    }
+
+    .texto_error {
+      display: flex;
+      justify-content: center;
+
+      span {
+        display: none;
+      }
+      &:hover span {
+        display: block;
+        position: fixed;
+        overflow: hidden;
+        border: 1px solid #b1b1b1ea;
+        background-color: #ff6767c0;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+      }
+
+      label {
+        flex-grow: 1;
+        margin-bottom: 10px;
+        margin-top: 10px;
+      }
+      input {
+        width: 200px;
+        margin: 0px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        border: none;
+        text-align: center;
+        background-color: #00000000;
+        border-bottom: 1px solid #ca0000;
+        transition: all ease-out 0.3s;
+        box-sizing: border-box;
+        color: $textoClaro;
+
+        &:focus {
+          margin-bottom: 2px;
+          margin-top: 2px;
+          font-size: 20px;
+          background-color: $colorInputError;
+          border: 1px solid #ca0000;
+        }
+
+        &[type="text"] {
+          width: 300px;
+        }
+      }
+    }
   }
 
-  .guardar{
+  .guardar {
     width: 100%;
     display: flex;
-    height: $altoGuardar+px;
+    height: $altoGuardar + px;
     justify-content: center;
     align-items: center;
     border-top: 2px solid $colorFondoOscuro;
@@ -109,5 +371,4 @@
       }
     }
   }
-
 }

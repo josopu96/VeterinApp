@@ -182,7 +182,7 @@ export class Global {
     _id: string;
     anamnesis: string;
     diagnostico: string;
-    tipoTratamiento: TipoTratamiento;
+    tipoTratamiento: string;
     fecha: Date;
     receta: Receta;
     idVeterinario: string;

@@ -3,49 +3,98 @@
   <div class="bottom">
     <app-menu class="menu"></app-menu>
     <div class="seccion{{tema}} columna">
-      <div style="overflow: scroll">
-        <div class="titulo">
-          <span *ngIf="new"> Nuevo cliente </span>
-          <span *ngIf="!new"> Editando cliente </span>
+      <div class="titulo">
+        <div class="volver" [routerLink]="['/clientes']"></div>
+        <span *ngIf="new"> Nuevo cliente </span>
+        <span *ngIf="!new"> Editando cliente </span>
+      </div>
+      <div class="formulario">
+        <div class="datos_y_contactos">
+          <div class="datos_basicos">
+            <fieldset>
+              <legend>Datos básicos</legend>
+              <div class="form_arriba">
+                <div class="texto">
+                  <label>Nombre</label><input type="text" [(ngModel)]="clienteEditado.nombre" />
+                </div>
+                <div class="texto">
+                  <label>Apellidos</label><input type="text" [(ngModel)]="clienteEditado.apellidos" />
+                </div>
+                <div class="texto">
+                  <label>Documento de identidad</label><input class="documento" type="text" [(ngModel)]="clienteEditado.dni" />
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="contactos">
+            <div class="titulo_tabla">
+              Métodos de contacto
+            </div>
+            <div class="tabla_contactos">
+                <table mdbTable striped="true" class="table table-striped table-dark table-hover">
+                    <thead class=thead-dark>
+                      <tr>
+                        <th *ngFor="let head of headElements" class="{{head.clase}}" scope="col">{{head.nombre}} </th>
+                      </tr>
+                    </thead>
+                    <tbody class=tbody-dark>
+                      <ng-container *ngFor="let el of clienteEditado.contactos">
+                        <tr mdbTableCol>
+                          <td class="colNombre">{{ el.nombre }}</td>
+                          <td class="colTelefono">{{ el.telefono }}</td>
+                          <td class="colTipo">{{ el.tipo }}</td>
+                          <td class="colQuitar">
+                            <img src="../../../../assets/img/delete.png" width="20px" height="20px" />
+                          </td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+            </div>
+            <div class="agregar_contacto">
+              Agregar método de contacto
+            </div>
+          </div>
         </div>
-        <div class="formulario">
-          <fieldset>
-            <legend>Datos obligatorios</legend>
-            <div class="texto">
-              <span>Nombre</span><input type="text" [(ngModel)]="clienteEditado.nombre" />
-            </div>
-            <div class="texto">
-              <span>Apellidos</span><input type="text" [(ngModel)]="clienteEditado.apellidos" />
-            </div>
-            <div class="texto">
-              <span>DNI</span><input type="text" [(ngModel)]="clienteEditado.dni" />
-            </div>
-          </fieldset>
+        <div class="datos_opcionales">
           <fieldset>
             <legend>Datos opcionales</legend>
-            <div class="texto">
-              <span>Direccion</span><input type="text" [(ngModel)]="clienteEditado.direccion" />
-            </div>
-            <div class="texto">
-              <span>Poblacion</span><input type="text" [(ngModel)]="clienteEditado.poblacion" />
-            </div>
-            <div class="texto">
-              <span>Código Postal</span><input type="number" [(ngModel)]="clienteEditado.codPostal" />
-            </div>
-            <div class="texto">
-              <span>Email</span><input type="email" [(ngModel)]="clienteEditado.email" />
-            </div>
-            <div class="texto" *ngIf="clienteEditado.fecNac">
-              <span>Fecha de Nacimiento</span><input type="date" [ngModel]="clienteEditado.fecNac | date:'yyyy-MM-dd'"  (ngModelChange)="clienteEditado.fecNac=$event"  id="dt" />
-            </div>
-            <div class="texto" *ngIf="!clienteEditado.fecNac">
-              <span>Fecha de Nacimiento</span><input type="date" [ngModel]="clienteEditado.fecNac"  (ngModelChange)="clienteEditado.fecNac=$event"  id="dt" />
+            <div class="form_abajo">
+              <div class="opcionales_izq">
+                <div class="texto">
+                  <label>Direccion</label>
+                  <input type="text" [(ngModel)]="clienteEditado.direccion" />
+                </div>
+                <div class="texto">
+                  <label>Poblacion</label>
+                  <input type="text" [(ngModel)]="clienteEditado.poblacion" />
+                </div>
+                <div class="texto">
+                  <label>Código Postal</label>
+                  <input type="text" [(ngModel)]="clienteEditado.codPostal" />
+                </div>
+              </div>
+              <div class="opcionales_dcha">
+                <div class="texto">
+                  <label>Email</label>
+                  <input type="text" [(ngModel)]="clienteEditado.email" />
+                </div>
+                <div class="texto" *ngIf="clienteEditado.fecNac">
+                  <label>Fecha de Nacimiento</label>
+                  <input type="date" [ngModel]="clienteEditado.fecNac | date:'yyyy-MM-dd'"
+                    (ngModelChange)="clienteEditado.fecNac=$event" id="dt" />
+                </div>
+                <div class="texto" *ngIf="!clienteEditado.fecNac">
+                  <label>Fecha de Nacimiento</label>
+                  <input type="date" [ngModel]="clienteEditado.fecNac" (ngModelChange)="clienteEditado.fecNac=$event"
+                    id="dt" />
+                </div>
+              </div>
             </div>
           </fieldset>
         </div>
       </div>
       <div class="guardar">
-        <button [routerLink]="['/clientes']"> Volver </button>
         <button (click)="guardar()" [disabled]="checkFormIsFullfilled()"> Guardar </button>
       </div>
     </div>

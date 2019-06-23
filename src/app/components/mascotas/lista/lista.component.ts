@@ -98,6 +98,10 @@ export class ListaComponent implements OnInit {
       this.router.navigate(["mascotas"]));
   }
 
+  irA(mascota){
+    this.router.navigate(["mascota/"+mascota._id]);
+  }
+
   limpiarMascota(): void {
     this.globalService.limpiarMascota();
     this.router.navigateByUrl('/seleccionaMascota', { skipLocationChange: true }).then(() =>
@@ -358,7 +362,8 @@ export class ListaComponent implements OnInit {
       'pelo': mascota.pelo,
       'capa': mascota.capa,
       'especie': mascota.especie,
-      'raza': mascota.raza
+      'raza': mascota.raza,
+      'idCliente': mascota.idCliente
     };
     this.router.navigate(['formMascotas', params]);
   }

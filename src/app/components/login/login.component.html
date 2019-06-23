@@ -11,10 +11,10 @@
           </div>
 
           <!-- Login Form -->
-          <form>
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" [(ngModel)]="email">
-            <input type="password" id="password" class="fadeIn second" name="login" placeholder="password" [(ngModel)]="password">
-            <input type="submit" class="fadeIn fourth" value="Entrar" (click)="sendLogin()">
+          <form *ngIf="isReady">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" [(ngModel)]="email" />
+            <input type="password" id="password" class="fadeIn third" name="login" placeholder="password" value="{{ password }}" />
+            <input type="submit" class="fadeIn fourth" value="Entrar" (click)="sendLogin()" />
           </form>
           <ng-container *ngIf="showError">
             <p> Usuario o contraseña incorrectos </p>

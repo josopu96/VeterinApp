@@ -43,6 +43,12 @@ import { FormUsuarioComponent } from './components/app-data/usuarios/form-usuari
 import { FormMascotasComponent } from './components/mascotas/form-mascotas/form-mascotas.component';
 import { AvisoNuevaMascotaComponent } from './components/mascotas/aviso-nueva-mascota/aviso-nueva-mascota.component';
 import { FormClienteComponent } from './components/clientes/form-cliente/form-cliente.component';
+import { ListaComponent as ListaTratamientos } from './components/operaciones/tratamientos/lista/lista.component';
+import { OperacionesComponent } from './components/operaciones/operaciones.component';
+import { FormTratamientoComponent } from './components/operaciones/tratamientos/form-tratamiento/form-tratamiento.component';
+import { ListaComponent } from './components/operaciones/pruebas/lista/lista.component';
+import { FormPruebaComponent } from './components/operaciones/pruebas/form-prueba/form-prueba.component';
+import { ResumenComponent } from './components/mascotas/resumen/resumen.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -72,7 +78,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormUsuarioComponent,
     FormMascotasComponent,
     AvisoNuevaMascotaComponent,
-    FormClienteComponent
+    FormClienteComponent,
+    OperacionesComponent,
+    ListaTratamientos,
+    FormTratamientoComponent,
+    ListaComponent,
+    FormPruebaComponent,
+    ResumenComponent
   ],
   imports: [
     BrowserModule,

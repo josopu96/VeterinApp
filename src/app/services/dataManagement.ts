@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RestWS } from './restService';
-import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota } from '../app.dataModels';
+import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota, Tratamiento, Prueba } from '../app.dataModels';
 import { Cliente } from '../app.dataModels';
 
 @Injectable()
@@ -182,4 +182,38 @@ export class DataManagement {
       return Promise.reject('error');
     });
   }
+
+  public getTratamientoByMascotaId(mascotaId: string): Promise<any> {
+    return this.restService.getTratamientoByMascotaId(mascotaId).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public createTratamiento(tratamiento: Tratamiento, mascotaId: string): Promise<any> {
+    return this.restService.createTratamiento(tratamiento, mascotaId).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public getPruebaByMascotaId(mascotaId: string): Promise<any> {
+    return this.restService.getPruebaByMascotaId(mascotaId).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public createPrueba(tratamiento: Prueba, mascotaId: string): Promise<any> {
+    return this.restService.createPrueba(tratamiento, mascotaId).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+
 }

@@ -26,6 +26,7 @@ function createWindow() {
         },
         resizable: false,
         show: false,
+        frame: false
     });
     var express = require('express');
     var bodyParser = require('body-parser');

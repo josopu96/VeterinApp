@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './../../config/configService';
 import { AbstractWS } from './abstractService';
 import { Injectable } from '@angular/core';
-import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota } from '../app.dataModels';
+import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota, Tratamiento, Prueba } from '../app.dataModels';
 import { Cliente } from '../app.dataModels';
 
 @Injectable()
@@ -163,6 +163,8 @@ export class RestWS extends AbstractWS {
 
       if (veterinario.fecNac) {
         fd = fd.append('fecNac', String(veterinario.fecNac));
+      } else {
+        fd = fd.append('fecNac', null);
       }
 
     return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/veterinario/create', fd).then((_) => {
@@ -209,7 +211,11 @@ export class RestWS extends AbstractWS {
       } else {
         fd = fd.append('email', '');
       }
-
+      if (clinica.imagen) {
+        fd = fd.append('imagen', encodeURIComponent(clinica.imagen));
+      } else {
+        fd = fd.append('imagen', '');
+      }
     return this.makePostRequest(this.path + 'clinicas/' + this.clinicaId + '/update', fd).then((_) => {
       return Promise.resolve();
     }).catch(error => {
@@ -294,20 +300,25 @@ export class RestWS extends AbstractWS {
   }
 
   public updateMascota(mascota: Mascota) {
-    const fd = new HttpParams()
+    let fd = new HttpParams()
       .set('nombre', mascota.nombre)
       .set('chip', mascota.chip)
       .set('fecNac', String(mascota.fecNac))
-      .set('fecBaj', String(mascota.fecBaj))
-      .set('fecModificacion', String(new Date()))
       .set('sexo', mascota.sexo)
       .set('estado', mascota.estado)
       .set('pelo', mascota.pelo)
       .set('capa', mascota.capa)
       .set('especie', mascota.especie)
-      .set('raza', mascota.raza);
-    return this.makePostRequest(this.path + 'mascotas/' + mascota._id + '/update', fd).then((_) => {
-      return Promise.resolve();
+      .set('raza', mascota.raza)
+      .set('idCliente', mascota.idCliente);
+
+    if (mascota.fecBaj) {
+      fd = fd.append('fecBaj', String(mascota.fecBaj));
+    } else {
+      fd = fd.append('fecBaj', null);
+    }
+    return this.makePostRequest(this.path + 'mascotas/' + mascota._id + '/update', fd).then(res => {
+      return Promise.resolve(res);
     }).catch(error => {
       return Promise.reject(error);
     });
@@ -370,4 +381,67 @@ export class RestWS extends AbstractWS {
       return Promise.reject(error);
     });
   }
+
+  public getTratamientoByMascotaId(mascotaId: string) {
+    const fd = new HttpParams();
+
+    return this.makeGetRequest(this.path + 'mascotas/' + mascotaId + '/tratamientos', fd).then((res: String) => {
+      return Promise.resolve(res);
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public createTratamiento (tratamiento: Tratamiento, mascotaId: string) {
+    let fd = new HttpParams()
+      .set('mascotaId', mascotaId);
+
+    if (tratamiento.anamnesis) {
+      fd = fd.append('anamnesis', tratamiento.anamnesis);
+    }
+    if (tratamiento.diagnostico) {
+      fd = fd.append('diagnostico', tratamiento.diagnostico);
+    }
+    if (tratamiento.tipoTratamiento) {
+      fd = fd.append('tipoTratamiento', tratamiento.tipoTratamiento);
+    }
+
+    return this.makePostRequest(this.path + 'mascotas/addTratamiento', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public getPruebaByMascotaId(mascotaId: string) {
+    const fd = new HttpParams();
+
+    return this.makeGetRequest(this.path + 'mascotas/' + mascotaId + '/pruebas', fd).then((res: String) => {
+      return Promise.resolve(res);
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public createPrueba (prueba: Prueba, mascotaId: string) {
+    let fd = new HttpParams()
+      .set('mascotaId', mascotaId);
+
+    if (prueba.concepto) {
+      fd = fd.append('concepto', prueba.concepto);
+    }
+    if (prueba.categoria) {
+      fd = fd.append('categoria', prueba.categoria);
+    }
+    if (prueba.tipoPrueba) {
+      fd = fd.append('tipoPrueba', prueba.tipoPrueba);
+    }
+
+    return this.makePostRequest(this.path + 'mascotas/addPrueba', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
 }

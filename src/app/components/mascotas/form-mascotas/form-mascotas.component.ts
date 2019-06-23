@@ -14,7 +14,6 @@ export class FormMascotasComponent implements OnInit {
 
   tema = "_oscuro";
   new: boolean;
-  ready = false;
   mascotaEditada: Mascota = new Mascota();
   clienteSeleccionado: Cliente;
   sinCliente: Boolean = false;
@@ -32,20 +31,6 @@ export class FormMascotasComponent implements OnInit {
     this.inicializaErrores();
     this.globalService.getMascotas();
     this.clienteSeleccionado = this.globalService.cliente;
-    if (this.clienteSeleccionado._id != "0") {
-      if (this.clienteSeleccionado._id == this.globalService.clienteEspecial._id) {
-        this.sinCliente = true;
-      } else {
-        if (this.clienteSeleccionado.contactos) {
-          if (this.clienteSeleccionado.contactos.length > 0) {
-            this.telefono = this.clienteSeleccionado.contactos[0].telefono;
-          }
-        }
-      }
-    } else {
-      //esta opción sólo se dará en desarrollo, cuando se reinicia el servidor en esta página.
-      this.metodoDesarrollo();
-    }
     if ((<HTMLInputElement>document.getElementById('nac_dt'))) {
       (<HTMLInputElement>document.getElementById('nac_dt')).max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
     }
@@ -60,7 +45,7 @@ export class FormMascotasComponent implements OnInit {
         this.mascotaEditada.nombre = params["nombre"];
         this.mascotaEditada.chip = params["chip"];
         this.mascotaEditada.fecNac = params["fecNac"];
-        this.mascotaEditada.fecBaj = params["fecBaj"] !== 'null' ? params["fecBaj"] : null;
+        this.mascotaEditada.fecBaj = (params["fecBaj"] !== 'undefined') && (params["fecBaj"] !== 'null') ? params["fecBaj"] : null;
         this.mascotaEditada.sexo = params["sexo"];
         this.mascotaEditada.estado = params["estado"];
         this.mascotaEditada.pelo = params["pelo"];
@@ -68,12 +53,31 @@ export class FormMascotasComponent implements OnInit {
         this.mascotaEditada.especie = params["especie"];
         this.mascotaEditada.raza = params["raza"];
         this.mascotaEditada.idCliente = params["idCliente"];
-        this.ready = true;
+
+        this.clienteSeleccionado = this.globalService.clientes.find(cliente => cliente._id == this.mascotaEditada.idCliente);
+        if (!this.clienteSeleccionado) {
+          this.clienteSeleccionado = this.globalService.clienteEspecial;
+        }
       } else {
         this.new = true;
         this.mascotaEditada.idCliente = this.clienteSeleccionado._id;
       }
     });
+    
+    if (this.clienteSeleccionado._id != "0") {
+      if (this.clienteSeleccionado._id == this.globalService.clienteEspecial._id) {
+        this.sinCliente = true;
+      } else {
+        if (this.clienteSeleccionado.contactos) {
+          if (this.clienteSeleccionado.contactos.length > 0) {
+            this.telefono = this.clienteSeleccionado.contactos[0].telefono;
+          }
+        }
+      }
+    } else {
+      //esta opción sólo se dará en desarrollo, cuando se reinicia el servidor en esta página.
+      this.metodoDesarrollo();
+    }
   }
 
   inicializaErrores() {
@@ -114,6 +118,7 @@ export class FormMascotasComponent implements OnInit {
 
   actualizar() {
     this.dm.updateMascota(this.mascotaEditada).then((res) => {
+      
       let index = this.globalService.mascotas.indexOf(
         this.globalService.mascotas.find(x => x._id === this.mascotaEditada._id)
       );
@@ -128,8 +133,6 @@ export class FormMascotasComponent implements OnInit {
     this.dm.createMascota(this.mascotaEditada).then((res) => {
       let resCliente: Cliente = res.cliente;
       let resMascota: Mascota = res.mascota;
-      console.log(resCliente);
-      console.log(resMascota);
       this.globalService.mascotas.push(this.mascotaEditada);
       let index = this.globalService.clientes.indexOf(
         this.globalService.clientes.find(x => x._id === resCliente._id)
@@ -164,7 +167,7 @@ export class FormMascotasComponent implements OnInit {
         tooltips[i].style.left = x;
       }
     }
-  };
+  }
 
   cambia(key) {
     switch (key) {

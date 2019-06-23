@@ -1,5 +1,6 @@
 <!doctype html>
 <html onselectstart='return false'>
+
 <head>
   <meta charset="utf-8">
   <title>AngularElectron</title>
@@ -8,7 +9,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
+
 <body>
-  <app-root>Loading...</app-root>
+  <script type="text/javascript">
+    window.onload = function () {
+      const { remote, ipcRenderer } = require('electron');
+      var currentWindow = remote.BrowserWindow.getFocusedWindow();
+      try {
+        var parent = currentWindow.getParentWindow();
+      }
+      catch (error) {
+        parent = null;
+      }
+      if (parent == null) {
+        document.getElementById("barra-titulo").style.display = "flex";
+
+        document.getElementById('minimize-button').addEventListener('click', () => {
+          remote.getCurrentWindow().minimize();
+        })
+
+        document.getElementById('close-button').addEventListener('click', () => {
+          remote.app.quit();
+        })
+      } else {
+        document.getElementById("texto-carga").style.display = "none";
+      }
+    }
+  </script>
+  <div id="barra-titulo" class="title-bar">
+    <div class="menu-button-container">
+      <div id="menu-button" class="menu-button">
+        <img src="./assets/logo_titulo_claro.png" width="30" height="15" />
+      </div>
+    </div>
+    <div class="app-name-container">
+      <p>VeterinApp</p>
+    </div>
+    <div class="window-controls-container">
+      <div id="minimize-button" class="minimize-button">
+        <img src="./assets/img/minimize_oscuro.png" width="15" height="15" />
+      </div>
+      <div id="close-button" class="close-button">
+        <img src="./assets/img/close_oscuro.png" width="15" height="15" />
+      </div>
+    </div>
+  </div>
+  <div class="app">
+    <app-root>
+    </app-root>
+  </div>
 </body>
+
 </html>

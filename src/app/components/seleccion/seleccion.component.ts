@@ -169,8 +169,18 @@ export class SeleccionComponent implements OnInit {
         }
 
         this.edadMascota= años+a+"y "+meses+m;
-        console.log(this.edadMascota);
       }
+    }
+  }
+
+  irA(key){
+    switch (key) {
+      case 'resumen_mascota':
+        this.router.navigate(["mascota/"+this.mascota._id]);
+        break;
+    
+      default:
+        break;
     }
   }
 

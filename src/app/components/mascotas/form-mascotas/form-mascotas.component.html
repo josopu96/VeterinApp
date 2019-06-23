@@ -4,6 +4,7 @@
     <app-menu class="menu"></app-menu>
     <div class="seccion{{tema}} columna">
       <div class="titulo">
+        <div class="volver" [routerLink]="['/mascotas']"></div>
         <span *ngIf="new"> Nueva mascota </span>
         <span *ngIf="!new"> Editando mascota </span>
       </div>
@@ -20,23 +21,18 @@
             <span class="tooltip" *ngIf="errores.chip=='obligatorio'">Es obligatorio rellenar este campo</span>
           </div>
           <div class="texto{{errores.fechaNac ? '_error' : ''}}">
-            <label>Fecha de Nacimiento</label><input type="date" [ngModel]="mascotaEditada.fecNac | date:'yyyy-MM-dd'"
-              (ngModelChange)="mascotaEditada.fecNac=$event; cambia('fecNac')" id="nac_dt" required />
+            <label>Fecha de Nacimiento</label><input title="" type="date" [ngModel]="mascotaEditada.fecNac | date:'yyyy-MM-dd'"
+              (ngModelChange)="mascotaEditada.fecNac=$event; cambia('fecNac')" id="nac_dt" />
             <span class="tooltip" *ngIf="errores.fechaNac=='obligatorio'">Es obligatorio rellenar este campo</span>
             <span class="tooltip" *ngIf="errores.fechaNac=='fechaFuturo'">La fecha de nacimiento no puede estar en el futuro</span>
             <span class="tooltip" *ngIf="errores.fechaNac=='fechaBaja'">La fecha de nacimiento no puede ser posterior a la fecha de fallecimiento</span>
           </div>
-          <div class="texto{{errores.fechaFac ? '_error' : ''}}" *ngIf="mascotaEditada.fecBaj">
-            <label>Fecha de Fallecimiento</label><input type="date"
+          <div class="texto{{errores.fechaFac ? '_error' : ''}}">
+            <label>Fecha de Fallecimiento</label><input title="" type="date"
               [ngModel]="mascotaEditada.fecBaj | date:'yyyy-MM-dd'" (ngModelChange)="mascotaEditada.fecBaj=$event; cambia('fecBaj')"
               id="def_dt" />
               <span class="tooltip" *ngIf="errores.fechaFac=='fechaFuturo'">La fecha de fallecimiento no puede estar en el futuro</span>
               <span class="tooltip" *ngIf="errores.fechaFac=='fechaAlta'">La fecha de fallecimiento no puede ser anterior a la fecha de nacimiento</span>
-          </div>
-          <div class="texto{{errores.fechaFac ? '_error' : ''}}" *ngIf="!mascotaEditada.fecBaj">
-            <label>Fecha de Fallecimiento</label><input type="date" [(ngModel)]="mascotaEditada.fecBaj" (ngModelChange)="cambia('fecBaj')" id="def_dt" />
-            <span class="tooltip" *ngIf="errores.fechaFac=='fechaFuturo'">La fecha de fallecimiento no puede estar en el futuro</span>
-            <span class="tooltip" *ngIf="errores.fechaFac=='fechaAlta'">La fecha de fallecimiento no puede ser anterior a la fecha de nacimiento</span>
           </div>
           <div class="texto{{errores.sexo ? '_error' : ''}}">
             <label for="sexo">Sexo</label><input type="text" id="sexo" [(ngModel)]="mascotaEditada.sexo"
@@ -103,7 +99,6 @@
         </div>
       </div>
       <div class="guardar">
-        <button [routerLink]="['/mascotas']"> Volver </button>
         <button (click)="guardar()"> Guardar </button>
       </div>
     </div>

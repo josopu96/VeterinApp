@@ -37,8 +37,6 @@ exports.createMascota = function (req, res) {
     idCliente         : req.body.idCliente,
   });
 
-  var hoy = new Date();
-
   mascota.save(function (err) {
     if (err) {
       res.send(err);
@@ -51,7 +49,7 @@ exports.createMascota = function (req, res) {
         var cuidados = cliente.cuidados;
         var nuevoCuidado = {
           _id: new mongoose.mongo.ObjectID,
-          fechaInicio: hoy,
+          fechaInicio: req.body.fecModificacion,
           idMascota: mascota._id
         };
         cuidados.push(nuevoCuidado);
@@ -65,16 +63,99 @@ exports.createMascota = function (req, res) {
         });
       }
     });
-    
+
   });
 };
 
 exports.updateMascota = function (req, res) {
+  console.log(req.body);
   Mascota.findByIdAndUpdate(req.params.id, {
-    $set: req.body
+    $set: {
+      "nombre"              : req.body.nombre,
+      "chip"                : req.body.chip,
+      "fecNac"              : req.body.fecNac,
+      "fecModificacion"     : new Date(),
+      "sexo"                : req.body.sexo,
+      "estado"              : req.body.estado,
+      "pelo"                : req.body.pelo,
+      "capa"                : req.body.capa,
+      "especie"             : req.body.especie,
+      "raza"                : req.body.raza,
+      "fecBaj"              : req.body.fecBaj != "null" ? req.body.fecBaj : null
+    }
   }, function (err, mascota) {
-    if (err) res.send(err);
-    res.send(mascota);
+    if (err){
+      res.send(err);
+    } else {
+      res.send(mascota);
+    }
   });
 };
 
+exports.getTratamientos = function (req, res) {
+  Mascota.findById(req.params.id, function (err1, mascota1) {
+    if (err1) {
+      res.status(404).send('Mascota no encontrada');
+    } else if (mascota1) {
+      res.send(mascota1.tratamientos);
+    }
+  })
+}
+
+exports.crearTratamiento = function (req, res) {
+  Mascota.findById(req.body.mascotaId, function (err1, mascota1) {
+    if (err1) {
+      res.status(404).send('Mascota no encontrada');
+    } else if (mascota1) {
+      var nuevoTratamiento = {
+        anamnesis: req.body.anamnesis,
+        diagnostico: req.body.diagnostico,
+        tipoTratamiento: req.body.tipoTratamiento,
+        fecModificacion: new Date()
+      }
+      Mascota.findByIdAndUpdate(req.body.mascotaId, {
+        $push: { "tratamientos": nuevoTratamiento },
+      }, {new: true}, function (err2, mascota2) {
+        if (err2) {
+          res.status(404).send(err2);
+        } else if (mascota2) {
+          res.send(mascota2);
+        }
+      })
+    }
+  })
+}
+
+exports.getPruebas = function (req, res) {
+  Mascota.findById(req.params.id, function (err1, mascota1) {
+    if (err1) {
+      res.status(404).send('Mascota no encontrada');
+    } else if (mascota1) {
+      res.send(mascota1.pruebas);
+    }
+  })
+}
+
+exports.crearPrueba = function (req, res) {
+  Mascota.findById(req.body.mascotaId, function (err1, mascota1) {
+    if (err1) {
+      res.status(404).send('Mascota no encontrada');
+    } else if (mascota1) {
+      var nuevaPrueba = {
+        concepto: req.body.concepto,
+        categoria: req.body.categoria,
+        tipoPrueba: req.body.tipoPrueba,
+        fecModificacion: new Date()
+      }
+      Mascota.findByIdAndUpdate(req.body.mascotaId, {
+        $push: { "pruebas": nuevaPrueba },
+      }, {new: true}, function (err2, mascota2) {
+        if (err2) {
+          res.status(404).send(err2);
+        } else if (mascota2) {
+          res.send(mascota2);
+        }
+      })
+    }
+  })
+}

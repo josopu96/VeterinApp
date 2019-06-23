@@ -29,6 +29,7 @@ function createWindow() {
     },
     resizable: false,
     show: false,
+    frame: false
   });
 
   const express = require('express');

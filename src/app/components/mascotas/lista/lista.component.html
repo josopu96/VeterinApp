@@ -21,7 +21,7 @@
                     <td class="colNombre seleccionado">{{ el.nombre }}</td>
                     <td class="colFecha seleccionado">{{ el.fecNac | date:"dd/MM/yyyy" }}</td>
                     <td class="colChip seleccionado">{{ el.chip }}</td>
-                    <td class="colVisualizar seleccionado"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px" height="13px"></td>
+                    <td class="colVisualizar seleccionado" (click)="irA(el)"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px" height="13px"></td>
                     <td class="colEditar seleccionado" (click)="editar(el)"><img src="../../../../assets/img/editar-oscuro.png" width="25px" height="25px"></td>
                     <td class="colSeleccionar seleccionado" (click)="limpiarMascota()"><img src="../../../../assets/img/limpiar-oscuro.png" width="25px" height="25px"></td>
                   </tr>
@@ -29,7 +29,7 @@
                     <td class="colNombre">{{ el.nombre }}</td>
                     <td class="colFecha">{{ el.fecNac | date:"dd/MM/yyyy" }}</td>
                     <td class="colChip">{{ el.chip }}</td>
-                    <td class="colVisualizar"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px" height="13px"></td>
+                    <td class="colVisualizar" (click)="irA(el)"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px" height="13px"></td>
                     <td class="colEditar" (click)="editar(el)"><img src="../../../../assets/img/editar-oscuro.png" width="25px" height="25px"></td>
                     <td class="colSeleccionar" (click)="onSelect(el)"><img src="../../../../assets/img/seleccionar-oscuro.png" width="20px" height="20px"></td>
                   </tr>

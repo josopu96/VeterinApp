@@ -6,7 +6,7 @@
   flex-basis: $anchoSeccion + px;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: $altoSeccion+px;
   border-top: 2px solid $colorFondoOscuro;
   border-left: 2px solid $colorFondoOscuro;
   box-sizing: border-box;
@@ -19,6 +19,19 @@
     height: $altoTitulo + px;
     justify-content: center;
     align-items: center;
+
+    .volver{
+      background-image: url("../../../../assets/img/back_oscuro.png");
+      width: 30px;
+      height: 30px;
+      position: fixed;
+      left: 200px;
+      cursor: pointer;
+
+      &:hover{
+        background-image: url("../../../../assets/img/back_medio.png");
+      }
+    }
 
     span {
       font-size: 30px;

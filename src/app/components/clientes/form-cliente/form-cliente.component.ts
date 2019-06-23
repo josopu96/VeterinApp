@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from '../../../services/globalService';
 import { DataManagement } from '../../../services/dataManagement';
 import { CabeceraTabla } from '../../../models/tablas';
+import { ErroresFormCliente } from '../../../models/errores';
 
 @Component({
   selector: 'app-form-cliente',
@@ -19,6 +20,7 @@ export class FormClienteComponent implements OnInit {
   ready = false;
   clienteEditado: Cliente = new Cliente();
   contactos: Contacto[];
+  errores: ErroresFormCliente = new ErroresFormCliente();
 
   constructor(
     private route: ActivatedRoute,
@@ -29,25 +31,28 @@ export class FormClienteComponent implements OnInit {
 
   ngOnInit() {
     this.inicializaCabecera();
-    if ((<HTMLInputElement>document.getElementById('nac_dt'))) {
-      (<HTMLInputElement>document.getElementById('nac_dt')).max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
-    }
+    
     this.tema = "_" + this.globalService.getTema();
     this.route.params.forEach(params => {
       if (params && params['id']) {
         this.new = false;
         // Mandatories
-        this.clienteEditado._id = params["id"];
-        this.clienteEditado.nombre = params["nombre"];
-        this.clienteEditado.apellidos = params["apellidos"];
-        this.clienteEditado.dni = params["dni"];
-
-        // Optionals
-        this.clienteEditado.direccion = params["direccion"];
-        this.clienteEditado.poblacion = params["poblacion"];
-        this.clienteEditado.codPostal = params["codPostal"];
-        this.clienteEditado.email = params["email"];
-        this.clienteEditado.fecNac = params["fecNac"];
+        let cli = this.globalService.clientes.find(cliente => cliente._id==params["id"]);
+        this.clienteEditado = new Cliente();
+        this.clienteEditado.codPostal = cli.codPostal;
+        this.clienteEditado.contactos = cli.contactos;
+        this.clienteEditado.cuidados = cli.cuidados;
+        this.clienteEditado.direccion = cli.direccion;
+        this.clienteEditado.dni = cli.dni;
+        this.clienteEditado.email = cli.email;
+        this.clienteEditado.facturas = cli.facturas;
+        this.clienteEditado.fecModificacion = cli.fecModificacion;
+        this.clienteEditado.fecNac = cli.fecNac;
+        this.clienteEditado.nombre = cli.nombre;
+        this.clienteEditado.poblacion = cli.poblacion;
+        this.clienteEditado._id = cli._id;
+        this.clienteEditado.apellidos = cli.apellidos;
+        
         this.dm.getContactos(this.clienteEditado._id).then((contactos: Contacto[]) => {
           this.clienteEditado.contactos = contactos;
           this.ready = true;
@@ -57,6 +62,25 @@ export class FormClienteComponent implements OnInit {
       }
     });
 
+  }
+
+  metodoDesarrollo(){
+    //Para desarrollo
+    if(!this.clienteEditado){
+      this.clienteEditado = new Cliente();
+      this.clienteEditado.contactos = [];
+    }
+  }
+
+  inicializaErrores() {
+    this.errores.nombre = '';
+    this.errores.apellidos = '';
+    this.errores.direccion = '';
+    this.errores.poblacion = '';
+    this.errores.codPostal = '';
+    this.errores.dni = '';
+    this.errores.email = '';
+    this.errores.fecNac = '';
   }
 
   inicializaCabecera() {
@@ -79,10 +103,12 @@ export class FormClienteComponent implements OnInit {
   }
 
   guardar() {
-    if (this.clienteEditado._id) {
-      this.actualizar();
-    } else {
-      this.crear();
+    if(this.compruebaFallos()){
+      if (this.clienteEditado._id) {
+        this.actualizar();
+      } else {
+        this.crear();
+      }
     }
   }
 
@@ -92,7 +118,11 @@ export class FormClienteComponent implements OnInit {
         this.globalService.clientes.find(x => x._id === this.clienteEditado._id)
       );
       this.globalService.clientes[index] = this.clienteEditado;
-      this.router.navigateByUrl('/clientes');
+      if(this.clienteEditado._id==this.globalService.cliente._id){
+        this.globalService.setCliente(this.clienteEditado);
+      }
+      this.router.navigateByUrl('seleccionaCliente', {skipLocationChange: true}).then(()=>
+      this.router.navigate(["/clientes"]));
     }).catch((err) => {
       console.log(err);
     });
@@ -120,5 +150,134 @@ export class FormClienteComponent implements OnInit {
   agregarContacto() {
     this.globalService.generaVentana(300, 552, '/formClientesContactos', 'nuevo-contacto');
   }
+
+  tooltip(e) {
+    let tooltips: NodeListOf<HTMLElement> = document.querySelectorAll('.texto_error span');
+    let x = (e.clientX + 20) + 'px',
+      y = (e.clientY + 20) + 'px';
+    if (tooltips) {
+      for (let i = 0; i < tooltips.length; i++) {
+        tooltips[i].style.top = y;
+        tooltips[i].style.left = x;
+      }
+    }
+  }
+
+  cambia(key) {
+    switch (key) {
+      case 'nombre':
+        if (this.errores.nombre != '') {
+          if (this.clienteEditado.nombre) {
+            this.errores.nombre = '';
+          }
+        }
+        break;
+
+      case 'apellidos':
+        if (this.errores.apellidos != '') {
+          if (this.clienteEditado.apellidos) {
+            this.errores.apellidos = '';
+          }
+        }
+        break;
+
+      case 'direccion':
+        if (this.errores.direccion != '') {
+          if (this.clienteEditado.direccion) {
+            this.errores.direccion = '';
+          }
+        }
+        break;
+
+      case 'codPostal':
+        if (this.errores.codPostal != '') {
+          if (this.clienteEditado.codPostal) {
+            this.errores.codPostal = '';
+          }
+        }
+        break;
+
+      case 'poblacion':
+        if (this.errores.poblacion != '') {
+          if (this.clienteEditado.poblacion) {
+            this.errores.poblacion = '';
+          }
+        }
+        break;
+
+      case 'email':
+        if (this.errores.email != '') {
+          if (this.clienteEditado.email) {
+            this.errores.email = '';
+          }
+        }
+        break;
+
+      case 'dni':
+        if (this.errores.dni != '') {
+          if (this.clienteEditado.dni) {
+            this.errores.dni = '';
+          }
+        }
+        break;
+
+      case 'fecNac':
+        if (this.errores.fecNac != '') {
+          if (this.clienteEditado.fecNac) {
+            this.errores.fecNac = '';
+          }
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  compruebaFallos() {
+    let res = true;
+    if (!this.clienteEditado.nombre) {
+      this.errores.nombre = "obligatorio";
+      res = false;
+    }
+    if (!this.clienteEditado.apellidos) {
+      this.errores.apellidos = "obligatorio";
+      res = false;
+    }
+    if (!this.clienteEditado.dni) {
+      this.errores.dni = "obligatorio";
+      res = false;
+    }
+    if (this.clienteEditado.email) {
+      if(!this.clienteEditado.email.includes('@')){
+        this.errores.email = "formato";
+        res = false;
+      }
+    }
+    if(this.compruebaFechaFuturo(this.clienteEditado.fecNac)){
+      this.errores.fecNac = "fechaFuturo";
+      res = false;
+    }
+    if(this.clienteEditado.codPostal){
+      let patt= new RegExp('^[0-9]*$');
+      if (!patt.test(this.clienteEditado.codPostal.toString())) {
+        this.errores.codPostal = 'patron';
+        res = false;
+      }
+    }
+    return res;
+  }
+
+  compruebaFechaFuturo(fecha){
+    let res: boolean = false;
+    let now: Date = new Date();
+    if(fecha){
+      if(new Date(fecha)>now){
+        res = true;
+      }
+    }
+    return res;
+  }
+
 
 }

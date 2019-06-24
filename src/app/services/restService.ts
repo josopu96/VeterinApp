@@ -466,8 +466,22 @@ export class RestWS extends AbstractWS {
       fd = fd.append('tipo', contacto.tipo);
     }
 
-    return this.makePostRequest(this.path + 'clientes/' + clienteId + '/addContacto', fd).then((_) => {
-      return Promise.resolve();
+    return this.makePostRequest(this.path + 'clientes/' + clienteId + '/addContacto', fd).then((res) => {
+      return Promise.resolve(res);
+    }).catch(err => {
+      return Promise.reject(err);
+    });
+  }
+
+  public deleteContacto(clienteId: string, contactoId: string): Promise<any> {
+    let fd = new HttpParams();
+
+    if (contactoId) {
+      fd = fd.append('contactoId', contactoId);
+    }
+
+    return this.makePostRequest(this.path + 'clientes/' + clienteId + '/removeContacto', fd).then((res) => {
+      return Promise.resolve(res);
     }).catch(err => {
       return Promise.reject(err);
     });

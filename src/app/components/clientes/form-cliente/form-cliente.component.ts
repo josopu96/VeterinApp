@@ -31,7 +31,7 @@ export class FormClienteComponent implements OnInit {
 
   ngOnInit() {
     this.inicializaCabecera();
-    
+
     this.tema = "_" + this.globalService.getTema();
     this.route.params.forEach(params => {
       if (params && params['id']) {
@@ -52,7 +52,7 @@ export class FormClienteComponent implements OnInit {
         this.clienteEditado.poblacion = cli.poblacion;
         this.clienteEditado._id = cli._id;
         this.clienteEditado.apellidos = cli.apellidos;
-        
+
         this.dm.getContactos(this.clienteEditado._id).then((contactos: Contacto[]) => {
           this.clienteEditado.contactos = contactos;
           this.ready = true;
@@ -277,6 +277,13 @@ export class FormClienteComponent implements OnInit {
       }
     }
     return res;
+  }
+
+  deleteContact(el: Contacto) {
+    this.dm.deleteContacto(this.clienteEditado._id, el._id).then((_) => {
+      let index = this.clienteEditado.contactos.indexOf(el);
+      this.clienteEditado.contactos.splice(index, 1);
+    });
   }
 
 

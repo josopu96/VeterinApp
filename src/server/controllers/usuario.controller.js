@@ -35,11 +35,11 @@ exports.createUsuario = function (req, res) {
     }
   });
 
-  usuario.save(function (err) {
+  usuario.save(function (err, usuarioCreado) {
     if (err) {
       return next(err);
     }
-    res.send({ "response": 'Usuario creado satisfactoriamente' });
+    res.status(200).send(usuarioCreado);
   });
 };
 

@@ -251,8 +251,8 @@ export class RestWS extends AbstractWS {
       .set('clave', usuario.clave)
       .set('email', usuario.email)
       .set('isAdmin', usuario.isAdmin + "");
-    return this.makePostRequest(this.path + 'usuarios/create', fd).then((_) => {
-      return Promise.resolve();
+    return this.makePostRequest(this.path + 'usuarios/create', fd).then((res) => {
+      return Promise.resolve(res);
     }).catch(error => {
       return Promise.reject(error);
     });

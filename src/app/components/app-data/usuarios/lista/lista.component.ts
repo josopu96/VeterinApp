@@ -53,12 +53,13 @@ export class ListaComponent implements OnInit {
     this.headElements.push(entrada3);
   }
 
-  editar(veterinario: Usuario) {
+  editar(usuario: Usuario) {
     let params = {
-        'id': veterinario._id,
-        'nombre': veterinario.nombre,
-        'email': veterinario.email,
-        'isAdmin': veterinario.isAdmin
+        'id': usuario._id,
+        'nombre': usuario.nombre,
+        'email': usuario.email,
+        'isAdmin': usuario.isAdmin,
+        'clave': usuario.clave
       };
     this.router.navigate(['formUsuario', params]);
   }

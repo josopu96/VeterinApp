@@ -1,40 +1,83 @@
-<div class="container{{tema}}">
+<div class="container{{tema}}" (document:mousemove)='tooltip($event)'>
   <app-selecciones class="top"></app-selecciones>
   <div class="bottom">
     <app-menu class="menu"></app-menu>
     <div class="seccion{{tema}} columna">
       <div class="titulo">
+        <div class="volver" [routerLink]="['/usuarios']"></div>
         <span *ngIf="new"> Nuevo usuario </span>
         <span *ngIf="!new"> Editando usuario </span>
       </div>
       <div class="formulario" *ngIf="ready">
         <fieldset>
-          <legend>Datos obligatorios</legend>
-          <div class="texto">
-            <span>Nombre de usuario</span><input type="text" [(ngModel)]="usuarioEditado.nombre" />
+          <legend>Datos del usuario</legend>
+          <div class="texto{{errores.nombre ? '_error' : ''}}">
+            <label for="nombre">Nombre de usuario</label><input type="text" [(ngModel)]="usuarioEditado.nombre"
+              (ngModelChange)="cambia('nombre')" />
+            <span class="tooltip" *ngIf="errores.nombre=='obligatorio'">Es obligatorio rellenar este campo</span>
+          </div>
+          <div class="texto{{errores.email ? '_error' : ''}}">
+            <label for="email">Email</label><input type="text" [(ngModel)]="usuarioEditado.email"
+              (ngModelChange)="cambia('email')" />
+            <span class="tooltip" *ngIf="errores.email=='obligatorio'">Es obligatorio rellenar este campo</span>
           </div>
           <div class="texto">
-            <span>Permisos de administrador</span><input type="checkbox" [checked]="usuarioEditado.isAdmin == 'true' ? true: false" (change)="usuarioEditado.isAdmin = $event.target.checked"/>
+            <label for="admin">Permisos de administrador</label>
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="usuarioEditado.isAdmin">
+              <span class="slider round"></span>
+            </label>
           </div>
-          <div class="texto">
-            <span>Email</span><input type="email" [(ngModel)]="usuarioEditado.email" />
+          <div *ngIf="!new" (click)="cambiarClave()" class="change_pass {{pass ? 'oculta' : ''}}">Cambiar contraseña
           </div>
-          <ng-container *ngIf="!new">
-            <div class="texto">
-              <span>Antigua Contraseña</span><input type="text" [(ngModel)]="usuarioEditado.oldClave" />
-            </div>
-          </ng-container>
-          <div class="texto">
-            <span>Contraseña</span><input type="text" [(ngModel)]="clave1" (change)="checkPasswordEquals()" />
+          <div *ngIf="pass && !new" class="pass {{claseClave}}">
+            <fieldset>
+              <legend>Cambiar contraseña</legend>
+              <div class="texto{{errores.antiguaClave ? '_error' : ''}}">
+                <label for="oldPass">Antigua Contraseña</label><input type="password" [(ngModel)]="usuarioEditado.oldClave"
+                  (ngModelChange)="cambia('antiguaClave')" />
+                <span class="tooltip" *ngIf="errores.antiguaClave=='obligatorio'">Es obligatorio rellenar este
+                  campo</span>
+                <span class="tooltip" *ngIf="errores.antiguaClave=='distinta'">La clave introducida no coincide con su
+                  clave antigua</span>
+              </div>
+              <div class="texto{{errores.clave ? '_error' : ''}}">
+                <label for="newPass">Contraseña</label><input id="newPass" type="password" [(ngModel)]="clave1"
+                  (ngModelChange)="cambia('clave')" />
+                <span class="tooltip" *ngIf="errores.clave=='obligatorio'">Es obligatorio rellenar este campo</span>
+              </div>
+              <div class="texto{{errores.claveRepetida ? '_error' : ''}}">
+                <label for="repeatPass">Repita contraseña</label><input id="repeatPass" type="password" [(ngModel)]="clave2"
+                  (ngModelChange)="cambia('claveRepetida')">
+                <span class="tooltip" *ngIf="errores.claveRepetida=='obligatorio'">Es obligatorio rellenar este
+                  campo</span>
+                <span class="tooltip" *ngIf="errores.claveRepetida=='distinta'">No coincide con la nueva contraseña
+                  introducida</span>
+              </div>
+            </fieldset>
           </div>
-          <div class="texto">
-            <span>Repita contraseña</span><input type="text" [(ngModel)]="clave2" (change)="checkPasswordEquals()">
+          <div *ngIf="new" class="pass">
+            <fieldset>
+              <legend>Contraseña</legend>
+              <div class="texto{{errores.clave ? '_error' : ''}}">
+                <label for="newPass">Contraseña</label><input id="newPass" type="password"
+                  [(ngModel)]="clave1" (ngModelChange)="cambia('clave')" />
+                <span class="tooltip" *ngIf="errores.clave=='obligatorio'">Es obligatorio rellenar este campo</span>
+              </div>
+              <div class="texto{{errores.claveRepetida ? '_error' : ''}}">
+                <label for="repeatPass">Repita contraseña</label><input id="repeatPass" type="password" [(ngModel)]="clave2"
+                  (ngModelChange)="cambia('claveRepetida')">
+                <span class="tooltip" *ngIf="errores.claveRepetida=='obligatorio'">Es obligatorio rellenar este
+                  campo</span>
+                <span class="tooltip" *ngIf="errores.claveRepetida=='distinta'">No coincide con la nueva contraseña
+                  introducida</span>
+              </div>
+            </fieldset>
           </div>
         </fieldset>
       </div>
       <div class="guardar">
-        <button [routerLink]="['/usuarios']"> Volver </button>
-        <button (click)="guardar()" [disabled]="checkFormIsFullfilled()"> Guardar </button>
+        <button (click)="guardar()"> Guardar </button>
       </div>
     </div>
   </div>

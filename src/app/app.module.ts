@@ -87,7 +87,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ListaComponent,
     FormPruebaComponent,
     ResumenComponent,
-    AvisoNuevoTratamientoComponent
+    AvisoNuevoTratamientoComponent,
     FormClienteContactoComponent
   ],
   imports: [

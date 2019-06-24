@@ -4,7 +4,7 @@
     <app-menu class="menu"></app-menu>
     <div class="seccion{{tema}} columna">
       <div class="seccion_interna">
-        <div class="recuadro" [routerLink]="['/tratamientos']">
+        <div class="recuadro" (click)="nuevoTratamiento()">
             <p class="title">Tratamientos</p>
         </div>
         <div class="recuadro" [routerLink]="['/pruebas']">

@@ -376,6 +376,8 @@ export class GlobalService {
     ipcRenderer.once('action-update', (event, arg) => {
       if (tipo == "nueva-mascota") {
         this.ngZone.run(() => { this.actionUpdateNuevaMascota(arg) });
+      } else if (tipo == 'nuevo-tratamiento') {
+        this.ngZone.run(() => { this.actionUpdateNuevoTratamiento(arg) });
       }
     });
 
@@ -411,6 +413,15 @@ export class GlobalService {
       } else if (arg.action == "elegir") {
         //En caso de seleccionar elegir cliente, redirigimos a la lista de clientes
         this.router.navigate(['clientes']);
+      }
+      //En cualquier otro caso no hacemos nada
+    }
+  }
+
+  async actionUpdateNuevoTratamiento(arg) {
+    if (arg) {
+      if (arg.action == "elegir") {
+        this.router.navigate(['mascotas']);
       }
       //En cualquier otro caso no hacemos nada
     }

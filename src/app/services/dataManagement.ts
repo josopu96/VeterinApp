@@ -199,6 +199,14 @@ export class DataManagement {
     });
   }
 
+  public updateTratamiento(tratamiento: Tratamiento, mascotaId: string): Promise<any> {
+    return this.restService.updateTratamiento(tratamiento, mascotaId).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
   public getPruebaByMascotaId(mascotaId: string): Promise<any> {
     return this.restService.getPruebaByMascotaId(mascotaId).then((data) => {
       return Promise.resolve(data);
@@ -230,6 +238,7 @@ export class DataManagement {
       return Promise.reject('error');
     });
   }
+
 
 
 }

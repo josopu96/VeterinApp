@@ -386,6 +386,7 @@ export class RestWS extends AbstractWS {
     const fd = new HttpParams();
 
     return this.makeGetRequest(this.path + 'mascotas/' + mascotaId + '/tratamientos', fd).then((res: String) => {
+      console.log(res);
       return Promise.resolve(res);
     }).catch(error => {
       return Promise.reject(error);
@@ -405,9 +406,27 @@ export class RestWS extends AbstractWS {
     if (tratamiento.tipoTratamiento) {
       fd = fd.append('tipoTratamiento', tratamiento.tipoTratamiento);
     }
+    if (tratamiento.fecha) {
+      fd = fd.append('fecha', String(tratamiento.fecha));
+    }
 
+    console.log(fd);
     return this.makePostRequest(this.path + 'mascotas/addTratamiento', fd).then((_) => {
       return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public updateTratamiento(tratamiento: Tratamiento, mascotaId: string) {
+    let fd = new HttpParams()
+      .set('anamnesis', tratamiento.anamnesis)
+      .set('diagnostico', tratamiento.diagnostico)
+      .set('tipoTratamiento', tratamiento.tipoTratamiento)
+      .set('fecha', String(tratamiento.fecha));
+
+    return this.makePostRequest(this.path + 'mascotas/' + mascotaId + '/updateTratamiento/' + tratamiento._id, fd).then(res => {
+      return Promise.resolve(res);
     }).catch(error => {
       return Promise.reject(error);
     });

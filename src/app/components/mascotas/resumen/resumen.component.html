@@ -15,9 +15,6 @@
         <div class="boton {{muestraSeccion=='vacunas' ? 'seleccionado' : ''}}" (click)="irA('vacunas')">VACUNAS</div>
         <div class="boton_desparasitaciones {{muestraSeccion=='desparasitaciones' ? 'seleccionado_ultimo' : ''}}" (click)="irA('desparasitaciones')">DESPARASITACIONES</div>
       </div>
-      <div class="resumen" *ngIf="muestraSeccion!='resumen'">
-        Esta sección no se ha completado todavía
-      </div>
       <div class="resumen" *ngIf="muestraSeccion=='resumen'">
         <div class="resumen_izq">
           <fieldset>
@@ -85,6 +82,9 @@
             </table>
           </div>
         </div>
+      </div>
+      <div class="resumen" *ngIf="muestraSeccion!='resumen'">
+        Esta sección no se ha completado todavía
       </div>
     </div>
     <div class="seccion{{tema}} error" *ngIf="!mascota">

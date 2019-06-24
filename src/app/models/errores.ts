@@ -48,3 +48,10 @@ export class ErroresFormCliente {
     email: string;
     fecNac: string;
 }
+
+export class ErroresFormTratamientos {
+  anamnesis: string;
+  diagnostico: string;
+  tipoTratamiento: string;
+  fecha: string;
+}

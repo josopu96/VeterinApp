@@ -1,15 +1,242 @@
 @import "../../../utilities/variables.scss";
 
-.container{
-    background: $color8;
+.container {
+  background: $fondoFormularioContactos;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 255px;
+  align-items: center;
+  border-radius: 4px;
+  border: 2px solid $textoClaro;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: $textoClaro;
+
+  .cerrar {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    background: rgba(0, 0, 0, 0.219);
+    height: 28px;
+    width: 28px;
+    transition: 0.3s all;
+    cursor: pointer;
+
+    &:hover{
+        background: rgba(0, 0, 0, 0.507);
+    }
+
+    img {
+      margin: 0 auto;
+      margin-top: 7px;
+      display: block;
+      height: 15px;
+      width: 15px;
+    }
+  }
+  .titulo {
+    display: flex;
+    height: 30px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background: #1a312c;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .datos {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     width: 100%;
-    height: 300px;
+    justify-content: center;
     align-items: center;
-    border-radius: 25px;
-    border: 2px solid white;
-    box-sizing: border-box;
-    overflow: hidden;
+    background: #1a4a3a91;
 
+    .nombre {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+      width: 100%;
+
+      input {
+        width: 80%;
+        border: none;
+        text-align: center;
+        background-color: #00000000;
+        border: 1px solid transparent;
+        border-bottom: 1px solid #cccccc;
+        transition: all ease-out 0.3s;
+        color: $textoClaro;
+        height: 27px;
+
+        &:focus {
+          height: 27px;
+          font-size: 20px;
+          background-color: $colorInput;
+          border: 1px solid #cccccc;
+        }
+      }
+    }
+
+    .nombre_error{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+      width: 100%;
+
+      span {
+        display: none;
+      }
+      &:hover span {
+        display: block;
+        position: fixed;
+        overflow: hidden;
+        border: 1px solid #b1b1b1ea;
+        background-color: #ff6767c0;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+      }
+
+      input {
+        width: 80%;
+        border: none;
+        text-align: center;
+        background-color: #00000000;
+        border: 1px solid transparent;
+        border-bottom: 1px solid #ca0000;
+        transition: all ease-out 0.3s;
+        color: $textoClaro;
+        height: 27px;
+
+        &:focus {
+          height: 27px;
+          font-size: 20px;
+          background-color: $colorInput;
+          border: 1px solid #ca0000;
+        }
+      }
+
+    }
+    .telefono {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      width: 100%;
+
+      input {
+        width: 80%;
+        border: none;
+        text-align: center;
+        background-color: #00000000;
+        border: 1px solid transparent;
+        border-bottom: 1px solid #cccccc;
+        transition: all ease-out 0.3s;
+        color: $textoClaro;
+        height: 27px;
+
+        &:focus {
+          height: 27px;
+          font-size: 20px;
+          background-color: $colorInput;
+          border: 1px solid #cccccc;
+        }
+      }
+    }
+
+    .telefono_error{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      width: 100%;
+
+      span {
+        display: none;
+      }
+      &:hover span {
+        display: block;
+        position: fixed;
+        overflow: hidden;
+        border: 1px solid #b1b1b1ea;
+        background-color: #ff6767c0;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+      }
+
+      input {
+        width: 80%;
+        border: none;
+        text-align: center;
+        background-color: #00000000;
+        border: 1px solid transparent;
+        border-bottom: 1px solid #ca0000;
+        transition: all ease-out 0.3s;
+        color: $textoClaro;
+        height: 27px;
+
+        &:focus {
+          height: 27px;
+          font-size: 20px;
+          background-color: $colorInput;
+          border: 1px solid #ca0000;
+        }
+      }
+
+    }
+    .tipo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+      width: 80%;
+      fieldset {
+        display: flex;
+        width: 100%;
+        margin: 0px;
+
+        legend {
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+
+        .item {
+          display: flex;
+          padding-left: 40px;
+        }
+      }
+    }
+  }
+  .botones {
+    display: flex;
+    height: 30px;
+    width: 100%;
+    justify-content: center;
+
+    #continuar {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      background: #232b2a;
+      cursor: pointer;
+      transition: 0.3s all;
+
+      &:hover {
+        background: #232b2acb;
+      }
+    }
+  }
 }

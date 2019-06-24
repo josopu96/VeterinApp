@@ -148,7 +148,7 @@ export class FormClienteComponent implements OnInit {
   }
 
   agregarContacto() {
-    this.globalService.generaVentana(300, 552, '/formClientesContactos', 'nuevo-contacto');
+    this.globalService.generaVentana(255, 250, '/formClientesContactos', 'nuevo-contacto');
   }
 
   tooltip(e) {

@@ -460,7 +460,7 @@ export class RestWS extends AbstractWS {
       fd = fd.append('nombre', contacto.nombre);
     }
     if (contacto.telefono) {
-      fd = fd.append('telefono', contacto.telefono);
+      fd = fd.append('telefono', encodeURIComponent(contacto.telefono));
     }
     if (contacto.tipo) {
       fd = fd.append('tipo', contacto.tipo);

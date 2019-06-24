@@ -86,7 +86,7 @@ exports.addContacto = function (req, res) {
   var contacto = {
     '_id'          : new mongoose.mongo.ObjectId(),
     'nombre'       : req.body.nombre,
-    'telefono'     : req.body.telefono,
+    'telefono'     : decodeURIComponent(req.body.telefono),
     'tipo'         : req.body.tipo,
   }
   console.log(contacto);

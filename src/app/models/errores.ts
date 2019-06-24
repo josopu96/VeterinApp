@@ -48,3 +48,9 @@ export class ErroresFormCliente {
     email: string;
     fecNac: string;
 }
+
+export class ErroresFormContacto {
+    nombre: string;
+    telefono: string;
+    tipo: string;
+}

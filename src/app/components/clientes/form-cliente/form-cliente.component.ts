@@ -5,7 +5,9 @@ import { GlobalService } from '../../../services/globalService';
 import { DataManagement } from '../../../services/dataManagement';
 import { CabeceraTabla } from '../../../models/tablas';
 import { ErroresFormCliente } from '../../../models/errores';
+import { CookieService } from 'ngx-cookie-service';
 
+const CONST_COOKIE_CLIENTEEDITADO = 'sesionClienteEditado';
 @Component({
   selector: 'app-form-cliente',
   templateUrl: './form-cliente.component.html',
@@ -26,12 +28,16 @@ export class FormClienteComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private globalService: GlobalService,
-    private dm: DataManagement
-  ) { }
+    private dm: DataManagement,
+    private cookieService: CookieService
+  ) {
+    console.log("CONSTRUCTOR");
+  }
 
   ngOnInit() {
+    console.log("INIT");
     this.inicializaCabecera();
-    
+
     this.tema = "_" + this.globalService.getTema();
     this.route.params.forEach(params => {
       if (params && params['id']) {
@@ -52,19 +58,32 @@ export class FormClienteComponent implements OnInit {
         this.clienteEditado.poblacion = cli.poblacion;
         this.clienteEditado._id = cli._id;
         this.clienteEditado.apellidos = cli.apellidos;
-        
+
         this.dm.getContactos(this.clienteEditado._id).then((contactos: Contacto[]) => {
           this.clienteEditado.contactos = contactos;
           this.ready = true;
         }).catch((_) => {});
       } else {
-        this.new = true;
+          this.new = this.checkCreacionDeContacto();
       }
     });
-
   }
 
-  metodoDesarrollo(){
+  checkCreacionDeContacto(): boolean {
+    if (this.cookieService.get(CONST_COOKIE_CLIENTEEDITADO)) {
+      this.clienteEditado = JSON.parse(this.cookieService.get(CONST_COOKIE_CLIENTEEDITADO));
+      this.dm.getContactos(this.clienteEditado._id).then((contactos: Contacto[]) => {
+        console.log("PASA");
+        this.clienteEditado.contactos = contactos;
+        this.cookieService.delete(CONST_COOKIE_CLIENTEEDITADO);
+      });
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  metodoDesarrollo() {
     //Para desarrollo
     if(!this.clienteEditado){
       this.clienteEditado = new Cliente();
@@ -148,7 +167,9 @@ export class FormClienteComponent implements OnInit {
   }
 
   agregarContacto() {
-    this.globalService.generaVentana(300, 552, '/formClientesContactos', 'nuevo-contacto');
+    this.cookieService.set(CONST_COOKIE_CLIENTEEDITADO, JSON.stringify(this.clienteEditado));
+    this.globalService.generaVentana(255, 250, '/formClientesContactos', 'nuevo-contacto');
+    // this.router.navigate([""]);
   }
 
   tooltip(e) {
@@ -277,6 +298,13 @@ export class FormClienteComponent implements OnInit {
       }
     }
     return res;
+  }
+
+  deleteContact(el: Contacto) {
+    this.dm.deleteContacto(this.clienteEditado._id, el._id).then((_) => {
+      let index = this.clienteEditado.contactos.indexOf(el);
+      this.clienteEditado.contactos.splice(index, 1);
+    });
   }
 
 

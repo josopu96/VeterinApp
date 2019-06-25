@@ -358,7 +358,7 @@ export class GlobalService {
     });
 
     // Comentar las siguientes lineas cuando se termine de programar la nueva ventana
-    // win.webContents.openDevTools()
+    win.webContents.openDevTools()
     // win.setMenu(null);
     // back.setMenu(null);
 
@@ -434,8 +434,8 @@ export class GlobalService {
     if (arg) {
       this.dm.getCliente(this.clienteEnEdicion).then((cliente: Cliente) => {
         if (arg.action == "guardar") {
-          this.dm.addContacto(cliente._id, arg.contactoEditado).then((_) => {
-            this.router.navigate(['clientes']);
+          this.dm.addContacto(cliente._id, arg.contactoEditado).then((res) => {
+            this.router.navigateByUrl('clientes');
           });
         }
         //En cualquier otro caso no hacemos nada

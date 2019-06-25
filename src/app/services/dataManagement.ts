@@ -239,6 +239,14 @@ export class DataManagement {
     });
   }
 
+  public deleteContacto(clienteId: string, contactoId: string): Promise<any> {
+    return this.restService.deleteContacto(clienteId, contactoId).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
 
 
 }

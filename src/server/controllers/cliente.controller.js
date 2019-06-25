@@ -78,7 +78,8 @@ exports.updateCliente = function (req, res) {
 exports.getContactos = function (req, res) {
   Cliente.findById(req.params.id, function (err, cliente) {
     if (err) res.status(404).send(err);
-    res.status(200).send(cliente.contactos);
+    console.log(cliente.contactos);
+    res.send(cliente.contactos.filter(x => x.borrado == false));
   });
 }
 
@@ -86,8 +87,9 @@ exports.addContacto = function (req, res) {
   var contacto = {
     '_id'          : new mongoose.mongo.ObjectId(),
     'nombre'       : req.body.nombre,
-    'telefono'     : req.body.telefono,
+    'telefono'     : decodeURIComponent(req.body.telefono),
     'tipo'         : req.body.tipo,
+    'borrado'      : false
   }
   console.log(contacto);
   Cliente.update(
@@ -97,5 +99,17 @@ exports.addContacto = function (req, res) {
     console.log(err);
     if (err) res.send(err);
     res.status(200).send({ 'response': 'Contacto creado satisfactoriamente' });
+  });
+}
+
+exports.deleteContacto = function (req, res) {
+  Cliente.findOneAndUpdate(
+    {'_id': req.params.id, 'contactos': { $elemMatch: {_id: req.body.contactoId }}
+  }, {
+    $set: {
+      'contactos.$.borrado': true,
+  }}, function (err, resp) {
+    if (err) res.send(err);
+    res.send(resp);
   });
 }

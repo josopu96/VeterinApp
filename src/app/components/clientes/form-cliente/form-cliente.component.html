@@ -73,8 +73,8 @@
                       <td class="colNombre">{{ el.nombre }}</td>
                       <td class="colTelefono">{{ el.telefono }}</td>
                       <td class="colTipo">{{ el.tipo }}</td>
-                      <td class="colQuitar">
-                        <img src="../../../../assets/img/delete.png" width="20px" height="20px" />
+                      <td class="colQuitar" (click)="deleteContact(el)">
+                        <img src="../../../../assets/img/delete.png" width="15px" height="15px" />
                       </td>
                     </tr>
                   </ng-container>

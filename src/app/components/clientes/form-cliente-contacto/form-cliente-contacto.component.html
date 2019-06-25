@@ -1,25 +1,26 @@
-<div class="container">
-  <div class="texto">
-    <fieldset>
-      <legend>Datos básicos</legend>
-      <div class="form_arriba">
-        <div class="texto">
-          <label>Nombre</label><input type="text" [(ngModel)]="contactoEditado.nombre" />
-        </div>
-        <div class="texto">
-          <label>Apellidos</label><input type="text" [(ngModel)]="contactoEditado.telefono" />
-        </div>
-        <div class="texto">
-          <form action="">
-            <input type="radio" [(ngModel)]="contactoEditado.tipo" name="buildTool" value="movil">Movil <br>
-            <input type="radio" [(ngModel)]="contactoEditado.tipo" name="buildTool" value="fijo">Fijo
-          </form>
-        </div>
+<div class="container" (document:mousemove)='tooltip($event)'>
+  <div class="titulo">
+    Nuevo contacto
+  </div>
+  <div class="cerrar" (click)="cerrarVentana()"><img src="../../../../assets/img/close_oscuro.png" /></div>
+  <div class="datos">
+      <div class="nombre{{errores.nombre ? '_error' : ''}}">
+        <label for="nombre">Nombre</label><input id="nombre" type="text" [(ngModel)]="contactoEditado.nombre" (ngModelChange)="cambia('nombre')" />
+        <span class="tooltip" *ngIf="errores.nombre=='obligatorio'">Es obligatorio rellenar este campo</span>
       </div>
-    </fieldset>
+      <div class="telefono{{errores.telefono ? '_error' : ''}}">
+        <label for="telefono">Teléfono</label><input id="telefono" type="text" [(ngModel)]="contactoEditado.telefono" (ngModelChange)="cambia('telefono')" />
+        <span class="tooltip" *ngIf="errores.telefono=='obligatorio'">Es obligatorio rellenar este campo</span>
+      </div>
+      <div class="tipo">
+        <fieldset>
+          <legend>Tipo</legend>
+          <div class="item"><input type="radio" [(ngModel)]="contactoEditado.tipo" name="buildTool" value="movil" id="movil"><label for="movil">Movil</label></div>
+          <div class="item"><input type="radio" [(ngModel)]="contactoEditado.tipo" name="buildTool" value="fijo" id="fijo"><label for="fijo">Fijo</label></div>
+        </fieldset>
+      </div>
   </div>
   <div class="botones">
-    <div id="cerrar" (click)="cerrarVentana()">Volver</div>
-    <div id="continuar" (click)="guardarContacto()">Guardar</div>
+    <div id="continuar" (click)="guardarContacto()">Añadir</div>
   </div>
 </div>

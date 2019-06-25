@@ -57,6 +57,12 @@ export class ErroresFormCliente {
     fecNac: string;
 }
 
+export class ErroresFormContacto {
+    nombre: string;
+    telefono: string;
+    tipo: string;
+}
+
 export class ErroresFormTratamientos {
   anamnesis: string;
   diagnostico: string;

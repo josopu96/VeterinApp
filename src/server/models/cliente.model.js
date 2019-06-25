@@ -5,6 +5,7 @@ let contactoSchema = new Schema({
     nombre:             { type: String, required: true },
     telefono:           { type: String, required: true },
     tipo:               { type: String, required: true },
+    borrado:            { type: Boolean, required: true},
     _id:                { type: mongoose.Schema.Types.ObjectId, required: true}
 });
 

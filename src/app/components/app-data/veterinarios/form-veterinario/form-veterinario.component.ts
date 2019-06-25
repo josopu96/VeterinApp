@@ -40,7 +40,7 @@ export class FormVeterinarioComponent implements OnInit {
         this.veterinarioEditado.dni = params["dni"];
         this.veterinarioEditado.numColegiado = params["numColegiado"];
         this.veterinarioEditado.fecNac = params["fecNac"] !== 'null' ? params["fecNac"] : null;
-        this.veterinarioEditado.telefono = params["telefono"] != 'null' ? params["telefono"] : "";
+        this.veterinarioEditado.telefono = params["telefono"] != 'null' || params["telefono"] != 'undefined'  ? params["telefono"] : "";
         this.ready = true;
       } else {
         this.new = true;

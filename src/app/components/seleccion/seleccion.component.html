@@ -13,7 +13,7 @@
   <div class="interior">
     <ng-template [ngIf]="cliente">
       <ng-template [ngIf]="cliente._id==0">
-        <div class="seccion1 addclient"></div>
+        <div class="seccion1 addclient"  [routerLink]="['/formClientes']"></div>
       </ng-template>
       <ng-template [ngIf]="cliente._id!=0">
         <div class="seccion1">
@@ -28,7 +28,7 @@
     </ng-template>
     <ng-template [ngIf]="mascota">
       <ng-template [ngIf]="mascota._id==0">
-        <div class="seccion1 addpet"></div>
+        <div class="seccion1 addpet" (click)="nuevaMascota()"></div>
       </ng-template>
       <ng-template [ngIf]="mascota._id!=0">
         <div class="seccion1" (click)="irA('resumen_mascota')">

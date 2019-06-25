@@ -185,7 +185,7 @@ export class SeleccionComponent implements OnInit {
         this.cookieService.set('veterinarioDisplay', JSON.stringify(this.veterinario));
         this.globalService.generaVentana(250, 350, '/displayVeterinario', null);
         break;
-    
+
       default:
         break;
     }
@@ -210,6 +210,21 @@ export class SeleccionComponent implements OnInit {
       this.globalService.limpiarVeterinario();
       this.router.navigateByUrl('/seleccionaVeterinario', { skipLocationChange: true }).then(() =>
         this.router.navigate(["veterinarios"]));
+    }
+  }
+
+  nuevaMascota() {
+    let showAlert = true;
+    if (this.globalService.cliente) {
+      if (this.globalService.cliente._id != "0") {
+        showAlert = false;
+      }
+    }
+
+    if (showAlert) {
+      this.globalService.generaVentana(300, 552, '/avisoNuevaMascota', 'nueva-mascota');
+    } else {
+      this.router.navigate(['formMascotas']);
     }
   }
 }

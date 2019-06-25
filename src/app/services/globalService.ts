@@ -358,7 +358,7 @@ export class GlobalService {
     });
 
     // Comentar las siguientes lineas cuando se termine de programar la nueva ventana
-    win.webContents.openDevTools()
+    // win.webContents.openDevTools()
     // win.setMenu(null);
     // back.setMenu(null);
 

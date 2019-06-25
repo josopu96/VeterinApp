@@ -68,6 +68,7 @@ export class FormTratamientoComponent implements OnInit {
 
   crear() {
     this.dm.createTratamiento(this.tratamientoEditado, this.globalService.mascota._id).then((res) => {
+      this.globalService.mascota.tratamientos.push(this.tratamientoEditado);
       this.router.navigateByUrl('/tratamientos');
     }).catch((err) => {
       console.log(err);

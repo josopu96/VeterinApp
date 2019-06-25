@@ -52,51 +52,61 @@ export class ResumenComponent implements OnInit {
 
   inicializaElementosTabla() {
     //Incluimos los tratamientos en el resumen de la mascota
-    this.mascota.tratamientos.forEach(tratamiento => {
-      let element: OperacionResumenMascota = new OperacionResumenMascota;
-      element.id = tratamiento._id;
-      element.fecha = tratamiento.fecha;
-      element.tipo = 'Tratamiento';
-      element.descripcion = tratamiento.tipoTratamiento;
-      this.elements.push(element);
-    });
+    if (this.mascota.tratamientos) {
+      this.mascota.tratamientos.forEach(tratamiento => {
+        let element: OperacionResumenMascota = new OperacionResumenMascota;
+        element.id = tratamiento._id;
+        element.fecha = tratamiento.fecha;
+        element.tipo = 'Tratamiento';
+        element.descripcion = tratamiento.tipoTratamiento;
+        this.elements.push(element);
+      });
+    }
     //Incluimos las vacunas en el resumen de la mascota
-    this.mascota.vacunas.forEach(vacuna => {
-      let element: OperacionResumenMascota = new OperacionResumenMascota;
-      element.id = vacuna._id;
-      element.fecha = vacuna.fecha;
-      element.tipo = 'Vacuna';
-      element.descripcion = vacuna.tipoVacuna;
-      this.elements.push(element);
-    });
+    if (this.mascota.vacunas) {
+      this.mascota.vacunas.forEach(vacuna => {
+        let element: OperacionResumenMascota = new OperacionResumenMascota;
+        element.id = vacuna._id;
+        element.fecha = vacuna.fecha;
+        element.tipo = 'Vacuna';
+        element.descripcion = vacuna.tipoVacuna;
+        this.elements.push(element);
+      });
+    }
     //Incluimos las pruebas en el resumen de la mascota
-    this.mascota.pruebas.forEach(prueba => {
-      let element: OperacionResumenMascota = new OperacionResumenMascota;
-      element.id = prueba._id;
-      element.fecha = prueba.fecha;
-      element.tipo = 'Prueba';
-      element.descripcion = prueba.tipoPrueba;
-      this.elements.push(element);
-    });
+    if (this.mascota.pruebas) {
+      this.mascota.pruebas.forEach(prueba => {
+        let element: OperacionResumenMascota = new OperacionResumenMascota;
+        element.id = prueba._id;
+        element.fecha = prueba.fecha;
+        element.tipo = 'Prueba';
+        element.descripcion = prueba.tipoPrueba;
+        this.elements.push(element);
+      });
+    }
     //Incluimos las analíticas en el resumen de la mascota
-    this.mascota.analiticas.forEach(analitica => {
-      let element: OperacionResumenMascota = new OperacionResumenMascota;
-      element.id = analitica._id;
-      element.fecha = analitica.fecha;
-      element.tipo = 'Analítica';
-      element.descripcion = analitica.descripcion;
-      this.elements.push(element);
-    });
+    if (this.mascota.analiticas) {
+      this.mascota.analiticas.forEach(analitica => {
+        let element: OperacionResumenMascota = new OperacionResumenMascota;
+        element.id = analitica._id;
+        element.fecha = analitica.fecha;
+        element.tipo = 'Analítica';
+        element.descripcion = analitica.descripcion;
+        this.elements.push(element);
+      });
+    }
     //Incluimos las desparasitaciones en el resumen de la mascota
-    this.mascota.desparasitaciones.forEach(desparasitacion => {
-      let element: OperacionResumenMascota = new OperacionResumenMascota;
-      element.id = desparasitacion._id;
-      element.fecha = desparasitacion.fecha;
-      element.tipo = 'Desparasitación';
-      element.descripcion = desparasitacion.tipoDesparasitacion;
-      this.elements.push(element);
-    });
-    
+    if (this.mascota.desparasitaciones) {
+      this.mascota.desparasitaciones.forEach(desparasitacion => {
+        let element: OperacionResumenMascota = new OperacionResumenMascota;
+        element.id = desparasitacion._id;
+        element.fecha = desparasitacion.fecha;
+        element.tipo = 'Desparasitación';
+        element.descripcion = desparasitacion.tipoDesparasitacion;
+        this.elements.push(element);
+      });
+    }
+
     this.elements.sort((a, b): number => {
       if (a.fecha > b.fecha) return -1;
       if (a.fecha < b.fecha) return 1;

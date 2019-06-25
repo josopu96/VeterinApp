@@ -48,8 +48,8 @@ export class ListaComponent implements OnInit {
     this.elements = this.globalService.clientes;
     this.clientesTotales = this.globalService.clientes;
     this.ordenaLista();
-    this.tema = "_" + this.globalService.getTema();
     this.aplicarFiltros();
+    this.tema = "_" + this.globalService.getTema();
   }
 
   inicializaCabecera() {

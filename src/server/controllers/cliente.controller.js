@@ -26,6 +26,7 @@ exports.createCliente = function (req, res) {
   let email = req.body.email ? req.body.email : "";
   let fecNac = req.body.fecNac ? req.body.fecNac : "";
 
+  console.log(req.body);
   let cliente = new Cliente({
     nombre: req.body.nombre,
     apellidos: req.body.apellidos,

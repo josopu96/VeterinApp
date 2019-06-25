@@ -423,8 +423,8 @@ export class GlobalService {
     if (arg) {
       this.dm.getCliente(this.clienteEnEdicion).then((cliente: Cliente) => {
         if (arg.action == "guardar") {
-          this.dm.addContacto(cliente._id, arg.contactoEditado).then((_) => {
-            this.router.navigate(['clientes']);
+          this.dm.addContacto(cliente._id, arg.contactoEditado).then((res) => {
+            this.router.navigateByUrl('clientes');
           });
         }
         //En cualquier otro caso no hacemos nada

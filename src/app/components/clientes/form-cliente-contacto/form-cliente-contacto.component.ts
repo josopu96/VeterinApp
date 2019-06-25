@@ -28,7 +28,11 @@ export class FormClienteContactoComponent implements OnInit {
 
   cerrarVentana() {
     let window = remote.getCurrentWindow();
-    ipcRenderer.send('request-update-in-window', null);
+    let Data = {
+      action: "salir"
+    };
+
+    ipcRenderer.send('request-update-in-window', Data);
     window.close();
   }
 

@@ -49,6 +49,8 @@ import { FormTratamientoComponent } from './components/operaciones/tratamientos/
 import { ListaComponent } from './components/operaciones/pruebas/lista/lista.component';
 import { FormPruebaComponent } from './components/operaciones/pruebas/form-prueba/form-prueba.component';
 import { ResumenComponent } from './components/mascotas/resumen/resumen.component';
+import { AvisoNuevoTratamientoComponent } from './components/operaciones/tratamientos/aviso-nuevo-tratamiento/aviso-nuevo-tratamiento.component';
+import { FormClienteContactoComponent } from './components/clientes/form-cliente-contacto/form-cliente-contacto.component';
 import { DisplayComponent } from './components/app-data/veterinarios/display/display.component';
 
 // AoT requires an exported function for factories
@@ -85,6 +87,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormTratamientoComponent,
     ListaComponent,
     FormPruebaComponent,
+    ResumenComponent,
+    AvisoNuevoTratamientoComponent,
+    FormClienteContactoComponent,
     ResumenComponent,
     DisplayComponent
   ],

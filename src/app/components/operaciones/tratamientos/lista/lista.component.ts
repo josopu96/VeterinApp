@@ -51,7 +51,15 @@ export class ListaComponent implements OnInit {
   }
 
   editar(tratamiento: Tratamiento) {
-
+    let params = {
+      'id': tratamiento._id,
+      'anamnesis': tratamiento.anamnesis,
+      'diagnostico': tratamiento.diagnostico,
+      'tipoTratamiento': tratamiento.tipoTratamiento,
+      'fecha': tratamiento.fecha,
+    };
+    console.log(params);
+    this.router.navigate(['formTratamiento', params]);
   }
 
 }

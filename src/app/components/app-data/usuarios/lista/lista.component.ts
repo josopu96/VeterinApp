@@ -41,30 +41,27 @@ export class ListaComponent implements OnInit {
   inicializaCabecera() {
     let entrada1: CabeceraTabla = new CabeceraTabla();
     let entrada2: CabeceraTabla = new CabeceraTabla();
+    let entrada3: CabeceraTabla = new CabeceraTabla();
     entrada1.nombre = 'Nombre de usuario';
     entrada1.clase = 'cabeceraNombre';
     this.headElements.push(entrada1);
     entrada2.nombre = 'Administrador';
-    entrada2.clase = 'cabeceraApellidos';
+    entrada2.clase = 'cabeceraAdministrador';
     this.headElements.push(entrada2);
+    entrada3.nombre = 'Editar';
+    entrada3.clase = 'cabeceraEditar';
+    this.headElements.push(entrada3);
   }
 
-  onSelect(veterinario: Usuario): void {
-
-  }
-
-  editar(veterinario: Usuario) {
+  editar(usuario: Usuario) {
     let params = {
-        'id': veterinario._id,
-        'nombre': veterinario.nombre,
-        'email': veterinario.email,
-        'isAdmin': veterinario.isAdmin
+        'id': usuario._id,
+        'nombre': usuario.nombre,
+        'email': usuario.email,
+        'isAdmin': usuario.isAdmin,
+        'clave': usuario.clave
       };
     this.router.navigate(['formUsuario', params]);
-  }
-
-  borrar(id: string) {
-
   }
 
   buscarPorNombre() {

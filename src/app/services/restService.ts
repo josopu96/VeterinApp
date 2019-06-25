@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './../../config/configService';
 import { AbstractWS } from './abstractService';
 import { Injectable } from '@angular/core';
-import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota, Tratamiento, Prueba } from '../app.dataModels';
+import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota, Tratamiento, Prueba, Contacto } from '../app.dataModels';
 import { Cliente } from '../app.dataModels';
 
 @Injectable()
@@ -251,8 +251,8 @@ export class RestWS extends AbstractWS {
       .set('clave', usuario.clave)
       .set('email', usuario.email)
       .set('isAdmin', usuario.isAdmin + "");
-    return this.makePostRequest(this.path + 'usuarios/create', fd).then((_) => {
-      return Promise.resolve();
+    return this.makePostRequest(this.path + 'usuarios/create', fd).then((res) => {
+      return Promise.resolve(res);
     }).catch(error => {
       return Promise.reject(error);
     });
@@ -386,6 +386,7 @@ export class RestWS extends AbstractWS {
     const fd = new HttpParams();
 
     return this.makeGetRequest(this.path + 'mascotas/' + mascotaId + '/tratamientos', fd).then((res: String) => {
+      console.log(res);
       return Promise.resolve(res);
     }).catch(error => {
       return Promise.reject(error);
@@ -405,9 +406,27 @@ export class RestWS extends AbstractWS {
     if (tratamiento.tipoTratamiento) {
       fd = fd.append('tipoTratamiento', tratamiento.tipoTratamiento);
     }
+    if (tratamiento.fecha) {
+      fd = fd.append('fecha', String(tratamiento.fecha));
+    }
 
+    console.log(fd);
     return this.makePostRequest(this.path + 'mascotas/addTratamiento', fd).then((_) => {
       return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public updateTratamiento(tratamiento: Tratamiento, mascotaId: string) {
+    let fd = new HttpParams()
+      .set('anamnesis', tratamiento.anamnesis)
+      .set('diagnostico', tratamiento.diagnostico)
+      .set('tipoTratamiento', tratamiento.tipoTratamiento)
+      .set('fecha', String(tratamiento.fecha));
+
+    return this.makePostRequest(this.path + 'mascotas/' + mascotaId + '/updateTratamiento/' + tratamiento._id, fd).then(res => {
+      return Promise.resolve(res);
     }).catch(error => {
       return Promise.reject(error);
     });
@@ -444,4 +463,32 @@ export class RestWS extends AbstractWS {
     });
   }
 
+  public getContactos(clienteId: string): Promise<Contacto[]> {
+    const fd = new HttpParams();
+    return this.makeGetRequest(this.path + 'clientes/' + clienteId + '/contactos', fd).then((res) => {
+      return Promise.resolve(res);
+    }).catch(err => {
+      return Promise.reject(err);
+    });
+  }
+
+  public addContacto(clienteId: string, contacto: Contacto): Promise<any> {
+    let fd = new HttpParams();
+
+    if (contacto.nombre) {
+      fd = fd.append('nombre', contacto.nombre);
+    }
+    if (contacto.telefono) {
+      fd = fd.append('telefono', contacto.telefono);
+    }
+    if (contacto.tipo) {
+      fd = fd.append('tipo', contacto.tipo);
+    }
+
+    return this.makePostRequest(this.path + 'clientes/' + clienteId + '/addContacto', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(err => {
+      return Promise.reject(err);
+    });
+  }
 }

@@ -315,6 +315,7 @@ export class ListaComponent implements OnInit {
       'fecNac': cliente.fecNac,
     };
     console.log(params);
+    this.globalService.clienteEnEdicion = params.id;
     this.router.navigate(['formClientes', params]);
   }
 

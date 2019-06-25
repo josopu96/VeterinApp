@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class OperacionesComponent implements OnInit {
 
   tema = "_oscuro";
+  showAlert = false;
 
   constructor(
     private dm: DataManagement,
@@ -22,4 +23,16 @@ export class OperacionesComponent implements OnInit {
     this.tema = "_" + this.globalService.getTema();
   }
 
+  nuevoTratamiento() {
+    this.showAlert = true;
+    if (this.globalService.mascota && this.globalService.mascota._id != "0") {
+        this.showAlert = false;
+    }
+
+    if (this.showAlert) {
+      this.globalService.generaVentana(300, 552, '/avisoNuevoTratamiento', 'nuevo-tratamiento');
+    } else {
+      this.router.navigate(['formTratamiento']);
+    }
+  }
 }

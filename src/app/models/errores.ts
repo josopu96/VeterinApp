@@ -37,3 +37,29 @@ export class ErroresFormClinica {
     propietario: string;
     dniPropietario: string;
 }
+
+export class ErroresFormUsuario {
+    nombre: string;
+    email: string;
+    antiguaClave: string;
+    clave: string;
+    claveRepetida: string;
+}
+
+export class ErroresFormCliente {
+    nombre: string;
+    apellidos: string;
+    direccion: string;
+    codPostal: string;
+    poblacion: string;
+    dni: string;
+    email: string;
+    fecNac: string;
+}
+
+export class ErroresFormTratamientos {
+  anamnesis: string;
+  diagnostico: string;
+  tipoTratamiento: string;
+  fecha: string;
+}

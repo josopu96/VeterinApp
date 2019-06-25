@@ -1,104 +1,66 @@
 @import "../../../../utilities/variables.scss";
 
-.container{
-    background: $color8;
+.container {
+  background: #d0eae6;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 250px;
+  align-items: center;
+  border: 2px solid rgb(0, 0, 0);
+  box-sizing: border-box;
+  overflow: hidden;
+
+  .cerrar {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background: rgba(0, 0, 0, 0.78);
+    height: 28px;
+    width: 28px;
+    transition: 0.3s all;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.637);
+    }
+
+    img {
+      margin: 0 auto;
+      margin-top: 7px;
+      display: block;
+      height: 15px;
+      width: 15px;
+    }
+  }
+  .titulo {
+    display: flex;
+    height: 40px;
+    margin-top: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  .datos {
+
+    hr{
+        height: 2px;
+        width: 40%;
+        color: black;
+        background: black;
+    }
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     width: 100%;
-    height: 300px;
+    justify-content: space-evenly;
     align-items: center;
-    border-radius: 25px;
-    border: 2px solid white;
-    box-sizing: border-box;
-    overflow: hidden;
 
-    .imagen{
-        height: 120px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
+    .frase2 {
+      font-size: 18px;
+      font-weight: bold;
     }
-    .texto{
-        height: 140px;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .frase1{
-            font-size: 40px;
-            font-weight: bold;
-            width: 100%;
-            text-align: center;
-            height: 60px;
-        }
-        .frase2{
-            display: flex;
-            height: 30px;
-            align-items: center;
-            width: 100%;
-            justify-content: center;
-            font-size: 20px;
-        }
-        .frase3{
-            display: flex;
-            height: 30px;
-            align-items: center;
-            width: 100%;
-            justify-content: center;
-            font-size: 20px;
-        }
-    }
-    .botones{
-        width: 100%;
-        display: flex;
-        height: 40px;
-        border-top: 1px solid white;
-        box-sizing: border-box;
-
-        #cerrar{
-            display: flex;
-            width: 184px;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-sizing: border-box;
-            border-right: 1px solid white;
-            background: #00000059;
-            color: $textoClaro;
-
-            &:hover{
-                background: #0000008a;
-            }
-        }
-        #elegir{
-            display: flex;
-            width: 184px;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            background: #00000059;
-            color: $textoClaro;
-
-            &:hover{
-                background: #0000008a;
-            }
-        }
-        #continuar{
-            display: flex;
-            width: 184px;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-sizing: border-box;
-            border-left: 1px solid white;
-            background: #00000059;
-            color: $textoClaro;
-
-            &:hover{
-                background: #0000008a;
-            }
-        }
-    }
+  }
 }

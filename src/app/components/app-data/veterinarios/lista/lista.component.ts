@@ -205,6 +205,6 @@ export class ListaComponent implements OnInit {
 
   visualizar(el: Veterinario) {
     this.cookieService.set('veterinarioDisplay', JSON.stringify(el));
-    this.globalService.generaVentana(300, 552, '/displayVeterinario', null);
+    this.globalService.generaVentana(250, 350, '/displayVeterinario', null);
   }
 }

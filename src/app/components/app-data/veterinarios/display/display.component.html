@@ -1,16 +1,14 @@
 <div class="container">
-    <div class="imagen">
-      <img src="../../../../assets/img/rana.png" width="100px" height="100px" />
-    </div>
-    <div class="texto">
-      <div class="frase1">VETERINARIO/A</div>
-      <div class="frase2">{{ veterinarioDisplay.nombre }} {{ veterinarioDisplay.apellidos }}</div>
-      <div class="frase2">{{ veterinarioDisplay.dni }}</div>
-      <div class="frase2">{{ veterinarioDisplay.telefono }}</div>
-      <label> Fecha de nacimiento</label><div class="frase2">{{ veterinarioDisplay.fecNac }}</div>
-      <label></label><div class="frase2">{{ veterinarioDisplay.nombre }}</div>
-    </div>
-    <div class="botones">
-      <div id="cerrar" (click)="cerrarVentana()">Volver</div>
-    </div>
+  <div class="cerrar" (click)="cerrarVentana()"><img src="../../../../assets/img/close_oscuro.png" /></div>
+  <div class="titulo">
+    <div class="frase1">VETERINARIO/A</div>
   </div>
+  <div class="datos">
+    <hr/>
+    <div class="frase2">{{ veterinarioDisplay.nombre }} {{ veterinarioDisplay.apellidos }}</div>
+    <div class="frase2">{{ veterinarioDisplay.dni }}</div>
+    <div class="frase2">{{ veterinarioDisplay.telefono }}</div>
+    <div class="frase2" *ngIf="veterinarioDisplay.fecNac"><u>Fecha de nacimiento</u> {{ veterinarioDisplay.fecNac | date:'yyyy-MM-dd' }}</div>
+    <div class="frase2" *ngIf="veterinarioDisplay.numColegiado"><u>Nº de colegiado:</u> {{ veterinarioDisplay.numColegiado }}</div>
+  </div>
+</div>

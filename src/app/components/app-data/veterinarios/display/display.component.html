@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="cerrar" (click)="cerrarVentana()"><img src="../../../../assets/img/close_oscuro.png" /></div>
+  <div class="titulo">
+    <div class="frase1">VETERINARIO/A</div>
+  </div>
+  <div class="datos">
+    <hr/>
+    <div class="frase2">{{ veterinarioDisplay.nombre }} {{ veterinarioDisplay.apellidos }}</div>
+    <div class="frase2">{{ veterinarioDisplay.dni }}</div>
+    <div class="frase2">{{ veterinarioDisplay.telefono }}</div>
+    <div class="frase2" *ngIf="veterinarioDisplay.fecNac"><u>Fecha de nacimiento</u> {{ veterinarioDisplay.fecNac | date:'yyyy-MM-dd' }}</div>
+    <div class="frase2" *ngIf="veterinarioDisplay.numColegiado"><u>Nº de colegiado:</u> {{ veterinarioDisplay.numColegiado }}</div>
+  </div>
+</div>

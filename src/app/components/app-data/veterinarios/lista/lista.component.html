@@ -21,7 +21,7 @@
                     <td class="colNombre seleccionado" (click)="onSelect(el)">{{ el.nombre }}</td>
                     <td class="colApellidos seleccionado">{{ el.apellidos }}</td>
                     <td class="colDNI seleccionado">{{ el.dni }}</td>
-                    <td class="colVisualizar seleccionado"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px" height="13px"></td>
+                    <td class="colVisualizar seleccionado" (click)="visualizar(el)"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px" height="13px"></td>
                     <td class="colEditar seleccionado" (click)="editar(el)"><img src="../../../../assets/img/editar-oscuro.png" width="25px" height="25px"></td>
                     <td class="colSeleccionar seleccionado" (click)="limpiarVeterinario()"><img src="../../../../assets/img/limpiar-oscuro.png" width="25px" height="25px"></td>
                   </tr>
@@ -29,7 +29,7 @@
                     <td class="colNombre" (click)="onSelect(el)">{{ el.nombre }}</td>
                     <td class="colApellidos">{{ el.apellidos }}</td>
                     <td class="colDNI">{{ el.dni }}</td>
-                    <td class="colVisualizar"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px" height="13px"></td>
+                    <td class="colVisualizar" (click)="visualizar(el)"><img src="../../../../assets/img/visualizar-oscuro.png" width="25px" height="13px"></td>
                     <td class="colEditar" (click)="editar(el)"><img src="../../../../assets/img/editar-oscuro.png" width="25px" height="25px"></td>
                     <td class="colSeleccionar" (click)="onSelect(el)"><img src="../../../../assets/img/seleccionar-oscuro.png" width="20px" height="20px"></td>
                   </tr>

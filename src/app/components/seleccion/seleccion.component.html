@@ -45,7 +45,7 @@
         <div class="seccion1 selectvet" [routerLink]="['/veterinarios']"></div>
       </ng-template>
       <ng-template [ngIf]="veterinario._id!=0">
-        <div class="seccion1">
+        <div class="seccion1" (click)="irA('ver_veterinario')">
           <div class="seccionNombre {{claseNombreVeterinario}}">{{ veterinario.nombre }}</div>
           <hr>
           <div class="seccionDatos {{claseApellidosVeterinario}}">{{ veterinario.apellidos }}</div>

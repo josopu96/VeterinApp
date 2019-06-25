@@ -3,6 +3,7 @@ import { Cliente, Mascota, Veterinario, Contacto } from '../../app.dataModels';
 import { Location } from '@angular/common';
 import { GlobalService } from '../../services/globalService';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-seleccion',
@@ -15,7 +16,8 @@ export class SeleccionComponent implements OnInit {
   constructor(
     private router: Router,
     private location: Location,
-    private globalService: GlobalService
+    private globalService: GlobalService,
+    private cookieService: CookieService
   ) { }
 
   @Input() cliente: Cliente;
@@ -177,6 +179,11 @@ export class SeleccionComponent implements OnInit {
     switch (key) {
       case 'resumen_mascota':
         this.router.navigate(["mascota/"+this.mascota._id]);
+        break;
+
+      case 'ver_veterinario':
+        this.cookieService.set('veterinarioDisplay', JSON.stringify(this.veterinario));
+        this.globalService.generaVentana(250, 350, '/displayVeterinario', null);
         break;
     
       default:

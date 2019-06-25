@@ -23,6 +23,7 @@ import { FormPruebaComponent } from './components/operaciones/pruebas/form-prueb
 import { ResumenComponent } from './components/mascotas/resumen/resumen.component';
 import { AvisoNuevoTratamientoComponent } from './components/operaciones/tratamientos/aviso-nuevo-tratamiento/aviso-nuevo-tratamiento.component';
 import { FormClienteContactoComponent } from './components/clientes/form-cliente-contacto/form-cliente-contacto.component';
+import { DisplayComponent as DisplayVeterinario } from './components/app-data/veterinarios/display/display.component';
 
 
 const routes: Routes = [
@@ -51,6 +52,8 @@ const routes: Routes = [
     { path: 'pruebas', component: ListaPruebas },
     { path: 'formPrueba', component: FormPruebaComponent },
     { path: 'mascota/:idMascota', component: ResumenComponent },
+    { path: 'mascota/:idMascota', component: ResumenComponent },
+    { path: 'displayVeterinario', component: DisplayVeterinario },
 ];
 
 @NgModule({

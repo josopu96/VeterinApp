@@ -1,0 +1,37 @@
+<div class="container{{tema}}">
+  <app-selecciones class="top"></app-selecciones>
+  <div class="bottom">
+    <app-menu class="menu"></app-menu>
+    <div class="seccion{{tema}} columna">
+      <div class="titulo">
+        <span *ngIf="new"> Nueva analitica </span>
+        <span *ngIf="!new"> Editando analitica </span>
+      </div>
+      <div class="formulario" *ngIf="ready">
+        <fieldset>
+          <legend>Datos obligatorios</legend>
+          <div class="texto{{errores.nombre ? '_error' : ''}}">
+            <span>Nombre</span><input type="text" [(ngModel)]="analiticaEditada.nombre" (ngModelChange)="cambia('nombre')" />
+            <span class="tooltip" *ngIf="errores.nombre=='obligatorio'">Es obligatorio rellenar este campo</span>
+          </div>
+          <div class="texto{{errores.descripcion ? '_error' : ''}}">
+            <span>Descripcion</span><input type="text" [(ngModel)]="analiticaEditada.descripcion" (ngModelChange)="cambia('descripcion')" />
+            <span class="tooltip" *ngIf="errores.descripcion=='obligatorio'">Es obligatorio rellenar este campo</span>
+          </div>
+          <div class="texto{{errores.resultado ? '_error' : ''}}">
+            <span>Resultado</span><input type="text" [(ngModel)]="analiticaEditada.resultado" (ngModelChange)="cambia('resultado')" />
+            <span class="tooltip" *ngIf="errores.resultado=='obligatorio'">Es obligatorio rellenar este campo</span>
+          </div>
+          <div class="texto{{errores.fecha ? '_error' : ''}}">
+            <label for="fecha">Fecha</label><input id="fechaTratamiento" type="date" [ngModel]="analiticaEditada.fecha | date:'yyyy-MM-dd'"  (ngModelChange)="analiticaEditada.fecha=$event; cambia('fecha')" />
+            <span class="tooltip" *ngIf="errores.fecha=='obligatorio'">Es obligatorio rellenar este campo</span>
+          </div>
+        </fieldset>
+      </div>
+      <div class="guardar">
+        <button [routerLink]="['/operaciones']"> Volver </button>
+        <button (click)="guardar()"> Guardar </button>
+      </div>
+    </div>
+  </div>
+</div>

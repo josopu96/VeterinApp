@@ -52,6 +52,15 @@ import { ResumenComponent } from './components/mascotas/resumen/resumen.componen
 import { AvisoNuevoTratamientoComponent } from './components/operaciones/tratamientos/aviso-nuevo-tratamiento/aviso-nuevo-tratamiento.component';
 import { FormClienteContactoComponent } from './components/clientes/form-cliente-contacto/form-cliente-contacto.component';
 import { DisplayComponent } from './components/app-data/veterinarios/display/display.component';
+import { FormVacunaComponent } from './components/operaciones/vacunas/form-vacuna/form-vacuna.component';
+import { AvisoNuevaVacunaComponent } from './components/operaciones/vacunas/aviso-nueva-vacuna/aviso-nueva-vacuna.component';
+import { FormDesparasitacionComponent } from './components/operaciones/desparasitaciones/form-desparasitacion/form-desparasitacion.component';
+import { AvisoNuevaDesparasitacionComponent } from './components/operaciones/desparasitaciones/aviso-nueva-desparasitacion/aviso-nueva-desparasitacion.component';
+import { FormAnaliticaComponent } from './components/operaciones/analiticas/form-analitica/form-analitica.component';
+import { AvisoNuevaAnaliticaComponent } from './components/operaciones/analiticas/aviso-nueva-analitica/aviso-nueva-analitica.component';
+import { ListaComponent as ListaVacunas } from './components/operaciones/vacunas/lista/lista.component';
+import { ListaComponent as ListaDesparasitaciones } from './components/operaciones/desparasitaciones/lista/lista.component';
+import { ListaComponent as ListaAnaliticas } from './components/operaciones/analiticas/lista/lista.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -91,7 +100,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     AvisoNuevoTratamientoComponent,
     FormClienteContactoComponent,
     ResumenComponent,
-    DisplayComponent
+    DisplayComponent,
+    FormVacunaComponent,
+    AvisoNuevaVacunaComponent,
+    FormDesparasitacionComponent,
+    AvisoNuevaDesparasitacionComponent,
+    FormAnaliticaComponent,
+    AvisoNuevaAnaliticaComponent,
+    ListaVacunas,
+    ListaDesparasitaciones,
+    ListaAnaliticas
   ],
   imports: [
     BrowserModule,

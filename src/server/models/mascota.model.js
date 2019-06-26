@@ -14,7 +14,27 @@ let pruebaSchema = new Schema({
   categoria:        { type: String, required: true },
   tipoPrueba:       { type: String, required: true },
   fecModificacion:  { type: Date,   required: true },
-})
+});
+
+let vacunaSchema = new Schema({
+  vacuna:           { type: String, required: true },
+  fecha:            { type: Date,   required: true },
+  fecModificacion:  { type: Date,   required: true },
+});
+
+let desparasitacionSchema = new Schema({
+  desparasitacion:  { type: String, required: true },
+  fecha:            { type: Date,   required: true },
+  fecModificacion:  { type: Date,   required: true },
+});
+
+let analiticaSchema = new Schema({
+  nombre:           { type: String, required: true },
+  descripcion:      { type: String, required: true },
+  resultado:        { type: String, required: true },
+  fecha:            { type: Date,   required: true },
+  fecModificacion:  { type: Date,   required: true },
+});
 
 let mascotaSchema = new Schema({
   nombre:           { type: String, required: true },
@@ -30,7 +50,10 @@ let mascotaSchema = new Schema({
   raza:             { type: String, required: true },
   idCliente:        { type: String, required: true },
   tratamientos:     [tratamientoSchema],
-  pruebas:          [pruebaSchema]
+  pruebas:          [pruebaSchema],
+  vacunas:          [vacunaSchema],
+  desparasitaciones:[desparasitacionSchema],
+  analiticas:       [analiticaSchema]
 });
 
 

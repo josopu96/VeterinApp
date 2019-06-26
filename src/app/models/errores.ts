@@ -69,3 +69,20 @@ export class ErroresFormTratamientos {
   tipoTratamiento: string;
   fecha: string;
 }
+
+export class ErroresFormVacunas {
+  fecha: string;
+  tipoVacuna: string;
+}
+
+export class ErroresFormAnaliticas {
+  nombre: string;
+  descripcion: string;
+  resultado: string;
+  fecha: string;
+}
+
+export class ErroresFormDesparasitaciones {
+  fecha: string;
+  tipoDesparasitacion: string;
+}

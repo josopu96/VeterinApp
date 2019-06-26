@@ -35,4 +35,43 @@ export class OperacionesComponent implements OnInit {
       this.router.navigate(['formTratamiento']);
     }
   }
+
+  nuevaVacuna() {
+    this.showAlert = true;
+    if (this.globalService.mascota && this.globalService.mascota._id != "0") {
+        this.showAlert = false;
+    }
+
+    if (this.showAlert) {
+      this.globalService.generaVentana(300, 552, '/avisoNuevaVacuna', 'nueva-vacuna');
+    } else {
+      this.router.navigate(['formVacuna']);
+    }
+  }
+
+  nuevaDesparasitacion() {
+    this.showAlert = true;
+    if (this.globalService.mascota && this.globalService.mascota._id != "0") {
+        this.showAlert = false;
+    }
+
+    if (this.showAlert) {
+      this.globalService.generaVentana(300, 552, '/avisoNuevaDesparasitacion', 'nueva-desparasitacion');
+    } else {
+      this.router.navigate(['formDesparasitacion']);
+    }
+  }
+
+  nuevaAnalitica() {
+    this.showAlert = true;
+    if (this.globalService.mascota && this.globalService.mascota._id != "0") {
+        this.showAlert = false;
+    }
+
+    if (this.showAlert) {
+      this.globalService.generaVentana(300, 552, '/avisoNuevaAnalitica', 'nueva-analitica');
+    } else {
+      this.router.navigate(['formAnalitica']);
+    }
+  }
 }

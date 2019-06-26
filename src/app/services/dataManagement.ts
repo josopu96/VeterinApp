@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RestWS } from './restService';
-import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota, Tratamiento, Prueba, Contacto } from '../app.dataModels';
+import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota, Tratamiento, Prueba, Contacto, Vacuna, Desparasitacion, Analitica } from '../app.dataModels';
 import { Cliente } from '../app.dataModels';
 
 @Injectable()
@@ -215,8 +215,8 @@ export class DataManagement {
     });
   }
 
-  public createPrueba(tratamiento: Prueba, mascotaId: string): Promise<any> {
-    return this.restService.createPrueba(tratamiento, mascotaId).then((data) => {
+  public createPrueba(prueba: Prueba, mascotaId: string): Promise<any> {
+    return this.restService.createPrueba(prueba, mascotaId).then((data) => {
       return Promise.resolve(data);
     }).catch(error => {
       return Promise.reject('error');
@@ -247,6 +247,53 @@ export class DataManagement {
     });
   }
 
+  public getVacunaByMascotaId(mascotaId: string): Promise<any> {
+    return this.restService.getVacunaByMascotaId(mascotaId).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public createVacuna(vacuna: Vacuna, mascotaId: string): Promise<any> {
+    return this.restService.createVacuna(vacuna, mascotaId).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public getDesparasitacionByMascotaId(mascotaId: string): Promise<any> {
+    return this.restService.getDesparasitacionByMascotaId(mascotaId).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public createDesparasitacion(desparasitacion: Desparasitacion, mascotaId: string): Promise<any> {
+    return this.restService.createDesparasitacion(desparasitacion, mascotaId).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public getAnaliticaByMascotaId(mascotaId: string): Promise<any> {
+    return this.restService.getAnaliticaByMascotaId(mascotaId).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
+
+  public createAnalitica(analitica: Analitica, mascotaId: string): Promise<any> {
+    return this.restService.createAnalitica(analitica, mascotaId).then((data) => {
+      return Promise.resolve(data);
+    }).catch(error => {
+      return Promise.reject('error');
+    });
+  }
 
 
 }

@@ -381,6 +381,12 @@ export class GlobalService {
         this.ngZone.run(() => { this.actionUpdateNuevoTratamiento(arg) });
       } else if (tipo == "nuevo-contacto") {
         this.ngZone.run(() => { this.actionUpdateNuevoContacto(arg) });
+      } else if (tipo == "nueva-vacuna") {
+        this.ngZone.run(() => { this.actionUpdateNuevaVacuna(arg) });
+      } else if (tipo == "nueva-analitica") {
+        this.ngZone.run(() => { this.actionUpdateNuevaAnalitica(arg) });
+      } else if (tipo == "nueva-desparasitacion") {
+        this.ngZone.run(() => { this.actionUpdateNuevaDesparasitacion(arg) });
       }
     });
 
@@ -440,6 +446,33 @@ export class GlobalService {
         }
         //En cualquier otro caso no hacemos nada
       });
+    }
+  }
+
+  async actionUpdateNuevaAnalitica(arg) {
+    if (arg) {
+      if (arg.action == "elegir") {
+        this.router.navigate(['mascotas']);
+      }
+      //En cualquier otro caso no hacemos nada
+    }
+  }
+
+  async actionUpdateNuevaDesparasitacion(arg) {
+    if (arg) {
+      if (arg.action == "elegir") {
+        this.router.navigate(['mascotas']);
+      }
+      //En cualquier otro caso no hacemos nada
+    }
+  }
+
+  async actionUpdateNuevaVacuna(arg) {
+    if (arg) {
+      if (arg.action == "elegir") {
+        this.router.navigate(['mascotas']);
+      }
+      //En cualquier otro caso no hacemos nada
     }
   }
 

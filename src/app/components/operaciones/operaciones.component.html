@@ -5,11 +5,19 @@
     <div class="seccion{{tema}} columna">
       <div class="seccion_interna">
         <div class="recuadro" (click)="nuevoTratamiento()">
-            <p class="title">Tratamientos</p>
+          <p class="title">Tratamientos</p>
         </div>
-        <!-- <div class="recuadro" [routerLink]="['/pruebas']">
-            <p class="title">Pruebas</p>
-        </div> -->
+        <div class="recuadro" (click)="nuevaVacuna()">
+          <p class="title">Vacunas</p>
+        </div>
+        <div class="seccion_interna">
+          <div class="recuadro" (click)="nuevaDesparasitacion()">
+            <p class="title">Desparasitaciones</p>
+          </div>
+          <div class="recuadro" (click)="nuevaAnalitica()">
+            <p class="title">Analiticas</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>

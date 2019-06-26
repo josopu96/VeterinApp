@@ -24,6 +24,15 @@ import { ResumenComponent } from './components/mascotas/resumen/resumen.componen
 import { AvisoNuevoTratamientoComponent } from './components/operaciones/tratamientos/aviso-nuevo-tratamiento/aviso-nuevo-tratamiento.component';
 import { FormClienteContactoComponent } from './components/clientes/form-cliente-contacto/form-cliente-contacto.component';
 import { DisplayComponent as DisplayVeterinario } from './components/app-data/veterinarios/display/display.component';
+import { ListaComponent as ListaVacunas } from './components/operaciones/vacunas/lista/lista.component';
+import { FormVacunaComponent } from './components/operaciones/vacunas/form-vacuna/form-vacuna.component';
+import { AvisoNuevaVacunaComponent } from './components/operaciones/vacunas/aviso-nueva-vacuna/aviso-nueva-vacuna.component';
+import { FormDesparasitacionComponent } from './components/operaciones/desparasitaciones/form-desparasitacion/form-desparasitacion.component';
+import { AvisoNuevaDesparasitacionComponent } from './components/operaciones/desparasitaciones/aviso-nueva-desparasitacion/aviso-nueva-desparasitacion.component';
+import { ListaComponent as ListaDesparasitaciones } from './components/operaciones/desparasitaciones/lista/lista.component';
+import { FormAnaliticaComponent } from './components/operaciones/analiticas/form-analitica/form-analitica.component';
+import { AvisoNuevaAnaliticaComponent } from './components/operaciones/analiticas/aviso-nueva-analitica/aviso-nueva-analitica.component';
+import { ListaComponent as ListaAnaliticas } from './components/operaciones/analiticas/lista/lista.component';
 
 
 const routes: Routes = [
@@ -54,6 +63,15 @@ const routes: Routes = [
     { path: 'mascota/:idMascota', component: ResumenComponent },
     { path: 'mascota/:idMascota', component: ResumenComponent },
     { path: 'displayVeterinario', component: DisplayVeterinario },
+    { path: 'vacunas', component: ListaVacunas },
+    { path: 'formVacuna', component: FormVacunaComponent },
+    { path: 'avisoNuevaVacuna', component: AvisoNuevaVacunaComponent },
+    { path: 'desparasitaciones', component: ListaDesparasitaciones },
+    { path: 'formDesparasitacion', component: FormDesparasitacionComponent },
+    { path: 'avisoNuevaDesparasitacion', component: AvisoNuevaDesparasitacionComponent },
+    { path: 'analiticas', component: ListaAnaliticas },
+    { path: 'formAnalitica', component: FormAnaliticaComponent },
+    { path: 'avisoNuevaAnalitica', component: AvisoNuevaAnaliticaComponent },
 ];
 
 @NgModule({

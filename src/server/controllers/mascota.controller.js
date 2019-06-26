@@ -175,3 +175,104 @@ exports.crearPrueba = function (req, res) {
     }
   })
 }
+
+exports.getVacunas = function (req, res) {
+  Mascota.findById(req.params.id, function (err1, mascota1) {
+    if (err1) {
+      res.status(404).send('Mascota no encontrada');
+    } else if (mascota1) {
+      res.send(mascota1.vacunas);
+    }
+  })
+}
+
+exports.crearVacuna = function (req, res) {
+  Mascota.findById(req.body.mascotaId, function (err1, mascota1) {
+    if (err1) {
+      res.status(404).send('Mascota no encontrada');
+    } else if (mascota1) {
+      var nuevaVacuna = {
+        vacuna: req.body.vacuna,
+        fecha: req.body.fecha,
+        fecModificacion: new Date()
+      }
+      Mascota.findByIdAndUpdate(req.body.mascotaId, {
+        $push: { "vacunas": nuevaVacuna },
+      }, {new: true}, function (err2, mascota2) {
+        if (err2) {
+          res.status(404).send(err2);
+        } else if (mascota2) {
+          res.send(mascota2);
+        }
+      })
+    }
+  })
+}
+
+exports.getDesparasitaciones = function (req, res) {
+  Mascota.findById(req.params.id, function (err1, mascota1) {
+    if (err1) {
+      res.status(404).send('Mascota no encontrada');
+    } else if (mascota1) {
+      res.send(mascota1.desparasitaciones);
+    }
+  })
+}
+
+exports.crearDesparasitacion = function (req, res) {
+  Mascota.findById(req.body.mascotaId, function (err1, mascota1) {
+    if (err1) {
+      res.status(404).send('Mascota no encontrada');
+    } else if (mascota1) {
+      var nuevaDesparasitacion = {
+        desparasitacion: req.body.desparasitacion,
+        fecha: req.body.fecha,
+        fecModificacion: new Date()
+      }
+      Mascota.findByIdAndUpdate(req.body.mascotaId, {
+        $push: { "desparasitaciones": nuevaDesparasitacion },
+      }, {new: true}, function (err2, mascota2) {
+        if (err2) {
+          res.status(404).send(err2);
+        } else if (mascota2) {
+          res.send(mascota2);
+        }
+      })
+    }
+  })
+}
+
+exports.getAnaliticas = function (req, res) {
+  Mascota.findById(req.params.id, function (err1, mascota1) {
+    if (err1) {
+      res.status(404).send('Mascota no encontrada');
+    } else if (mascota1) {
+      res.send(mascota1.analiticas);
+    }
+  })
+}
+
+exports.crearAnalitica = function (req, res) {
+  Mascota.findById(req.body.mascotaId, function (err1, mascota1) {
+    if (err1) {
+      res.status(404).send('Mascota no encontrada');
+    } else if (mascota1) {
+      var nuevaAnalitica = {
+        nombre: req.body.nombre,
+        descripcion: req.body.descripcion,
+        resultado: req.body.resultado,
+        fecha: req.body.fecha,
+        fecModificacion: new Date()
+      }
+      Mascota.findByIdAndUpdate(req.body.mascotaId, {
+        $push: { "pruebas": nuevaAnalitica },
+      }, {new: true}, function (err2, mascota2) {
+        if (err2) {
+          res.status(404).send(err2);
+        } else if (mascota2) {
+          res.send(mascota2);
+        }
+      })
+    }
+  })
+}

@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ConfigService } from './../../config/configService';
 import { AbstractWS } from './abstractService';
 import { Injectable } from '@angular/core';
-import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota, Tratamiento, Prueba, Contacto } from '../app.dataModels';
+import { Usuario, Ajustes, Global, Veterinario, Clinica, Mascota, Tratamiento, Prueba, Contacto, Vacuna, Desparasitacion, Analitica } from '../app.dataModels';
 import { Cliente } from '../app.dataModels';
 
 @Injectable()
@@ -503,6 +503,99 @@ export class RestWS extends AbstractWS {
       return Promise.resolve(res);
     }).catch(err => {
       return Promise.reject(err);
+    });
+  }
+
+  public getVacunaByMascotaId(mascotaId: string) {
+    const fd = new HttpParams();
+
+    return this.makeGetRequest(this.path + 'mascotas/' + mascotaId + '/vacunas', fd).then((res: String) => {
+      return Promise.resolve(res);
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public createVacuna (vacuna: Vacuna, mascotaId: string) {
+    let fd = new HttpParams()
+      .set('mascotaId', mascotaId);
+
+    if (vacuna.tipoVacuna) {
+      fd = fd.append('vacuna', vacuna.tipoVacuna);
+    }
+    if (vacuna.fecha) {
+      fd = fd.append('fecha', String(vacuna.fecha));
+    }
+
+    return this.makePostRequest(this.path + 'mascotas/addVacuna', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public getDesparasitacionByMascotaId(mascotaId: string) {
+    const fd = new HttpParams();
+
+    return this.makeGetRequest(this.path + 'mascotas/' + mascotaId + '/desparasitaciones', fd).then((res: String) => {
+      return Promise.resolve(res);
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public createDesparasitacion (desparasitacion: Desparasitacion, mascotaId: string) {
+    let fd = new HttpParams()
+      .set('mascotaId', mascotaId);
+
+    if (desparasitacion.tipoDesparasitacion) {
+      fd = fd.append('desparasitacion', desparasitacion.tipoDesparasitacion);
+    }
+    if (desparasitacion.fecha) {
+      fd = fd.append('fecha', String(desparasitacion.fecha));
+    }
+
+    return this.makePostRequest(this.path + 'mascotas/addDesparasitacion', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public getAnaliticaByMascotaId(mascotaId: string) {
+    const fd = new HttpParams();
+
+    return this.makeGetRequest(this.path + 'mascotas/' + mascotaId + '/analiticas', fd).then((res: String) => {
+      return Promise.resolve(res);
+    }).catch(error => {
+      return Promise.reject(error);
+    });
+  }
+
+  public createAnalitica (analitica: Analitica, mascotaId: string) {
+    let fd = new HttpParams()
+      .set('mascotaId', mascotaId);
+
+    if (analitica.nombre) {
+      fd = fd.append('nombre', analitica.nombre);
+    }
+    if (analitica.descripcion) {
+      fd = fd.append('descripcion', analitica.descripcion);
+    }
+    if (analitica.resultado) {
+      fd = fd.append('resultado', analitica.resultado);
+    }
+    if (analitica.descripcion) {
+      fd = fd.append('descripcion', analitica.descripcion);
+    }
+    if (analitica.fecha) {
+      fd = fd.append('fecha', String(analitica.fecha));
+    }
+
+    return this.makePostRequest(this.path + 'mascotas/addAnalitica', fd).then((_) => {
+      return Promise.resolve();
+    }).catch(error => {
+      return Promise.reject(error);
     });
   }
 }

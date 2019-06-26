@@ -4,8 +4,8 @@
     <app-menu class="menu"></app-menu>
     <div class="seccion{{tema}} columna">
       <div class="titulo">
-        <span *ngIf="new"> Nuevo usuario </span>
-        <span *ngIf="!new"> Editando usuario </span>
+        <span *ngIf="new"> Nuevo tratamiento </span>
+        <span *ngIf="!new"> Editando tratamiento </span>
       </div>
       <div class="formulario" *ngIf="ready">
         <fieldset>
@@ -29,7 +29,7 @@
         </fieldset>
       </div>
       <div class="guardar">
-        <button [routerLink]="['/tratamientos']"> Volver </button>
+        <button [routerLink]="['/operaciones']"> Volver </button>
         <button (click)="guardar()"> Guardar </button>
       </div>
     </div>

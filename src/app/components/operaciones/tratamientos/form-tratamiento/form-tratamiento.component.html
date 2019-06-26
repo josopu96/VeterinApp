@@ -11,20 +11,20 @@
       <div class="formulario" *ngIf="ready">
         <fieldset>
           <legend>Datos</legend>
-          <div class="texto{{errores.anamnesis ? '_error' : ''}}">
-            <label>Anamnesis</label><input type="text" [(ngModel)]="tratamientoEditado.anamnesis" (ngModelChange)="cambia('anamnesis')" />
+          <div class="texto{{errores.anamnesis ? '_error' : ''}} anamnesis">
+            <label for="anamnesis">Anamnesis</label><textarea id="anamnesis" [(ngModel)]="tratamientoEditado.anamnesis" (ngModelChange)="cambia('anamnesis')" ></textarea>
             <span class="tooltip" *ngIf="errores.anamnesis=='obligatorio'">Es obligatorio rellenar este campo</span>
           </div>
           <div class="texto{{errores.diagnostico ? '_error' : ''}}">
-            <label>Diagnóstico</label><input type="text" [(ngModel)]="tratamientoEditado.diagnostico" (ngModelChange)="cambia('diagnostico')" />
+            <label for="diagnostico">Diagnóstico</label><input id="diagnostico" type="text" [(ngModel)]="tratamientoEditado.diagnostico" (ngModelChange)="cambia('diagnostico')" />
             <span class="tooltip" *ngIf="errores.diagnostico=='obligatorio'">Es obligatorio rellenar este campo</span>
           </div>
           <div class="texto{{errores.tipoTratamiento ? '_error' : ''}}">
-            <label>Tipo Tratamiento</label><input type="text" [(ngModel)]="tratamientoEditado.tipoTratamiento" (ngModelChange)="cambia('tipoTratamiento')" />
+            <label for="tipoTratamiento">Tipo Tratamiento</label><input id="tipoTratamiento" type="text" [(ngModel)]="tratamientoEditado.tipoTratamiento" (ngModelChange)="cambia('tipoTratamiento')" />
             <span class="tooltip" *ngIf="errores.tipoTratamiento=='obligatorio'">Es obligatorio rellenar este campo</span>
           </div>
           <div class="texto{{errores.fecha ? '_error' : ''}}">
-            <label for="fecha">Fecha</label><input id="fechaTratamiento" type="date" [ngModel]="tratamientoEditado.fecha | date:'yyyy-MM-dd'"  (ngModelChange)="tratamientoEditado.fecha=$event; cambia('fecha')" required />
+            <label for="fechaTratamiento">Fecha</label><input id="fechaTratamiento" type="date" [ngModel]="tratamientoEditado.fecha | date:'yyyy-MM-dd'"  (ngModelChange)="tratamientoEditado.fecha=$event; cambia('fecha')" required />
             <span class="tooltip" *ngIf="errores.fecha=='obligatorio'">Es obligatorio rellenar este campo</span>
           </div>
         </fieldset>

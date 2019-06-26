@@ -124,6 +124,7 @@ export class FormClinicaComponent implements OnInit {
     this.clinicaEditada.propietario = this.clinica.propietario;
     this.clinicaEditada.dniPropietario = this.clinica.dniPropietario;
     this.actualizaImagenSpan(this.clinica.imagen);
+    this.inicializaErrores();
     this.edit = false;
   }
 

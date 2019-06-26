@@ -24,7 +24,7 @@
       cursor: pointer;
       display: flex;
       flex-direction: column;
-      width: $anchoSeccion/2+px;
+      width: $anchoSeccion/4+px;
       justify-content: center;
       align-items: center;
       border: 1px solid $border;
@@ -76,7 +76,7 @@
       cursor: pointer;
       display: flex;
       flex-direction: column;
-      width: 100%;
+      width: $anchoSeccion/4+px;
       justify-content: center;
       align-items: center;
       border: 1px solid $border;

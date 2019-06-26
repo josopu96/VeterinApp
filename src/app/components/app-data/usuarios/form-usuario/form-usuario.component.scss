@@ -115,7 +115,8 @@
               margin-top: 5px;
               border: none;
               text-align: center;
-              background-color: #00000000;
+              background-color: transparent;
+              background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.048));
               border-bottom: 1px solid #cccccc;
               transition: all ease-out 0.3s;
               box-sizing: border-box;
@@ -162,7 +163,8 @@
               margin-top: 5px;
               border: none;
               text-align: center;
-              background-color: #00000000;
+              background-color: transparent;
+              background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.048));
               border-bottom: 1px solid #ca0000;
               transition: all ease-out 0.3s;
               box-sizing: border-box;
@@ -196,7 +198,8 @@
           margin-top: 5px;
           border: none;
           text-align: center;
-          background-color: #00000000;
+          background-color: transparent;
+          background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.048));
           border-bottom: 1px solid #cccccc;
           transition: all ease-out 0.3s;
           box-sizing: border-box;
@@ -242,7 +245,8 @@
           margin-top: 5px;
           border: none;
           text-align: center;
-          background-color: #00000000;
+          background-color: transparent;
+          background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.048));
           border-bottom: 1px solid #ca0000;
           transition: all ease-out 0.3s;
           box-sizing: border-box;

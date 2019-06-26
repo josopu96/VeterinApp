@@ -60,7 +60,7 @@ export class FormTratamientoComponent implements OnInit {
 
   actualizar() {
     this.dm.updateTratamiento(this.tratamientoEditado, this.globalService.mascota._id).then((res) => {
-      this.router.navigateByUrl('/tratamientos');
+      this.router.navigateByUrl('/mascota'+this.globalService.mascota._id);
     }).catch((err) => {
       console.log(err);
     });
@@ -69,7 +69,7 @@ export class FormTratamientoComponent implements OnInit {
   crear() {
     this.dm.createTratamiento(this.tratamientoEditado, this.globalService.mascota._id).then((res) => {
       this.globalService.mascota.tratamientos.push(this.tratamientoEditado);
-      this.router.navigateByUrl('/tratamientos');
+      this.router.navigateByUrl('/mascota/'+this.globalService.mascota._id);
     }).catch((err) => {
       console.log(err);
     });
@@ -78,35 +78,19 @@ export class FormTratamientoComponent implements OnInit {
   cambia(key) {
     switch (key) {
       case 'anamnesis':
-        if (this.errores.anamnesis != '') {
-          if (this.tratamientoEditado.anamnesis) {
-            this.errores.anamnesis = '';
-          }
-        }
+        this.errores.anamnesis = '';
         break;
 
       case 'diagnostico':
-        if (this.errores.diagnostico != '') {
-          if (this.tratamientoEditado.diagnostico) {
-            this.errores.diagnostico = '';
-          }
-        }
+        this.errores.diagnostico = '';
         break;
 
       case 'tipoTratamiento':
-        if (this.errores.tipoTratamiento != '') {
-          if (this.tratamientoEditado.tipoTratamiento) {
-            this.errores.tipoTratamiento = '';
-          }
-        }
+        this.errores.tipoTratamiento = '';
         break;
 
-      case 'telefono':
-        if (this.errores.fecha != '') {
-          if (this.tratamientoEditado.fecha) {
-            this.errores.fecha = '';
-          }
-        }
+      case 'fecha':
+        this.errores.fecha = '';
         break;
 
       default:

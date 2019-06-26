@@ -59,7 +59,7 @@
 
         #cerrar{
             display: flex;
-            width: 184px;
+            width: 100%;
             justify-content: center;
             align-items: center;
             cursor: pointer;
@@ -74,11 +74,12 @@
         }
         #elegir{
             display: flex;
-            width: 184px;
+            width: 100%;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             background: #00000059;
+            border-left: 1px solid white;
             color: $textoClaro;
 
             &:hover{
@@ -87,12 +88,11 @@
         }
         #continuar{
             display: flex;
-            width: 184px;
+            width: 100%;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             box-sizing: border-box;
-            border-left: 1px solid white;
             background: #00000059;
             color: $textoClaro;
 

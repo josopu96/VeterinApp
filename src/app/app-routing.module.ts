@@ -61,7 +61,6 @@ const routes: Routes = [
     { path: 'pruebas', component: ListaPruebas },
     { path: 'formPrueba', component: FormPruebaComponent },
     { path: 'mascota/:idMascota', component: ResumenComponent },
-    { path: 'mascota/:idMascota', component: ResumenComponent },
     { path: 'displayVeterinario', component: DisplayVeterinario },
     { path: 'vacunas', component: ListaVacunas },
     { path: 'formVacuna', component: FormVacunaComponent },

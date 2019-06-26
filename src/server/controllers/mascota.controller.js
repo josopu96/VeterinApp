@@ -253,10 +253,14 @@ exports.getAnaliticas = function (req, res) {
 }
 
 exports.crearAnalitica = function (req, res) {
+  console.log("entramos en crear analítica");
   Mascota.findById(req.body.mascotaId, function (err1, mascota1) {
     if (err1) {
+      console.log("tenemos fallo 404");
+      console.log(err1);
       res.status(404).send('Mascota no encontrada');
     } else if (mascota1) {
+      console.log("NO tenemos fallo 404");
       var nuevaAnalitica = {
         nombre: req.body.nombre,
         descripcion: req.body.descripcion,
@@ -265,11 +269,15 @@ exports.crearAnalitica = function (req, res) {
         fecModificacion: new Date()
       }
       Mascota.findByIdAndUpdate(req.body.mascotaId, {
-        $push: { "pruebas": nuevaAnalitica },
+        $push: { "analiticas": nuevaAnalitica },
       }, {new: true}, function (err2, mascota2) {
         if (err2) {
+          console.log("tenemos fallo 404 a la segunda");
+          console.log(err2);
           res.status(404).send(err2);
         } else if (mascota2) {
+          console.log("NO tenemos fallo 404");
+          console.log(mascota2);
           res.send(mascota2);
         }
       })

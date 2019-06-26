@@ -18,6 +18,6 @@ router.post('/addVacuna', cors(), mascota_controller.crearVacuna);
 router.get('/:id/desparasitaciones', cors(), mascota_controller.getDesparasitaciones);
 router.post('/addDesparasitacion', cors(), mascota_controller.crearDesparasitacion);
 router.get('/:id/analiticas', cors(), mascota_controller.getAnaliticas);
-router.post('/addAnaliticas', cors(), mascota_controller.crearAnalitica);
+router.post('/addAnalitica', cors(), mascota_controller.crearAnalitica);
 
 module.exports = router;

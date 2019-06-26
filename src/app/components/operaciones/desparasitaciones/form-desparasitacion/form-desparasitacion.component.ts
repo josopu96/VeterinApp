@@ -62,7 +62,7 @@ export class FormDesparasitacionComponent implements OnInit {
   crear() {
     this.dm.createDesparasitacion(this.desparasitacionEditada, this.globalService.mascota._id).then((res) => {
       this.globalService.mascota.desparasitaciones.push(this.desparasitacionEditada);
-      this.router.navigateByUrl('/desparasitaciones');
+      this.router.navigateByUrl('/mascota/'+this.globalService.mascota._id);
     }).catch((err) => {
       console.log(err);
     });
@@ -71,19 +71,11 @@ export class FormDesparasitacionComponent implements OnInit {
   cambia(key) {
     switch (key) {
       case 'tipoDesparasitacion':
-        if (this.errores.tipoDesparasitacion != '') {
-          if (this.desparasitacionEditada.tipoDesparasitacion) {
-            this.errores.tipoDesparasitacion = '';
-          }
-        }
+        this.errores.tipoDesparasitacion = '';
         break;
 
-      case 'telefono':
-        if (this.errores.fecha != '') {
-          if (this.desparasitacionEditada.fecha) {
-            this.errores.fecha = '';
-          }
-        }
+      case 'fecha':
+        this.errores.fecha = '';
         break;
 
       default:

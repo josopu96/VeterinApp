@@ -64,7 +64,7 @@ export class FormAnaliticaComponent implements OnInit {
   crear() {
     this.dm.createAnalitica(this.analiticaEditada, this.globalService.mascota._id).then((res) => {
       this.globalService.mascota.analiticas.push(this.analiticaEditada);
-      this.router.navigateByUrl('/analiticas');
+      this.router.navigateByUrl('/mascota/'+this.globalService.mascota._id);
     }).catch((err) => {
       console.log(err);
     });
@@ -73,35 +73,19 @@ export class FormAnaliticaComponent implements OnInit {
   cambia(key) {
     switch (key) {
       case 'nombre':
-        if (this.errores.nombre != '') {
-          if (this.analiticaEditada.nombre) {
-            this.errores.nombre = '';
-          }
-        }
+        this.errores.nombre = '';
         break;
 
       case 'descripcion':
-        if (this.errores.descripcion != '') {
-          if (this.analiticaEditada.descripcion) {
-            this.errores.descripcion = '';
-          }
-        }
+        this.errores.descripcion = '';
         break;
 
       case 'resultado':
-        if (this.errores.resultado != '') {
-          if (this.analiticaEditada.resultado) {
-            this.errores.resultado = '';
-          }
-        }
+        this.errores.resultado = '';
         break;
 
       case 'fecha':
-        if (this.errores.fecha != '') {
-          if (this.analiticaEditada.fecha) {
-            this.errores.fecha = '';
-          }
-        }
+        this.errores.fecha = '';
         break;
 
       default:

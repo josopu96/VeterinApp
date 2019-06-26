@@ -62,7 +62,7 @@ export class FormVacunaComponent implements OnInit {
   crear() {
     this.dm.createVacuna(this.vacunaEditada, this.globalService.mascota._id).then((res) => {
       this.globalService.mascota.vacunas.push(this.vacunaEditada);
-      this.router.navigateByUrl('/vacunas');
+      this.router.navigateByUrl('/mascota/'+this.globalService.mascota._id);
     }).catch((err) => {
       console.log(err);
     });
@@ -71,19 +71,11 @@ export class FormVacunaComponent implements OnInit {
   cambia(key) {
     switch (key) {
       case 'tipoVacuna':
-        if (this.errores.tipoVacuna != '') {
-          if (this.vacunaEditada.tipoVacuna) {
-            this.errores.tipoVacuna = '';
-          }
-        }
+        this.errores.tipoVacuna = '';
         break;
 
-      case 'telefono':
-        if (this.errores.fecha != '') {
-          if (this.vacunaEditada.fecha) {
-            this.errores.fecha = '';
-          }
-        }
+      case 'fecha':
+        this.errores.fecha = '';
         break;
 
       default:

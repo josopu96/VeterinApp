@@ -1,27 +1,27 @@
-<div class="container{{tema}}">
+<div class="container{{tema}}" (document:mousemove)='tooltip($event)'>
   <app-selecciones class="top"></app-selecciones>
   <div class="bottom">
     <app-menu class="menu"></app-menu>
     <div class="seccion{{tema}} columna">
       <div class="titulo">
+        <div class="volver" [routerLink]="['/operaciones']"></div>
         <span *ngIf="new"> Nueva desparasitacion </span>
         <span *ngIf="!new"> Editando desparasitacion </span>
       </div>
       <div class="formulario" *ngIf="ready">
         <fieldset>
-          <legend>Datos obligatorios</legend>
+          <legend>Datos</legend>
           <div class="texto{{errores.tipoDesparasitacion ? '_error' : ''}}">
-            <span>Tipo Desparasitacion</span><input type="text" [(ngModel)]="desparasitacionEditada.tipoDesparasitacion" (ngModelChange)="cambia('tipoDesparasitacion')" />
+            <label for="tipoDesparasitacion">Tipo Desparasitacion</label><input id="tipoDesparasitacion" type="text" [(ngModel)]="desparasitacionEditada.tipoDesparasitacion" (ngModelChange)="cambia('tipoDesparasitacion')" />
             <span class="tooltip" *ngIf="errores.tipoDesparasitacion=='obligatorio'">Es obligatorio rellenar este campo</span>
           </div>
           <div class="texto{{errores.fecha ? '_error' : ''}}">
-            <label for="fecha">Fecha</label><input id="fechaDesparasitacion" type="date" [ngModel]="desparasitacionEditada.fecha | date:'yyyy-MM-dd'"  (ngModelChange)="desparasitacionEditada.fecha=$event; cambia('fecha')" />
+            <label for="fechaDesparasitacion">Fecha</label><input id="fechaDesparasitacion" type="date" [ngModel]="desparasitacionEditada.fecha | date:'yyyy-MM-dd'"  (ngModelChange)="desparasitacionEditada.fecha=$event; cambia('fecha')" />
             <span class="tooltip" *ngIf="errores.fecha=='obligatorio'">Es obligatorio rellenar este campo</span>
           </div>
         </fieldset>
       </div>
       <div class="guardar">
-        <button [routerLink]="['/operaciones']"> Volver </button>
         <button (click)="guardar()"> Guardar </button>
       </div>
     </div>

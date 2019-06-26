@@ -21,6 +21,19 @@
     justify-content: center;
     align-items: center;
 
+    .volver{
+      background-image: url("../../../../../assets/img/back_oscuro.png");
+      width: 30px;
+      height: 30px;
+      position: fixed;
+      left: 200px;
+      cursor: pointer;
+
+      &:hover{
+        background-image: url("../../../../../assets/img/back_medio.png");
+      }
+    }
+
     span{
       font-size: 30px;
       font-weight: bold;
@@ -28,7 +41,7 @@
   }
 
   .formulario{
-    width: 70%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -45,18 +58,38 @@
       legend{
         font-weight: bold;
         font-size: 18px;
+        padding-left: 10px;
+        padding-right: 10px;
       }
-      .texto{
+
+      .texto {
         display: flex;
         justify-content: center;
-
-        span{
+        margin-top: 20px;
+        margin-bottom: 20px;
+  
+        span {
+          display:none;
+        }
+        &:hover span {
+          display:block;
+          position:fixed;
+          overflow:hidden;
+          border: 1px solid #b1b1b1ea;
+          background-color: #ff6767c0;
+          padding: 10px;
+          border-radius: 5px;
+          text-align: center;
+  
+        }
+  
+        label {
           flex-grow: 1;
           margin-bottom: 10px;
           margin-top: 10px;
         }
-        input{
-          width: 400px;
+        input {
+          width: 650px;
           margin: 0px;
           margin-bottom: 5px;
           margin-top: 5px;
@@ -68,13 +101,63 @@
           transition: all ease-out 0.3s;
           box-sizing: border-box;
           color: $textoClaro;
-
-          &:focus{
+  
+          &:focus {
             margin-bottom: 2px;
             margin-top: 2px;
             font-size: 20px;
             background-color: $colorInput;
             border: 1px solid #cccccc;
+          }
+        }
+      }
+  
+      .texto_error{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+  
+        span {
+          display:none;
+        }
+        &:hover span {
+          display:block;
+          position:fixed;
+          overflow:hidden;
+          border: 1px solid #b1b1b1ea;
+          background-color: #ff6767c0;
+          padding: 10px;
+          border-radius: 5px;
+          text-align: center;
+  
+        }
+  
+        label {
+          flex-grow: 1;
+          margin-bottom: 10px;
+          margin-top: 10px;
+        }
+        input {
+          width: 650px;
+          margin: 0px;
+          margin-bottom: 5px;
+          margin-top: 5px;
+          border: none;
+          text-align: center;
+          background-color: transparent;
+          background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.048));
+          border-bottom: 1px solid #ca0000;
+          transition: all ease-out 0.3s;
+          box-sizing: border-box;
+          color: $textoClaro;
+  
+          &:focus {
+            margin-bottom: 2px;
+            margin-top: 2px;
+            font-size: 20px;
+            background-color: $colorInputError;
+            border: 1px solid #ca0000;
           }
         }
       }

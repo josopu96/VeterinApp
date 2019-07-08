@@ -12,8 +12,8 @@
 
           <!-- Login Form -->
           <form *ngIf="isReady">
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" [(ngModel)]="email" />
-            <input type="password" id="password" class="fadeIn third" name="login" placeholder="password" value="{{ password }}" />
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="correo" [(ngModel)]="email" />
+            <input type="password" id="password" class="fadeIn third" name="login" placeholder="contraseña" value="{{ password }}" />
             <input type="submit" class="fadeIn fourth" value="Entrar" (click)="sendLogin()" />
           </form>
           <ng-container *ngIf="showError">

@@ -1,7 +1,6 @@
 const express = require('express');
 const PORT = process.env.PORT || 5000;
 
-express().listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 const bodyParser = require('body-parser');
 
@@ -12,6 +11,7 @@ const globalModel = require('./src/server/routes/global.route');
 const mascota = require('./src/server/routes/mascota.route');
 const clinica = require('./src/server/routes/clinica.route');
 
+server.listen(PORT, () => console.log(`Listening on ${ PORT }`))
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({
   extended: false

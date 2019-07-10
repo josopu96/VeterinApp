@@ -18,7 +18,7 @@ server.use('/global', globalModel);
 server.use('/mascotas', mascota);
 server.use('/clinicas', clinica);
 
-var port = 80;
+var port = 443;
 server.listen(port, () => {
   console.log('Server is up and running on port numner ' + port);
 });

@@ -22,11 +22,6 @@ server.use('/global', globalModel);
 server.use('/mascotas', mascota);
 server.use('/clinicas', clinica);
 
-var port = 443;
-server.listen(port, () => {
-  console.log('Server is up and running on port numner ' + port);
-});
-
  // Set up mongoose connection
  const mongoose = require('mongoose');
  var dev_db_url = 'mongodb+srv://admin:admin@frankfurtcluster-kdmjy.mongodb.net/VeterinApp';
